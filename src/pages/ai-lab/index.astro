@@ -71,7 +71,7 @@ const categories = ['Generative imagery', 'Voice and real-time', '3D and assets'
             data-card
             data-cat={item.data.category}
           >
-            <PlaceholderMedia label={item.data.type} ratio={entry.ratio} radius="md" dark={entry.dark} />
+            <PlaceholderMedia label={item.data.type} src={item.data.heroImage} alt={item.data.heroAlt} ratio={entry.ratio} radius="md" dark={entry.dark} />
             <div class="lab-page__grid-item-footer">
               <span class="lab-page__grid-item-title">{item.data.title}</span>
               <span class="mono-label" style="color:var(--color-label-dim)">EXP {String(i + 2).padStart(2, '0')}</span>

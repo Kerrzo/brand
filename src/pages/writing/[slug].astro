@@ -37,7 +37,7 @@ const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric'
       </div>
     </div>
 
-    <PlaceholderMedia label="Hero image · replace" ratio="16/9" radius="lg" class="article__hero" />
+    <PlaceholderMedia label="Hero image · replace" src={item.data.heroImage} alt={item.data.heroAlt} ratio="16/9" radius="lg" class="article__hero" />
 
     <div class="prose" data-reveal>
       <Content />

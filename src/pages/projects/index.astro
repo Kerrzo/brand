@@ -23,6 +23,8 @@ const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
       <div class:list={['projects-page__row', { 'projects-page__row--dark': i % 2 === 1 }]} data-reveal>
         <PlaceholderMedia
           label={`${item.data.title} hero image`}
+          src={item.data.heroImage}
+          alt={item.data.heroAlt}
           ratio="16/11"
           radius="md"
           dark={i % 2 === 1}

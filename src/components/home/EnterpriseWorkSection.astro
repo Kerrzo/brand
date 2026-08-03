@@ -22,6 +22,8 @@ const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder).slic
       <div class:list={['ent-work__row', { 'ent-work__row--reverse': i % 2 === 1 }]}>
         <PlaceholderMedia
           label={`${item.data.client} · ${item.data.tagline}`}
+          src={item.data.heroImage}
+          alt={item.data.heroAlt}
           ratio="16/9"
           radius="md"
           class="ent-work__media"

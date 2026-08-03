@@ -13,10 +13,12 @@ interface Props {
   backHref: string;
   backLabel: string;
   heroLabel: string;
+  heroImage?: string;
+  heroAlt?: string;
   facts?: { label: string; value: string }[];
 }
 
-const { title, description, current, eyebrow, heading, tagline, backHref, backLabel, heroLabel, facts = [] } = Astro.props;
+const { title, description, current, eyebrow, heading, tagline, backHref, backLabel, heroLabel, heroImage, heroAlt, facts = [] } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} current={current}>
@@ -28,7 +30,7 @@ const { title, description, current, eyebrow, heading, tagline, backHref, backLa
       {tagline && <div class="detail__tagline">{tagline}</div>}
     </div>
 
-    <PlaceholderMedia label={heroLabel} ratio="16/9" radius="lg" class="detail__hero" />
+    <PlaceholderMedia label={heroLabel} src={heroImage} alt={heroAlt} ratio="16/9" radius="lg" class="detail__hero" />
 
     <div class="detail__body-grid" data-reveal>
       <div class="prose">

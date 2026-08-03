@@ -10,6 +10,8 @@ deliveredVia: "42 Interactive"
 tags: ["Vector analysis", "Clustering", "Web platform"]
 displayOrder: 1
 featured: true
+heroImage: "/media/work/cluster.png"
+heroAlt: "3D scatter plot of survey responses clustered by semantic similarity, colour-coded by group"
 ---
 
 Strategy Connect captures open-ended input through guided AI conversation, preserves the original human responses, and uses vector analysis, clustering and semantic density to reveal consensus, divergence and important minority viewpoints.
@@ -17,6 +19,8 @@ Strategy Connect captures open-ended input through guided AI conversation, prese
 ## The problem
 
 Traditional surveys force nuance into a scale. Strategy Connect draws it out through conversation instead, then keeps the verbatim answer next to every insight it derives from it.
+
+![Strategy Connect's guided AI conversation interface on a phone, showing a back-and-forth exchange about a survey question](/media/work/clusterphone.png)
 
 ## How it works
 

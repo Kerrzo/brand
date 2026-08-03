@@ -40,7 +40,13 @@ const stats = [
         <span>{items[0].data.yearRange}</span>
       </div>
       <a href={`/work/${items[0].id}/`} data-reveal>
-        <PlaceholderMedia label={`${items[0].data.client} · cluster map · 2400×1030`} ratio="21/9" radius="lg" />
+        <PlaceholderMedia
+          label={`${items[0].data.client} · cluster map · 2400×1030`}
+          src={items[0].data.heroImage}
+          alt={items[0].data.heroAlt}
+          ratio="21/9"
+          radius="lg"
+        />
       </a>
       <div class="work-feature__grid" data-reveal>
         <div class="work-feature__copy">
@@ -85,7 +91,14 @@ const stats = [
         class:list={['work-split__grid', { 'work-split__grid--reverse': i % 2 === 1 }]}
         data-reveal
       >
-        <PlaceholderMedia label={`${item.data.client} · ${item.data.tagline}`} ratio="16/10" radius="lg" class="work-split__media" />
+        <PlaceholderMedia
+          label={`${item.data.client} · ${item.data.tagline}`}
+          src={item.data.heroImage}
+          alt={item.data.heroAlt}
+          ratio="16/10"
+          radius="lg"
+          class="work-split__media"
+        />
         <div class="work-split__copy">
           <h2 class="work-split__title">{item.data.title}</h2>
           <div class="work-split__tagline">{item.data.tagline}</div>
@@ -121,7 +134,14 @@ const stats = [
               data-card
               data-cat={item.data.category}
             >
-              <PlaceholderMedia label={`${item.data.title} · headset capture`} ratio="4/3" radius="md" dark />
+              <PlaceholderMedia
+                label={`${item.data.title} · headset capture`}
+                src={item.data.heroImage}
+                alt={item.data.heroAlt}
+                ratio="4/3"
+                radius="md"
+                dark
+              />
               <div class="work-dark-group__copy">
                 <div class="work-dark-group__title">{item.data.title}</div>
                 <div class="work-dark-group__tagline">{item.data.tagline}</div>

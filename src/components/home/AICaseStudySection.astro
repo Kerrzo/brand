@@ -1,6 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
 import SectionLabel from '../ui/SectionLabel.astro';
 import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
+
+const work = await getCollection('work', ({ data }) => !data.draft);
+const strategyConnect = work.find((item) => item.id === 'strategy-connect');
 
 const rows = [
   { n: '01', title: 'Guided conversation', copy: 'An AI interviewer draws out nuance instead of forcing a scale.' },
@@ -39,6 +43,8 @@ const rows = [
 
   <PlaceholderMedia
     label="Strategy Connect · cluster map screenshot"
+    src={strategyConnect?.data.heroImage}
+    alt={strategyConnect?.data.heroAlt}
     ratio="24/9"
     radius="lg"
     class="ai-case__media"

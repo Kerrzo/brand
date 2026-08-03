@@ -17,7 +17,14 @@ const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
     <div class="emerging__grid" data-reveal>
       {items.map((item, i) => (
         <a href={`/work/${item.id}/`} class:list={['emerging__item', { 'emerging__item--offset': i % 2 === 1 }]}>
-          <PlaceholderMedia label={`${item.data.title} · headset capture`} ratio="4/3" radius="md" dark />
+          <PlaceholderMedia
+            label={`${item.data.title} · headset capture`}
+            src={item.data.heroImage}
+            alt={item.data.heroAlt}
+            ratio="4/3"
+            radius="md"
+            dark
+          />
           <div class="emerging__item-copy">
             <div class="emerging__item-title">{item.data.title}</div>
             <div class="emerging__item-tagline">{item.data.tagline}</div>
