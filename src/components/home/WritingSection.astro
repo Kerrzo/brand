@@ -1,0 +1,112 @@
+---
+import { getCollection } from 'astro:content';
+import SectionLabel from '../ui/SectionLabel.astro';
+import Button from '../ui/Button.astro';
+
+const all = await getCollection('writing', ({ data }) => !data.draft);
+const items = all
+  .sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf())
+  .slice(0, 3);
+
+const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
+---
+
+<section id="writing" class="writing-teaser container">
+  <div class="writing-teaser__intro" data-reveal>
+    <div>
+      <SectionLabel>Build notes</SectionLabel>
+      <h2 class="writing-teaser__heading">What I&rsquo;m learning while building.</h2>
+    </div>
+    <Button href="/writing/" variant="outline" class="writing-teaser__all">All writing</Button>
+  </div>
+
+  <div class="writing-teaser__list" data-reveal>
+    {items.map((item) => (
+      <a href={`/writing/${item.id}/`} class="writing-teaser__row">
+        <h3 class="writing-teaser__title">{item.data.title}</h3>
+        <span class="writing-teaser__desc">{item.data.description}</span>
+        <span class="mono-label writing-teaser__date">{dateFmt.format(item.data.publishedDate)}</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .writing-teaser {
+    padding-top: clamp(90px, 13vh, 180px);
+  }
+
+  .writing-teaser__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: end;
+    margin-bottom: clamp(36px, 5vh, 64px);
+  }
+
+  .writing-teaser__heading {
+    margin: 26px 0 0;
+    font-size: clamp(36px, 5.4vw, 88px);
+    line-height: .94;
+    letter-spacing: -.045em;
+    font-weight: 500;
+    max-width: 14ch;
+  }
+
+  .writing-teaser__all {
+    justify-self: end;
+  }
+
+  .writing-teaser__list {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .writing-teaser__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) 130px;
+    gap: 24px;
+    align-items: baseline;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .writing-teaser__title {
+    margin: 0;
+    font-size: clamp(24px, 2.8vw, 44px);
+    font-weight: 500;
+    letter-spacing: -.035em;
+    line-height: 1.02;
+    max-width: 20ch;
+  }
+
+  .writing-teaser__desc {
+    font-size: 15px;
+    color: var(--color-body);
+    line-height: 1.55;
+  }
+
+  .writing-teaser__date {
+    color: var(--color-label-dim);
+    text-align: right;
+  }
+
+  @media (max-width: 900px) {
+    .writing-teaser__intro {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 20px;
+    }
+
+    .writing-teaser__all {
+      justify-self: start;
+    }
+
+    .writing-teaser__row {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 8px;
+    }
+
+    .writing-teaser__date {
+      text-align: left;
+    }
+  }
+</style>

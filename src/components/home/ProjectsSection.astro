@@ -1,0 +1,198 @@
+---
+import { getCollection } from 'astro:content';
+import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
+import SectionLabel from '../ui/SectionLabel.astro';
+
+const allProjects = await getCollection('projects', ({ data }) => !data.draft);
+const projects = allProjects.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
+const [pellzo, brilliancy, gameWorld] = projects;
+---
+
+<section id="projects" class="projects container">
+  <div class="projects__intro" data-reveal>
+    <div>
+      <SectionLabel>What I&rsquo;m building now</SectionLabel>
+      <h2 class="h-1" style="margin-top:26px">Products and experiments</h2>
+    </div>
+    <p class="body-copy projects__intro-copy">
+      I build my own products to explore what experienced, AI-enabled creators and small teams can
+      now achieve.
+    </p>
+  </div>
+
+  {pellzo && (
+    <div class="projects__row projects__row--light" data-reveal>
+      <div class="projects__row-copy">
+        <SectionLabel withDot>(01) &middot; In development</SectionLabel>
+        <h3 class="h-2">{pellzo.data.title}</h3>
+        <div class="projects__row-tagline">{pellzo.data.tagline}</div>
+        <p class="projects__row-desc">{pellzo.data.description}</p>
+        <a href={`/projects/${pellzo.id}/`} class="projects__row-link">View project &rarr;</a>
+      </div>
+      <PlaceholderMedia label="Pellzo dashboard crop · 1600×1100" ratio="16/11" radius="md" class="projects__row-media" />
+    </div>
+  )}
+
+  {brilliancy && (
+    <div class="projects__row projects__row--dark" data-reveal>
+      <PlaceholderMedia label="Brilliancy · board + coaching UI" ratio="5/4" radius="sm" dark class="projects__row-media" />
+      <div class="projects__row-copy">
+        <SectionLabel dark withDot>(02) &middot; Experimental product</SectionLabel>
+        <h3 class="h-2">{brilliancy.data.title}</h3>
+        <div class="projects__row-tagline">{brilliancy.data.tagline}</div>
+        <p class="projects__row-desc projects__row-desc--dark">{brilliancy.data.description}</p>
+        <a href={`/projects/${brilliancy.id}/`} class="projects__row-link projects__row-link--dark">View project &rarr;</a>
+      </div>
+    </div>
+  )}
+
+  {gameWorld && (
+    <div class="projects__feature" data-reveal>
+      <PlaceholderMedia label="Game world · character / environment art · 2400×1030" ratio="21/9" radius="lg" />
+      <div class="projects__feature-grid">
+        <div class="projects__feature-copy">
+          <SectionLabel withDot>(03) &middot; Ongoing experiment</SectionLabel>
+          <h3 class="h-2 projects__feature-heading">{gameWorld.data.title}</h3>
+        </div>
+        <div class="projects__feature-side">
+          <div class="projects__row-tagline">{gameWorld.data.tagline}</div>
+          <p class="projects__row-desc">{gameWorld.data.description}</p>
+          <a href="/ai-lab/" class="projects__row-link">See the experiments &rarr;</a>
+        </div>
+      </div>
+    </div>
+  )}
+</section>
+
+<style>
+  .projects {
+    padding-top: clamp(90px, 12vh, 170px);
+  }
+
+  .projects__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: end;
+    margin-bottom: clamp(48px, 7vh, 96px);
+  }
+
+  .projects__intro-copy {
+    margin: 0 0 10px;
+    max-width: 44ch;
+  }
+
+  .projects__row {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+    gap: clamp(24px, 4vw, 72px);
+    align-items: start;
+    padding-top: 34px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .projects__row--dark {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: center;
+    margin-top: clamp(70px, 10vh, 140px);
+    background: var(--color-dark-bg);
+    color: var(--color-dark-fg);
+    border-top: none;
+    border-radius: var(--radius-xl);
+    padding: clamp(44px, 6vw, 96px) clamp(28px, 4vw, 72px);
+  }
+
+  .projects__row-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    position: sticky;
+    top: 110px;
+  }
+
+  .projects__row--dark .projects__row-copy {
+    position: static;
+  }
+
+  .projects__row-tagline {
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  .projects__row-desc {
+    margin: 0;
+    max-width: 38ch;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-body);
+  }
+
+  .projects__row-desc--dark {
+    color: rgba(243, 242, 240, .62);
+  }
+
+  .projects__row-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-border-strong);
+    padding-bottom: 4px;
+    align-self: flex-start;
+  }
+
+  .projects__row-link--dark {
+    border-bottom-color: rgba(243, 242, 240, .3);
+  }
+
+  .projects__feature {
+    margin-top: clamp(70px, 10vh, 140px);
+  }
+
+  .projects__feature-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 72px);
+    margin-top: 34px;
+  }
+
+  .projects__feature-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .projects__feature-heading {
+    max-width: 16ch;
+  }
+
+  .projects__feature-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 6px;
+  }
+
+  .projects__feature-side .projects__row-desc {
+    max-width: 48ch;
+  }
+
+  @media (max-width: 900px) {
+    .projects__intro,
+    .projects__row,
+    .projects__row--dark,
+    .projects__feature-grid {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 24px;
+    }
+
+    .projects__row--dark {
+      margin-top: 48px;
+    }
+
+    .projects__row-copy {
+      position: static;
+    }
+  }
+</style>

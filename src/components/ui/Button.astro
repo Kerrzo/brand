@@ -1,0 +1,67 @@
+---
+interface Props {
+  href: string;
+  variant?: 'solid' | 'outline' | 'solid-dark' | 'inverse';
+  withDot?: boolean;
+  class?: string;
+}
+
+const { href, variant = 'solid', withDot = false, class: className = '' } = Astro.props;
+---
+
+<a href={href} class:list={['btn', `btn--${variant}`, className]}>
+  <slot />
+  {withDot && <span class="dot" aria-hidden="true"></span>}
+</a>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border-radius: var(--radius-pill);
+    font-size: 15px;
+    font-weight: 500;
+    transition: background var(--dur-fast) ease, color var(--dur-fast) ease, border-color var(--dur-fast) ease;
+    white-space: nowrap;
+  }
+
+  .btn--solid {
+    background: var(--color-ink);
+    color: var(--color-bg);
+  }
+
+  .btn--solid:hover {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .btn--outline {
+    border: 1px solid var(--color-border-strong);
+  }
+
+  .btn--outline:hover {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+  }
+
+  .btn--solid-dark {
+    background: var(--color-bg);
+    color: var(--color-ink);
+  }
+
+  .btn--solid-dark:hover {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .btn--inverse {
+    border: 1px solid rgba(243, 242, 240, .3);
+    color: var(--color-dark-fg);
+  }
+
+  .btn--inverse:hover {
+    border-color: var(--color-dark-fg);
+  }
+</style>

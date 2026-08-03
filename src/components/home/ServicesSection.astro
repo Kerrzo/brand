@@ -1,0 +1,88 @@
+---
+import SectionLabel from '../ui/SectionLabel.astro';
+
+const services = [
+  { n: '01', title: 'AI Product Advisory', copy: 'Where AI genuinely changes the product, and where it is a distraction.' },
+  { n: '02', title: 'Prototype Sprints', copy: 'A working, testable product in weeks — not a slide deck about one.' },
+  { n: '03', title: 'AI Builder Coaching', copy: 'Helping teams become genuinely AI-capable in how they build.' },
+  { n: '04', title: 'Fractional CTO / Product Architecture', copy: 'Senior technical judgement, without hiring for it permanently.' },
+];
+---
+
+<section class="services container">
+  <div class="services__intro" data-reveal>
+    <div>
+      <SectionLabel>Work with Paul</SectionLabel>
+      <h2 class="services__heading">From promising idea to something real.</h2>
+    </div>
+  </div>
+  <div class="services__rows" data-reveal>
+    {services.map((s) => (
+      <a href="/work-with-paul/" class="services__row">
+        <span class="mono-label" style="color:var(--color-label-dim)">{s.n}</span>
+        <h3 class="services__row-title">{s.title}</h3>
+        <p class="services__row-copy">{s.copy}</p>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .services {
+    padding-top: clamp(90px, 13vh, 180px);
+  }
+
+  .services__intro {
+    margin-bottom: clamp(40px, 6vh, 72px);
+  }
+
+  .services__heading {
+    margin: 26px 0 0;
+    font-size: clamp(36px, 5.4vw, 88px);
+    line-height: .94;
+    letter-spacing: -.045em;
+    font-weight: 500;
+    max-width: 14ch;
+  }
+
+  .services__rows {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .services__row {
+    display: grid;
+    grid-template-columns: 90px minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 24px;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--color-border);
+    transition: background var(--dur-fast) ease;
+  }
+
+  .services__row:hover {
+    background: rgba(14, 14, 13, .03);
+    color: inherit;
+  }
+
+  .services__row-title {
+    margin: 0;
+    font-size: clamp(24px, 2.6vw, 40px);
+    font-weight: 500;
+    letter-spacing: -.03em;
+    line-height: 1;
+  }
+
+  .services__row-copy {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-body);
+    max-width: 44ch;
+  }
+
+  @media (max-width: 900px) {
+    .services__row {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 10px;
+    }
+  }
+</style>

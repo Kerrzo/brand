@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+export async function getStaticPaths() {
+  const items = await getCollection('work', ({ data }) => !data.draft);
+  return items.map((item) => ({ params: { slug: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+
+const facts = [
+  { label: 'Client', value: item.data.client },
+  { label: 'Category', value: item.data.category },
+  { label: 'Years', value: item.data.yearRange },
+  ...(item.data.role ? [{ label: 'Role', value: item.data.role }] : []),
+  ...(item.data.deliveredVia ? [{ label: 'Delivered via', value: item.data.deliveredVia }] : []),
+  ...(item.data.tags.length ? [{ label: 'Focus', value: item.data.tags.join(', ') }] : []),
+];
+---
+
+<ContentLayout
+  title={item.data.title}
+  description={item.data.description}
+  current="work"
+  eyebrow={item.data.category}
+  heading={item.data.title}
+  tagline={item.data.tagline}
+  backHref="/work/"
+  backLabel="All selected work"
+  heroLabel={`${item.data.client} · ${item.data.tagline}`}
+  facts={facts}
+>
+  <Content />
+</ContentLayout>

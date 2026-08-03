@@ -1,0 +1,59 @@
+h1, h2, h3, h4 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.h-display {
+  font-size: clamp(56px, 11.5vw, 196px);
+  line-height: 0.86;
+  letter-spacing: -0.055em;
+  font-weight: 500;
+}
+
+.h-hero {
+  font-size: clamp(42px, 7.6vw, 124px);
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+}
+
+.h-1 {
+  font-size: clamp(36px, 5.4vw, 88px);
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+}
+
+.h-2 {
+  font-size: clamp(30px, 3.6vw, 58px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+}
+
+.h-3 {
+  font-size: clamp(24px, 2.6vw, 40px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.lede {
+  font-size: clamp(19px, 1.9vw, 28px);
+  line-height: 1.36;
+  letter-spacing: -0.02em;
+}
+
+.body-copy {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-body);
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--color-label);
+}

@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeHero from '../components/home/HomeHero.astro';
+import StatsRow from '../components/ui/StatsRow.astro';
+import ProjectsSection from '../components/home/ProjectsSection.astro';
+import AICaseStudySection from '../components/home/AICaseStudySection.astro';
+import EnterpriseWorkSection from '../components/home/EnterpriseWorkSection.astro';
+import EmergingTechnologySection from '../components/home/EmergingTechnologySection.astro';
+import ServicesSection from '../components/home/ServicesSection.astro';
+import LabSection from '../components/home/LabSection.astro';
+import WritingSection from '../components/home/WritingSection.astro';
+import AboutSection from '../components/home/AboutSection.astro';
+import FinalCTA from '../components/ui/FinalCTA.astro';
+
+const stats = [
+  { value: '25+', label: 'Years in technology' },
+  { value: 'CTO and product architect', label: 'Role' },
+  { value: 'Enterprise platforms', label: 'Shipped at scale' },
+  { value: 'AI · Web · Mobile · Voice · VR', label: 'Surfaces' },
+];
+---
+
+<BaseLayout
+  title="Paul Kerr — CTO, AI Product Architect, Builder"
+  description="I build ambitious products at the edge of what is now possible. AI product architecture, enterprise platforms and creative technology from Paul Kerr / KERRZO."
+  transparentHeader
+>
+  <HomeHero />
+  <div class="container">
+    <StatsRow stats={stats} />
+  </div>
+  <ProjectsSection />
+  <AICaseStudySection />
+  <EnterpriseWorkSection />
+  <EmergingTechnologySection />
+  <ServicesSection />
+  <LabSection />
+  <WritingSection />
+  <AboutSection />
+  <FinalCTA />
+</BaseLayout>

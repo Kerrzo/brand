@@ -1,0 +1,126 @@
+---
+interface Props {
+  videoUrl?: string;
+  posterLabel?: string;
+}
+
+const { videoUrl = '', posterLabel = 'Video poster · replace with still' } = Astro.props;
+---
+
+<div class="video-reveal" data-reveal data-video-url={videoUrl}>
+  <video data-video playsinline controls class="video-reveal__video"></video>
+  <div class="video-reveal__poster" data-poster>
+    <div class="video-reveal__scrim"></div>
+    <div class="video-reveal__play">&#9654;</div>
+    <span class="video-reveal__label">{posterLabel}</span>
+    <span class="video-reveal__hint" data-video-hint>Video not yet added</span>
+  </div>
+</div>
+
+<style>
+  .video-reveal {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    background-color: #1d1c1a;
+    background-image: repeating-linear-gradient(122deg, #1d1c1a 0 14px, #252421 14px 28px);
+  }
+
+  .video-reveal__video {
+    display: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #000;
+  }
+
+  .video-reveal__poster {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .video-reveal__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, .15) 0%, rgba(0, 0, 0, .45) 100%);
+  }
+
+  .video-reveal__play {
+    position: relative;
+    width: clamp(64px, 7vw, 96px);
+    height: clamp(64px, 7vw, 96px);
+    border-radius: var(--radius-pill);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    padding-left: 5px;
+    transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
+  }
+
+  .video-reveal__poster:hover .video-reveal__play {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .video-reveal__label {
+    position: absolute;
+    left: 26px;
+    top: 24px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .55);
+  }
+
+  .video-reveal__hint {
+    position: absolute;
+    left: 26px;
+    bottom: 22px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .55);
+  }
+</style>
+
+<script>
+  function initVideoReveals() {
+    document.querySelectorAll<HTMLElement>('[data-video-url]').forEach((wrap) => {
+      if (wrap.dataset.bound) return;
+      wrap.dataset.bound = '1';
+
+      const src = wrap.dataset.videoUrl || '';
+      const video = wrap.querySelector<HTMLVideoElement>('[data-video]');
+      const poster = wrap.querySelector<HTMLElement>('[data-poster]');
+      const hint = wrap.querySelector<HTMLElement>('[data-video-hint]');
+
+      if (!src || !video) {
+        if (hint) hint.style.display = 'block';
+        return;
+      }
+
+      if (hint) hint.style.display = 'none';
+      video.setAttribute('src', src);
+
+      poster?.addEventListener('click', () => {
+        if (poster) poster.style.display = 'none';
+        video.style.display = 'block';
+        video.play();
+      });
+    });
+  }
+
+  initVideoReveals();
+</script>

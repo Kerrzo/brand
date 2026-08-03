@@ -1,0 +1,128 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import PlaceholderMedia from '../components/ui/PlaceholderMedia.astro';
+import FinalCTA from '../components/ui/FinalCTA.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  current?: 'projects' | 'work' | 'ai-lab' | 'writing' | 'about';
+  eyebrow: string;
+  heading: string;
+  tagline?: string;
+  backHref: string;
+  backLabel: string;
+  heroLabel: string;
+  facts?: { label: string; value: string }[];
+}
+
+const { title, description, current, eyebrow, heading, tagline, backHref, backLabel, heroLabel, facts = [] } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} current={current}>
+  <article class="detail container">
+    <a href={backHref} class="detail__back">&larr; {backLabel}</a>
+    <div class="detail__intro" data-reveal>
+      <div class="mono-label">{eyebrow}</div>
+      <h1 class="detail__heading">{heading}</h1>
+      {tagline && <div class="detail__tagline">{tagline}</div>}
+    </div>
+
+    <PlaceholderMedia label={heroLabel} ratio="16/9" radius="lg" class="detail__hero" />
+
+    <div class="detail__body-grid" data-reveal>
+      <div class="prose">
+        <slot />
+      </div>
+      {facts.length > 0 && (
+        <aside class="detail__facts">
+          {facts.map((f) => (
+            <div class="detail__fact">
+              <div class="mono-label">{f.label}</div>
+              <div class="detail__fact-value">{f.value}</div>
+            </div>
+          ))}
+        </aside>
+      )}
+    </div>
+
+    <div class="detail__related">
+      <slot name="related" />
+    </div>
+  </article>
+
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .detail {
+    padding-top: clamp(120px, 18vh, 200px);
+  }
+
+  .detail__back {
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-label);
+    margin-bottom: clamp(28px, 4vh, 48px);
+  }
+
+  .detail__back:hover {
+    color: var(--color-accent);
+  }
+
+  .detail__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: clamp(36px, 5vh, 64px);
+  }
+
+  .detail__heading {
+    margin: 0;
+    font-size: clamp(38px, 5.6vw, 84px);
+    line-height: .96;
+    letter-spacing: -.045em;
+    font-weight: 500;
+    max-width: 18ch;
+  }
+
+  .detail__tagline {
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--color-body);
+  }
+
+  .detail__hero {
+    margin-bottom: clamp(40px, 6vh, 72px);
+  }
+
+  .detail__body-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, .4fr);
+    gap: clamp(28px, 5vw, 80px);
+  }
+
+  .detail__facts {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 6px;
+  }
+
+  .detail__fact-value {
+    margin-top: 8px;
+    font-size: 16px;
+  }
+
+  .detail__related {
+    margin-top: clamp(60px, 8vh, 100px);
+  }
+
+  @media (max-width: 900px) {
+    .detail__body-grid {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 32px;
+    }
+  }
+</style>

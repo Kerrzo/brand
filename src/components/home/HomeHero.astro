@@ -1,0 +1,374 @@
+---
+import Button from '../ui/Button.astro';
+---
+
+<section id="top" class="hero" data-hero-wrap>
+  <div class="hero__sticky">
+    <div class="hero__img" data-hero-img>
+      <div class="hero__img-pattern"></div>
+      <div class="hero__img-gradient"></div>
+      <div class="hero__img-label" data-hero-img-label>
+        <span class="hero__img-index">01</span>
+        <span>Pellzo &mdash; platform interface &middot; replace with screenshot</span>
+      </div>
+    </div>
+
+    <div class="hero__over" data-hero-over>
+      <div class="hero__over-eyebrow">Paul Kerr &mdash; CTO &middot; AI Product Architect &middot; Builder</div>
+      <h1 class="hero__over-heading">I build ambitious products at the edge of what is now possible.</h1>
+    </div>
+
+    <div class="hero__locked" data-hero-locked>
+      <div class="hero__locked-inner">
+        <div class="hero__locked-eyebrow">Paul Kerr &middot; CTO &middot; AI Product Architect &middot; Builder</div>
+        <h2 class="hero__locked-heading">I build ambitious products at the edge of what is now possible.</h2>
+        <p class="hero__locked-copy" data-hero-locked-copy>
+          I combine more than 25 years of product and technology leadership with AI-native
+          development to move from idea to working product at unusual speed.
+        </p>
+        <div class="hero__locked-actions">
+          <Button href="#projects">View projects<span class="dot" aria-hidden="true"></span></Button>
+          <Button href="/work-with-paul/#contact" variant="outline">Work with Paul</Button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__frags" data-hero-frags>
+      <div class="hero__frag">
+        <span>02 &middot; Brilliancy</span>
+      </div>
+      <div class="hero__frag hero__frag--alt">
+        <span>03 &middot; Game world</span>
+      </div>
+    </div>
+
+    <div class="hero__cred" data-hero-cred>Enterprise platforms &middot; AI products &middot; Voice systems &middot; Creative technology</div>
+
+    <div class="hero__hint" data-hero-hint>Scroll</div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: 230vh;
+  }
+
+  .hero__sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .hero__img {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #1A1917;
+    will-change: top, right, bottom, left, border-radius;
+  }
+
+  .hero__img-pattern {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(122deg, #232220 0 14px, #1B1A18 14px 28px);
+  }
+
+  .hero__img-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, .42) 0%, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, .5) 100%);
+  }
+
+  .hero__img-label {
+    position: absolute;
+    left: 22px;
+    bottom: 20px;
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .62);
+  }
+
+  .hero__img-index {
+    color: var(--color-accent);
+  }
+
+  .hero__over {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 var(--edge) 14vh;
+    color: #fff;
+    pointer-events: none;
+  }
+
+  .hero__over-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .72);
+    margin-bottom: 26px;
+  }
+
+  .hero__over-heading {
+    font-size: clamp(42px, 7.6vw, 124px);
+    line-height: .94;
+    letter-spacing: -.045em;
+    font-weight: 500;
+    max-width: 16ch;
+    text-wrap: balance;
+  }
+
+  .hero__locked {
+    position: absolute;
+    inset: 0;
+    padding: 14vh var(--edge) 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .hero__locked-inner {
+    display: grid;
+    gap: 34px;
+    max-width: 44vw;
+  }
+
+  .hero__locked-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--color-label);
+  }
+
+  .hero__locked-heading {
+    font-size: clamp(34px, 4.3vw, 72px);
+    line-height: .96;
+    letter-spacing: -.04em;
+    font-weight: 500;
+    color: var(--color-ink);
+    max-width: 13ch;
+  }
+
+  .hero__locked-copy {
+    margin: 0;
+    max-width: 46ch;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--color-body);
+  }
+
+  .hero__locked-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    pointer-events: auto;
+  }
+
+  .hero__frags {
+    position: absolute;
+    left: var(--edge);
+    bottom: 5vh;
+    display: flex;
+    gap: 16px;
+    opacity: 0;
+  }
+
+  .hero__frag {
+    width: 15vw;
+    min-width: 150px;
+    aspect-ratio: 4/3;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background: repeating-linear-gradient(122deg, #E6E4E0 0 10px, #EDEBE7 10px 20px);
+  }
+
+  .hero__frag--alt {
+    background: repeating-linear-gradient(122deg, #DEDCD7 0 10px, #E7E5E1 10px 20px);
+  }
+
+  .hero__frag span {
+    position: absolute;
+    left: 12px;
+    bottom: 10px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--color-caption);
+  }
+
+  .hero__cred {
+    position: absolute;
+    right: var(--edge);
+    bottom: 5vh;
+    text-align: right;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--color-label);
+    opacity: 0;
+    max-width: 38ch;
+  }
+
+  .hero__hint {
+    position: absolute;
+    left: 50%;
+    bottom: 26px;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .65);
+  }
+
+  @media (max-width: 1000px) {
+    .hero__locked-inner {
+      max-width: none;
+    }
+
+    .hero__locked-copy {
+      display: none;
+    }
+  }
+
+  /* Static fallback shared by prefers-reduced-motion and no-JS: the pin/scale
+     sequence never runs, so render the locked panel (heading, copy, CTAs) as
+     normal in-flow content instead of leaving it at opacity:0 forever. */
+  @media (prefers-reduced-motion: reduce) {
+    .hero { height: auto; }
+    .hero__sticky { position: relative; height: auto; min-height: auto; }
+    .hero__img { position: relative; height: 55vh; border-radius: var(--radius-md); }
+    .hero__over { display: none; }
+    .hero__locked {
+      position: relative;
+      inset: auto;
+      opacity: 1;
+      pointer-events: auto;
+      padding: clamp(32px, 6vh, 64px) var(--edge);
+    }
+    .hero__locked-inner { max-width: none; }
+    .hero__locked-copy { display: block; }
+    .hero__frags,
+    .hero__cred,
+    .hero__hint {
+      display: none;
+    }
+  }
+
+  html:not(.js) .hero { height: auto; }
+  html:not(.js) .hero__sticky { position: relative; height: auto; min-height: auto; }
+  html:not(.js) .hero__img { position: relative; height: 55vh; border-radius: var(--radius-md); }
+  html:not(.js) .hero__over { display: none; }
+  html:not(.js) .hero__locked {
+    position: relative;
+    inset: auto;
+    opacity: 1;
+    pointer-events: auto;
+    padding: clamp(32px, 6vh, 64px) var(--edge);
+  }
+  html:not(.js) .hero__locked-inner { max-width: none; }
+  html:not(.js) .hero__locked-copy { display: block; }
+  html:not(.js) .hero__frags,
+  html:not(.js) .hero__cred,
+  html:not(.js) .hero__hint {
+    display: none;
+  }
+</style>
+
+<script>
+  function initHomeHero() {
+    const wrap = document.querySelector<HTMLElement>('[data-hero-wrap]');
+    const img = document.querySelector<HTMLElement>('[data-hero-img]');
+    if (!wrap || !img) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const over = document.querySelector<HTMLElement>('[data-hero-over]');
+    const locked = document.querySelector<HTMLElement>('[data-hero-locked]');
+    const imgLabel = document.querySelector<HTMLElement>('[data-hero-img-label]');
+    const frags = document.querySelector<HTMLElement>('[data-hero-frags]');
+    const cred = document.querySelector<HTMLElement>('[data-hero-cred]');
+    const hint = document.querySelector<HTMLElement>('[data-hero-hint]');
+    const header = document.querySelector<HTMLElement>('[data-site-header]');
+
+    let wasDark: boolean | null = null;
+    let raf = 0;
+
+    const lerp = (a: number, b: number, e: number) => a + (b - a) * e;
+
+    const update = () => {
+      raf = 0;
+      const vh = window.innerHeight;
+      const vw = window.innerWidth;
+      const r = wrap.getBoundingClientRect();
+      const span = Math.max(1, r.height - vh);
+      const p = Math.min(1, Math.max(0, -r.top / span));
+      const e = p < 0.5 ? 4 * p ** 3 : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      const narrow = vw <= 1000;
+
+      const pad = vw * 0.04;
+      let tgt;
+      if (narrow) {
+        const inner = locked?.firstElementChild as HTMLElement | null;
+        const ch = inner ? inner.getBoundingClientRect().height : vh * 0.34;
+        const top = Math.min(vh - 150, Math.max(vh * 0.42, 84 + ch + 30));
+        tgt = { top, right: vw * 0.06, bottom: 24, left: vw * 0.06 };
+      } else {
+        tgt = { top: vh * 0.20, right: pad, bottom: vh * 0.16, left: vw * 0.48 };
+      }
+
+      img.style.top = `${lerp(0, tgt.top, e)}px`;
+      img.style.right = `${lerp(0, tgt.right, e)}px`;
+      img.style.bottom = `${lerp(0, tgt.bottom, e)}px`;
+      img.style.left = `${lerp(0, tgt.left, e)}px`;
+      img.style.borderRadius = `${lerp(0, 12, e)}px`;
+
+      const fade = (el: HTMLElement | null, v: number) => {
+        if (!el) return;
+        el.style.opacity = String(v);
+        el.style.pointerEvents = v > 0.5 ? '' : 'none';
+      };
+
+      if (over) {
+        over.style.opacity = String(Math.max(0, 1 - e * 2.4));
+        over.style.transform = `translateY(${-e * 60}px)`;
+      }
+
+      const inTail = Math.max(0, (e - 0.55) / 0.45);
+      fade(locked, inTail);
+      if (locked) locked.style.transform = `translateY(${(1 - inTail) * 24}px)`;
+      if (imgLabel) imgLabel.style.opacity = String(inTail);
+      fade(frags, narrow ? 0 : inTail);
+      fade(cred, narrow ? 0 : inTail);
+      if (hint) hint.style.opacity = String(Math.max(0, 1 - e * 4));
+
+      const dark = e < 0.35;
+      if (header && wasDark !== dark) {
+        wasDark = dark;
+        header.classList.toggle('is-dark', dark);
+      }
+    };
+
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  initHomeHero();
+</script>

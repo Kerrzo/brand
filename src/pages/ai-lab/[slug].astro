@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+export async function getStaticPaths() {
+  const items = await getCollection('lab', ({ data }) => !data.draft);
+  return items.map((item) => ({ params: { slug: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+
+const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' });
+
+const facts = [
+  { label: 'Category', value: item.data.category },
+  { label: 'Type', value: item.data.type },
+  { label: 'Status', value: item.data.status },
+  { label: 'Published', value: dateFmt.format(item.data.publishedDate) },
+  ...(item.data.tools.length ? [{ label: 'Tools', value: item.data.tools.join(', ') }] : []),
+];
+---
+
+<ContentLayout
+  title={item.data.title}
+  description={item.data.description}
+  current="ai-lab"
+  eyebrow={`EXP ${String(item.data.displayOrder).padStart(2, '0')} · ${item.data.category}`}
+  heading={item.data.title}
+  backHref="/ai-lab/"
+  backLabel="All experiments"
+  heroLabel={`${item.data.type} · ${item.data.status}`}
+  facts={facts}
+>
+  <Content />
+</ContentLayout>

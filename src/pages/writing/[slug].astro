@@ -1,0 +1,110 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
+import FinalCTA from '../../components/ui/FinalCTA.astro';
+import { readingTime } from '../../lib/readingTime';
+
+export async function getStaticPaths() {
+  const items = await getCollection('writing', ({ data }) => !data.draft);
+  return items.map((item) => ({ params: { slug: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+const minutes = readingTime(item.body ?? '');
+const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+---
+
+<BaseLayout title={item.data.title} description={item.data.description} current="writing">
+  <article class="article container">
+    <a href="/writing/" class="article__back">&larr; All writing</a>
+
+    <div class="article__intro" data-reveal>
+      <span class="pill-tag">{item.data.category}</span>
+      <h1 class="article__heading">{item.data.title}</h1>
+      <p class="article__deck">{item.data.description}</p>
+      <div class="article__meta">
+        <span>{dateFmt.format(item.data.publishedDate)}</span>
+        <span>&middot;</span>
+        <span>{minutes}</span>
+        {item.data.placeholder && (
+          <>
+            <span>&middot;</span>
+            <span class="article__placeholder-flag">Placeholder &mdash; full piece coming soon</span>
+          </>
+        )}
+      </div>
+    </div>
+
+    <PlaceholderMedia label="Hero image · replace" ratio="16/9" radius="lg" class="article__hero" />
+
+    <div class="prose" data-reveal>
+      <Content />
+    </div>
+  </article>
+
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .article {
+    padding-top: clamp(120px, 18vh, 200px);
+    max-width: 900px;
+  }
+
+  .article__back {
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-label);
+    margin-bottom: clamp(28px, 4vh, 48px);
+  }
+
+  .article__back:hover {
+    color: var(--color-accent);
+  }
+
+  .article__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: clamp(36px, 5vh, 64px);
+  }
+
+  .article__heading {
+    margin: 0;
+    font-size: clamp(34px, 5.4vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -.04em;
+    font-weight: 500;
+  }
+
+  .article__deck {
+    margin: 0;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--color-body);
+    max-width: 50ch;
+  }
+
+  .article__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--color-label);
+  }
+
+  .article__placeholder-flag {
+    color: var(--color-accent);
+  }
+
+  .article__hero {
+    margin-bottom: clamp(40px, 6vh, 72px);
+  }
+</style>

@@ -1,0 +1,31 @@
+---
+interface Props {
+  dark?: boolean;
+  withDot?: boolean;
+  class?: string;
+}
+
+const { dark = false, withDot = false, class: className = '' } = Astro.props;
+---
+
+<div class:list={['section-label', { 'section-label--dark': dark }, className]}>
+  {withDot && <span class="dot" aria-hidden="true"></span>}
+  <slot />
+</div>
+
+<style>
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--color-label);
+  }
+
+  .section-label--dark {
+    color: var(--color-dark-label);
+  }
+</style>

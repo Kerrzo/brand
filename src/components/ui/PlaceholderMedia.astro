@@ -1,0 +1,70 @@
+---
+interface Props {
+  label: string;
+  ratio?: string;
+  dark?: boolean;
+  radius?: 'sm' | 'md' | 'lg' | 'xl';
+  src?: string;
+  alt?: string;
+  class?: string;
+}
+
+const {
+  label,
+  ratio = '16/9',
+  dark = false,
+  radius = 'md',
+  src,
+  alt = '',
+  class: className = '',
+} = Astro.props;
+---
+
+<div
+  class:list={['media-frame', { 'media-frame--dark': dark && !src }, className]}
+  style={{ aspectRatio: ratio, borderRadius: `var(--radius-${radius})` }}
+>
+  {src ? (
+    <img src={src} alt={alt} loading="lazy" />
+  ) : (
+    <span class="media-frame__label">{label}</span>
+  )}
+</div>
+
+<style>
+  .media-frame {
+    position: relative;
+    overflow: hidden;
+    background-color: #e6e4e0;
+    background-image: repeating-linear-gradient(122deg, #e6e4e0 0 12px, #eeece8 12px 24px);
+  }
+
+  .media-frame--dark {
+    background-color: #1d1c1a;
+    background-image: repeating-linear-gradient(122deg, #1d1c1a 0 12px, #252421 12px 24px);
+  }
+
+  .media-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .media-frame__label {
+    position: absolute;
+    left: 20px;
+    bottom: 16px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--color-caption);
+    max-width: calc(100% - 40px);
+  }
+
+  .media-frame--dark .media-frame__label {
+    color: rgba(255, 255, 255, .55);
+  }
+</style>

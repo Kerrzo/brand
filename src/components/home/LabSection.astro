@@ -1,0 +1,125 @@
+---
+import { getCollection } from 'astro:content';
+import SectionLabel from '../ui/SectionLabel.astro';
+import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
+import Button from '../ui/Button.astro';
+
+const all = await getCollection('lab', ({ data }) => !data.draft);
+const order = [
+  'realtime-drive-through-ordering',
+  'consistent-character-workflows',
+  'modular-2d-characters',
+  'concept-to-3d-asset',
+  'ltx-video-experiments',
+  'local-ai-versus-cloud',
+];
+const items = order.map((slug) => all.find((item) => item.id === slug)).filter((v) => v !== undefined);
+const spans = [4, 2, 2, 2, 2, 4];
+const ratios = ['16/9', '3/4', '1/1', '1/1', '1/1', '16/7'];
+const dark = [false, false, false, true, false, false];
+const offsets = [false, true, false, false, false, false];
+---
+
+<section id="lab" class="lab container">
+  <div class="lab__intro" data-reveal>
+    <div>
+      <SectionLabel>KERRZO AI Lab</SectionLabel>
+      <h2 class="lab__heading">Experiments from the edge of the toolkit.</h2>
+    </div>
+    <Button href="/ai-lab/" variant="outline" class="lab__all">Enter the lab</Button>
+  </div>
+
+  <div class="lab__grid" data-reveal>
+    {items.map((item, i) => (
+      <a
+        href={`/ai-lab/${item.id}/`}
+        class:list={['lab__item', `lab__item--span-${spans[i]}`, { 'lab__item--offset': offsets[i] }]}
+      >
+        <PlaceholderMedia label={item.data.type} ratio={ratios[i]} radius="md" dark={dark[i]} />
+        <div class="lab__item-footer">
+          <span class="lab__item-title">{item.data.title}</span>
+          <span class="mono-label" style="color:var(--color-label-dim)">{String(i + 1).padStart(2, '0')}</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .lab {
+    padding-top: clamp(90px, 13vh, 180px);
+  }
+
+  .lab__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: end;
+    margin-bottom: clamp(40px, 6vh, 72px);
+  }
+
+  .lab__heading {
+    margin: 26px 0 0;
+    font-size: clamp(36px, 5.4vw, 88px);
+    line-height: .94;
+    letter-spacing: -.045em;
+    font-weight: 500;
+    max-width: 14ch;
+  }
+
+  .lab__all {
+    justify-self: end;
+  }
+
+  .lab__grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: clamp(14px, 1.6vw, 26px);
+  }
+
+  .lab__item {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .lab__item--span-4 { grid-column: span 4; }
+  .lab__item--span-2 { grid-column: span 2; }
+  .lab__item--offset { padding-top: clamp(0px, 4vw, 64px); }
+
+  .lab__item-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .lab__item-title {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -.02em;
+  }
+
+  @media (max-width: 900px) {
+    .lab__intro {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 20px;
+    }
+
+    .lab__all {
+      justify-self: start;
+    }
+
+    .lab__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lab__item--span-4,
+    .lab__item--span-2 {
+      grid-column: span 1;
+    }
+
+    .lab__item--offset {
+      padding-top: 0;
+    }
+  }
+</style>

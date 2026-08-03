@@ -1,0 +1,268 @@
+---
+interface Props {
+  current?: 'projects' | 'work' | 'ai-lab' | 'writing' | 'about';
+  transparent?: boolean;
+}
+
+const { current, transparent = false } = Astro.props;
+
+const links = [
+  { key: 'projects', label: 'Projects', href: '/#projects' },
+  { key: 'work', label: 'Work', href: '/work/' },
+  { key: 'ai-lab', label: 'AI Lab', href: '/ai-lab/' },
+  { key: 'writing', label: 'Writing', href: '/writing/' },
+  { key: 'about', label: 'About', href: '/about/' },
+] as const;
+---
+
+<header class:list={['site-header', { 'site-header--transparent': transparent }]} data-site-header>
+  <a href="/" class="site-header__logo">KERRZO<sup>&reg;</sup></a>
+
+  <nav class="site-header__nav" data-site-nav aria-label="Primary">
+    {links.map((link) => (
+      <a
+        href={link.href}
+        class:list={['site-header__link', { 'is-current': current === link.key }]}
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+
+  <div class="site-header__actions">
+    <a href="/work-with-paul/#contact" class="site-header__cta" data-site-cta>
+      Work with Paul
+      <span class="dot" aria-hidden="true"></span>
+    </a>
+    <button type="button" class="site-header__menu-btn" data-menu-toggle aria-label="Menu" aria-expanded="false">
+      Menu
+    </button>
+  </div>
+</header>
+
+<div class="menu-panel" data-menu-panel>
+  <nav class="menu-panel__nav" aria-label="Mobile">
+    {links.map((link) => (
+      <a
+        href={link.href}
+        class:list={['menu-panel__link', { 'is-current': current === link.key }]}
+        data-menu-link
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+  <div class="menu-panel__footer">
+    <a href="/work-with-paul/#contact" class="menu-panel__cta" data-menu-link>
+      Work with Paul
+      <span class="dot" aria-hidden="true"></span>
+    </a>
+    <div class="menu-panel__meta">KERRZO &mdash; Paul Kerr</div>
+  </div>
+</div>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-header);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 22px var(--edge);
+    color: var(--color-ink);
+    background: rgba(243, 242, 240, .86);
+    backdrop-filter: blur(10px);
+    transition: color var(--dur-fast) ease, background var(--dur-fast) ease;
+  }
+
+  .site-header--transparent {
+    background: transparent;
+    backdrop-filter: none;
+  }
+
+  .site-header--transparent.is-dark {
+    color: #fff;
+  }
+
+  .site-header__logo {
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .site-header__logo sup {
+    font-size: 9px;
+    font-weight: 500;
+    top: -0.9em;
+    position: relative;
+  }
+
+  .site-header__nav {
+    display: none;
+    align-items: center;
+    gap: 44px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .site-header__link.is-current {
+    color: var(--color-accent);
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .site-header__cta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-ink);
+    color: var(--color-bg);
+    padding: 11px 18px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 500;
+    transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
+  }
+
+  .site-header__cta:hover {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .site-header--transparent.is-dark .site-header__cta {
+    background: var(--color-bg);
+    color: var(--color-ink);
+  }
+
+  .site-header__menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-pill);
+    border: 1px solid currentColor;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .menu-panel {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-menu);
+    background: var(--color-dark-bg);
+    color: var(--color-dark-fg);
+    padding: 92px var(--edge-narrow) 5vh;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 36px;
+    overflow-y: auto;
+  }
+
+  .menu-panel.is-open {
+    display: flex;
+  }
+
+  .menu-panel__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .menu-panel__link {
+    font-size: clamp(26px, 7.2vw, 48px);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1.2;
+  }
+
+  .menu-panel__link.is-current {
+    color: var(--color-accent);
+  }
+
+  .menu-panel__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .menu-panel__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    padding: 15px 24px;
+    border-radius: var(--radius-pill);
+    font-size: 16px;
+    font-weight: 500;
+    align-self: flex-start;
+  }
+
+  .menu-panel__meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(243, 242, 240, .45);
+  }
+
+  @media (min-width: 1001px) {
+    .site-header__nav {
+      display: flex;
+    }
+
+    .site-header__menu-btn {
+      display: none;
+    }
+
+    .menu-panel {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  function initHeader() {
+    const panel = document.querySelector<HTMLElement>('[data-menu-panel]');
+    const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+    if (!panel || !toggle) return;
+
+    const header = document.querySelector<HTMLElement>('[data-site-header]');
+
+    const setOpen = (open: boolean) => {
+      panel.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      toggle.textContent = open ? 'Close' : 'Menu';
+      if (open) header?.classList.add('is-dark');
+    };
+
+    toggle.addEventListener('click', () => setOpen(!panel.classList.contains('is-open')));
+    panel.querySelectorAll('[data-menu-link]').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    const mq = window.matchMedia('(min-width: 1001px)');
+    mq.addEventListener('change', (e) => {
+      if (e.matches) setOpen(false);
+    });
+  }
+
+  initHeader();
+  document.addEventListener('astro:after-swap', initHeader);
+</script>

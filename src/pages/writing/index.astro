@@ -1,0 +1,396 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingHero from '../../components/content/ListingHero.astro';
+import FilterBar from '../../components/ui/FilterBar.astro';
+import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
+import { readingTime } from '../../lib/readingTime';
+
+const all = await getCollection('writing', ({ data }) => !data.draft);
+const sorted = all.sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf());
+
+const featured = sorted.find((p) => p.data.featured) ?? sorted[0];
+const rest = sorted.filter((p) => p.id !== featured.id);
+const grid = rest.slice(0, 8);
+const earlier = rest.slice(8);
+
+const dateFmtShort = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
+const dateFmtLong = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' });
+
+const featuredReadingTime = readingTime(featured.body ?? '');
+
+const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
+---
+
+<BaseLayout title="Writing" description="Notes on AI products, architecture decisions and the things that only become obvious once you ship." current="writing">
+  <ListingHero
+    heading="Writing"
+    headingSize="clamp(58px, 12vw, 200px)"
+    eyebrow="Build notes"
+    meta={`${all.length} pieces · updated monthly`}
+    lede="Thinking through the work by doing it — notes on AI products, architecture decisions and the things that only become obvious once you ship."
+  />
+
+  <section class="container writing-page__filter">
+    <FilterBar categories={categories} allLabel="All" />
+  </section>
+
+  {featured && (
+    <section class="container writing-page__featured" data-card data-cat={featured.data.category}>
+      <a href={`/writing/${featured.id}/`} class="writing-page__featured-grid" data-reveal>
+        <div class="writing-page__featured-media-wrap">
+          <PlaceholderMedia label="Hero image · replace" ratio="16/9" radius="lg" />
+          <span class="writing-page__featured-badge">Featured</span>
+        </div>
+        <div class="writing-page__featured-copy">
+          <span class="pill-tag">{featured.data.category}</span>
+          <h2 class="writing-page__featured-title">{featured.data.title}</h2>
+          <p class="body-copy" style="margin:0;max-width:44ch">{featured.data.description}</p>
+          <div class="writing-page__featured-meta">
+            <span>{dateFmtLong.format(featured.data.publishedDate)}</span>
+            <span>&middot;</span>
+            <span>{featuredReadingTime}</span>
+          </div>
+        </div>
+      </a>
+    </section>
+  )}
+
+  <section class="container writing-page__grid-wrap">
+    <div class="writing-page__grid" data-narrow="repeat(2,minmax(0,1fr))" data-reveal>
+      {grid.map((post) => (
+        <a href={`/writing/${post.id}/`} class="writing-page__card" data-card data-cat={post.data.category}>
+          <PlaceholderMedia label="Image" ratio="4/3" radius="md" />
+          <span class="pill-tag">{post.data.category}</span>
+          <h3 class="writing-page__card-title">{post.data.title}</h3>
+          <span class="mono-label">{dateFmtShort.format(post.data.publishedDate)}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {earlier.length > 0 && (
+    <section class="container writing-page__earlier">
+      <div class="writing-page__earlier-intro" data-reveal>
+        <h2 class="writing-page__earlier-heading">Earlier notes</h2>
+        <span class="mono-label">
+          ({earlier[earlier.length - 1].data.publishedDate.getFullYear()} — {earlier[0].data.publishedDate.getFullYear()})
+        </span>
+      </div>
+      <div class="writing-page__earlier-rows" data-reveal>
+        {earlier.map((post) => (
+          <a href={`/writing/${post.id}/`} class="writing-page__earlier-row" data-card data-cat={post.data.category}>
+            <h3 class="writing-page__earlier-title">{post.data.title}</h3>
+            <span class="writing-page__earlier-desc">{post.data.description}</span>
+            <span class="mono-label" style="color:var(--color-label-dim);text-align:right">{dateFmtShort.format(post.data.publishedDate)}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="writing-page__newsletter">
+    <div class="container writing-page__newsletter-grid" data-reveal>
+      <div class="writing-page__newsletter-copy">
+        <div class="mono-label" style="color:var(--color-dark-label)">Build notes by email</div>
+        <h2 class="writing-page__newsletter-heading">One honest note a month, from inside the build.</h2>
+      </div>
+      <form class="writing-page__newsletter-form" data-newsletter-form>
+        <div class="writing-page__newsletter-input-row">
+          <input type="email" name="email" required placeholder="you@company.com" class="writing-page__newsletter-input" />
+          <button type="submit" class="writing-page__newsletter-submit">Subscribe</button>
+        </div>
+        <div class="writing-page__newsletter-hint">No course, no funnel. Unsubscribe whenever.</div>
+      </form>
+    </div>
+  </section>
+
+  <section id="contact" class="container writing-page__cta">
+    <div class="writing-page__cta-grid" data-reveal>
+      <h2 class="writing-page__cta-heading">Bring me a problem worth solving.</h2>
+      <div class="writing-page__cta-body">
+        <p class="body-copy">
+          Whether you have an AI opportunity, an early product concept or a team that needs help
+          becoming AI-capable, let&rsquo;s work out the most useful next step.
+        </p>
+        <a href="mailto:paul@kerrzo.com" class="btn"><span>Work with Paul</span><span class="dot" aria-hidden="true"></span></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .writing-page__filter {
+    padding-top: clamp(40px, 6vh, 72px);
+  }
+
+  .writing-page__featured {
+    padding-top: clamp(40px, 6vh, 72px);
+  }
+
+  .writing-page__featured-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 64px);
+    align-items: end;
+  }
+
+  .writing-page__featured-media-wrap {
+    position: relative;
+  }
+
+  .writing-page__featured-badge {
+    position: absolute;
+    left: 24px;
+    top: 22px;
+    background: var(--color-accent);
+    color: #fff;
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .writing-page__featured-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-bottom: 6px;
+    align-items: flex-start;
+  }
+
+  .writing-page__featured-title {
+    margin: 0;
+    font-size: clamp(28px, 3.2vw, 50px);
+    line-height: 1.02;
+    letter-spacing: -.035em;
+    font-weight: 500;
+    max-width: 18ch;
+  }
+
+  .writing-page__featured-meta {
+    display: flex;
+    gap: 18px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--color-label);
+  }
+
+  .writing-page__grid-wrap {
+    padding-top: clamp(56px, 8vh, 100px);
+  }
+
+  .writing-page__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(18px, 2.2vw, 34px);
+  }
+
+  .writing-page__card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .writing-page__card-title {
+    margin: 0;
+    font-size: 21px;
+    line-height: 1.15;
+    letter-spacing: -.025em;
+    font-weight: 500;
+  }
+
+  .writing-page__earlier {
+    padding-top: clamp(70px, 10vh, 130px);
+  }
+
+  .writing-page__earlier-intro {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 26px;
+  }
+
+  .writing-page__earlier-heading {
+    margin: 0;
+    font-size: clamp(28px, 3.2vw, 50px);
+    line-height: 1;
+    letter-spacing: -.04em;
+    font-weight: 500;
+  }
+
+  .writing-page__earlier-rows {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .writing-page__earlier-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) 120px;
+    gap: 24px;
+    align-items: baseline;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .writing-page__earlier-title {
+    margin: 0;
+    font-size: clamp(20px, 2.2vw, 32px);
+    font-weight: 500;
+    letter-spacing: -.03em;
+    line-height: 1.08;
+    max-width: 22ch;
+  }
+
+  .writing-page__earlier-desc {
+    font-size: 15px;
+    color: var(--color-body);
+    line-height: 1.55;
+  }
+
+  .writing-page__newsletter {
+    margin: clamp(80px, 12vh, 160px) 0 0;
+    background: var(--color-dark-bg);
+    color: var(--color-dark-fg);
+  }
+
+  .writing-page__newsletter-grid {
+    padding: clamp(48px, 7vw, 100px) var(--edge);
+    border-radius: var(--radius-xl);
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 80px);
+    align-items: end;
+  }
+
+  .writing-page__newsletter-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .writing-page__newsletter-heading {
+    margin: 0;
+    font-size: clamp(30px, 3.6vw, 58px);
+    line-height: 1;
+    letter-spacing: -.04em;
+    font-weight: 500;
+    max-width: 16ch;
+  }
+
+  .writing-page__newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 6px;
+  }
+
+  .writing-page__newsletter-input-row {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid rgba(243, 242, 240, .3);
+    padding-bottom: 12px;
+  }
+
+  .writing-page__newsletter-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-dark-fg);
+    font-family: inherit;
+    font-size: 17px;
+  }
+
+  .writing-page__newsletter-submit {
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 11px 20px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .writing-page__newsletter-hint {
+    font-size: 13px;
+    color: rgba(243, 242, 240, .45);
+  }
+
+  .writing-page__cta {
+    padding-top: clamp(90px, 14vh, 180px);
+    padding-bottom: clamp(80px, 12vh, 160px);
+  }
+
+  .writing-page__cta-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 90px);
+    align-items: end;
+  }
+
+  .writing-page__cta-heading {
+    margin: 0;
+    font-size: clamp(44px, 7.4vw, 132px);
+    line-height: .9;
+    letter-spacing: -.05em;
+    font-weight: 500;
+    max-width: 12ch;
+  }
+
+  .writing-page__cta-body {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    padding-bottom: 10px;
+  }
+
+  .writing-page__cta-body p {
+    margin: 0;
+    max-width: 42ch;
+  }
+
+  .writing-page__cta-body .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--color-ink);
+    color: var(--color-bg);
+    padding: 16px 26px;
+    border-radius: var(--radius-pill);
+    font-size: 16px;
+    font-weight: 500;
+    align-self: flex-start;
+    transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
+  }
+
+  .writing-page__cta-body .btn:hover {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  @media (max-width: 900px) {
+    .writing-page__featured-grid,
+    .writing-page__earlier-row,
+    .writing-page__newsletter-grid,
+    .writing-page__cta-grid {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 16px;
+    }
+
+    .writing-page__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .writing-page__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

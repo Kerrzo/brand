@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout title="Page Not Found" description="This page doesn't exist.">
+  <section class="not-found container">
+    <div class="mono-label">404</div>
+    <h1 class="not-found__heading">That page doesn&rsquo;t exist.</h1>
+    <p class="body-copy not-found__copy">
+      The link might be broken, or the page may have moved. Try the homepage, or one of the
+      sections below.
+    </p>
+    <div class="not-found__actions">
+      <Button href="/">Back to homepage</Button>
+      <Button href="/work/" variant="outline">Selected work</Button>
+      <Button href="/writing/" variant="outline">Writing</Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding: clamp(160px, 24vh, 260px) var(--edge) clamp(120px, 18vh, 200px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .not-found__heading {
+    margin: 0;
+    font-size: clamp(40px, 6vw, 96px);
+    line-height: .94;
+    letter-spacing: -.045em;
+    font-weight: 500;
+  }
+
+  .not-found__copy {
+    max-width: 46ch;
+  }
+
+  .not-found__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+  }
+</style>

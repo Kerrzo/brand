@@ -1,0 +1,139 @@
+---
+import { getCollection } from 'astro:content';
+import SectionLabel from '../ui/SectionLabel.astro';
+import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
+import Button from '../ui/Button.astro';
+
+const all = await getCollection('work', ({ data }) => !data.draft && data.category === 'Enterprise platforms');
+const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder).slice(0, 2);
+---
+
+<section id="work" class="ent-work container">
+  <div class="ent-work__intro" data-reveal>
+    <div>
+      <SectionLabel>Proven in the real world</SectionLabel>
+      <h2 class="ent-work__heading">Platforms that connect digital products to real operations.</h2>
+    </div>
+    <Button href="/work/" variant="outline" class="ent-work__all">All selected work</Button>
+  </div>
+
+  <div class="ent-work__rows" data-reveal>
+    {items.map((item, i) => (
+      <div class:list={['ent-work__row', { 'ent-work__row--reverse': i % 2 === 1 }]}>
+        <PlaceholderMedia
+          label={`${item.data.client} · ${item.data.tagline}`}
+          ratio="16/9"
+          radius="md"
+          class="ent-work__media"
+        />
+        <div class="ent-work__copy">
+          <div class="mono-label">{item.data.client}</div>
+          <h3 class="ent-work__title">{item.data.tagline}</h3>
+          <p class="body-copy" style="margin:0;max-width:40ch">{item.data.description}</p>
+          <a href={`/work/${item.id}/`} class="ent-work__link">Read the case study &rarr;</a>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .ent-work {
+    padding-top: clamp(90px, 13vh, 180px);
+  }
+
+  .ent-work__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: end;
+    margin-bottom: clamp(44px, 6vh, 84px);
+  }
+
+  .ent-work__heading {
+    margin: 26px 0 0;
+    font-size: clamp(36px, 5vw, 80px);
+    line-height: .94;
+    letter-spacing: -.045em;
+    font-weight: 500;
+    max-width: 16ch;
+  }
+
+  .ent-work__all {
+    justify-self: end;
+  }
+
+  .ent-work__rows {
+    display: grid;
+    gap: clamp(40px, 6vh, 80px);
+  }
+
+  .ent-work__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: clamp(24px, 3vw, 56px);
+    align-items: end;
+  }
+
+  .ent-work__row--reverse {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  }
+
+  .ent-work__row--reverse .ent-work__copy {
+    order: 1;
+  }
+
+  .ent-work__row--reverse .ent-work__media {
+    order: 2;
+  }
+
+  .ent-work__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 6px;
+  }
+
+  .ent-work__title {
+    margin: 0;
+    font-size: clamp(26px, 2.8vw, 44px);
+    line-height: 1;
+    letter-spacing: -.035em;
+    font-weight: 500;
+    max-width: 14ch;
+  }
+
+  .ent-work__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-border-strong);
+    padding-bottom: 4px;
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 900px) {
+    .ent-work__intro {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 20px;
+    }
+
+    .ent-work__all {
+      justify-self: start;
+    }
+
+    .ent-work__row,
+    .ent-work__row--reverse {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 18px;
+    }
+
+    .ent-work__row--reverse .ent-work__copy,
+    .ent-work__row--reverse .ent-work__media {
+      order: initial;
+    }
+  }
+</style>

@@ -1,0 +1,67 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  heading?: string;
+  id?: string;
+};
+
+const {
+  heading = 'Bring me a problem worth solving.',
+  id = 'contact',
+} = Astro.props;
+---
+
+<section id={id} class="final-cta container">
+  <div class="final-cta__grid" data-reveal>
+    <h2 class="final-cta__heading">{heading}</h2>
+    <div class="final-cta__body">
+      <p class="body-copy">
+        Whether you have an AI opportunity, an early product concept or a team that needs help
+        becoming AI-capable, let&rsquo;s work out the most useful next step.
+      </p>
+      <Button href="mailto:paul@kerrzo.com" withDot>Work with Paul</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .final-cta {
+    padding-top: clamp(100px, 15vh, 200px);
+    padding-bottom: clamp(80px, 12vh, 160px);
+  }
+
+  .final-cta__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 90px);
+    align-items: end;
+  }
+
+  .final-cta__heading {
+    font-size: clamp(44px, 7.4vw, 132px);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    font-weight: 500;
+    max-width: 12ch;
+  }
+
+  .final-cta__body {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    padding-bottom: 10px;
+  }
+
+  .final-cta__body p {
+    max-width: 42ch;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .final-cta__grid {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 24px;
+    }
+  }
+</style>

@@ -1,0 +1,96 @@
+---
+interface Props {
+  heading: string;
+  headingSize?: string;
+  eyebrowTop?: string;
+  eyebrow: string;
+  meta: string;
+  lede: string;
+}
+
+const {
+  heading,
+  headingSize = 'clamp(56px, 11.5vw, 196px)',
+  eyebrowTop,
+  eyebrow,
+  meta,
+  lede,
+} = Astro.props;
+---
+
+<section id="top" class="page-hero container">
+  {eyebrowTop && (
+    <div class="page-hero__eyebrow-top">
+      <span class="dot" aria-hidden="true"></span>{eyebrowTop}
+    </div>
+  )}
+  <h1 class="page-hero__heading" style={{ fontSize: headingSize }}>{heading}</h1>
+  <div class="page-hero__grid">
+    <div class="page-hero__meta">
+      <div class="mono-label">{eyebrow}</div>
+      <div class="page-hero__meta-copy">{meta}</div>
+    </div>
+    <p class="page-hero__lede">{lede}</p>
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    padding-top: clamp(120px, 20vh, 220px);
+  }
+
+  .page-hero__eyebrow-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--color-label);
+    margin-bottom: 26px;
+  }
+
+  .page-hero__heading {
+    margin: 0;
+    line-height: .86;
+    letter-spacing: -.055em;
+    font-weight: 500;
+    max-width: 15ch;
+  }
+
+  .page-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, .55fr) minmax(0, 1.45fr);
+    gap: clamp(24px, 5vw, 90px);
+    margin-top: clamp(34px, 6vh, 68px);
+  }
+
+  .page-hero__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .page-hero__meta-copy {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-body);
+    max-width: 26ch;
+  }
+
+  .page-hero__lede {
+    margin: 0;
+    font-size: clamp(19px, 1.9vw, 28px);
+    line-height: 1.36;
+    letter-spacing: -.02em;
+    max-width: 44ch;
+  }
+
+  @media (max-width: 900px) {
+    .page-hero__grid {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 20px;
+    }
+  }
+</style>

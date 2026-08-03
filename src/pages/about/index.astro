@@ -1,0 +1,511 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingHero from '../../components/content/ListingHero.astro';
+import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
+import FaqAccordion from '../../components/ui/FaqAccordion.astro';
+import FinalCTA from '../../components/ui/FinalCTA.astro';
+
+const contexts = ['Craveable Brands', 'International Towers', 'Amica', '42 Interactive', 'BoxOfficeVR'];
+
+const timeline = [
+  { n: '001', title: 'Engineering foundations', copy: 'Web and enterprise systems, back when everything had to be built by hand.', year: '1999' },
+  { n: '002', title: 'Product and technology leadership', copy: 'Leading teams building commerce, property and healthcare platforms.', year: '2009' },
+  { n: '003', title: 'Enterprise ecosystems', copy: 'Craveable Brands, International Towers and Amica — digital connected to real operations.', year: '2016' },
+  { n: '004', title: 'Beyond the screen', copy: 'BoxOfficeVR and neurotechnology — immersive work with a real purpose.', year: '2020' },
+  { n: '005', title: 'KERRZO — AI-native building', copy: 'Pellzo, Brilliancy, Strategy Connect and AI-assisted game worlds.', year: '2024 —' },
+];
+
+const capabilities = [
+  { title: 'AI product architecture', copy: 'Model choice, evaluation, agents, retrieval, guardrails.' },
+  { title: 'Platform engineering', copy: 'Integrations, payments, POS, identity, operations at scale.' },
+  { title: 'Product definition', copy: 'Finding the smallest version that proves the idea.' },
+  { title: 'Rapid prototyping', copy: 'Working software in weeks, tested with real people.' },
+  { title: 'Immersive and voice', copy: 'VR, real-time voice systems, spatial and sensor-driven work.' },
+  { title: 'Team enablement', copy: 'Helping engineers and designers become genuinely AI-capable.' },
+];
+
+const beliefs = [
+  { n: '01', title: 'The model is rarely the hard part', copy: 'Deciding what is worth building, and what "good" means, still takes human judgement.' },
+  { n: '02', title: 'Prototypes beat opinions', copy: 'A rough working thing settles arguments a strategy deck will run for months.' },
+  { n: '03', title: 'Keep the human answer intact', copy: 'Systems that average people out lose exactly the signal worth having.' },
+];
+
+const faqs = [
+  { question: 'How do you usually start with a new client?', answer: 'Usually a short paid discovery: a couple of conversations, a look at what exists, and a written point of view on the most useful next step. Often that leads into a prototype sprint.' },
+  { question: 'Do you build, or only advise?', answer: 'I build. Advisory work is more useful when the person giving it is still shipping software every week — which is exactly what Pellzo, Brilliancy and the lab experiments are for.' },
+  { question: 'What size of team do you work best with?', answer: 'Founders and small product teams who need senior technical judgement quickly, and enterprise teams who need someone who has already delivered at that scale.' },
+  { question: 'How quickly can something real exist?', answer: 'A focused prototype sprint typically produces something testable in two to four weeks — real software, not a clickable illusion.' },
+];
+---
+
+<BaseLayout title="About" description="I have spent more than 25 years turning complicated technology into products people actually use — and I now build my own at the edge of what AI makes possible." current="about">
+  <ListingHero
+    heading="About"
+    headingSize="clamp(64px, 13vw, 220px)"
+    eyebrow="Paul Kerr"
+    meta="CTO · AI Product Architect · Builder. Sydney, Australia."
+    lede="I have spent more than 25 years turning complicated technology into products people actually use — and I now build my own at the edge of what AI makes possible."
+  />
+
+  <section class="container about-photos">
+    <div class="about-photos__grid" data-reveal>
+      <div class="about-photos__frame">
+        <PlaceholderMedia label="Photo · working session" ratio="16/10" radius="md" dark />
+        <div class="about-photos__caption">Building alongside teams, not above them</div>
+      </div>
+      <div class="about-photos__frame">
+        <PlaceholderMedia label="Photo · desk / build" ratio="16/10" radius="md" />
+        <div class="about-photos__caption about-photos__caption--light">Shipping in weeks, not quarters</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container about-contexts">
+    <div class="about-contexts__meta" data-reveal>
+      <span class="about-contexts__meta-left"><span class="dot" aria-hidden="true"></span>Selected contexts</span>
+      <span>(1999 — 2026)</span>
+    </div>
+    <div class="about-contexts__grid" data-reveal data-narrow="repeat(2,minmax(0,1fr))">
+      {contexts.map((c) => <div class="about-contexts__item">{c}</div>)}
+    </div>
+  </section>
+
+  <section class="container about-short">
+    <div class="about-short__grid" data-reveal>
+      <div class="mono-label about-short__label">The short version</div>
+      <div class="about-short__body">
+        <h2 class="about-short__heading">I started as an engineer, became a CTO, and never stopped building things myself.</h2>
+        <div class="about-short__cols">
+          <p class="body-copy">Across commerce, property, strategy, healthcare and immersive technology, my work has mostly been the same job wearing different clothes: understand a messy real-world operation, then design the product and architecture that makes it feel simple.</p>
+          <p class="body-copy">The tools have changed dramatically. AI has collapsed the distance between an idea and a working product — which rewards people who can hold product judgement and technical clarity at the same time. That is the part I care about most.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container about-timeline">
+    <div class="about-timeline__intro" data-reveal>
+      <h2 class="about-timeline__heading">Selected timeline</h2>
+      <span class="mono-label">(05)</span>
+    </div>
+    <div class="about-timeline__rows" data-reveal>
+      {timeline.map((row) => (
+        <div class="about-timeline__row" data-narrow="minmax(0,1fr) 90px">
+          <span class="mono-label" style="color:var(--color-label-dim)">{row.n}</span>
+          <span class="about-timeline__title">{row.title}</span>
+          <span class="about-timeline__copy">{row.copy}</span>
+          <span class="mono-label" style="color:var(--color-label);text-align:right">{row.year}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="about-capabilities">
+    <div class="container">
+      <div class="about-capabilities__intro" data-reveal>
+        <div class="mono-label" style="color:var(--color-dark-label)">Capabilities</div>
+        <h2 class="about-capabilities__heading">What I actually do when I turn up.</h2>
+      </div>
+      <div class="about-capabilities__grid" data-reveal>
+        {capabilities.map((c) => (
+          <div class="about-capabilities__item">
+            <div class="about-capabilities__item-title">{c.title}</div>
+            <div class="about-capabilities__item-copy">{c.copy}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container about-beliefs">
+    <div class="about-beliefs__intro" data-reveal>
+      <div>
+        <div class="mono-label" style="margin-bottom:24px">What I believe</div>
+        <h2 class="about-beliefs__heading">Opinions earned by shipping.</h2>
+      </div>
+    </div>
+    <div class="about-beliefs__rows" data-reveal>
+      {beliefs.map((b) => (
+        <div class="about-beliefs__row">
+          <span class="mono-label" style="color:var(--color-label-dim)">{b.n}</span>
+          <h3 class="about-beliefs__title">{b.title}</h3>
+          <p class="about-beliefs__copy">{b.copy}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container about-away">
+    <div class="about-away__grid" data-reveal>
+      <PlaceholderMedia label="Portrait of Paul · editorial, natural light" ratio="4/5" radius="md" />
+      <div class="about-away__copy">
+        <div class="mono-label">Away from the screen</div>
+        <h2 class="about-away__heading">Chess, game worlds, and a stubborn interest in how things work.</h2>
+        <p class="body-copy" style="max-width:46ch">
+          Most of my side projects start as curiosity — a chess habit that became Brilliancy, a
+          fascination with generative art that became a game world, an interest in pain science
+          that became neurotechnology work.
+        </p>
+        <div class="about-away__tags">
+          {['Chess', 'Generative art', 'Game design', 'Music tech', 'Coastal running'].map((t) => (
+            <span class="pill-tag" style="padding:9px 16px;font-size:14px">{t}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container about-faq">
+    <h2 class="about-faq__heading" data-reveal>FAQs</h2>
+    <FaqAccordion items={faqs} />
+  </section>
+
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .about-photos {
+    padding-top: clamp(48px, 8vh, 96px);
+  }
+
+  .about-photos__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: clamp(16px, 2vw, 28px);
+  }
+
+  .about-photos__frame {
+    position: relative;
+  }
+
+  .about-photos__caption {
+    position: absolute;
+    left: 26px;
+    bottom: 24px;
+    color: #fff;
+    font-size: clamp(18px, 1.8vw, 26px);
+    font-weight: 500;
+    letter-spacing: -.025em;
+    line-height: 1.15;
+    max-width: 16ch;
+  }
+
+  .about-photos__caption--light {
+    max-width: 14ch;
+  }
+
+  .about-contexts {
+    padding-top: clamp(60px, 9vh, 120px);
+  }
+
+  .about-contexts__meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 22px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--color-label);
+  }
+
+  .about-contexts__meta-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .about-contexts__meta-left .dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .about-contexts__grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .about-contexts__item {
+    padding: 26px 18px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .about-contexts__item:last-child {
+    border-right: none;
+  }
+
+  .about-short {
+    padding-top: clamp(90px, 13vh, 180px);
+  }
+
+  .about-short__grid {
+    display: grid;
+    grid-template-columns: minmax(0, .5fr) minmax(0, 1.5fr);
+    gap: clamp(24px, 4vw, 72px);
+    align-items: start;
+  }
+
+  .about-short__label {
+    padding-top: 12px;
+  }
+
+  .about-short__body {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .about-short__heading {
+    margin: 0;
+    font-size: clamp(30px, 3.6vw, 58px);
+    line-height: 1.04;
+    letter-spacing: -.035em;
+    font-weight: 500;
+    max-width: 22ch;
+    text-wrap: pretty;
+  }
+
+  .about-short__cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 56px);
+  }
+
+  .about-short__cols p {
+    margin: 0;
+  }
+
+  .about-timeline {
+    padding-top: clamp(80px, 11vh, 150px);
+  }
+
+  .about-timeline__intro {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 34px;
+  }
+
+  .about-timeline__heading {
+    margin: 0;
+    font-size: clamp(34px, 4.6vw, 74px);
+    line-height: .96;
+    letter-spacing: -.045em;
+    font-weight: 500;
+  }
+
+  .about-timeline__rows {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .about-timeline__row {
+    display: grid;
+    grid-template-columns: 90px minmax(0, 1.1fr) minmax(0, 1.2fr) 120px;
+    gap: 20px;
+    align-items: baseline;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .about-timeline__title {
+    font-size: clamp(19px, 1.9vw, 28px);
+    font-weight: 500;
+    letter-spacing: -.025em;
+  }
+
+  .about-timeline__copy {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-body);
+  }
+
+  .about-capabilities {
+    margin-top: clamp(90px, 13vh, 180px);
+    background: var(--color-dark-bg);
+    color: var(--color-dark-fg);
+    padding: clamp(64px, 10vh, 140px) 0;
+  }
+
+  .about-capabilities__intro {
+    display: grid;
+    grid-template-columns: minmax(0, .5fr) minmax(0, 1.5fr);
+    gap: clamp(24px, 4vw, 72px);
+    align-items: start;
+    margin-bottom: clamp(40px, 6vh, 80px);
+  }
+
+  .about-capabilities__heading {
+    margin: 0;
+    font-size: clamp(30px, 3.6vw, 58px);
+    line-height: 1.04;
+    letter-spacing: -.035em;
+    font-weight: 500;
+    max-width: 20ch;
+  }
+
+  .about-capabilities__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--color-dark-border);
+  }
+
+  .about-capabilities__item {
+    padding: 28px 24px;
+    border-bottom: 1px solid var(--color-dark-border);
+    border-right: 1px solid var(--color-dark-border);
+  }
+
+  .about-capabilities__item:nth-child(3n) {
+    border-right: none;
+  }
+
+  .about-capabilities__item-title {
+    font-size: 19px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .about-capabilities__item-copy {
+    font-size: 15px;
+    line-height: 1.55;
+    color: rgba(243, 242, 240, .55);
+  }
+
+  .about-beliefs {
+    padding-top: clamp(90px, 13vh, 180px);
+  }
+
+  .about-beliefs__intro {
+    margin-bottom: clamp(36px, 5vh, 64px);
+  }
+
+  .about-beliefs__heading {
+    margin: 0;
+    font-size: clamp(34px, 5vw, 80px);
+    line-height: .94;
+    letter-spacing: -.045em;
+    font-weight: 500;
+    max-width: 14ch;
+  }
+
+  .about-beliefs__rows {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .about-beliefs__row {
+    display: grid;
+    grid-template-columns: 90px minmax(0, 1.05fr) minmax(0, 1.1fr);
+    gap: 24px;
+    align-items: baseline;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .about-beliefs__title {
+    margin: 0;
+    font-size: clamp(22px, 2.4vw, 38px);
+    font-weight: 500;
+    letter-spacing: -.03em;
+    line-height: 1.05;
+    max-width: 18ch;
+  }
+
+  .about-beliefs__copy {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-body);
+    max-width: 46ch;
+  }
+
+  .about-away {
+    padding-top: clamp(90px, 13vh, 180px);
+  }
+
+  .about-away__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    gap: clamp(28px, 5vw, 90px);
+    align-items: center;
+  }
+
+  .about-away__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  .about-away__heading {
+    margin: 0;
+    font-size: clamp(28px, 3.2vw, 50px);
+    line-height: 1.04;
+    letter-spacing: -.035em;
+    font-weight: 500;
+    max-width: 18ch;
+  }
+
+  .about-away__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .about-faq {
+    padding-top: clamp(90px, 13vh, 180px);
+  }
+
+  .about-faq__heading {
+    margin: 0 0 clamp(30px, 5vh, 56px);
+    text-align: center;
+    font-size: clamp(38px, 5.4vw, 88px);
+    line-height: .95;
+    letter-spacing: -.045em;
+    font-weight: 500;
+  }
+
+  @media (max-width: 900px) {
+    .about-photos__grid,
+    .about-short__grid,
+    .about-short__cols,
+    .about-capabilities__intro,
+    .about-away__grid {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 20px;
+    }
+
+    .about-contexts__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about-timeline__row {
+      grid-template-columns: minmax(0, 1fr) 90px;
+      row-gap: 6px;
+    }
+
+    .about-timeline__copy {
+      display: none;
+    }
+
+    .about-capabilities__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .about-capabilities__item {
+      border-right: none;
+    }
+
+    .about-beliefs__row {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 10px;
+    }
+  }
+</style>

@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingHero from '../../components/content/ListingHero.astro';
+import FilterBar from '../../components/ui/FilterBar.astro';
+import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
+import VideoReveal from '../../components/ui/VideoReveal.astro';
+import StatsRow from '../../components/ui/StatsRow.astro';
+import FinalCTA from '../../components/ui/FinalCTA.astro';
+import { getCollection } from 'astro:content';
+
+const all = await getCollection('work', ({ data }) => !data.draft);
+const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
+
+const categories = ['AI and intelligence', 'Enterprise platforms', 'Immersive technology', 'Health and wellbeing'];
+
+const stats = [
+  { value: 'National', label: 'Scale of deployment' },
+  { value: '5 sectors', label: 'Commerce to healthcare' },
+  { value: 'End to end', label: 'Strategy through delivery' },
+  { value: '42 Interactive', label: 'Client work delivered via' },
+];
+---
+
+<BaseLayout title="Selected Work" description="Platforms and products built with real operations behind them — enterprise ecosystems, AI intelligence and technology beyond the screen." current="work">
+  <ListingHero
+    heading="Selected work."
+    eyebrow="2016 — 2026"
+    meta="Five projects that show the range: intelligence, operations at scale, and technology beyond the screen."
+    lede="Platforms and products built with real operations behind them — where the interesting problem was never the interface alone."
+  />
+
+  <section class="container work-filter">
+    <FilterBar categories={categories} allLabel="All work" />
+  </section>
+
+  {items[0] && (
+    <section class="container work-feature" data-card data-cat={items[0].data.category}>
+      <div class="work-feature__meta" data-reveal>
+        <span class="work-feature__meta-left"><span class="dot" aria-hidden="true"></span>001 &mdash; {items[0].data.category}</span>
+        <span>{items[0].data.yearRange}</span>
+      </div>
+      <a href={`/work/${items[0].id}/`} data-reveal>
+        <PlaceholderMedia label={`${items[0].data.client} · cluster map · 2400×1030`} ratio="21/9" radius="lg" />
+      </a>
+      <div class="work-feature__grid" data-reveal>
+        <div class="work-feature__copy">
+          <h2 class="work-feature__title">{items[0].data.title}</h2>
+          <p class="body-copy" style="margin:0;max-width:46ch">{items[0].data.description}</p>
+          <a href={`/work/${items[0].id}/`} class="work-feature__link">Read the case study &rarr;</a>
+        </div>
+        <div class="work-feature__facts">
+          {items[0].data.role && (
+            <div>
+              <div class="mono-label">Role</div>
+              <div class="work-feature__fact-value">{items[0].data.role}</div>
+            </div>
+          )}
+          {items[0].data.deliveredVia && (
+            <div>
+              <div class="mono-label">Delivered via</div>
+              <div class="work-feature__fact-value">{items[0].data.deliveredVia}</div>
+            </div>
+          )}
+          <div>
+            <div class="mono-label">Tags</div>
+            <div class="work-feature__fact-value">{items[0].data.tags.join(', ')}</div>
+          </div>
+          <div>
+            <div class="mono-label">Surface</div>
+            <div class="work-feature__fact-value">Web platform</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {items.slice(1, 3).map((item, i) => (
+    <section class="container work-split" data-card data-cat={item.data.category}>
+      <div class="work-split__meta" data-reveal>
+        <span>{String(i + 2).padStart(3, '0')} &mdash; {item.data.category}</span>
+        <span>{item.data.yearRange}</span>
+      </div>
+      <a
+        href={`/work/${item.id}/`}
+        class:list={['work-split__grid', { 'work-split__grid--reverse': i % 2 === 1 }]}
+        data-reveal
+      >
+        <PlaceholderMedia label={`${item.data.client} · ${item.data.tagline}`} ratio="16/10" radius="lg" class="work-split__media" />
+        <div class="work-split__copy">
+          <h2 class="work-split__title">{item.data.title}</h2>
+          <div class="work-split__tagline">{item.data.tagline}</div>
+          <p class="body-copy" style="margin:0;max-width:42ch">{item.data.description}</p>
+          <div class="work-split__tags">
+            {item.data.tags.map((tag) => <span class="pill-tag">{tag}</span>)}
+          </div>
+        </div>
+      </a>
+    </section>
+  ))}
+
+  <section class="container work-showreel">
+    <div class="work-showreel__intro" data-reveal>
+      <div class="mono-label">Showreel</div>
+      <h2 class="work-showreel__heading">Two minutes on how these platforms actually behave in the real world.</h2>
+    </div>
+    <VideoReveal />
+  </section>
+
+  {items.length > 3 && (
+    <section class="work-dark-group" data-card-group>
+      <div class="container">
+        <div class="work-dark-group__meta" data-reveal>
+          <span>004 / 005 &mdash; Beyond the screen</span>
+          <span>2020 — 2023</span>
+        </div>
+        <div class="work-dark-group__grid" data-reveal>
+          {items.slice(3, 5).map((item, i) => (
+            <a
+              href={`/work/${item.id}/`}
+              class:list={['work-dark-group__item', { 'work-dark-group__item--offset': i === 1 }]}
+              data-card
+              data-cat={item.data.category}
+            >
+              <PlaceholderMedia label={`${item.data.title} · headset capture`} ratio="4/3" radius="md" dark />
+              <div class="work-dark-group__copy">
+                <div class="work-dark-group__title">{item.data.title}</div>
+                <div class="work-dark-group__tagline">{item.data.tagline}</div>
+                <p class="work-dark-group__desc">{item.data.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <div class="container">
+    <StatsRow stats={stats} />
+  </div>
+
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .work-filter {
+    padding-top: clamp(40px, 6vh, 72px);
+  }
+
+  .work-feature {
+    padding-top: clamp(48px, 7vh, 90px);
+  }
+
+  .work-feature__meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--color-label);
+  }
+
+  .work-feature__meta-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .work-feature__meta-left .dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .work-feature__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 72px);
+    margin-top: 32px;
+  }
+
+  .work-feature__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .work-feature__title {
+    margin: 0;
+    font-size: clamp(30px, 3.8vw, 60px);
+    line-height: 1;
+    letter-spacing: -.04em;
+    font-weight: 500;
+    max-width: 16ch;
+  }
+
+  .work-feature__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-border-strong);
+    padding-bottom: 4px;
+    align-self: flex-start;
+  }
+
+  .work-feature__facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-content: start;
+    padding-top: 6px;
+  }
+
+  .work-feature__fact-value {
+    font-size: 16px;
+    margin-top: 8px;
+  }
+
+  .work-split {
+    padding-top: clamp(70px, 10vh, 130px);
+  }
+
+  .work-split__meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--color-label);
+  }
+
+  .work-split__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 64px);
+    align-items: end;
+  }
+
+  .work-split__grid--reverse {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+  }
+
+  .work-split__grid--reverse .work-split__copy {
+    order: 1;
+  }
+
+  .work-split__grid--reverse .work-split__media {
+    order: 2;
+  }
+
+  .work-split__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-bottom: 8px;
+  }
+
+  .work-split__title {
+    margin: 0;
+    font-size: clamp(28px, 3.4vw, 54px);
+    line-height: 1;
+    letter-spacing: -.04em;
+    font-weight: 500;
+    max-width: 14ch;
+  }
+
+  .work-split__tagline {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .work-split__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .work-showreel {
+    padding-top: clamp(80px, 11vh, 150px);
+  }
+
+  .work-showreel__intro {
+    display: grid;
+    grid-template-columns: minmax(0, .5fr) minmax(0, 1.5fr);
+    gap: clamp(24px, 4vw, 72px);
+    align-items: end;
+    margin-bottom: 30px;
+  }
+
+  .work-showreel__heading {
+    margin: 0;
+    font-size: clamp(26px, 3.2vw, 50px);
+    line-height: 1.04;
+    letter-spacing: -.035em;
+    font-weight: 500;
+    max-width: 22ch;
+  }
+
+  .work-dark-group {
+    margin-top: clamp(80px, 12vh, 160px);
+    background: var(--color-dark-bg);
+    color: var(--color-dark-fg);
+    padding: clamp(64px, 10vh, 140px) 0;
+  }
+
+  .work-dark-group__meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: clamp(36px, 6vh, 72px);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--color-dark-label);
+  }
+
+  .work-dark-group__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 48px);
+  }
+
+  .work-dark-group__item {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .work-dark-group__item--offset {
+    padding-top: clamp(0px, 6vw, 90px);
+  }
+
+  .work-dark-group__title {
+    font-size: clamp(24px, 2.4vw, 38px);
+    font-weight: 500;
+    letter-spacing: -.035em;
+  }
+
+  .work-dark-group__tagline {
+    font-size: 17px;
+    color: rgba(243, 242, 240, .62);
+  }
+
+  .work-dark-group__desc {
+    margin: 0;
+    max-width: 40ch;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(243, 242, 240, .5);
+  }
+
+  @media (max-width: 900px) {
+    .work-feature__grid,
+    .work-split__grid,
+    .work-split__grid--reverse,
+    .work-showreel__intro,
+    .work-dark-group__grid {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 18px;
+    }
+
+    .work-split__grid--reverse .work-split__copy,
+    .work-split__grid--reverse .work-split__media {
+      order: initial;
+    }
+
+    .work-dark-group__item--offset {
+      padding-top: 0;
+    }
+  }
+</style>

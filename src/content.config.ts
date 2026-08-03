@@ -1,0 +1,92 @@
+import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
+
+const writing = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/writing' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      publishedDate: z.coerce.date(),
+      updatedDate: z.coerce.date().optional(),
+      category: z.enum(['AI products', 'Creative AI', 'Architecture', 'Leadership']),
+      tags: z.array(z.string()).default([]),
+      featured: z.boolean().default(false),
+      draft: z.boolean().default(false),
+      placeholder: z.boolean().default(false),
+      heroImage: image().optional(),
+      heroAlt: z.string().optional(),
+      socialImage: image().optional(),
+      relatedProjects: z.array(z.string()).default([]),
+      relatedLab: z.array(z.string()).default([]),
+    }),
+});
+
+const work = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/work' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      client: z.string(),
+      description: z.string(),
+      tagline: z.string(),
+      category: z.enum(['AI and intelligence', 'Enterprise platforms', 'Immersive technology', 'Health and wellbeing']),
+      yearRange: z.string(),
+      role: z.string().optional(),
+      deliveredVia: z.string().optional(),
+      heroImage: image().optional(),
+      heroAlt: z.string().optional(),
+      featured: z.boolean().default(false),
+      displayOrder: z.number().default(0),
+      sourceUrl: z.string().optional(),
+      sourceLabel: z.string().optional(),
+      tags: z.array(z.string()).default([]),
+      relatedProjects: z.array(z.string()).default([]),
+      relatedWriting: z.array(z.string()).default([]),
+      draft: z.boolean().default(false),
+    }),
+});
+
+const projects = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      tagline: z.string(),
+      description: z.string(),
+      status: z.string(),
+      heroImage: image().optional(),
+      heroAlt: z.string().optional(),
+      featured: z.boolean().default(false),
+      displayOrder: z.number().default(0),
+      tags: z.array(z.string()).default([]),
+      externalUrl: z.string().optional(),
+      relatedWriting: z.array(z.string()).default([]),
+      relatedLab: z.array(z.string()).default([]),
+      draft: z.boolean().default(false),
+    }),
+});
+
+const lab = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/lab' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      category: z.enum(['Generative imagery', 'Voice and real-time', '3D and assets', 'Infrastructure']),
+      type: z.string(),
+      status: z.enum(['Running', 'Written up', 'Paused', 'Demo ready']),
+      publishedDate: z.coerce.date(),
+      heroImage: image().optional(),
+      heroAlt: z.string().optional(),
+      tools: z.array(z.string()).default([]),
+      featured: z.boolean().default(false),
+      displayOrder: z.number().default(0),
+      tags: z.array(z.string()).default([]),
+      relatedProjects: z.array(z.string()).default([]),
+      relatedWriting: z.array(z.string()).default([]),
+      draft: z.boolean().default(false),
+    }),
+});
+
+export const collections = { writing, work, projects, lab };

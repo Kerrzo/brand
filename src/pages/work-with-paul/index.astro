@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingHero from '../../components/content/ListingHero.astro';
+import Button from '../../components/ui/Button.astro';
+
+const services = [
+  { n: '01', title: 'AI Product Advisory', copy: 'Where AI genuinely changes the product, and where it is a distraction.' },
+  { n: '02', title: 'Prototype Sprints', copy: 'A working, testable product in weeks — not a slide deck about one.' },
+  { n: '03', title: 'AI Builder Coaching', copy: 'Helping teams become genuinely AI-capable in how they build.' },
+  { n: '04', title: 'Fractional CTO / Product Architecture', copy: 'Senior technical judgement, without hiring for it permanently.' },
+];
+---
+
+<BaseLayout title="Work with Paul" description="From promising idea to something real. AI product advisory, prototype sprints, AI builder coaching and fractional CTO work.">
+  <ListingHero
+    heading="Work with Paul"
+    headingSize="clamp(48px, 9vw, 160px)"
+    eyebrow="Ways to work together"
+    meta="Founders, small product teams and enterprise teams who need senior technical judgement, quickly."
+    lede="From promising idea to something real."
+  />
+
+  <section class="container services-page__rows">
+    <div class="services-page__rows-inner" data-reveal>
+      {services.map((s) => (
+        <div class="services-page__row">
+          <span class="mono-label" style="color:var(--color-label-dim)">{s.n}</span>
+          <h2 class="services-page__title">{s.title}</h2>
+          <p class="services-page__copy">{s.copy}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="contact" class="container contact-block">
+    <div class="contact-block__grid" data-reveal>
+      <h2 class="contact-block__heading">Bring me a problem worth solving.</h2>
+      <div class="contact-block__body">
+        <p class="body-copy">
+          Whether you have an AI opportunity, an early product concept or a team that needs help
+          becoming AI-capable, let&rsquo;s work out the most useful next step. Usually that starts
+          with a short paid discovery: a couple of conversations, a look at what exists, and a
+          written point of view on the most useful next step.
+        </p>
+        <div class="contact-block__actions">
+          <Button href="mailto:paul@kerrzo.com" withDot>Email Paul</Button>
+        </div>
+        <div class="contact-block__meta">
+          <div>
+            <div class="mono-label">Email</div>
+            <a href="mailto:paul@kerrzo.com">paul@kerrzo.com</a>
+          </div>
+          <div>
+            <div class="mono-label">Location</div>
+            <span>Sydney, Australia</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .services-page__rows {
+    padding-top: clamp(60px, 9vh, 120px);
+  }
+
+  .services-page__rows-inner {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .services-page__row {
+    display: grid;
+    grid-template-columns: 90px minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 24px;
+    padding: 34px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .services-page__title {
+    margin: 0;
+    font-size: clamp(26px, 2.8vw, 42px);
+    font-weight: 500;
+    letter-spacing: -.03em;
+    line-height: 1;
+  }
+
+  .services-page__copy {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-body);
+    max-width: 44ch;
+  }
+
+  .contact-block {
+    padding-top: clamp(90px, 14vh, 180px);
+    padding-bottom: clamp(80px, 12vh, 160px);
+  }
+
+  .contact-block__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 90px);
+    align-items: start;
+  }
+
+  .contact-block__heading {
+    margin: 0;
+    font-size: clamp(40px, 6.4vw, 100px);
+    line-height: .92;
+    letter-spacing: -.05em;
+    font-weight: 500;
+    max-width: 12ch;
+  }
+
+  .contact-block__body {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  .contact-block__body p {
+    margin: 0;
+    max-width: 46ch;
+  }
+
+  .contact-block__meta {
+    display: flex;
+    gap: 40px;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .contact-block__meta > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 20px;
+  }
+
+  .contact-block__meta a {
+    font-size: 16px;
+  }
+
+  .contact-block__meta a:hover {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 900px) {
+    .services-page__row {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 8px;
+    }
+
+    .contact-block__grid {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 24px;
+    }
+  }
+</style>

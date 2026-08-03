@@ -1,0 +1,140 @@
+---
+interface Props {
+  beforeLabel?: string;
+  afterLabel?: string;
+}
+
+const { beforeLabel = 'Before', afterLabel = 'After' } = Astro.props;
+---
+
+<div class="compare" data-reveal data-compare>
+  <span class="compare__after-label">{afterLabel}</span>
+  <div class="compare__clip" data-compare-clip>
+    <div class="compare__before"></div>
+    <span class="compare__before-label">{beforeLabel}</span>
+  </div>
+  <div class="compare__handle" data-compare-handle>
+    <div class="compare__grip">&#8596;</div>
+  </div>
+</div>
+
+<style>
+  .compare {
+    position: relative;
+    aspect-ratio: 21/9;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    background-color: #e2e0db;
+    background-image: repeating-linear-gradient(122deg, #e2e0db 0 14px, #eae8e4 14px 28px);
+    cursor: ew-resize;
+    user-select: none;
+    touch-action: none;
+  }
+
+  .compare__after-label {
+    position: absolute;
+    right: 26px;
+    bottom: 22px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--color-caption);
+  }
+
+  .compare__clip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    overflow: hidden;
+  }
+
+  .compare__before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100vw;
+    background-color: #1d1c1a;
+    background-image: repeating-linear-gradient(122deg, #1d1c1a 0 14px, #252421 14px 28px);
+  }
+
+  .compare__before-label {
+    position: absolute;
+    left: 26px;
+    bottom: 22px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .55);
+  }
+
+  .compare__handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: var(--color-bg);
+    transform: translateX(-1px);
+  }
+
+  .compare__grip {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius-pill);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, .22);
+  }
+</style>
+
+<script>
+  function initCompareSliders() {
+    document.querySelectorAll<HTMLElement>('[data-compare]').forEach((el) => {
+      if (el.dataset.bound) return;
+      el.dataset.bound = '1';
+
+      const clip = el.querySelector<HTMLElement>('[data-compare-clip]');
+      const handle = el.querySelector<HTMLElement>('[data-compare-handle]');
+
+      const paint = (split: number) => {
+        if (clip) clip.style.width = `${split}%`;
+        if (handle) handle.style.left = `${split}%`;
+      };
+
+      const move = (e: PointerEvent) => {
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const split = Math.max(2, Math.min(98, (x / r.width) * 100));
+        paint(split);
+      };
+
+      const up = () => {
+        window.removeEventListener('pointermove', move);
+        window.removeEventListener('pointerup', up);
+      };
+
+      el.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        move(e);
+        window.addEventListener('pointermove', move);
+        window.addEventListener('pointerup', up);
+      });
+    });
+  }
+
+  initCompareSliders();
+</script>

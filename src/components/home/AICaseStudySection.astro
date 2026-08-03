@@ -1,0 +1,128 @@
+---
+import SectionLabel from '../ui/SectionLabel.astro';
+import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
+
+const rows = [
+  { n: '01', title: 'Guided conversation', copy: 'An AI interviewer draws out nuance instead of forcing a scale.' },
+  { n: '02', title: 'Verbatim responses', copy: 'Every original answer is preserved, never summarised away.' },
+  { n: '03', title: 'Embeddings and vectors', copy: 'Language becomes geometry — meaning placed in shared space.' },
+  { n: '04', title: 'Clustering and density', copy: 'Dense regions show where a group genuinely agrees.' },
+  { n: '05', title: 'Consensus and divergence', copy: 'Minority viewpoints stay visible rather than being averaged out.' },
+  { n: '06', title: 'Traceable original answers', copy: 'Every insight can be walked back to the human who said it.' },
+];
+---
+
+<section class="ai-case container">
+  <SectionLabel class="ai-case__eyebrow" data-reveal>Selected AI work</SectionLabel>
+  <div class="ai-case__intro" data-reveal>
+    <h2 class="ai-case__heading">Finding real consensus without flattening human perspective.</h2>
+    <div class="ai-case__meta">
+      <div class="mono-label">Strategy Connect</div>
+      <p class="body-copy" style="margin:0">
+        Strategy Connect captures open-ended input through guided AI conversation, preserves the
+        original human responses and uses vector analysis, clustering and semantic density to
+        reveal consensus, divergence and important minority viewpoints.
+      </p>
+      <a href="/work/strategy-connect/" class="ai-case__link">Read the case study &rarr;</a>
+    </div>
+  </div>
+
+  <div class="ai-case__rows" data-reveal>
+    {rows.map((row) => (
+      <div class="ai-case__row">
+        <span class="mono-label" style="color:var(--color-label-dim)">{row.n}</span>
+        <span class="ai-case__row-title">{row.title}</span>
+        <span class="ai-case__row-copy">{row.copy}</span>
+      </div>
+    ))}
+  </div>
+
+  <PlaceholderMedia
+    label="Strategy Connect · cluster map screenshot"
+    ratio="24/9"
+    radius="lg"
+    class="ai-case__media"
+  />
+</section>
+
+<style>
+  .ai-case {
+    padding-top: clamp(90px, 13vh, 180px);
+  }
+
+  .ai-case__eyebrow {
+    margin-bottom: 30px;
+  }
+
+  .ai-case__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 90px);
+    align-items: end;
+  }
+
+  .ai-case__heading {
+    margin: 0;
+    font-size: clamp(36px, 5.2vw, 86px);
+    line-height: .94;
+    letter-spacing: -.045em;
+    font-weight: 500;
+    max-width: 15ch;
+  }
+
+  .ai-case__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 8px;
+  }
+
+  .ai-case__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-border-strong);
+    padding-bottom: 4px;
+    align-self: flex-start;
+  }
+
+  .ai-case__rows {
+    margin-top: clamp(44px, 6vh, 80px);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .ai-case__row {
+    display: grid;
+    grid-template-columns: 80px minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 24px;
+    align-items: baseline;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .ai-case__row-title {
+    font-size: clamp(20px, 2vw, 30px);
+    font-weight: 500;
+    letter-spacing: -.025em;
+  }
+
+  .ai-case__row-copy {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-body);
+  }
+
+  .ai-case__media {
+    margin-top: clamp(40px, 6vh, 72px);
+  }
+
+  @media (max-width: 900px) {
+    .ai-case__intro,
+    .ai-case__row {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 10px;
+    }
+  }
+</style>

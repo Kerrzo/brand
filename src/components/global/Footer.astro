@@ -1,0 +1,147 @@
+---
+---
+
+<footer class="site-footer">
+  <div class="site-footer__grid">
+    <div class="site-footer__lead">
+      <h3 class="site-footer__heading">Let&rsquo;s build something at the edge of what is now possible.</h3>
+      <a href="/work-with-paul/#contact" class="site-footer__cta">
+        Work with Paul
+        <span class="dot" aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="site-footer__col">
+      <div class="site-footer__col-title">Contact</div>
+      <a href="mailto:paul@kerrzo.com">paul@kerrzo.com</a>
+      <span>Sydney, Australia</span>
+    </div>
+    <div class="site-footer__col">
+      <div class="site-footer__col-title">Elsewhere</div>
+      <a href="https://linkedin.com" rel="noreferrer">LinkedIn</a>
+      <a href="https://github.com" rel="noreferrer">GitHub</a>
+      <a href="https://x.com" rel="noreferrer">X</a>
+    </div>
+  </div>
+
+  <div class="site-footer__marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="site-footer__marquee-text">KERRZO * BUILD * SHIP&nbsp;*&nbsp;</span>
+      <span class="site-footer__marquee-text">KERRZO * BUILD * SHIP&nbsp;*&nbsp;</span>
+    </div>
+  </div>
+
+  <div class="site-footer__meta">
+    <span>&copy; {new Date().getFullYear()} KERRZO &mdash; Paul Kerr</span>
+    <span>CTO &middot; AI Product Architect &middot; Builder</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-dark-bg);
+    color: var(--color-dark-fg);
+    border-radius: 16px 16px 0 0;
+    padding: clamp(56px, 9vh, 110px) var(--edge) 0;
+    overflow: hidden;
+  }
+
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, .7fr);
+    gap: 40px;
+  }
+
+  .site-footer__lead {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .site-footer__heading {
+    font-size: clamp(28px, 3.4vw, 54px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+    max-width: 16ch;
+  }
+
+  .site-footer__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    padding: 13px 20px;
+    border-radius: var(--radius-pill);
+    font-size: 15px;
+    font-weight: 500;
+    align-self: flex-start;
+    transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
+  }
+
+  .site-footer__cta:hover {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .site-footer__col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 15px;
+  }
+
+  .site-footer__col a,
+  .site-footer__col span {
+    color: rgba(243, 242, 240, .6);
+  }
+
+  .site-footer__col a:hover {
+    color: var(--color-accent);
+  }
+
+  .site-footer__col-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--color-dark-fg);
+  }
+
+  .site-footer__marquee {
+    margin-top: clamp(50px, 8vh, 100px);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .site-footer__marquee-text {
+    font-size: clamp(80px, 15vw, 240px);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    font-weight: 500;
+    padding-right: 0.3em;
+  }
+
+  .site-footer__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 26px 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(243, 242, 240, .45);
+  }
+
+  @media (max-width: 900px) {
+    .site-footer__grid {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 32px;
+    }
+
+    .site-footer__meta {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+</style>
