@@ -38,9 +38,17 @@ jobs:
         
       - name: Build with Astro
         run: |
+          echo "Building site..."
           npm run build
-          echo "Build successful"
+          echo "Build completed. Checking dist folder contents:"
           ls -la dist/
+          echo "Checking for index.html specifically:"
+          if [ -f "dist/index.html" ]; then
+            echo "index.html found"
+          else
+            echo "ERROR: index.html NOT found"
+            exit 1
+          fi
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
