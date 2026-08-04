@@ -7,16 +7,16 @@ interface Props {
 const { current, transparent = false } = Astro.props;
 
 const links = [
-  { key: 'projects', label: 'Projects', href: '/brand/#projects' },
-  { key: 'work', label: 'Work', href: '/brand/work/' },
-  { key: 'ai-lab', label: 'AI Lab', href: '/brand/ai-lab/' },
-  { key: 'writing', label: 'Writing', href: '/brand/writing/' },
-  { key: 'about', label: 'About', href: '/brand/about/' },
+  { key: 'projects', label: 'Projects', href: '/projects/' },
+  { key: 'work', label: 'Work', href: '/work/' },
+  { key: 'ai-lab', label: 'AI Lab', href: '/ai-lab/' },
+  { key: 'writing', label: 'Writing', href: '/writing/' },
+  { key: 'about', label: 'About', href: '/about/' },
 ] as const;
 ---
 
 <header class:list={['site-header', { 'site-header--transparent': transparent }]} data-site-header>
-  <a href="/brand/" class="site-header__logo">KERRZO<sup>&reg;</sup></a>
+  <a href="/" class="site-header__logo">KERRZO<sup>&reg;</sup></a>
 
   <nav class="site-header__nav" data-site-nav aria-label="Primary">
     {links.map((link) => (
@@ -30,7 +30,7 @@ const links = [
   </nav>
 
   <div class="site-header__actions">
-    <a href="/brand/work-with-paul/#contact" class="site-header__cta" data-site-cta>
+    <a href="/work-with-paul/#contact" class="site-header__cta" data-site-cta>
       Work with Paul
       <span class="dot" aria-hidden="true"></span>
     </a>
@@ -53,7 +53,7 @@ const links = [
     ))}
   </nav>
   <div class="menu-panel__footer">
-    <a href="/brand/work-with-paul/#contact" class="menu-panel__cta" data-menu-link>
+    <a href="/work-with-paul/#contact" class="menu-panel__cta" data-menu-link>
       Work with Paul
       <span class="dot" aria-hidden="true"></span>
     </a>
