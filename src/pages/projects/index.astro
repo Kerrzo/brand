@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ListingHero from '../../components/content/ListingHero.astro';
 import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
 import FinalCTA from '../../components/ui/FinalCTA.astro';
+import { withBase } from '../../lib/paths';
 
 const all = await getCollection('projects', ({ data }) => !data.draft);
 const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
@@ -38,7 +39,7 @@ const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
           <div class="projects-page__tags">
             {item.data.tags.map((tag) => <span class:list={['pill-tag', { 'pill-tag--dark': i % 2 === 1 }]}>{tag}</span>)}
           </div>
-          <a href={`/projects/${item.id}/`} class="projects-page__link">View project &rarr;</a>
+          <a href={withBase(`/projects/${item.id}/`)} class="projects-page__link">View project &rarr;</a>
         </div>
       </div>
     ))}

@@ -22,6 +22,6 @@ export default defineConfig({
       },
     },
   },
-  // Force static output for GitHub Pages
-  base: process.env.NODE_ENV === 'production' ? '/brand' : '/',
+  // GitHub Pages serves this repo under /brand/
+  base: process.env.NODE_ENV === 'production' ? '/brand/' : '/',
 });

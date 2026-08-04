@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import SectionLabel from '../ui/SectionLabel.astro';
 import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
+import { withBase } from '../../lib/paths';
 
 const all = await getCollection(
   'work',
@@ -16,7 +17,7 @@ const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
     <h2 class="emerging__heading" data-reveal>I have been building beyond the conventional screen for years.</h2>
     <div class="emerging__grid" data-reveal>
       {items.map((item, i) => (
-        <a href={`/work/${item.id}/`} class:list={['emerging__item', { 'emerging__item--offset': i % 2 === 1 }]}>
+        <a href={withBase(`/work/${item.id}/`)} class:list={['emerging__item', { 'emerging__item--offset': i % 2 === 1 }]}>
           <PlaceholderMedia
             label={`${item.data.title} · headset capture`}
             src={item.data.heroImage}

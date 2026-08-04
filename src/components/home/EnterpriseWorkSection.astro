@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import SectionLabel from '../ui/SectionLabel.astro';
 import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
 import Button from '../ui/Button.astro';
+import { withBase } from '../../lib/paths';
 
 const all = await getCollection('work', ({ data }) => !data.draft && data.category === 'Enterprise platforms');
 const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder).slice(0, 2);
@@ -32,7 +33,7 @@ const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder).slic
           <div class="mono-label">{item.data.client}</div>
           <h3 class="ent-work__title">{item.data.tagline}</h3>
           <p class="body-copy" style="margin:0;max-width:40ch">{item.data.description}</p>
-          <a href={`/work/${item.id}/`} class="ent-work__link">Read the case study &rarr;</a>
+          <a href={withBase(`/work/${item.id}/`)} class="ent-work__link">Read the case study &rarr;</a>
         </div>
       </div>
     ))}

@@ -1,5 +1,6 @@
 ---
 import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
+import { withBase } from '../../lib/paths';
 ---
 
 <section id="about" class="about-teaser container">
@@ -15,7 +16,7 @@ import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
         The tools have changed dramatically. Product judgement, technical clarity and the ability
         to turn complexity into something useful have not.
       </p>
-      <a href="/about/" class="about-teaser__link">More about Paul &rarr;</a>
+      <a href={withBase('/about/')} class="about-teaser__link">More about Paul &rarr;</a>
     </div>
   </div>
 </section>

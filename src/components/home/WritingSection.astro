@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import SectionLabel from '../ui/SectionLabel.astro';
 import Button from '../ui/Button.astro';
+import { withBase } from '../../lib/paths';
 
 const all = await getCollection('writing', ({ data }) => !data.draft);
 const items = all
@@ -22,7 +23,7 @@ const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeri
 
   <div class="writing-teaser__list" data-reveal>
     {items.map((item) => (
-      <a href={`/writing/${item.id}/`} class="writing-teaser__row">
+      <a href={withBase(`/writing/${item.id}/`)} class="writing-teaser__row">
         <h3 class="writing-teaser__title">{item.data.title}</h3>
         <span class="writing-teaser__desc">{item.data.description}</span>
         <span class="mono-label writing-teaser__date">{dateFmt.format(item.data.publishedDate)}</span>

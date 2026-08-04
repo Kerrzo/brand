@@ -8,6 +8,7 @@ import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
 import VideoReveal from '../../components/ui/VideoReveal.astro';
 import Ticker from '../../components/ui/Ticker.astro';
 import FinalCTA from '../../components/ui/FinalCTA.astro';
+import { withBase } from '../../lib/paths';
 
 const all = await getCollection('lab', ({ data }) => !data.draft);
 const bySlug = (slug: string) => all.find((item) => item.id === slug)!;
@@ -66,7 +67,7 @@ const categories = ['Generative imagery', 'Voice and real-time', '3D and assets'
         const item = bySlug(entry.slug);
         return (
           <a
-            href={`/ai-lab/${item.id}/`}
+            href={withBase(`/ai-lab/${item.id}/`)}
             class:list={['lab-page__grid-item', `lab-page__grid-item--span-${entry.span}`, { 'lab-page__grid-item--offset': entry.offset }]}
             data-card
             data-cat={item.data.category}
@@ -134,7 +135,7 @@ const categories = ['Generative imagery', 'Voice and real-time', '3D and assets'
       {labLogOrder.map((slug) => {
         const item = bySlug(slug);
         return (
-          <a href={`/ai-lab/${item.id}/`} class="lab-page__log-row" data-narrow="minmax(0,1fr) 110px">
+          <a href={withBase(`/ai-lab/${item.id}/`)} class="lab-page__log-row" data-narrow="minmax(0,1fr) 110px">
             <span class="mono-label" style="color:var(--color-label-dim)">{String(item.data.displayOrder).padStart(2, '0')}</span>
             <span class="lab-page__log-title">{item.data.title}</span>
             <span class="lab-page__log-tools">{item.data.tools.join(' · ')}</span>

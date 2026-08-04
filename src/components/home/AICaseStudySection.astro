@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import SectionLabel from '../ui/SectionLabel.astro';
 import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
+import { withBase } from '../../lib/paths';
 
 const work = await getCollection('work', ({ data }) => !data.draft);
 const strategyConnect = work.find((item) => item.id === 'strategy-connect');
@@ -27,7 +28,7 @@ const rows = [
         original human responses and uses vector analysis, clustering and semantic density to
         reveal consensus, divergence and important minority viewpoints.
       </p>
-      <a href="/work/strategy-connect/" class="ai-case__link">Read the case study &rarr;</a>
+      <a href={withBase('/work/strategy-connect/')} class="ai-case__link">Read the case study &rarr;</a>
     </div>
   </div>
 

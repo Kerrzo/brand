@@ -1,5 +1,6 @@
 ---
 import SectionLabel from '../ui/SectionLabel.astro';
+import { withBase } from '../../lib/paths';
 
 const services = [
   { n: '01', title: 'AI Product Advisory', copy: 'Where AI genuinely changes the product, and where it is a distraction.' },
@@ -18,7 +19,7 @@ const services = [
   </div>
   <div class="services__rows" data-reveal>
     {services.map((s) => (
-      <a href="/work-with-paul/" class="services__row">
+      <a href={withBase('/work-with-paul/')} class="services__row">
         <span class="mono-label" style="color:var(--color-label-dim)">{s.n}</span>
         <h3 class="services__row-title">{s.title}</h3>
         <p class="services__row-copy">{s.copy}</p>

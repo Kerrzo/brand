@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import SectionLabel from '../ui/SectionLabel.astro';
 import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
 import Button from '../ui/Button.astro';
+import { withBase } from '../../lib/paths';
 
 const all = await getCollection('lab', ({ data }) => !data.draft);
 const order = [
@@ -32,7 +33,7 @@ const offsets = [false, true, false, false, false, false];
   <div class="lab__grid" data-reveal>
     {items.map((item, i) => (
       <a
-        href={`/ai-lab/${item.id}/`}
+        href={withBase(`/ai-lab/${item.id}/`)}
         class:list={['lab__item', `lab__item--span-${spans[i]}`, { 'lab__item--offset': offsets[i] }]}
       >
         <PlaceholderMedia label={item.data.type} ratio={ratios[i]} radius="md" dark={dark[i]} />

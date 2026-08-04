@@ -7,6 +7,7 @@ import VideoReveal from '../../components/ui/VideoReveal.astro';
 import StatsRow from '../../components/ui/StatsRow.astro';
 import FinalCTA from '../../components/ui/FinalCTA.astro';
 import { getCollection } from 'astro:content';
+import { withBase } from '../../lib/paths';
 
 const all = await getCollection('work', ({ data }) => !data.draft);
 const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
@@ -39,7 +40,7 @@ const stats = [
         <span class="work-feature__meta-left"><span class="dot" aria-hidden="true"></span>001 &mdash; {items[0].data.category}</span>
         <span>{items[0].data.yearRange}</span>
       </div>
-      <a href={`/work/${items[0].id}/`} data-reveal>
+      <a href={withBase(`/work/${items[0].id}/`)} data-reveal>
         <PlaceholderMedia
           label={`${items[0].data.client} · cluster map · 2400×1030`}
           src={items[0].data.heroImage}
@@ -52,7 +53,7 @@ const stats = [
         <div class="work-feature__copy">
           <h2 class="work-feature__title">{items[0].data.title}</h2>
           <p class="body-copy" style="margin:0;max-width:46ch">{items[0].data.description}</p>
-          <a href={`/work/${items[0].id}/`} class="work-feature__link">Read the case study &rarr;</a>
+          <a href={withBase(`/work/${items[0].id}/`)} class="work-feature__link">Read the case study &rarr;</a>
         </div>
         <div class="work-feature__facts">
           {items[0].data.role && (
@@ -87,7 +88,7 @@ const stats = [
         <span>{item.data.yearRange}</span>
       </div>
       <a
-        href={`/work/${item.id}/`}
+        href={withBase(`/work/${item.id}/`)}
         class:list={['work-split__grid', { 'work-split__grid--reverse': i % 2 === 1 }]}
         data-reveal
       >
@@ -129,7 +130,7 @@ const stats = [
         <div class="work-dark-group__grid" data-reveal>
           {items.slice(3, 5).map((item, i) => (
             <a
-              href={`/work/${item.id}/`}
+              href={withBase(`/work/${item.id}/`)}
               class:list={['work-dark-group__item', { 'work-dark-group__item--offset': i === 1 }]}
               data-card
               data-cat={item.data.category}
