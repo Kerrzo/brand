@@ -23,4 +23,5 @@ export default defineConfig({
     },
   },
   // Force static output for GitHub Pages
+  base: '/',
 });
