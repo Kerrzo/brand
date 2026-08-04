@@ -1,6 +1,6 @@
-# KERRZO
+# Paul Kerr
 
-Astro implementation of the KERRZO website, built from the Claude Design handoff
+Astro implementation of the Paul Kerr website, built from the Claude Design handoff
 (`design-handoff-extracted/`) as the source of truth for layout, typography, spacing,
 copy and interaction.
 
@@ -64,7 +64,7 @@ pointed back to a same-page placeholder anchor. Per direction from the project o
 - **All imagery is the design's intentional striped placeholder treatment** (`PlaceholderMedia`
   component), since no real photography, screenshots or video were supplied — only 4 full-page
   reference screenshots of a different site used by the designer for inspiration, which aren't
-  KERRZO content and were left out of `public/media/`. Drop real assets into the matching
+  Paul Kerr content and were left out of `public/media/`. Drop real assets into the matching
   `public/media/<section>/` folder and pass a `src` prop to swap a placeholder for a real image.
 
 ## Interaction fidelity notes

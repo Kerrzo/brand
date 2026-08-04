@@ -10,13 +10,13 @@ const links = [
   { key: 'projects', label: 'Projects', href: '/projects/' },
   { key: 'work', label: 'Work', href: '/work/' },
   { key: 'ai-lab', label: 'AI Lab', href: '/ai-lab/' },
-  { key: 'writing', href: '/writing/' },
+  { key: 'writing', label: 'Writing', href: '/writing/' },
   { key: 'about', label: 'About', href: '/about/' },
 ] as const;
 ---
 
 <header class:list={['site-header', { 'site-header--transparent': transparent }]} data-site-header>
-  <a href={Astro.site} class="site-header__logo">KERRZO<sup>&reg;</sup></a>
+  <a href="/" class="site-header__logo">paulkerr.com.au</a>
 
   <nav class="site-header__nav" data-site-nav aria-label="Primary">
     {links.map((link) => (
@@ -57,7 +57,7 @@ const links = [
       Work with Paul
       <span class="dot" aria-hidden="true"></span>
     </a>
-    <div class="menu-panel__meta">KERRZO &mdash; Paul Kerr</div>
+    <div class="menu-panel__meta">paulkerr.com.au &mdash; Paul Kerr</div>
   </div>
 </div>
 

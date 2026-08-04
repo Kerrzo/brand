@@ -5,7 +5,7 @@ import SectionLabel from '../ui/SectionLabel.astro';
 
 const allProjects = await getCollection('projects', ({ data }) => !data.draft);
 const projects = allProjects.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
-const [pellzo, brilliancy, gameWorld] = projects;
+const [kerrzo, brilliancy, gameWorld] = projects;
 ---
 
 <section id="projects" class="projects container">
@@ -20,16 +20,16 @@ const [pellzo, brilliancy, gameWorld] = projects;
     </p>
   </div>
 
-  {pellzo && (
+  {kerrzo && (
     <div class="projects__row projects__row--light" data-reveal>
       <div class="projects__row-copy">
         <SectionLabel withDot>(01) &middot; In development</SectionLabel>
-        <h3 class="h-2">{pellzo.data.title}</h3>
-        <div class="projects__row-tagline">{pellzo.data.tagline}</div>
-        <p class="projects__row-desc">{pellzo.data.description}</p>
-        <a href={`/projects/${pellzo.id}/`} class="projects__row-link">View project &rarr;</a>
+        <h3 class="h-2">{kerrzo.data.title}</h3>
+        <div class="projects__row-tagline">{kerrzo.data.tagline}</div>
+        <p class="projects__row-desc">{kerrzo.data.description}</p>
+        <a href={`/projects/${kerrzo.id}/`} class="projects__row-link">View project &rarr;</a>
       </div>
-      <PlaceholderMedia label="Pellzo dashboard crop · 1600×1100" ratio="16/11" radius="md" class="projects__row-media" />
+      <PlaceholderMedia label="Kerrzo dashboard crop · 1600×1100" ratio="16/11" radius="md" class="projects__row-media" />
     </div>
   )}
 
