@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://kerrzo.com',
+  site: 'https://kerrzo.github.io/brand',
   output: 'static',
   trailingSlash: 'always',
   integrations: [sitemap()],
