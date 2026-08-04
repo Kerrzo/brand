@@ -8,4 +8,18 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   integrations: [sitemap()],
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          assetFileNames: (assetInfo) => {
+            if (assetInfo.name.endsWith('.css') || assetInfo.name.endsWith('.js')) {
+              return 'assets/[name].[hash].[ext]';
+            }
+            return 'assets/[name].[hash].[ext]';
+          },
+        },
+      },
+    },
+  },
 });
