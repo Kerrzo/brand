@@ -22,7 +22,6 @@ export default defineConfig({
       },
     },
   },
-  base: '/brand',
   // Force static output for GitHub Pages
   experimental: {
     assets: true,
