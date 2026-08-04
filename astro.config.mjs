@@ -23,7 +23,4 @@ export default defineConfig({
     },
   },
   // Force static output for GitHub Pages
-  experimental: {
-    assets: true,
-  },
 });
