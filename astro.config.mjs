@@ -23,5 +23,5 @@ export default defineConfig({
     },
   },
   // Force static output for GitHub Pages
-  base: '/brand',
+  base: process.env.NODE_ENV === 'production' ? '/brand' : '/',
 });
