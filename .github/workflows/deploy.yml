@@ -38,9 +38,8 @@ jobs:
         
       - name: Build with Astro
         run: |
-          echo "Building site..."
           npm run build
-          echo "Build completed. Contents of dist folder:"
+          echo "Build successful"
           ls -la dist/
       
       - name: Upload artifact
