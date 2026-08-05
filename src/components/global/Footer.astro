@@ -1,13 +1,19 @@
----
-import { withBase } from '../../lib/paths';
----
-
-<footer class="site-footer">
+<footer class="site-footer" id="contact">
   <div class="site-footer__grid">
     <div class="site-footer__lead">
-      <h3 class="site-footer__heading">Let&rsquo;s build something at the edge of what is now possible.</h3>
-      <a href={withBase('/work-with-paul/#contact')} class="site-footer__cta">
-        Work with Paul
+      <h3 class="site-footer__heading">Bring me a problem worth solving.</h3>
+      <div class="site-footer__copy">
+        <p>
+          I enjoy building ambitious AI products with founders and teams tackling difficult
+          engineering and product challenges.
+        </p>
+        <p>
+          If you&rsquo;re working on something genuinely interesting, I&rsquo;d love to hear about
+          it.
+        </p>
+      </div>
+      <a href="mailto:paul@kerrzo.com" class="site-footer__cta">
+        Start a Conversation
         <span class="dot" aria-hidden="true"></span>
       </a>
     </div>
@@ -26,14 +32,14 @@ import { withBase } from '../../lib/paths';
 
   <div class="site-footer__marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span class="site-footer__marquee-text">paulkerr.com.au * BUILD * SHIP&nbsp;*&nbsp;</span>
-      <span class="site-footer__marquee-text">paulkerr.com.au * BUILD * SHIP&nbsp;*&nbsp;</span>
+      <span class="site-footer__marquee-text">EXPERIMENT &bull; BUILD &bull; SHIP &bull; LEARN &bull;&nbsp;</span>
+      <span class="site-footer__marquee-text">EXPERIMENT &bull; BUILD &bull; SHIP &bull; LEARN &bull;&nbsp;</span>
     </div>
   </div>
 
   <div class="site-footer__meta">
-    <span>&copy; {new Date().getFullYear()} paulkerr.com.au &mdash; Paul Kerr</span>
-    <span>CTO &middot; AI Product Architect &middot; Builder</span>
+    <span>&copy; 2026 Paul Kerr</span>
+    <span>Built with curiosity. Accelerated by AI.</span>
   </div>
 </footer>
 
@@ -42,6 +48,7 @@ import { withBase } from '../../lib/paths';
     background: var(--color-dark-bg);
     color: var(--color-dark-fg);
     border-radius: 16px 16px 0 0;
+    margin-top: clamp(80px, 12vh, 160px);
     padding: clamp(56px, 9vh, 110px) var(--edge) 0;
     overflow: hidden;
   }
@@ -64,6 +71,20 @@ import { withBase } from '../../lib/paths';
     letter-spacing: -0.035em;
     font-weight: 500;
     max-width: 16ch;
+  }
+
+  .site-footer__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 42ch;
+  }
+
+  .site-footer__copy p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: rgba(243, 242, 240, .6);
   }
 
   .site-footer__cta {

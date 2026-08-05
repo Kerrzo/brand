@@ -1,0 +1,388 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PlaceholderMedia from '../../../components/ui/PlaceholderMedia.astro';
+import FinalCTA from '../../../components/ui/FinalCTA.astro';
+import { withBase } from '../../../lib/paths';
+
+const explorations = [
+  {
+    title: 'AI Agents',
+    copy: 'Exploring specialised agents that perform meaningful business tasks while keeping humans in control.',
+  },
+  {
+    title: 'Knowledge Systems',
+    copy: 'Connecting organisational knowledge so AI can reason over business context.',
+  },
+  {
+    title: 'Workflow Orchestration',
+    copy: 'Replacing rigid workflows with intelligent, adaptable processes.',
+  },
+  {
+    title: 'Model Gateways',
+    copy: 'Treating AI providers as infrastructure rather than application logic.',
+  },
+];
+
+const roadmap = ['Research', 'Architecture', 'Private Alpha', 'Real Customers'];
+---
+
+<BaseLayout
+  title="Kerrzo"
+  description="Exploring what an AI-native operating system for small businesses could become."
+  current="building"
+>
+  <article class="kerrzo container">
+    <a href={withBase('/building/')} class="kerrzo__back">&larr; Building</a>
+
+    <header class="kerrzo__hero" data-reveal>
+      <div class="mono-label">Building</div>
+      <h1 class="kerrzo__title">Kerrzo</h1>
+      <p class="kerrzo__support">
+        Exploring what an AI-native operating system for small businesses could become.
+      </p>
+      <div class="kerrzo__lede body-copy">
+        <p>
+          Every generation of business software has been built around a different interaction model.
+        </p>
+        <p>
+          Kerrzo explores what changes when AI becomes the primary interface instead of forms, menus
+          and workflows.
+        </p>
+      </div>
+    </header>
+
+    <PlaceholderMedia
+      label="Future cinematic product video"
+      ratio="16/9"
+      radius="lg"
+      class="kerrzo__media"
+    />
+
+    <section class="kerrzo__section" data-reveal>
+      <h2 class="kerrzo__heading">The Question</h2>
+      <div class="kerrzo__copy body-copy">
+        <p>Traditional business software assumes humans navigate applications.</p>
+        <p>AI changes that assumption.</p>
+        <p>What happens when intelligent agents become the primary way work gets done?</p>
+        <p>Kerrzo exists to explore that question.</p>
+      </div>
+    </section>
+
+    <section class="kerrzo__section" data-reveal>
+      <h2 class="kerrzo__heading">Why I&rsquo;m Building It</h2>
+      <div class="kerrzo__copy body-copy">
+        <p>
+          Rather than adding AI to existing software, Kerrzo starts with AI at the centre of the
+          architecture.
+        </p>
+        <p>
+          The goal isn&rsquo;t to build another CRM. It&rsquo;s to understand what business software
+          looks like when knowledge, automation and conversation become first-class architectural
+          concepts.
+        </p>
+      </div>
+    </section>
+
+    <section class="kerrzo__section" data-reveal>
+      <h2 class="kerrzo__heading">Current Areas of Exploration</h2>
+      <ul class="kerrzo__areas">
+        {explorations.map((item) => (
+          <li class="kerrzo__area">
+            <h3 class="kerrzo__area-title">{item.title}</h3>
+            <p class="body-copy">{item.copy}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="kerrzo__section" data-reveal>
+      <h2 class="kerrzo__heading">Latest Lesson</h2>
+      <div class="kerrzo__copy body-copy">
+        <p>
+          Every product eventually becomes coupled to its AI model unless that dependency is
+          intentionally designed away.
+        </p>
+        <p>
+          Building a model gateway early proved to be an architectural decision rather than an
+          implementation detail.
+        </p>
+      </div>
+      <a href="#" class="kerrzo__cta" aria-disabled="true">Read the Lesson</a>
+    </section>
+
+    <section class="kerrzo__section" data-reveal>
+      <h2 class="kerrzo__heading">Roadmap</h2>
+      <ol class="kerrzo__roadmap">
+        {roadmap.map((step, i) => (
+          <li class="kerrzo__milestone">
+            <span class="mono-label">{String(i + 1).padStart(2, '0')}</span>
+            <span class="kerrzo__milestone-title">{step}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="kerrzo__section kerrzo__related" data-reveal>
+      <h2 class="kerrzo__heading">Related</h2>
+      <div class="kerrzo__related-grid">
+        <a href={withBase('/building/brilliancy/')} class="kerrzo__related-card">
+          <PlaceholderMedia label="Brilliancy · placeholder" ratio="16/10" radius="md" />
+          <div class="kerrzo__related-copy">
+            <h3 class="kerrzo__related-title">Brilliancy</h3>
+            <p class="body-copy">Can AI become a genuine personal chess coach?</p>
+            <span class="kerrzo__cta">View Project</span>
+          </div>
+        </a>
+        <div class="kerrzo__related-card kerrzo__related-card--static">
+          <PlaceholderMedia label="Lesson · placeholder" ratio="16/10" radius="md" dark />
+          <div class="kerrzo__related-copy">
+            <h3 class="kerrzo__related-title">Latest Lesson</h3>
+            <p class="body-copy">Why Model Gateways Matter</p>
+            <span class="kerrzo__cta kerrzo__cta--muted">Read Lesson</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .kerrzo {
+    padding-top: clamp(120px, 18vh, 200px);
+  }
+
+  .kerrzo__back {
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-label);
+    margin-bottom: clamp(28px, 4vh, 48px);
+  }
+
+  .kerrzo__back:hover {
+    color: var(--color-accent);
+  }
+
+  .kerrzo__hero {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: clamp(36px, 5vh, 64px);
+  }
+
+  .kerrzo__title {
+    margin: 0;
+    font-size: clamp(38px, 5.6vw, 84px);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    font-weight: 500;
+  }
+
+  .kerrzo__support {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--color-body);
+    max-width: 36ch;
+  }
+
+  .kerrzo__lede {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 52ch;
+    margin-top: 8px;
+  }
+
+  .kerrzo__lede p {
+    margin: 0;
+  }
+
+  .kerrzo__media {
+    margin-bottom: clamp(56px, 8vh, 96px);
+  }
+
+  .kerrzo__section {
+    padding: clamp(40px, 6vh, 72px) 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .kerrzo__heading {
+    margin: 0 0 clamp(22px, 3vh, 36px);
+    font-size: clamp(30px, 3.6vw, 52px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+    max-width: 18ch;
+  }
+
+  .kerrzo__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 54ch;
+  }
+
+  .kerrzo__copy p {
+    margin: 0;
+  }
+
+  .kerrzo__areas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .kerrzo__area {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px 24px 28px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .kerrzo__area:nth-child(even) {
+    padding-left: 24px;
+    padding-right: 0;
+    border-left: 1px solid var(--color-border);
+  }
+
+  .kerrzo__area p {
+    margin: 0;
+    max-width: 36ch;
+  }
+
+  .kerrzo__area-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+  }
+
+  .kerrzo__cta {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 28px;
+    font-size: 15px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-border-strong);
+    padding-bottom: 4px;
+    align-self: flex-start;
+  }
+
+  .kerrzo__cta:hover {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .kerrzo__cta--muted,
+  .kerrzo__cta[aria-disabled='true'] {
+    color: var(--color-label);
+    border-bottom-color: var(--color-border);
+    pointer-events: none;
+  }
+
+  .kerrzo__roadmap {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .kerrzo__milestone {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 28px 20px 8px 0;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .kerrzo__milestone:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .kerrzo__milestone-title {
+    font-size: clamp(20px, 2.2vw, 28px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .kerrzo__related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 40px);
+  }
+
+  .kerrzo__related-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: inherit;
+  }
+
+  .kerrzo__related-card:hover {
+    color: inherit;
+  }
+
+  .kerrzo__related-card:hover .kerrzo__cta {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .kerrzo__related-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .kerrzo__related-title {
+    margin: 0;
+    font-size: clamp(24px, 2.4vw, 32px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .kerrzo__related-copy .body-copy {
+    margin: 0;
+    max-width: 32ch;
+  }
+
+  .kerrzo__related-copy .kerrzo__cta {
+    margin-top: 8px;
+  }
+
+  @media (max-width: 900px) {
+    .kerrzo__areas,
+    .kerrzo__roadmap,
+    .kerrzo__related-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .kerrzo__area,
+    .kerrzo__area:nth-child(even) {
+      padding: 24px 0;
+      border-left: none;
+    }
+
+    .kerrzo__milestone {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+      padding: 22px 0;
+    }
+
+    .kerrzo__milestone:last-child {
+      border-bottom: none;
+    }
+  }
+</style>

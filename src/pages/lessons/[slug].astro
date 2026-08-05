@@ -17,9 +17,9 @@ const minutes = readingTime(item.body ?? '');
 const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 ---
 
-<BaseLayout title={item.data.title} description={item.data.description} current="writing">
+<BaseLayout title={item.data.title} description={item.data.description} current="lessons">
   <article class="article container">
-    <a href={withBase('/writing/')} class="article__back">&larr; All writing</a>
+    <a href={withBase('/lessons/')} class="article__back">&larr; Learnings</a>
 
     <div class="article__intro" data-reveal>
       <span class="pill-tag">{item.data.category}</span>

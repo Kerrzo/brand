@@ -32,7 +32,7 @@ const work = defineCollection({
     client: z.string(),
     description: z.string(),
     tagline: z.string(),
-    category: z.enum(['AI and intelligence', 'Enterprise platforms', 'Immersive technology', 'Health and wellbeing']),
+    category: z.enum(['AI Strategy Platform', 'AI and intelligence', 'Enterprise platforms', 'Immersive technology', 'Health and wellbeing']),
     yearRange: z.string(),
     role: z.string().optional(),
     deliveredVia: z.string().optional(),

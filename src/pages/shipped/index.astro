@@ -4,7 +4,6 @@ import ListingHero from '../../components/content/ListingHero.astro';
 import FilterBar from '../../components/ui/FilterBar.astro';
 import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
 import VideoReveal from '../../components/ui/VideoReveal.astro';
-import StatsRow from '../../components/ui/StatsRow.astro';
 import FinalCTA from '../../components/ui/FinalCTA.astro';
 import { getCollection } from 'astro:content';
 import { withBase } from '../../lib/paths';
@@ -12,22 +11,38 @@ import { withBase } from '../../lib/paths';
 const all = await getCollection('work', ({ data }) => !data.draft);
 const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
 
-const categories = ['AI and intelligence', 'Enterprise platforms', 'Immersive technology', 'Health and wellbeing'];
+const categories = ['AI Strategy Platform', 'Enterprise platforms', 'Immersive technology', 'Health and wellbeing'];
 
-const stats = [
-  { value: 'National', label: 'Scale of deployment' },
-  { value: '5 sectors', label: 'Commerce to healthcare' },
-  { value: 'End to end', label: 'Strategy through delivery' },
-  { value: '42 Interactive', label: 'Client work delivered via' },
+const takeaways = [
+  {
+    n: '01',
+    title: 'National scale changes the problem',
+    copy: 'Once a platform reaches every store, lobby or clinical site, architecture decisions stop being theoretical — reliability and operations become the product.',
+  },
+  {
+    n: '02',
+    title: 'Five sectors, similar pressure',
+    copy: 'Commerce, property, strategy, healthcare and immersive work look different on the surface. Underneath, they share the same need: software that survives real operations.',
+  },
+  {
+    n: '03',
+    title: 'End to end, or not at all',
+    copy: 'The useful work sat between strategy and delivery — holding product judgement and technical clarity in the same place from first decision through to ship.',
+  },
+  {
+    n: '04',
+    title: 'Built with delivery partners',
+    copy: 'Much of this client work shipped through 42 Interactive — senior architecture and product thinking inside a team accountable for getting it live.',
+  },
 ];
 ---
 
-<BaseLayout title="Selected Work" description="Platforms and products built with real operations behind them — enterprise ecosystems, AI intelligence and technology beyond the screen." current="work">
+<BaseLayout title="Shipped" description="Platforms and products built with real operations behind them — enterprise ecosystems, AI intelligence and technology beyond the screen." current="shipped">
   <ListingHero
-    heading="Selected work."
+    heading="Engineering Stories."
     eyebrow="2016 — 2026"
     meta="Five projects that show the range: intelligence, operations at scale, and technology beyond the screen."
-    lede="Platforms and products built with real operations behind them — where the interesting problem was never the interface alone."
+    lede="These projects span enterprise platforms, AI products and immersive technology. More importantly, they shaped how I think about architecture, product development and building software that lasts."
   />
 
   <section class="container work-filter">
@@ -40,7 +55,7 @@ const stats = [
         <span class="work-feature__meta-left"><span class="dot" aria-hidden="true"></span>001 &mdash; {items[0].data.category}</span>
         <span>{items[0].data.yearRange}</span>
       </div>
-      <a href={withBase(`/work/${items[0].id}/`)} data-reveal>
+      <a href={withBase(`/shipped/${items[0].id}/`)} data-reveal>
         <PlaceholderMedia
           label={`${items[0].data.client} · cluster map · 2400×1030`}
           src={items[0].data.heroImage}
@@ -53,7 +68,7 @@ const stats = [
         <div class="work-feature__copy">
           <h2 class="work-feature__title">{items[0].data.title}</h2>
           <p class="body-copy" style="margin:0;max-width:46ch">{items[0].data.description}</p>
-          <a href={withBase(`/work/${items[0].id}/`)} class="work-feature__link">Read the case study &rarr;</a>
+          <a href={withBase(`/shipped/${items[0].id}/`)} class="work-feature__link">Read Case Study</a>
         </div>
         <div class="work-feature__facts">
           {items[0].data.role && (
@@ -88,7 +103,7 @@ const stats = [
         <span>{item.data.yearRange}</span>
       </div>
       <a
-        href={withBase(`/work/${item.id}/`)}
+        href={withBase(`/shipped/${item.id}/`)}
         class:list={['work-split__grid', { 'work-split__grid--reverse': i % 2 === 1 }]}
         data-reveal
       >
@@ -130,7 +145,7 @@ const stats = [
         <div class="work-dark-group__grid" data-reveal>
           {items.slice(3, 5).map((item, i) => (
             <a
-              href={withBase(`/work/${item.id}/`)}
+              href={withBase(`/shipped/${item.id}/`)}
               class:list={['work-dark-group__item', { 'work-dark-group__item--offset': i === 1 }]}
               data-card
               data-cat={item.data.category}
@@ -155,9 +170,23 @@ const stats = [
     </section>
   )}
 
-  <div class="container">
-    <StatsRow stats={stats} />
-  </div>
+  <section class="container shipped-takeaways">
+    <div class="shipped-takeaways__intro" data-reveal>
+      <div>
+        <div class="mono-label" style="margin-bottom:24px">What these projects taught</div>
+        <h2 class="shipped-takeaways__heading">Patterns that only show up after you ship.</h2>
+      </div>
+    </div>
+    <div class="shipped-takeaways__rows" data-reveal>
+      {takeaways.map((item) => (
+        <div class="shipped-takeaways__row">
+          <span class="mono-label" style="color:var(--color-label-dim)">{item.n}</span>
+          <h3 class="shipped-takeaways__title">{item.title}</h3>
+          <p class="shipped-takeaways__copy">{item.copy}</p>
+        </div>
+      ))}
+    </div>
+  </section>
 
   <FinalCTA />
 </BaseLayout>
@@ -380,6 +409,53 @@ const stats = [
     color: rgba(243, 242, 240, .5);
   }
 
+  .shipped-takeaways {
+    padding-top: clamp(90px, 13vh, 180px);
+  }
+
+  .shipped-takeaways__intro {
+    margin-bottom: clamp(36px, 5vh, 64px);
+  }
+
+  .shipped-takeaways__heading {
+    margin: 0;
+    font-size: clamp(34px, 5vw, 80px);
+    line-height: .94;
+    letter-spacing: -.045em;
+    font-weight: 500;
+    max-width: 14ch;
+  }
+
+  .shipped-takeaways__rows {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .shipped-takeaways__row {
+    display: grid;
+    grid-template-columns: 90px minmax(0, 1.05fr) minmax(0, 1.1fr);
+    gap: 24px;
+    align-items: baseline;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .shipped-takeaways__title {
+    margin: 0;
+    font-size: clamp(22px, 2.4vw, 38px);
+    font-weight: 500;
+    letter-spacing: -.03em;
+    line-height: 1.05;
+    max-width: 18ch;
+  }
+
+  .shipped-takeaways__copy {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-body);
+    max-width: 46ch;
+  }
+
   @media (max-width: 900px) {
     .work-feature__grid,
     .work-split__grid,
@@ -397,6 +473,11 @@ const stats = [
 
     .work-dark-group__item--offset {
       padding-top: 0;
+    }
+
+    .shipped-takeaways__row {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 10px;
     }
   }
 </style>

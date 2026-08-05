@@ -12,12 +12,12 @@ const [kerrzo, brilliancy, gameWorld] = projects;
 <section id="projects" class="projects container">
   <div class="projects__intro" data-reveal>
     <div>
-      <SectionLabel>What I&rsquo;m building now</SectionLabel>
-      <h2 class="h-1" style="margin-top:26px">Products and experiments</h2>
+      <SectionLabel>Current work</SectionLabel>
+      <h2 class="h-1" style="margin-top:26px">What I&rsquo;m exploring now</h2>
     </div>
     <p class="body-copy projects__intro-copy">
-      I build my own products to explore what experienced, AI-enabled creators and small teams can
-      now achieve.
+      These projects are where I&rsquo;m learning how AI changes architecture, product shape and the
+      day-to-day craft of building. Evidence from the work, not a pitch for it.
     </p>
   </div>
 
@@ -28,7 +28,7 @@ const [kerrzo, brilliancy, gameWorld] = projects;
         <h3 class="h-2">{kerrzo.data.title}</h3>
         <div class="projects__row-tagline">{kerrzo.data.tagline}</div>
         <p class="projects__row-desc">{kerrzo.data.description}</p>
-        <a href={withBase(`/projects/${kerrzo.id}/`)} class="projects__row-link">View project &rarr;</a>
+        <a href={withBase(`/building/${kerrzo.id}/`)} class="projects__row-link">View project &rarr;</a>
       </div>
       <PlaceholderMedia label="Kerrzo dashboard crop · 1600×1100" ratio="16/11" radius="md" class="projects__row-media" />
     </div>
@@ -42,7 +42,7 @@ const [kerrzo, brilliancy, gameWorld] = projects;
         <h3 class="h-2">{brilliancy.data.title}</h3>
         <div class="projects__row-tagline">{brilliancy.data.tagline}</div>
         <p class="projects__row-desc projects__row-desc--dark">{brilliancy.data.description}</p>
-        <a href={withBase(`/projects/${brilliancy.id}/`)} class="projects__row-link projects__row-link--dark">View project &rarr;</a>
+        <a href={withBase(`/building/${brilliancy.id}/`)} class="projects__row-link projects__row-link--dark">View project &rarr;</a>
       </div>
     </div>
   )}
@@ -58,7 +58,7 @@ const [kerrzo, brilliancy, gameWorld] = projects;
         <div class="projects__feature-side">
           <div class="projects__row-tagline">{gameWorld.data.tagline}</div>
           <p class="projects__row-desc">{gameWorld.data.description}</p>
-          <a href={withBase('/ai-lab/')} class="projects__row-link">See the experiments &rarr;</a>
+          <a href={withBase('/experiments/')} class="projects__row-link">See the experiments &rarr;</a>
         </div>
       </div>
     </div>

@@ -8,6 +8,6 @@ featured: false
 placeholder: true
 ---
 
-This piece is a placeholder for build notes on "Designing systems that survive their own success". The full write-up hasn't been drafted yet — check back soon, or read the other pieces in [Writing](/writing/) in the meantime.
+This piece is a placeholder for build notes on "Designing systems that survive their own success". The full write-up hasn't been drafted yet — check back soon, or read the other pieces in [Writing](/lessons/) in the meantime.
 
 Notes from scaling a national ordering platform.

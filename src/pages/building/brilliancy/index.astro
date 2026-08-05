@@ -1,0 +1,384 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PlaceholderMedia from '../../../components/ui/PlaceholderMedia.astro';
+import FinalCTA from '../../../components/ui/FinalCTA.astro';
+import { withBase } from '../../../lib/paths';
+
+const explorations = [
+  {
+    title: 'Personalised Coaching',
+    copy: 'Helping players understand why decisions matter rather than simply identifying mistakes.',
+  },
+  {
+    title: 'Learning Memory',
+    copy: 'Building long-term understanding from previous games, recurring mistakes and improvement over time.',
+  },
+  {
+    title: 'Cloud-first Architecture',
+    copy: 'Combining background AI analysis with fast, responsive client experiences across desktop, mobile and web.',
+  },
+  {
+    title: 'Local AI Exploration',
+    copy: 'Understanding where local models provide meaningful value and where cloud models remain the better architectural choice.',
+  },
+];
+
+const roadmap = ['Research', 'Private Alpha', 'Public Beta', 'Hosted Coaching Platform'];
+---
+
+<BaseLayout
+  title="Brilliancy"
+  description="Exploring whether AI can become a genuinely useful personal chess coach."
+  current="building"
+>
+  <article class="brilliancy container">
+    <a href={withBase('/building/')} class="brilliancy__back">&larr; Building</a>
+
+    <header class="brilliancy__hero" data-reveal>
+      <div class="mono-label">Building</div>
+      <h1 class="brilliancy__title">Brilliancy</h1>
+      <p class="brilliancy__support">
+        Exploring whether AI can become a genuinely useful personal chess coach.
+      </p>
+      <div class="brilliancy__lede body-copy">
+        <p>Most chess software tells players what move was best.</p>
+        <p>
+          Brilliancy explores whether AI can instead become a coach that understands how each
+          individual learns, remembers mistakes and improves over time.
+        </p>
+      </div>
+    </header>
+
+    <PlaceholderMedia
+      label="Future cinematic product video"
+      ratio="16/9"
+      radius="lg"
+      class="brilliancy__media"
+    />
+
+    <section class="brilliancy__section" data-reveal>
+      <h2 class="brilliancy__heading">The Question</h2>
+      <div class="brilliancy__copy body-copy">
+        <p>Chess engines have become incredibly strong.</p>
+        <p>Coaching hasn&rsquo;t.</p>
+        <p>
+          What happens when AI stops behaving like an engine and starts behaving like a personal
+          coach?
+        </p>
+        <p>Brilliancy exists to explore that question.</p>
+      </div>
+    </section>
+
+    <section class="brilliancy__section" data-reveal>
+      <h2 class="brilliancy__heading">Why I&rsquo;m Building It</h2>
+      <div class="brilliancy__copy body-copy">
+        <p>I wanted a coach that understands my games, my habits and the way I learn.</p>
+        <p>
+          Rather than analysing every move in isolation, Brilliancy explores how AI can build
+          long-term understanding across hundreds of games to deliver personalised coaching over
+          time.
+        </p>
+      </div>
+    </section>
+
+    <section class="brilliancy__section" data-reveal>
+      <h2 class="brilliancy__heading">Current Areas of Exploration</h2>
+      <ul class="brilliancy__areas">
+        {explorations.map((item) => (
+          <li class="brilliancy__area">
+            <h3 class="brilliancy__area-title">{item.title}</h3>
+            <p class="body-copy">{item.copy}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="brilliancy__section" data-reveal>
+      <h2 class="brilliancy__heading">Latest Lesson</h2>
+      <div class="brilliancy__copy body-copy">
+        <p>The first version explored fully local AI.</p>
+        <p>
+          The more I built, the clearer it became that coaching benefits from cloud-first
+          architecture with intelligent clients rather than local inference alone.
+        </p>
+        <p>The architecture changed because the learning changed.</p>
+      </div>
+      <a href="#" class="brilliancy__cta" aria-disabled="true">Read the Lesson</a>
+    </section>
+
+    <section class="brilliancy__section" data-reveal>
+      <h2 class="brilliancy__heading">Roadmap</h2>
+      <ol class="brilliancy__roadmap">
+        {roadmap.map((step, i) => (
+          <li class="brilliancy__milestone">
+            <span class="mono-label">{String(i + 1).padStart(2, '0')}</span>
+            <span class="brilliancy__milestone-title">{step}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="brilliancy__section brilliancy__related" data-reveal>
+      <h2 class="brilliancy__heading">Related</h2>
+      <div class="brilliancy__related-grid">
+        <a href={withBase('/building/kerrzo/')} class="brilliancy__related-card">
+          <PlaceholderMedia label="Kerrzo · placeholder" ratio="16/10" radius="md" />
+          <div class="brilliancy__related-copy">
+            <h3 class="brilliancy__related-title">Kerrzo</h3>
+            <p class="body-copy">Exploring AI-native business software.</p>
+            <span class="brilliancy__cta">View Project</span>
+          </div>
+        </a>
+        <div class="brilliancy__related-card brilliancy__related-card--static">
+          <PlaceholderMedia label="Lesson · placeholder" ratio="16/10" radius="md" dark />
+          <div class="brilliancy__related-copy">
+            <h3 class="brilliancy__related-title">Latest Lesson</h3>
+            <p class="body-copy">Cloud-first beats local-first</p>
+            <span class="brilliancy__cta brilliancy__cta--muted">Read Lesson</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .brilliancy {
+    padding-top: clamp(120px, 18vh, 200px);
+  }
+
+  .brilliancy__back {
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-label);
+    margin-bottom: clamp(28px, 4vh, 48px);
+  }
+
+  .brilliancy__back:hover {
+    color: var(--color-accent);
+  }
+
+  .brilliancy__hero {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: clamp(36px, 5vh, 64px);
+  }
+
+  .brilliancy__title {
+    margin: 0;
+    font-size: clamp(38px, 5.6vw, 84px);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    font-weight: 500;
+  }
+
+  .brilliancy__support {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--color-body);
+    max-width: 36ch;
+  }
+
+  .brilliancy__lede {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 52ch;
+    margin-top: 8px;
+  }
+
+  .brilliancy__lede p {
+    margin: 0;
+  }
+
+  .brilliancy__media {
+    margin-bottom: clamp(56px, 8vh, 96px);
+  }
+
+  .brilliancy__section {
+    padding: clamp(40px, 6vh, 72px) 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .brilliancy__heading {
+    margin: 0 0 clamp(22px, 3vh, 36px);
+    font-size: clamp(30px, 3.6vw, 52px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+    max-width: 18ch;
+  }
+
+  .brilliancy__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 54ch;
+  }
+
+  .brilliancy__copy p {
+    margin: 0;
+  }
+
+  .brilliancy__areas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .brilliancy__area {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px 24px 28px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .brilliancy__area:nth-child(even) {
+    padding-left: 24px;
+    padding-right: 0;
+    border-left: 1px solid var(--color-border);
+  }
+
+  .brilliancy__area p {
+    margin: 0;
+    max-width: 36ch;
+  }
+
+  .brilliancy__area-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+  }
+
+  .brilliancy__cta {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 28px;
+    font-size: 15px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-border-strong);
+    padding-bottom: 4px;
+    align-self: flex-start;
+  }
+
+  .brilliancy__cta:hover {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .brilliancy__cta--muted,
+  .brilliancy__cta[aria-disabled='true'] {
+    color: var(--color-label);
+    border-bottom-color: var(--color-border);
+    pointer-events: none;
+  }
+
+  .brilliancy__roadmap {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .brilliancy__milestone {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 28px 20px 8px 0;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .brilliancy__milestone:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .brilliancy__milestone-title {
+    font-size: clamp(20px, 2.2vw, 28px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .brilliancy__related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 40px);
+  }
+
+  .brilliancy__related-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: inherit;
+  }
+
+  .brilliancy__related-card:hover {
+    color: inherit;
+  }
+
+  .brilliancy__related-card:hover .brilliancy__cta {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .brilliancy__related-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .brilliancy__related-title {
+    margin: 0;
+    font-size: clamp(24px, 2.4vw, 32px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .brilliancy__related-copy .body-copy {
+    margin: 0;
+    max-width: 32ch;
+  }
+
+  .brilliancy__related-copy .brilliancy__cta {
+    margin-top: 8px;
+  }
+
+  @media (max-width: 900px) {
+    .brilliancy__areas,
+    .brilliancy__roadmap,
+    .brilliancy__related-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .brilliancy__area,
+    .brilliancy__area:nth-child(even) {
+      padding: 24px 0;
+      border-left: none;
+    }
+
+    .brilliancy__milestone {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+      padding: 22px 0;
+    }
+
+    .brilliancy__milestone:last-child {
+      border-bottom: none;
+    }
+  }
+</style>

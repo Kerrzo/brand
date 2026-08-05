@@ -14,10 +14,10 @@ const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
 <section class="emerging">
   <div class="container">
     <SectionLabel dark data-reveal>Emerging technology</SectionLabel>
-    <h2 class="emerging__heading" data-reveal>I have been building beyond the conventional screen for years.</h2>
+    <h2 class="emerging__heading" data-reveal>Exploring what product architecture looks like beyond the conventional screen.</h2>
     <div class="emerging__grid" data-reveal>
       {items.map((item, i) => (
-        <a href={withBase(`/work/${item.id}/`)} class:list={['emerging__item', { 'emerging__item--offset': i % 2 === 1 }]}>
+        <a href={withBase(`/shipped/${item.id}/`)} class:list={['emerging__item', { 'emerging__item--offset': i % 2 === 1 }]}>
           <PlaceholderMedia
             label={`${item.data.title} · headset capture`}
             src={item.data.heroImage}

@@ -2,17 +2,17 @@
 import { withBase } from '../../lib/paths';
 
 interface Props {
-  current?: 'projects' | 'work' | 'ai-lab' | 'writing' | 'about';
+  current?: 'building' | 'shipped' | 'experiments' | 'lessons' | 'about';
   transparent?: boolean;
 }
 
 const { current, transparent = false } = Astro.props;
 
 const links = [
-  { key: 'projects', label: 'Projects', href: withBase('/projects/') },
-  { key: 'work', label: 'Work', href: withBase('/work/') },
-  { key: 'ai-lab', label: 'AI Lab', href: withBase('/ai-lab/') },
-  { key: 'writing', label: 'Writing', href: withBase('/writing/') },
+  { key: 'building', label: 'Building', href: withBase('/building/') },
+  { key: 'shipped', label: 'Shipped', href: withBase('/shipped/') },
+  { key: 'experiments', label: 'Experiments', href: withBase('/experiments/') },
+  { key: 'lessons', label: 'Learnings', href: withBase('/lessons/') },
   { key: 'about', label: 'About', href: withBase('/about/') },
 ] as const;
 ---
@@ -249,7 +249,7 @@ const links = [
     const setOpen = (open: boolean) => {
       panel.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
       toggle.textContent = open ? 'Close' : 'Menu';
       if (open) header?.classList.add('is-dark');
     };

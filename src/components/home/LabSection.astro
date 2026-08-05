@@ -25,15 +25,15 @@ const offsets = [false, true, false, false, false, false];
   <div class="lab__intro" data-reveal>
     <div>
       <SectionLabel>AI Lab</SectionLabel>
-      <h2 class="lab__heading">Experiments from the edge of the toolkit.</h2>
+      <h2 class="lab__heading">Experiments from tools under real constraints.</h2>
     </div>
-    <Button href="/ai-lab/" variant="outline" class="lab__all">Enter the lab</Button>
+    <Button href="/experiments/" variant="outline" class="lab__all">Enter the lab</Button>
   </div>
 
   <div class="lab__grid" data-reveal>
     {items.map((item, i) => (
       <a
-        href={withBase(`/ai-lab/${item.id}/`)}
+        href={withBase(`/experiments/${item.id}/`)}
         class:list={['lab__item', `lab__item--span-${spans[i]}`, { 'lab__item--offset': offsets[i] }]}
       >
         <PlaceholderMedia label={item.data.type} ratio={ratios[i]} radius="md" dark={dark[i]} />

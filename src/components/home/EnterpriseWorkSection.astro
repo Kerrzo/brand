@@ -12,10 +12,10 @@ const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder).slic
 <section id="work" class="ent-work container">
   <div class="ent-work__intro" data-reveal>
     <div>
-      <SectionLabel>Proven in the real world</SectionLabel>
-      <h2 class="ent-work__heading">Platforms that connect digital products to real operations.</h2>
+      <SectionLabel>Architecture in production</SectionLabel>
+      <h2 class="ent-work__heading">Trade-offs and lessons from platforms connected to real operations.</h2>
     </div>
-    <Button href="/work/" variant="outline" class="ent-work__all">All selected work</Button>
+    <Button href="/shipped/" variant="outline" class="ent-work__all">All selected work</Button>
   </div>
 
   <div class="ent-work__rows" data-reveal>
@@ -33,7 +33,7 @@ const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder).slic
           <div class="mono-label">{item.data.client}</div>
           <h3 class="ent-work__title">{item.data.tagline}</h3>
           <p class="body-copy" style="margin:0;max-width:40ch">{item.data.description}</p>
-          <a href={withBase(`/work/${item.id}/`)} class="ent-work__link">Read the case study &rarr;</a>
+          <a href={withBase(`/shipped/${item.id}/`)} class="ent-work__link">Read the engineering story &rarr;</a>
         </div>
       </div>
     ))}

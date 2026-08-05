@@ -3,8 +3,12 @@ import { getCollection, render } from 'astro:content';
 import ContentLayout from '../../layouts/ContentLayout.astro';
 
 export async function getStaticPaths() {
+  // Kerrzo and Brilliancy have dedicated narrative pages under /building/
+  const dedicated = new Set(['kerrzo', 'brilliancy']);
   const items = await getCollection('projects', ({ data }) => !data.draft);
-  return items.map((item) => ({ params: { slug: item.id }, props: { item } }));
+  return items
+    .filter((item) => !dedicated.has(item.id))
+    .map((item) => ({ params: { slug: item.id }, props: { item } }));
 }
 
 const { item } = Astro.props;
@@ -20,12 +24,12 @@ const facts = [
 <ContentLayout
   title={item.data.title}
   description={item.data.description}
-  current="projects"
+  current="building"
   eyebrow={item.data.status}
   heading={item.data.title}
   tagline={item.data.tagline}
-  backHref="/projects/"
-  backLabel="All projects"
+  backHref="/building/"
+  backLabel="Building"
   heroLabel={`${item.data.title} hero image`}
   heroImage={item.data.heroImage}
   heroAlt={item.data.heroAlt}

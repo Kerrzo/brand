@@ -1,0 +1,390 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PlaceholderMedia from '../../../components/ui/PlaceholderMedia.astro';
+import FinalCTA from '../../../components/ui/FinalCTA.astro';
+import { withBase } from '../../../lib/paths';
+
+const explorations = [
+  {
+    title: 'Natural Conversation',
+    copy: 'Creating interactions that feel human rather than scripted.',
+  },
+  {
+    title: 'Real-time Decision Making',
+    copy: 'Understanding incomplete orders, ambiguity and changing customer intent.',
+  },
+  {
+    title: 'Human Escalation',
+    copy: 'Knowing when to transfer a conversation smoothly to a staff member.',
+  },
+  {
+    title: 'Restaurant Integration',
+    copy: 'Exploring how conversational AI fits into real operational workflows rather than existing as an isolated demo.',
+  },
+];
+
+const roadmap = ['Research', 'Proof of Concept', 'Pilot Demonstration', 'Operational Trials'];
+---
+
+<BaseLayout
+  title="Poszo"
+  description="Exploring whether conversational AI can become part of a restaurant team."
+  current="building"
+>
+  <article class="poszo container">
+    <a href={withBase('/building/')} class="poszo__back">&larr; Building</a>
+
+    <header class="poszo__hero" data-reveal>
+      <div class="mono-label">Building</div>
+      <h1 class="poszo__title">Poszo</h1>
+      <p class="poszo__support">
+        Exploring whether conversational AI can become part of a restaurant team.
+      </p>
+      <div class="poszo__lede body-copy">
+        <p>Ordering food sounds simple.</p>
+        <p>
+          In reality it requires understanding people, handling ambiguity, asking the right
+          questions and keeping service moving under pressure.
+        </p>
+        <p>Poszo explores whether modern AI can perform that role naturally and reliably.</p>
+      </div>
+    </header>
+
+    <PlaceholderMedia
+      label="Future cinematic product video"
+      ratio="16/9"
+      radius="lg"
+      class="poszo__media"
+    />
+
+    <section class="poszo__section" data-reveal>
+      <h2 class="poszo__heading">The Question</h2>
+      <div class="poszo__copy body-copy">
+        <p>Voice AI has improved dramatically.</p>
+        <p>
+          But can it move beyond answering questions and become an operational team member trusted
+          to interact with customers?
+        </p>
+        <p>Poszo exists to explore that question.</p>
+      </div>
+    </section>
+
+    <section class="poszo__section" data-reveal>
+      <h2 class="poszo__heading">Why I&rsquo;m Building It</h2>
+      <div class="poszo__copy body-copy">
+        <p>
+          Quick-service restaurants operate in fast, noisy environments where every second matters.
+        </p>
+        <p>
+          Rather than building another chatbot, Poszo explores whether conversational AI can
+          understand customers, manage conversations naturally and know when a human should take
+          over.
+        </p>
+        <p>The challenge isn&rsquo;t speech recognition.</p>
+        <p>It&rsquo;s building trust through conversation.</p>
+      </div>
+    </section>
+
+    <section class="poszo__section" data-reveal>
+      <h2 class="poszo__heading">Current Areas of Exploration</h2>
+      <ul class="poszo__areas">
+        {explorations.map((item) => (
+          <li class="poszo__area">
+            <h3 class="poszo__area-title">{item.title}</h3>
+            <p class="body-copy">{item.copy}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="poszo__section" data-reveal>
+      <h2 class="poszo__heading">Latest Lesson</h2>
+      <div class="poszo__copy body-copy">
+        <p>Fast inference alone isn&rsquo;t enough.</p>
+        <p>
+          The real challenge is maintaining a natural conversation while making accurate
+          operational decisions under real-world conditions.
+        </p>
+        <p>
+          The hardest engineering problems turned out to be conversational rather than technical.
+        </p>
+      </div>
+      <a href="#" class="poszo__cta" aria-disabled="true">Read the Lesson</a>
+    </section>
+
+    <section class="poszo__section" data-reveal>
+      <h2 class="poszo__heading">Roadmap</h2>
+      <ol class="poszo__roadmap">
+        {roadmap.map((step, i) => (
+          <li class="poszo__milestone">
+            <span class="mono-label">{String(i + 1).padStart(2, '0')}</span>
+            <span class="poszo__milestone-title">{step}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="poszo__section poszo__related" data-reveal>
+      <h2 class="poszo__heading">Related</h2>
+      <div class="poszo__related-grid">
+        <a href={withBase('/building/brilliancy/')} class="poszo__related-card">
+          <PlaceholderMedia label="Brilliancy · placeholder" ratio="16/10" radius="md" />
+          <div class="poszo__related-copy">
+            <h3 class="poszo__related-title">Brilliancy</h3>
+            <p class="body-copy">Exploring AI coaching through chess.</p>
+            <span class="poszo__cta">View Project</span>
+          </div>
+        </a>
+        <div class="poszo__related-card poszo__related-card--static">
+          <PlaceholderMedia label="Lesson · placeholder" ratio="16/10" radius="md" dark />
+          <div class="poszo__related-copy">
+            <h3 class="poszo__related-title">Latest Lesson</h3>
+            <p class="body-copy">Real-time AI changes product architecture</p>
+            <span class="poszo__cta poszo__cta--muted">Read Lesson</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .poszo {
+    padding-top: clamp(120px, 18vh, 200px);
+  }
+
+  .poszo__back {
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-label);
+    margin-bottom: clamp(28px, 4vh, 48px);
+  }
+
+  .poszo__back:hover {
+    color: var(--color-accent);
+  }
+
+  .poszo__hero {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: clamp(36px, 5vh, 64px);
+  }
+
+  .poszo__title {
+    margin: 0;
+    font-size: clamp(38px, 5.6vw, 84px);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    font-weight: 500;
+  }
+
+  .poszo__support {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--color-body);
+    max-width: 36ch;
+  }
+
+  .poszo__lede {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 52ch;
+    margin-top: 8px;
+  }
+
+  .poszo__lede p {
+    margin: 0;
+  }
+
+  .poszo__media {
+    margin-bottom: clamp(56px, 8vh, 96px);
+  }
+
+  .poszo__section {
+    padding: clamp(40px, 6vh, 72px) 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .poszo__heading {
+    margin: 0 0 clamp(22px, 3vh, 36px);
+    font-size: clamp(30px, 3.6vw, 52px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+    max-width: 18ch;
+  }
+
+  .poszo__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 54ch;
+  }
+
+  .poszo__copy p {
+    margin: 0;
+  }
+
+  .poszo__areas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .poszo__area {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px 24px 28px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .poszo__area:nth-child(even) {
+    padding-left: 24px;
+    padding-right: 0;
+    border-left: 1px solid var(--color-border);
+  }
+
+  .poszo__area p {
+    margin: 0;
+    max-width: 36ch;
+  }
+
+  .poszo__area-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+  }
+
+  .poszo__cta {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 28px;
+    font-size: 15px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-border-strong);
+    padding-bottom: 4px;
+    align-self: flex-start;
+  }
+
+  .poszo__cta:hover {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .poszo__cta--muted,
+  .poszo__cta[aria-disabled='true'] {
+    color: var(--color-label);
+    border-bottom-color: var(--color-border);
+    pointer-events: none;
+  }
+
+  .poszo__roadmap {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .poszo__milestone {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 28px 20px 8px 0;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .poszo__milestone:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .poszo__milestone-title {
+    font-size: clamp(20px, 2.2vw, 28px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .poszo__related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 40px);
+  }
+
+  .poszo__related-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: inherit;
+  }
+
+  .poszo__related-card:hover {
+    color: inherit;
+  }
+
+  .poszo__related-card:hover .poszo__cta {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .poszo__related-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .poszo__related-title {
+    margin: 0;
+    font-size: clamp(24px, 2.4vw, 32px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .poszo__related-copy .body-copy {
+    margin: 0;
+    max-width: 32ch;
+  }
+
+  .poszo__related-copy .poszo__cta {
+    margin-top: 8px;
+  }
+
+  @media (max-width: 900px) {
+    .poszo__areas,
+    .poszo__roadmap,
+    .poszo__related-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .poszo__area,
+    .poszo__area:nth-child(even) {
+      padding: 24px 0;
+      border-left: none;
+    }
+
+    .poszo__milestone {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+      padding: 22px 0;
+    }
+
+    .poszo__milestone:last-child {
+      border-bottom: none;
+    }
+  }
+</style>

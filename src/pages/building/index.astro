@@ -1,0 +1,162 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingHero from '../../components/content/ListingHero.astro';
+import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
+import FinalCTA from '../../components/ui/FinalCTA.astro';
+import { withBase } from '../../lib/paths';
+
+const all = await getCollection('projects', ({ data }) => !data.draft);
+const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
+
+const pageCopy: Record<string, { title?: string; href?: string; category: string; description: string; focus: string[] }> = {
+  kerrzo: {
+    category: 'AI-native Business Platform',
+    description:
+      'Kerrzo explores what an AI-native operating system for small businesses could become. Rather than layering AI onto existing software, it asks what changes when AI becomes a first-class architectural component.',
+    focus: ['AI agents', 'Knowledge systems', 'Workflow orchestration'],
+  },
+  brilliancy: {
+    category: 'AI Chess Coach',
+    description:
+      'Brilliancy explores whether AI can become a genuinely useful personal chess coach. It also serves as a platform for experimenting with local AI, cloud inference and modern AI product architecture.',
+    focus: ['Personalised coaching', 'Local AI', 'Cloud architecture'],
+  },
+  'ai-game-world': {
+    title: 'Poszo',
+    href: '/building/poszo/',
+    category: 'AI Voice Ordering',
+    description:
+      "Exploring whether conversational AI can deliver a fast, natural ordering experience for quick-service restaurants. The goal isn't simply voice recognition—it's creating an AI team member capable of understanding customers, handling ambiguity and integrating into real restaurant operations.",
+    focus: ['Real-time voice AI', 'Order understanding', 'Human escalation'],
+  },
+};
+---
+
+<BaseLayout title="Building" description="I build products to explore how AI is changing software. Every project represents a real engineering problem, an architectural decision or a new way of thinking about AI-first product development." current="building">
+  <ListingHero
+    heading="Building"
+    headingSize="clamp(48px, 9vw, 160px)"
+    eyebrow="Active explorations"
+    meta="The products are the experiments. The lessons are the outcome."
+    lede="I build products to explore how AI is changing software. Every project represents a real engineering problem, an architectural decision or a new way of thinking about AI-first product development."
+  />
+
+  <section class="container projects-page__rows">
+    {items.map((item, i) => {
+      const copy = pageCopy[item.id];
+      const title = copy?.title ?? item.data.title;
+      const category = copy?.category ?? item.data.status;
+      const description = copy?.description ?? item.data.description;
+      const focus = copy?.focus ?? item.data.tags;
+      return (
+        <div class:list={['projects-page__row', { 'projects-page__row--dark': i % 2 === 1 }]} data-reveal>
+          <PlaceholderMedia
+            label={`${title} hero image`}
+            src={item.data.heroImage}
+            alt={item.data.heroAlt}
+            ratio="16/11"
+            radius="md"
+            dark={i % 2 === 1}
+            class="projects-page__media"
+          />
+          <div class="projects-page__copy">
+            <div class:list={['mono-label', { 'eyebrow--dark': i % 2 === 1 }]}>({String(i + 1).padStart(2, '0')}) &middot; Active exploration</div>
+            <h2 class="projects-page__title">{title}</h2>
+            <div class="projects-page__tagline">{category}</div>
+            <p class="projects-page__desc">{description}</p>
+            <div class="projects-page__tags">
+              {focus.map((tag) => <span class:list={['pill-tag', { 'pill-tag--dark': i % 2 === 1 }]}>{tag}</span>)}
+            </div>
+            <a href={withBase(copy?.href ?? `/building/${item.id}/`)} class="projects-page__link">Read More</a>
+          </div>
+        </div>
+      );
+    })}
+  </section>
+
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .projects-page__rows {
+    padding-top: clamp(60px, 9vh, 120px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(60px, 9vh, 120px);
+  }
+
+  .projects-page__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 72px);
+    align-items: center;
+  }
+
+  .projects-page__row--dark {
+    background: var(--color-dark-bg);
+    color: var(--color-dark-fg);
+    border-radius: var(--radius-xl);
+    padding: clamp(36px, 5vw, 64px);
+  }
+
+  .projects-page__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .projects-page__title {
+    margin: 0;
+    font-size: clamp(30px, 3.6vw, 52px);
+    line-height: .98;
+    letter-spacing: -.035em;
+    font-weight: 500;
+  }
+
+  .projects-page__tagline {
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  .projects-page__desc {
+    margin: 0;
+    max-width: 42ch;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-body);
+  }
+
+  .projects-page__row--dark .projects-page__desc {
+    color: rgba(243, 242, 240, .62);
+  }
+
+  .projects-page__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .projects-page__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-border-strong);
+    padding-bottom: 4px;
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+
+  .projects-page__row--dark .projects-page__link {
+    border-bottom-color: rgba(243, 242, 240, .3);
+  }
+
+  @media (max-width: 900px) {
+    .projects-page__row {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 20px;
+    }
+  }
+</style>

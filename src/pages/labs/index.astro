@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Labs" description="Labs">
+  <section id="top" class="page-hero container">
+    <h1 class="page-hero__heading">Labs</h1>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: clamp(120px, 20vh, 220px);
+    padding-bottom: clamp(80px, 12vh, 160px);
+  }
+
+  .page-hero__heading {
+    margin: 0;
+    font-size: clamp(56px, 11.5vw, 196px);
+    line-height: .86;
+    letter-spacing: -.055em;
+    font-weight: 500;
+    max-width: 15ch;
+  }
+</style>

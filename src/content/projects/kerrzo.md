@@ -1,15 +1,15 @@
 ---
 title: "Kerrzo"
-tagline: "AI-native business platform"
-description: "A platform bringing sales, customer relationships, operations and intelligent agents into one connected business system."
+tagline: "An AI-native operating system, under exploration"
+description: "An exploration into what an AI-native operating system for small businesses could become — and what architecture looks like when agents sit at the centre of the system."
 status: "In development"
 tags: ["AI agents", "CRM", "Operations"]
 displayOrder: 1
 featured: true
 ---
 
-Kerrzo brings sales, customer relationships, operations and intelligent agents into one connected business system — built for small teams who need enterprise-grade capability without enterprise-grade headcount.
+Kerrzo is an exploration into what an AI-native operating system for small businesses could become.
 
 ## Why it exists
 
-Most small businesses run on a patchwork of disconnected tools. Kerrzo starts from the agents outward: what would it look like if the software actually did the work, not just tracked it.
+The interesting question is architectural: what changes when agents, not apps, sit at the centre of a small-business system — and how far that model can stretch before the seams show.

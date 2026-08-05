@@ -1,15 +1,15 @@
 ---
 title: "Brilliancy"
-tagline: "Personal AI chess coach"
-description: "A personalised chess coach that learns from your own games and helps explain not only which move was better, but why."
+tagline: "Can AI be a genuinely useful chess coach?"
+description: "An exploration into whether AI can become a genuinely useful personal chess coach — and a platform for experimenting with local AI, cloud inference and AI product architecture."
 status: "Experimental product"
 tags: ["Chess", "Coaching", "Explainability"]
 displayOrder: 2
 featured: true
 ---
 
-Brilliancy is a personalised chess coach that learns from your own games and helps explain not only which move was better, but why — treating explanation quality as the actual product, not the engine evaluation underneath it.
+Brilliancy explores whether AI can become a genuinely useful personal chess coach.
 
-## The interesting problem
+## Why it exists
 
-Chess engines have been superhuman for decades. The hard part was never finding the better move — it was building a coach that could explain the reasoning in a way that actually improves how you think.
+Beyond the coaching question, it is a working platform for experimenting with local AI, cloud inference and the product architecture that sits between them.
