@@ -4,12 +4,15 @@ interface Props {
 }
 
 const { text } = Astro.props;
+const segment = `${text} · `;
+// Enough repeats per half that the track stays wider than the viewport
+const half = Array.from({ length: 6 }, () => segment).join('');
 ---
 
 <div class="ticker" data-reveal>
   <div class="ticker-track">
-    <span class="ticker__text">{text}&nbsp;&middot;&nbsp;</span>
-    <span class="ticker__text">{text}&nbsp;&middot;&nbsp;</span>
+    <span class="ticker__text">{half}</span>
+    <span class="ticker__text" aria-hidden="true">{half}</span>
   </div>
 </div>
 
@@ -22,11 +25,16 @@ const { text } = Astro.props;
     padding: 18px 0;
   }
 
+  .ticker-track {
+    display: flex;
+    width: max-content;
+  }
+
   .ticker__text {
-    padding-right: 1.5em;
+    flex-shrink: 0;
     font-family: var(--font-mono);
     font-size: 12px;
-    letter-spacing: .16em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: #7c7973;
   }

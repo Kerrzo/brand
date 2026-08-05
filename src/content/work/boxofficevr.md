@@ -2,7 +2,7 @@
 title: "BoxOfficeVR"
 client: "BoxOfficeVR"
 tagline: "The magic of theatre at home"
-description: "Live performance captured and staged for VR, built so the sense of a room full of people survives the translation."
+description: "Exploring how theatre could become immersive through VR streaming, interactive performances and virtual venues."
 category: "Immersive technology"
 yearRange: "2020 — 2023"
 tags: ["VR", "Live capture"]

@@ -27,9 +27,9 @@ const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
   <ListingHero
     heading="Learnings"
     headingSize="clamp(58px, 12vw, 200px)"
-    eyebrow="Build notes"
-    meta={`${all.length} pieces · updated monthly`}
-    lede="Thinking through the work by doing it — notes on AI products, architecture decisions and the things that only become obvious once you ship."
+    eyebrow="Learning in public"
+    meta={`No content calendar.\nOnly lessons worth writing down.`}
+    lede={`<p>Building raises questions.</p><p>Writing helps me answer them.</p><p><strong>These are notes from AI products, architecture decisions and experiments that changed how I think.</strong></p>`}
   />
 
   <section class="container writing-page__filter">
@@ -70,6 +70,17 @@ const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
     </div>
   </section>
 
+  <section class="writing-page__pause" data-writing-pause aria-label="Building in public">
+    <div class="writing-page__pause-inner">
+      <div class="writing-page__pause-statement">
+        <p data-pause-line data-pause-emphasis>Everything on this site comes from real projects, real experiments and real decisions.</p>
+        <p data-pause-line data-pause-emphasis>Sometimes the ideas survive.</p>
+        <p data-pause-line data-pause-emphasis>Sometimes they don&rsquo;t.</p>
+        <p data-pause-line data-pause-emphasis>Both are worth documenting.</p>
+      </div>
+    </div>
+  </section>
+
   {earlier.length > 0 && (
     <section class="container writing-page__earlier">
       <div class="writing-page__earlier-intro" data-reveal>
@@ -89,35 +100,6 @@ const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
       </div>
     </section>
   )}
-
-  <section class="writing-page__newsletter">
-    <div class="container writing-page__newsletter-grid" data-reveal>
-      <div class="writing-page__newsletter-copy">
-        <div class="mono-label" style="color:var(--color-dark-label)">Build notes by email</div>
-        <h2 class="writing-page__newsletter-heading">One honest note a month, from inside the build.</h2>
-      </div>
-      <form class="writing-page__newsletter-form" data-newsletter-form>
-        <div class="writing-page__newsletter-input-row">
-          <input type="email" name="email" required placeholder="you@company.com" class="writing-page__newsletter-input" />
-          <button type="submit" class="writing-page__newsletter-submit">Subscribe</button>
-        </div>
-        <div class="writing-page__newsletter-hint">No course, no funnel. Unsubscribe whenever.</div>
-      </form>
-    </div>
-  </section>
-
-  <section id="contact" class="container writing-page__cta">
-    <div class="writing-page__cta-grid" data-reveal>
-      <h2 class="writing-page__cta-heading">Bring me a problem worth solving.</h2>
-      <div class="writing-page__cta-body">
-        <p class="body-copy">
-          Whether you have an AI opportunity, an early product concept or a team that needs help
-          becoming AI-capable, let&rsquo;s work out the most useful next step.
-        </p>
-        <a href="mailto:paul@kerrzo.com" class="btn"><span>Work with Paul</span><span class="dot" aria-hidden="true"></span></a>
-      </div>
-    </div>
-  </section>
 </BaseLayout>
 
 <style>
@@ -205,7 +187,8 @@ const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
   }
 
   .writing-page__earlier {
-    padding-top: clamp(70px, 10vh, 130px);
+    padding-top: clamp(80px, 12vh, 160px);
+    padding-bottom: clamp(80px, 12vh, 160px);
   }
 
   .writing-page__earlier-intro {
@@ -252,134 +235,43 @@ const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
     line-height: 1.55;
   }
 
-  .writing-page__newsletter {
-    margin: clamp(80px, 12vh, 160px) 0 0;
+  .writing-page__pause {
+    margin: clamp(72px, 11vh, 140px) 0 0;
     background: var(--color-dark-bg);
     color: var(--color-dark-fg);
   }
 
-  .writing-page__newsletter-grid {
-    padding: clamp(48px, 7vw, 100px) var(--edge);
-    border-radius: var(--radius-xl);
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-    gap: clamp(28px, 5vw, 80px);
-    align-items: end;
-  }
-
-  .writing-page__newsletter-copy {
+  .writing-page__pause-inner {
+    padding: clamp(88px, 16vh, 180px) var(--edge);
     display: flex;
     flex-direction: column;
-    gap: 20px;
-  }
-
-  .writing-page__newsletter-heading {
-    margin: 0;
-    font-size: clamp(30px, 3.6vw, 58px);
-    line-height: 1;
-    letter-spacing: -.04em;
-    font-weight: 500;
-    max-width: 16ch;
-  }
-
-  .writing-page__newsletter-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding-bottom: 6px;
-  }
-
-  .writing-page__newsletter-input-row {
-    display: flex;
-    gap: 10px;
-    border-bottom: 1px solid rgba(243, 242, 240, .3);
-    padding-bottom: 12px;
-  }
-
-  .writing-page__newsletter-input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--color-dark-fg);
-    font-family: inherit;
-    font-size: 17px;
-  }
-
-  .writing-page__newsletter-submit {
-    background: var(--color-accent);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius-pill);
-    padding: 11px 20px;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-
-  .writing-page__newsletter-hint {
-    font-size: 13px;
-    color: rgba(243, 242, 240, .45);
-  }
-
-  .writing-page__cta {
-    padding-top: clamp(90px, 14vh, 180px);
-    padding-bottom: clamp(80px, 12vh, 160px);
-  }
-
-  .writing-page__cta-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-    gap: clamp(28px, 5vw, 90px);
-    align-items: end;
-  }
-
-  .writing-page__cta-heading {
-    margin: 0;
-    font-size: clamp(44px, 7.4vw, 132px);
-    line-height: .9;
-    letter-spacing: -.05em;
-    font-weight: 500;
-    max-width: 12ch;
-  }
-
-  .writing-page__cta-body {
-    display: flex;
-    flex-direction: column;
-    gap: 26px;
-    padding-bottom: 10px;
-  }
-
-  .writing-page__cta-body p {
-    margin: 0;
-    max-width: 42ch;
-  }
-
-  .writing-page__cta-body .btn {
-    display: inline-flex;
     align-items: center;
-    gap: 12px;
-    background: var(--color-ink);
-    color: var(--color-bg);
-    padding: 16px 26px;
-    border-radius: var(--radius-pill);
-    font-size: 16px;
-    font-weight: 500;
-    align-self: flex-start;
-    transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
+    text-align: center;
   }
 
-  .writing-page__cta-body .btn:hover {
-    background: var(--color-accent);
-    color: #fff;
+  .writing-page__pause-statement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45em;
+    width: 100%;
+    font-size: clamp(30px, 4.6vw, 64px);
+    max-width: min(28em, 92vw);
+  }
+
+  .writing-page__pause-statement p {
+    margin: 0;
+    font-size: 1em;
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+    opacity: 0.14;
+    transition: opacity 0.55s ease;
   }
 
   @media (max-width: 900px) {
     .writing-page__featured-grid,
-    .writing-page__earlier-row,
-    .writing-page__newsletter-grid,
-    .writing-page__cta-grid {
+    .writing-page__earlier-row {
       grid-template-columns: minmax(0, 1fr);
       row-gap: 16px;
     }
@@ -395,3 +287,62 @@ const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
     }
   }
 </style>
+
+<script>
+  function initWritingPause() {
+    const section = document.querySelector<HTMLElement>('[data-writing-pause]');
+    if (!section || section.dataset.pauseReady === 'true') return;
+    section.dataset.pauseReady = 'true';
+
+    const lines = Array.from(section.querySelectorAll<HTMLElement>('[data-pause-line]'));
+    if (!lines.length) return;
+
+    let raf: number | null = null;
+
+    const update = () => {
+      raf = null;
+      const focusY = window.innerHeight * 0.55;
+      const sectionRect = section.getBoundingClientRect();
+      if (sectionRect.bottom < 0 || sectionRect.top > window.innerHeight) return;
+
+      let active = 0;
+      let best = Infinity;
+      lines.forEach((el, i) => {
+        const r = el.getBoundingClientRect();
+        const mid = r.top + r.height / 2;
+        const dist = Math.abs(mid - focusY);
+        if (dist < best) {
+          best = dist;
+          active = i;
+        }
+      });
+
+      lines.forEach((el, i) => {
+        const emphasized = el.hasAttribute('data-pause-emphasis');
+        if (i === active) {
+          el.style.opacity = emphasized ? '1' : '0.85';
+        } else if (i < active) {
+          el.style.opacity = emphasized ? '0.38' : '0.45';
+        } else {
+          el.style.opacity = emphasized ? '0.14' : '0.28';
+        }
+      });
+    };
+
+    const onScroll = () => {
+      if (raf == null) raf = requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  }
+
+  initWritingPause();
+  document.addEventListener('astro:after-swap', () => {
+    document.querySelectorAll<HTMLElement>('[data-writing-pause]').forEach((el) => {
+      delete el.dataset.pauseReady;
+    });
+    initWritingPause();
+  });
+</script>

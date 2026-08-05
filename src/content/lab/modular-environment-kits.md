@@ -1,6 +1,6 @@
 ---
-title: "Modular environment kits"
-description: "Generated pieces, hand-built rules."
+title: "AI-generated cinematic product videos"
+description: "Building premium launch videos using generative image models, LTX Video and cinematic camera movement."
 category: "3D and assets"
 type: "Experiment"
 status: "Running"
@@ -11,4 +11,4 @@ featured: true
 relatedProjects: ["ai-game-world"]
 ---
 
-Generated pieces, hand-built rules — environment kits where individual assets come from generative workflows, but the modular grammar that snaps them together is authored by hand.
+Building premium launch videos using generative image models, LTX Video and cinematic camera movement — environment and product motion where generative imagery meets authored camera grammar.

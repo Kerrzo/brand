@@ -1,0 +1,189 @@
+---
+interface Props {
+  lines: string[];
+  eyebrow?: string;
+  showRail?: boolean;
+  accentColor?: string;
+}
+
+const {
+  lines,
+  eyebrow = '',
+  showRail = true,
+  accentColor = 'var(--color-accent)',
+} = Astro.props;
+---
+
+<section
+  class="editorial-seq"
+  data-editorial-seq
+  data-show-rail={showRail ? 'true' : 'false'}
+  data-accent={accentColor}
+  aria-label="Editorial quote"
+>
+  <div class="editorial-seq__inner">
+    {eyebrow && (
+      <div class="editorial-seq__eyebrow">{eyebrow}</div>
+    )}
+    <div class="editorial-seq__lines" data-editorial-lines>
+      {lines.map((line) => (
+        <p data-seq>{line}</p>
+      ))}
+    </div>
+    {showRail && <div class="editorial-seq__rail" data-editorial-rail aria-hidden="true"></div>}
+  </div>
+</section>
+
+<style>
+  .editorial-seq {
+    background: var(--color-dark-bg);
+    color: var(--color-dark-fg);
+    position: relative;
+    margin-top: clamp(56px, 9vh, 120px);
+  }
+
+  .editorial-seq__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: clamp(88px, 16vh, 180px) 6vw;
+    box-sizing: border-box;
+  }
+
+  .editorial-seq__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(243, 242, 240, 0.4);
+    margin-bottom: clamp(18px, 4vh, 52px);
+  }
+
+  .editorial-seq__lines {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(20px, 4.2vh, 64px);
+    max-width: 48ch;
+  }
+
+  .editorial-seq__lines p {
+    margin: 0;
+    font-size: clamp(21px, 2.9vw, 46px);
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+    color: var(--color-dark-fg);
+    opacity: 0.16;
+    transition: opacity 0.45s ease;
+  }
+
+  .editorial-seq__rail {
+    position: absolute;
+    right: 4vw;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .editorial-seq__rail :global(span) {
+    display: block;
+    width: 2px;
+    height: 22px;
+    background: rgba(243, 242, 240, 0.2);
+    transition: background 0.4s ease, height 0.4s ease;
+  }
+</style>
+
+<script>
+  function initEditorialSequences() {
+    const sections = document.querySelectorAll<HTMLElement>('[data-editorial-seq]');
+
+    sections.forEach((wrap) => {
+      if (wrap.dataset.editorialReady === 'true') return;
+      wrap.dataset.editorialReady = 'true';
+
+      const seq = wrap.querySelector<HTMLElement>('[data-editorial-lines]');
+      const rail = wrap.querySelector<HTMLElement>('[data-editorial-rail]');
+      if (!seq) return;
+
+      const lines = Array.from(seq.querySelectorAll<HTMLElement>('[data-seq]'));
+      if (!lines.length) return;
+
+      const showRail = wrap.dataset.showRail !== 'false';
+      const accent = wrap.dataset.accent || '#E14A22';
+
+      if (rail) {
+        rail.style.display = showRail ? 'flex' : 'none';
+        if (showRail && rail.children.length !== lines.length) {
+          rail.innerHTML = '';
+          lines.forEach(() => {
+            rail.appendChild(document.createElement('span'));
+          });
+        }
+      }
+
+      let raf: number | null = null;
+      let lastActive = -1;
+
+      const update = () => {
+        raf = null;
+        const focusY = window.innerHeight * 0.45;
+
+        let active = 0;
+        let best = Infinity;
+
+        lines.forEach((el, i) => {
+          const r = el.getBoundingClientRect();
+          const mid = r.top + r.height / 2;
+          const dist = Math.abs(mid - focusY);
+          if (dist < best) {
+            best = dist;
+            active = i;
+          }
+        });
+
+        // Prefer the line currently crossing the focus band while the section is on screen
+        const section = wrap.getBoundingClientRect();
+        if (section.bottom < 0 || section.top > window.innerHeight) {
+          // Off-screen: keep last state, no work
+          return;
+        }
+
+        if (active === lastActive) return;
+        lastActive = active;
+
+        lines.forEach((el, i) => {
+          el.style.opacity = i === active ? '1' : i < active ? '0.3' : '0.14';
+          const tick = rail?.children[i] as HTMLElement | undefined;
+          if (tick) {
+            tick.style.background =
+              i === active ? accent : i < active ? 'rgba(243,242,240,.4)' : 'rgba(243,242,240,.16)';
+            tick.style.height = i === active ? '34px' : '22px';
+          }
+        });
+      };
+
+      const onScroll = () => {
+        if (raf == null) raf = requestAnimationFrame(update);
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      update();
+    });
+  }
+
+  initEditorialSequences();
+  document.addEventListener('astro:after-swap', () => {
+    document.querySelectorAll<HTMLElement>('[data-editorial-seq]').forEach((el) => {
+      delete el.dataset.editorialReady;
+    });
+    initEditorialSequences();
+  });
+</script>

@@ -24,23 +24,29 @@ const featuredOrder = [
   { slug: 'modular-environment-kits', span: 2, ratio: '1/1', offset: false },
 ];
 
-const labLogOrder = ['ltx-video-experiments', 'modular-environment-kits', 'local-ai-versus-cloud', 'concept-to-3d-asset', 'realtime-drive-through-ordering'];
+const labLog = [
+  { slug: 'realtime-drive-through-ordering', title: 'AI-native voice ordering' },
+  { slug: 'consistent-character-workflows', title: 'Consistent game character pipeline' },
+  { slug: 'modular-environment-kits', title: 'Cinematic website fly-through generation' },
+  { slug: 'local-ai-versus-cloud', title: 'Local inference architecture' },
+  { slug: 'ltx-video-experiments', title: 'LTX Video workflow evaluation' },
+];
 
 const categories = ['Generative imagery', 'Voice and real-time', '3D and assets', 'Infrastructure'];
 ---
 
-<BaseLayout title="Experiments" description="Short experiments at the edge of the toolkit — generative imagery, real-time voice, 3D pipelines and the unglamorous infrastructure questions underneath them." current="experiments">
+<BaseLayout title="Experiments" description="Small experiments exploring technologies before they become products. Every experiment answers one question: is this genuinely useful?" current="experiments">
   <ListingHero
-    eyebrowTop="AI Lab"
-    heading="Testing what is becoming possible."
+    eyebrowTop="Field Notes"
+    heading="Exploring what becomes possible."
     headingSize="clamp(46px, 9.2vw, 158px)"
     eyebrow="Open experiments"
     meta="Unfinished on purpose. Published as they are, notes included."
-    lede="Short experiments at the edge of the toolkit — generative imagery, real-time voice, 3D pipelines and the unglamorous infrastructure questions underneath them."
+    lede={`<p>Small experiments exploring technologies before they become products. Every experiment answers one question: <strong>is this genuinely useful?</strong></p>`}
   />
 
   <div class="lab-page__ticker">
-    <Ticker text="ComfyUI · Flux · LTX Video · SDXL · Whisper · Realtime voice · Blender · TripoSR · Ollama · Llama · Claude · Vector DBs" />
+    <Ticker text="Local AI · Voice · Video · 3D · Realtime · Agents · Robotics · Game Dev · Creative Tools" />
   </div>
 
   <section class="container lab-page__filter">
@@ -55,8 +61,11 @@ const categories = ['Generative imagery', 'Voice and real-time', '3D and assets'
       </div>
       <CompareSlider beforeLabel="Before · raw generation" afterLabel="After · locked character sheet" />
       <div class="lab-page__exp01-grid" data-reveal>
-        <h2 class="lab-page__exp01-heading">Keeping one character consistent across four hundred generations</h2>
-        <p class="body-copy lab-page__exp01-copy">{exp01.data.description}</p>
+        <h2 class="lab-page__exp01-heading">Consistent characters across hundreds of generations</h2>
+        <p class="body-copy lab-page__exp01-copy">
+          Exploring whether modern image models can create production-ready game assets instead of
+          isolated concept art.
+        </p>
       </div>
     </section>
   )}
@@ -88,7 +97,7 @@ const categories = ['Generative imagery', 'Voice and real-time', '3D and assets'
     <section class="container lab-page__exp07" data-card data-cat={exp07.data.category}>
       <div class="lab-page__exp07-intro" data-reveal>
         <div class="mono-label">EXP 07 &mdash; {exp07.data.title}</div>
-        <h2 class="lab-page__exp07-heading">Short generated sequences that hold together for longer than four seconds.</h2>
+        <h2 class="lab-page__exp07-heading">Long-form AI video is finally becoming useful.</h2>
       </div>
       <VideoReveal />
     </section>
@@ -98,7 +107,7 @@ const categories = ['Generative imagery', 'Voice and real-time', '3D and assets'
     <div class="container">
       <div class="lab-page__graph-intro" data-reveal>
         <div class="mono-label" style="color:var(--color-dark-label)">How it was made</div>
-        <h2 class="lab-page__graph-heading">The graph behind EXP 01, in plain terms.</h2>
+        <h2 class="lab-page__graph-heading">Every experiment begins with a question. The interesting part isn&rsquo;t the model&mdash;it&rsquo;s what survives contact with reality.</h2>
       </div>
       <div class="lab-page__graph-grid" data-reveal>
         <div class="lab-page__graph-steps">
@@ -128,16 +137,16 @@ const categories = ['Generative imagery', 'Voice and real-time', '3D and assets'
 
   <section class="container lab-page__log">
     <div class="lab-page__log-intro" data-reveal>
-      <h2 class="lab-page__log-heading">Lab log</h2>
-      <span class="mono-label">Updated weekly</span>
+      <h2 class="lab-page__log-heading">Experiment log</h2>
+      <span class="mono-label">Recent experiments</span>
     </div>
     <div class="lab-page__log-rows" data-reveal>
-      {labLogOrder.map((slug) => {
-        const item = bySlug(slug);
+      {labLog.map((entry, i) => {
+        const item = bySlug(entry.slug);
         return (
           <a href={withBase(`/experiments/${item.id}/`)} class="lab-page__log-row" data-narrow="minmax(0,1fr) 110px">
-            <span class="mono-label" style="color:var(--color-label-dim)">{String(item.data.displayOrder).padStart(2, '0')}</span>
-            <span class="lab-page__log-title">{item.data.title}</span>
+            <span class="mono-label" style="color:var(--color-label-dim)">{String(i + 1).padStart(2, '0')}</span>
+            <span class="lab-page__log-title">{entry.title}</span>
             <span class="lab-page__log-tools">{item.data.tools.join(' · ')}</span>
             <span class="lab-page__log-status">{item.data.status}</span>
           </a>
@@ -290,7 +299,7 @@ const categories = ['Generative imagery', 'Voice and real-time', '3D and assets'
     line-height: 1.04;
     letter-spacing: -.035em;
     font-weight: 500;
-    max-width: 20ch;
+    max-width: 36ch;
   }
 
   .lab-page__graph-grid {

@@ -1,61 +1,122 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ListingHero from '../../components/content/ListingHero.astro';
 import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
-import FaqAccordion from '../../components/ui/FaqAccordion.astro';
 import FinalCTA from '../../components/ui/FinalCTA.astro';
+import EditorialScrollSequence from '../../components/ui/EditorialScrollSequence.astro';
 
 const contexts = ['Craveable Brands', 'International Towers', 'Amica', '42 Interactive', 'BoxOfficeVR'];
 
 const timeline = [
-  { n: '001', title: 'Engineering foundations', copy: 'Web and enterprise systems, back when everything had to be built by hand.', year: '1999' },
-  { n: '002', title: 'Product and technology leadership', copy: 'Leading teams building commerce, property and healthcare platforms.', year: '2009' },
-  { n: '003', title: 'Enterprise ecosystems', copy: 'Craveable Brands, International Towers and Amica — digital connected to real operations.', year: '2016' },
-  { n: '004', title: 'Beyond the screen', copy: 'BoxOfficeVR and neurotechnology — immersive work with a real purpose.', year: '2020' },
-  { n: '005', title: 'paulkerr.com.au — AI-native building', copy: 'Kerrzo, Brilliancy, Strategy Connect and AI-assisted game worlds.', year: '2024 —' },
+  {
+    n: '001',
+    title: 'Enterprise Platforms',
+    copy: 'Designed and delivered large-scale software platforms used by millions of customers.',
+    year: '',
+  },
+  {
+    n: '002',
+    title: 'Product & Technology Leadership',
+    copy: 'Led engineering teams while remaining deeply involved in architecture and product design.',
+    year: '',
+  },
+  {
+    n: '003',
+    title: 'Founder & Builder',
+    copy: 'Built products across enterprise software, AI, VR and consumer applications.',
+    year: '',
+  },
+  {
+    n: '004',
+    title: 'Today',
+    copy: 'Exploring AI-native products, modern engineering workflows and the future of software.',
+    year: '',
+  },
 ];
 
 const capabilities = [
-  { title: 'AI product architecture', copy: 'Model choice, evaluation, agents, retrieval, guardrails.' },
-  { title: 'Platform engineering', copy: 'Integrations, payments, POS, identity, operations at scale.' },
-  { title: 'Product definition', copy: 'Finding the smallest version that proves the idea.' },
-  { title: 'Rapid prototyping', copy: 'Working software in weeks, tested with real people.' },
-  { title: 'Immersive and voice', copy: 'VR, real-time voice systems, spatial and sensor-driven work.' },
-  { title: 'Team enablement', copy: 'Helping engineers and designers become genuinely AI-capable.' },
+  {
+    title: 'Build before debating',
+    copy: 'The fastest way to understand new technology is to build something real.',
+  },
+  {
+    title: 'Architecture outlives models',
+    copy: 'Models improve constantly. Good architecture survives those changes.',
+  },
+  {
+    title: 'Keep the human answer intact',
+    copy: 'AI should amplify judgement, not replace it.',
+  },
+  {
+    title: 'Ship. Learn. Repeat.',
+    copy: 'Real products teach lessons that theory never will.',
+  },
 ];
 
 const beliefs = [
-  { n: '01', title: 'The model is rarely the hard part', copy: 'Deciding what is worth building, and what "good" means, still takes human judgement.' },
-  { n: '02', title: 'Prototypes beat opinions', copy: 'A rough working thing settles arguments a strategy deck will run for months.' },
-  { n: '03', title: 'Keep the human answer intact', copy: 'Systems that average people out lose exactly the signal worth having.' },
-];
-
-const faqs = [
-  { question: 'How do you usually start with a new client?', answer: 'Usually a short paid discovery: a couple of conversations, a look at what exists, and a written point of view on the most useful next step. Often that leads into a prototype sprint.' },
-  { question: 'Do you build, or only advise?', answer: 'I build. Advisory work is more useful when the person giving it is still shipping software every week — which is exactly what Kerrzo, Brilliancy and the lab experiments are for.' },
-  { question: 'What size of team do you work best with?', answer: 'Founders and small product teams who need senior technical judgement quickly, and enterprise teams who need someone who has already delivered at that scale.' },
-  { question: 'How quickly can something real exist?', answer: 'A focused prototype sprint typically produces something testable in two to four weeks — real software, not a clickable illusion.' },
+  {
+    n: '01',
+    title: 'The model is rarely the hard part.',
+    copy: 'Choosing where intelligence belongs is usually the harder architectural decision.',
+  },
+  {
+    n: '02',
+    title: 'Prototype early.',
+    copy: 'Real software exposes assumptions much faster than planning.',
+  },
+  {
+    n: '03',
+    title: 'Curiosity compounds.',
+    copy: 'The best opportunities come from following interesting technical questions.',
+  },
+  {
+    n: '04',
+    title: 'Learn in public.',
+    copy: 'Sharing experiments creates better conversations than polished opinions.',
+  },
 ];
 ---
 
-<BaseLayout title="About" description="I have spent more than 25 years turning complicated technology into products people actually use — and I now build my own at the edge of what AI makes possible." current="about">
-  <ListingHero
-    heading="About"
-    headingSize="clamp(64px, 13vw, 220px)"
-    eyebrow="Paul Kerr"
-    meta="CTO · AI Product Architect · Builder. Sydney, Australia."
-    lede="I have spent more than 25 years turning complicated technology into products people actually use — and I now build my own at the edge of what AI makes possible."
-  />
+<BaseLayout
+  title="About Paul"
+  description="Thirty years of building software. Still learning — and documenting what AI changes along the way."
+  current="about"
+>
+  <section id="top" class="page-hero container">
+    <h1 class="page-hero__heading">About Paul</h1>
+    <div class="page-hero__grid">
+      <div class="page-hero__meta">
+        <div class="mono-label">About Paul</div>
+        <div class="page-hero__meta-copy">
+          <p>Engineer.</p>
+          <p>Product Architect.</p>
+          <p>Builder.</p>
+          <p class="page-hero__meta-gap">Thirty years of building software.</p>
+          <p>Still learning.</p>
+        </div>
+      </div>
+      <div class="page-hero__lede">
+        <p><strong>Thirty years of engineering taught me how to build software.</strong></p>
+        <p>Now I&rsquo;m exploring what becomes possible when experience meets AI.</p>
+        <p>The tools are changing, the principles aren&rsquo;t.</p>
+      </div>
+    </div>
+  </section>
 
   <section class="container about-photos">
     <div class="about-photos__grid" data-reveal>
       <div class="about-photos__frame">
-        <PlaceholderMedia label="Photo · working session" ratio="16/10" radius="md" dark />
-        <div class="about-photos__caption">Building alongside teams, not above them</div>
+        <PlaceholderMedia label="Editorial portrait" ratio="16/10" radius="md" dark />
+        <div class="about-photos__caption">
+          Now building.<br />
+          AI-native products and experiments.
+        </div>
       </div>
       <div class="about-photos__frame">
-        <PlaceholderMedia label="Photo · desk / build" ratio="16/10" radius="md" />
-        <div class="about-photos__caption about-photos__caption--light">Shipping in weeks, not quarters</div>
+        <PlaceholderMedia label="Workspace" ratio="16/10" radius="md" />
+        <div class="about-photos__caption about-photos__caption--light">
+          Workspace.<br />
+          Where ideas become software.
+        </div>
       </div>
     </div>
   </section>
@@ -74,10 +135,23 @@ const faqs = [
     <div class="about-short__grid" data-reveal>
       <div class="mono-label about-short__label">The short version</div>
       <div class="about-short__body">
-        <h2 class="about-short__heading">I started as an engineer, became a CTO, and never stopped building things myself.</h2>
+        <h2 class="about-short__heading">
+          I started as an engineer. Thirty years later, I&rsquo;m still learning.
+        </h2>
         <div class="about-short__cols">
-          <p class="body-copy">Across commerce, property, strategy, healthcare and immersive technology, my work has mostly been the same job wearing different clothes: understand a messy real-world operation, then design the product and architecture that makes it feel simple.</p>
-          <p class="body-copy">The tools have changed dramatically. AI has collapsed the distance between an idea and a working product — which rewards people who can hold product judgement and technical clarity at the same time. That is the part I care about most.</p>
+          <div class="about-short__col body-copy">
+            <p>I started writing software in the 1990s because I loved building things.</p>
+            <p>
+              Since then I&rsquo;ve designed enterprise platforms, led engineering teams, built
+              startups and helped organisations solve difficult technical problems.
+            </p>
+            <p>Today I&rsquo;m fascinated by something different.</p>
+          </div>
+          <div class="about-short__col body-copy">
+            <p>AI isn&rsquo;t simply another technology shift.</p>
+            <p>It changes how products are conceived, designed and built.</p>
+            <p>This website documents what I&rsquo;m learning as I explore that change.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -85,8 +159,8 @@ const faqs = [
 
   <section class="container about-timeline">
     <div class="about-timeline__intro" data-reveal>
-      <h2 class="about-timeline__heading">Selected timeline</h2>
-      <span class="mono-label">(05)</span>
+      <h2 class="about-timeline__heading">Selected Experience</h2>
+      <span class="mono-label">(04)</span>
     </div>
     <div class="about-timeline__rows" data-reveal>
       {timeline.map((row) => (
@@ -100,28 +174,18 @@ const faqs = [
     </div>
   </section>
 
-  <section class="about-capabilities">
-    <div class="container">
-      <div class="about-capabilities__intro" data-reveal>
-        <div class="mono-label" style="color:var(--color-dark-label)">Capabilities</div>
-        <h2 class="about-capabilities__heading">What I actually do when I turn up.</h2>
-      </div>
-      <div class="about-capabilities__grid" data-reveal>
-        {capabilities.map((c) => (
-          <div class="about-capabilities__item">
-            <div class="about-capabilities__item-title">{c.title}</div>
-            <div class="about-capabilities__item-copy">{c.copy}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <EditorialScrollSequence
+    lines={[
+      'Experience tells me what used to work.',
+      'Curiosity helps me discover what works next.',
+    ]}
+  />
 
   <section class="container about-beliefs">
     <div class="about-beliefs__intro" data-reveal>
       <div>
         <div class="mono-label" style="margin-bottom:24px">What I believe</div>
-        <h2 class="about-beliefs__heading">Opinions earned by shipping.</h2>
+        <h2 class="about-beliefs__heading">Principles</h2>
       </div>
     </div>
     <div class="about-beliefs__rows" data-reveal>
@@ -135,19 +199,45 @@ const faqs = [
     </div>
   </section>
 
+  <section class="about-capabilities">
+    <div class="container">
+      <div class="about-capabilities__intro" data-reveal>
+        <div class="mono-label" style="color:var(--color-dark-label)">Approach</div>
+        <h2 class="about-capabilities__heading">How I Think</h2>
+      </div>
+      <div class="about-capabilities__grid" data-reveal>
+        {capabilities.map((c) => (
+          <div class="about-capabilities__item">
+            <div class="about-capabilities__item-title">{c.title}</div>
+            <div class="about-capabilities__item-copy">{c.copy}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section class="container about-away">
     <div class="about-away__grid" data-reveal>
-      <PlaceholderMedia label="Portrait of Paul · editorial, natural light" ratio="4/5" radius="md" />
+      <PlaceholderMedia
+        label="Lifestyle photography · Chess · Workspace · Running"
+        ratio="4/5"
+        radius="md"
+      />
       <div class="about-away__copy">
         <div class="mono-label">Away from the screen</div>
-        <h2 class="about-away__heading">Chess, game worlds, and a stubborn interest in how things work.</h2>
-        <p class="body-copy" style="max-width:46ch">
-          Most of my side projects start as curiosity — a chess habit that became Brilliancy, a
-          fascination with generative art that became a game world, an interest in pain science
-          that became neurotechnology work.
-        </p>
+        <h2 class="about-away__heading">Beyond software</h2>
+        <div class="about-away__body body-copy" style="max-width:46ch">
+          <p>Outside of work I&rsquo;m usually exploring another system.</p>
+          <p>Chess.</p>
+          <p>Game development.</p>
+          <p>Running.</p>
+          <p>Virtual reality.</p>
+          <p>Creative tools.</p>
+          <p>Most of those hobbies eventually become experiments.</p>
+          <p>Most experiments eventually become products.</p>
+        </div>
         <div class="about-away__tags">
-          {['Chess', 'Generative art', 'Game design', 'Music tech', 'Coastal running'].map((t) => (
+          {['Chess', 'Game development', 'Running', 'Virtual reality', 'Creative tools'].map((t) => (
             <span class="pill-tag" style="padding:9px 16px;font-size:14px">{t}</span>
           ))}
         </div>
@@ -155,15 +245,66 @@ const faqs = [
     </div>
   </section>
 
-  <section class="container about-faq">
-    <h2 class="about-faq__heading" data-reveal>FAQs</h2>
-    <FaqAccordion items={faqs} />
-  </section>
-
   <FinalCTA />
 </BaseLayout>
 
 <style>
+  .page-hero {
+    padding-top: clamp(120px, 20vh, 220px);
+  }
+
+  .page-hero__heading {
+    margin: 0;
+    font-size: clamp(64px, 13vw, 220px);
+    line-height: 0.86;
+    letter-spacing: -0.055em;
+    font-weight: 500;
+    max-width: 15ch;
+  }
+
+  .page-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr);
+    gap: clamp(24px, 5vw, 90px);
+    margin-top: clamp(34px, 6vh, 68px);
+  }
+
+  .page-hero__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .page-hero__meta-copy {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-body);
+    max-width: 26ch;
+  }
+
+  .page-hero__meta-copy p {
+    margin: 0;
+  }
+
+  .page-hero__meta-gap {
+    margin-top: 0.85em !important;
+  }
+
+  .page-hero__lede {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin: 0;
+    font-size: clamp(19px, 1.9vw, 28px);
+    line-height: 1.36;
+    letter-spacing: -0.02em;
+    max-width: 44ch;
+  }
+
+  .page-hero__lede p {
+    margin: 0;
+  }
+
   .about-photos {
     padding-top: clamp(48px, 8vh, 96px);
   }
@@ -187,11 +328,12 @@ const faqs = [
     font-weight: 500;
     letter-spacing: -.025em;
     line-height: 1.15;
-    max-width: 16ch;
+    max-width: 18ch;
   }
 
   .about-photos__caption--light {
-    max-width: 14ch;
+    max-width: 16ch;
+    color: var(--color-ink);
   }
 
   .about-contexts {
@@ -279,7 +421,13 @@ const faqs = [
     gap: clamp(20px, 3vw, 56px);
   }
 
-  .about-short__cols p {
+  .about-short__col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .about-short__col p {
     margin: 0;
   }
 
@@ -453,26 +601,24 @@ const faqs = [
     max-width: 18ch;
   }
 
+  .about-away__body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .about-away__body p {
+    margin: 0;
+  }
+
   .about-away__tags {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
   }
 
-  .about-faq {
-    padding-top: clamp(90px, 13vh, 180px);
-  }
-
-  .about-faq__heading {
-    margin: 0 0 clamp(30px, 5vh, 56px);
-    text-align: center;
-    font-size: clamp(38px, 5.4vw, 88px);
-    line-height: .95;
-    letter-spacing: -.045em;
-    font-weight: 500;
-  }
-
   @media (max-width: 900px) {
+    .page-hero__grid,
     .about-photos__grid,
     .about-short__grid,
     .about-short__cols,

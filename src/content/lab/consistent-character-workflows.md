@@ -1,6 +1,6 @@
 ---
-title: "Consistent character workflows in ComfyUI"
-description: "Keeping one character consistent across four hundred generations. A ComfyUI graph combining reference conditioning, a trained LoRA and a strict prompt schema."
+title: "Consistent characters across hundreds of generations"
+description: "Exploring whether modern image models can create production-ready game assets instead of isolated concept art."
 category: "Generative imagery"
 type: "Experiment"
 status: "Written up"
@@ -11,7 +11,7 @@ featured: true
 relatedProjects: ["ai-game-world"]
 ---
 
-A ComfyUI graph combining reference conditioning, a trained LoRA and a strict prompt schema. The interesting part was not fidelity — it was making the failures predictable enough to fix.
+Exploring whether modern image models can create production-ready game assets instead of isolated concept art. A ComfyUI graph combining reference conditioning, a trained LoRA and a strict prompt schema — the interesting part was making the failures predictable enough to fix.
 
 ## The graph, in plain terms
 

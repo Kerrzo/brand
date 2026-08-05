@@ -30,7 +30,7 @@ const {
       <div class="mono-label">{eyebrow}</div>
       <div class="page-hero__meta-copy">{meta}</div>
     </div>
-    <p class="page-hero__lede">{lede}</p>
+    <div class="page-hero__lede" set:html={lede} />
   </div>
 </section>
 
@@ -77,14 +77,22 @@ const {
     line-height: 1.55;
     color: var(--color-body);
     max-width: 26ch;
+    white-space: pre-line;
   }
 
   .page-hero__lede {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85em;
     margin: 0;
     font-size: clamp(19px, 1.9vw, 28px);
     line-height: 1.36;
     letter-spacing: -.02em;
     max-width: 44ch;
+  }
+
+  .page-hero__lede :global(p) {
+    margin: 0;
   }
 
   @media (max-width: 900px) {

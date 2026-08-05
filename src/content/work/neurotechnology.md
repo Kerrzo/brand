@@ -2,7 +2,7 @@
 title: "Neurotechnology"
 client: "Neurotechnology"
 tagline: "Exploring a more immersive way to manage pain"
-description: "Sensor-driven immersive sessions designed with clinicians, tested with real patients rather than demo audiences."
+description: "Building VR therapy platforms that combined neuroscience, motion tracking and immersive technology to improve rehabilitation outcomes."
 category: "Health and wellbeing"
 yearRange: "2020 — 2023"
 tags: ["Sensors", "Clinical"]

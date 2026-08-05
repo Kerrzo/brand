@@ -1,6 +1,6 @@
 ---
 title: "Modular 2D characters"
-description: "Swappable parts that stay on-model."
+description: "Swappable parts that stay on-model — outfits, expressions and props recombined without breaking consistency."
 category: "Generative imagery"
 type: "Experiment"
 status: "Running"

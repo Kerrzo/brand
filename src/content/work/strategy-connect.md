@@ -2,7 +2,7 @@
 title: "Strategy Connect"
 client: "Strategy Connect"
 tagline: "AI-native consensus platform"
-description: "Helping organisations visualise strategic consensus using AI, embeddings and clustering. This project reinforced that the hardest problems are often about helping people understand complex information, not simply generating it."
+description: "Helped transform strategic planning by clustering thousands of qualitative responses into visual patterns that teams could actually discuss and act on."
 category: "AI Strategy Platform"
 yearRange: "2024"
 role: "CTO / product architect"

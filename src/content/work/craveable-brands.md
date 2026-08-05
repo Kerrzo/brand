@@ -2,7 +2,7 @@
 title: "Craveable Brands"
 client: "Craveable Brands"
 tagline: "Building restaurants of the future"
-description: "A national digital ordering ecosystem connecting customers, restaurants, payments, loyalty, delivery partners and point-of-sale systems."
+description: "Built and evolved ordering platforms across multiple restaurant brands, integrating mobile, web, payments, loyalty, delivery and point-of-sale systems at national scale."
 category: "Enterprise platforms"
 yearRange: "2019 — 2023"
 tags: ["Ordering", "POS integration", "Loyalty"]

@@ -1,6 +1,6 @@
 ---
-title: "Concept image to usable 3D asset"
-description: "Retopo is still the bottleneck."
+title: "AI-assisted 2D/3D asset pipeline"
+description: "Building a workflow from concept art through Blender into Unity and Unreal using modern generative tools."
 category: "3D and assets"
 type: "Experiment"
 status: "Paused"
@@ -12,4 +12,4 @@ relatedProjects: ["ai-game-world"]
 relatedWriting: ["concept-image-to-3d-asset"]
 ---
 
-Retopo is still the bottleneck. TripoSR gets a usable mesh out of a single concept image fast — the manual clean-up pass after it is where the real time still goes.
+Building a workflow from concept art through Blender into Unity and Unreal using modern generative tools. Retopo is still the bottleneck — TripoSR gets a usable mesh out of a single concept image fast, and the manual clean-up pass after it is where the real time still goes.

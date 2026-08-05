@@ -16,33 +16,34 @@ const categories = ['AI Strategy Platform', 'Enterprise platforms', 'Immersive t
 const takeaways = [
   {
     n: '01',
-    title: 'National scale changes the problem',
+    title: 'Scale changes the architecture.',
     copy: 'Once a platform reaches every store, lobby or clinical site, architecture decisions stop being theoretical — reliability and operations become the product.',
   },
   {
     n: '02',
-    title: 'Five sectors, similar pressure',
+    title: "Every industry thinks it's unique. The engineering usually isn't.",
     copy: 'Commerce, property, strategy, healthcare and immersive work look different on the surface. Underneath, they share the same need: software that survives real operations.',
   },
   {
     n: '03',
-    title: 'End to end, or not at all',
+    title: 'Products succeed when the whole system works—not just the app.',
     copy: 'The useful work sat between strategy and delivery — holding product judgement and technical clarity in the same place from first decision through to ship.',
   },
   {
     n: '04',
-    title: 'Built with delivery partners',
+    title: 'Real products depend on ecosystems, integrations and operational reality.',
     copy: 'Much of this client work shipped through 42 Interactive — senior architecture and product thinking inside a team accountable for getting it live.',
   },
 ];
 ---
 
-<BaseLayout title="Shipped" description="Platforms and products built with real operations behind them — enterprise ecosystems, AI intelligence and technology beyond the screen." current="shipped">
+<BaseLayout title="Shipped" description="Ideas are easy. Shipping is harder. These are products that made it into the real world—used by customers, staff and millions of people." current="shipped">
   <ListingHero
-    heading="Engineering Stories."
+    heading="Shipped."
+    eyebrowTop="Built & Delivered"
     eyebrow="2016 — 2026"
-    meta="Five projects that show the range: intelligence, operations at scale, and technology beyond the screen."
-    lede="These projects span enterprise platforms, AI products and immersive technology. More importantly, they shaped how I think about architecture, product development and building software that lasts."
+    meta="Enterprise Platforms · Consumer Products · AI · VR · Mobile · Cloud"
+    lede="Ideas are easy. Shipping is harder. These are products that made it into the real world—used by customers, staff and millions of people."
   />
 
   <section class="container work-filter">
@@ -130,9 +131,9 @@ const takeaways = [
   <section class="container work-showreel">
     <div class="work-showreel__intro" data-reveal>
       <div class="mono-label">Showreel</div>
-      <h2 class="work-showreel__heading">Two minutes on how these platforms actually behave in the real world.</h2>
+      <h2 class="work-showreel__heading">The best products aren&rsquo;t interesting because of the technology. They&rsquo;re interesting because people actually use them.</h2>
     </div>
-    <VideoReveal />
+    <VideoReveal posterLabel="Short walkthroughs showing how these products behaved after launch—not just how they looked in Figma." />
   </section>
 
   {items.length > 3 && (
@@ -174,7 +175,7 @@ const takeaways = [
     <div class="shipped-takeaways__intro" data-reveal>
       <div>
         <div class="mono-label" style="margin-bottom:24px">What these projects taught</div>
-        <h2 class="shipped-takeaways__heading">Patterns that only show up after you ship.</h2>
+        <h2 class="shipped-takeaways__heading">What shipping teaches you that prototypes never will.</h2>
       </div>
     </div>
     <div class="shipped-takeaways__rows" data-reveal>
@@ -351,7 +352,7 @@ const takeaways = [
     line-height: 1.04;
     letter-spacing: -.035em;
     font-weight: 500;
-    max-width: 22ch;
+    max-width: 36ch;
   }
 
   .work-dark-group {
@@ -423,7 +424,7 @@ const takeaways = [
     line-height: .94;
     letter-spacing: -.045em;
     font-weight: 500;
-    max-width: 14ch;
+    max-width: 18ch;
   }
 
   .shipped-takeaways__rows {

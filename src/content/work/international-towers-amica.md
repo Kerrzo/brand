@@ -2,7 +2,7 @@
 title: "International Towers / Amica"
 client: "International Towers / Amica"
 tagline: "Connecting people to the workplace"
-description: "A connected workplace ecosystem combining mobile access, parking, permits, loyalty, services and community experiences."
+description: "A workplace experience platform bringing together building access, events, bookings, community and tenant services into one mobile experience."
 category: "Enterprise platforms"
 yearRange: "2017 — 2022"
 tags: ["Mobile access", "Building systems", "Community"]
