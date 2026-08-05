@@ -30,7 +30,14 @@ const [kerrzo, brilliancy, gameWorld] = projects;
         <p class="projects__row-desc">{kerrzo.data.description}</p>
         <a href={withBase(`/building/${kerrzo.id}/`)} class="projects__row-link">View project &rarr;</a>
       </div>
-      <PlaceholderMedia label="Kerrzo dashboard crop · 1600×1100" ratio="16/11" radius="md" class="projects__row-media" />
+      <PlaceholderMedia
+        label="Kerrzo platform interface"
+        src={withBase('/media/projects/kerrzo.mp4')}
+        alt="Kerrzo platform interface"
+        ratio="16/9"
+        radius="md"
+        class="projects__row-media"
+      />
     </div>
   )}
 
@@ -87,15 +94,24 @@ const [kerrzo, brilliancy, gameWorld] = projects;
     display: grid;
     grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
     gap: clamp(24px, 4vw, 72px);
-    align-items: start;
-    padding-top: 34px;
+    align-items: center;
+    padding-top: clamp(70px, 10vh, 140px);
+    padding-bottom: clamp(70px, 10vh, 140px);
     border-top: 1px solid var(--color-border);
+  }
+
+  .projects__row--light .projects__row-copy {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .projects__row--light .projects__row-link {
+    align-self: flex-end;
   }
 
   .projects__row--dark {
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-    align-items: center;
-    margin-top: clamp(70px, 10vh, 140px);
+    margin-top: 0;
     background: var(--color-dark-bg);
     color: var(--color-dark-fg);
     border-top: none;
@@ -107,12 +123,6 @@ const [kerrzo, brilliancy, gameWorld] = projects;
     display: flex;
     flex-direction: column;
     gap: 22px;
-    position: sticky;
-    top: 110px;
-  }
-
-  .projects__row--dark .projects__row-copy {
-    position: static;
   }
 
   .projects__row-tagline {
@@ -192,8 +202,13 @@ const [kerrzo, brilliancy, gameWorld] = projects;
       margin-top: 48px;
     }
 
-    .projects__row-copy {
-      position: static;
+    .projects__row--light .projects__row-copy {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .projects__row--light .projects__row-link {
+      align-self: flex-start;
     }
   }
 </style>

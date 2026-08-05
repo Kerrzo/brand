@@ -17,7 +17,7 @@ const links = [
 ] as const;
 ---
 
-<header class:list={['site-header', { 'site-header--transparent': transparent }]} data-site-header>
+<header class:list={['site-header', { 'site-header--transparent': transparent, 'is-dark': transparent }]} data-site-header>
   <a href={withBase('/')} class="site-header__logo">paulkerr.com.au</a>
 
   <nav class="site-header__nav" data-site-nav aria-label="Primary">
@@ -76,18 +76,28 @@ const links = [
     gap: 24px;
     padding: 22px var(--edge);
     color: var(--color-ink);
-    background: rgba(243, 242, 240, .86);
-    backdrop-filter: blur(10px);
-    transition: color var(--dur-fast) ease, background var(--dur-fast) ease;
-  }
-
-  .site-header--transparent {
-    background: transparent;
-    backdrop-filter: none;
+    background: rgba(243, 242, 240, .78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition:
+      color var(--dur-fast) ease,
+      background var(--dur-fast) ease,
+      backdrop-filter var(--dur-fast) ease,
+      -webkit-backdrop-filter var(--dur-fast) ease;
   }
 
   .site-header--transparent.is-dark {
     color: #fff;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .site-header--transparent:not(.is-dark) {
+    color: var(--color-ink);
+    background: rgba(243, 242, 240, .78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
   }
 
   .site-header__logo {
@@ -142,6 +152,11 @@ const links = [
   .site-header--transparent.is-dark .site-header__cta {
     background: var(--color-bg);
     color: var(--color-ink);
+  }
+
+  .site-header--transparent:not(.is-dark) .site-header__cta {
+    background: var(--color-ink);
+    color: var(--color-bg);
   }
 
   .site-header__menu-btn {
@@ -244,14 +259,11 @@ const links = [
     const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
     if (!panel || !toggle) return;
 
-    const header = document.querySelector<HTMLElement>('[data-site-header]');
-
     const setOpen = (open: boolean) => {
       panel.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
       toggle.textContent = open ? 'Close' : 'Menu';
-      if (open) header?.classList.add('is-dark');
     };
 
     toggle.addEventListener('click', () => setOpen(!panel.classList.contains('is-open')));
