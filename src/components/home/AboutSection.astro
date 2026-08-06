@@ -1,11 +1,17 @@
 ---
 import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
-import { withBase } from '../../lib/paths';
 ---
 
 <section id="about" class="about-teaser container">
   <div class="about-teaser__grid" data-reveal>
-    <PlaceholderMedia label="Portrait of Paul · editorial, natural light" ratio="4/5" radius="md" class="about-teaser__media" />
+    <PlaceholderMedia
+      label="Portrait of Paul · editorial, natural light"
+      src="/media/projects/pk.png"
+      alt="Portrait of Paul Kerr"
+      ratio="4/5"
+      radius="md"
+      class="about-teaser__media"
+    />
     <div class="about-teaser__copy">
       <h2 class="about-teaser__heading">Experience still matters.</h2>
       <p class="body-copy about-teaser__lede">
@@ -17,7 +23,7 @@ import { withBase } from '../../lib/paths';
         The tools have changed dramatically. Product judgement, technical clarity and the ability
         to turn complexity into something useful have not.
       </p>
-      <a href={withBase('/about/')} class="about-teaser__link">More about Paul &rarr;</a>
+      <a href="/about/" class="about-teaser__link">More about Paul &rarr;</a>
     </div>
   </div>
 </section>

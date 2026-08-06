@@ -81,5 +81,6 @@ pointed back to a same-page placeholder anchor. Per direction from the project o
 ## Deployment
 
 1. Push to a GitHub repository, with Pages enabled (`Settings → Pages → Source: GitHub Actions`).
-2. `public/CNAME` is already set to `kerrzo.com` — update or remove it if the domain differs.
-3. `.github/workflows/deploy.yml` builds and deploys on every push to `main` (or manual dispatch).
+2. `public/CNAME` is set to `paulkerr.com.au` for the custom domain.
+3. `.github/workflows/deploy.yml` builds and deploys on every push to `master` (or manual dispatch).
+4. The site is served from the domain root (no `/brand` base path).

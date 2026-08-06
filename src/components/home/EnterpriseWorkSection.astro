@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import SectionLabel from '../ui/SectionLabel.astro';
 import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
 import Button from '../ui/Button.astro';
-import { withBase } from '../../lib/paths';
 
 const all = await getCollection('work', ({ data }) => !data.draft && data.category === 'Enterprise platforms');
 const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder).slice(0, 2);
@@ -11,8 +10,8 @@ const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder).slic
 
 <section id="work" class="ent-work container">
   <div class="ent-work__intro" data-reveal>
-    <div>
-      <SectionLabel>Architecture in production</SectionLabel>
+    <div class="ent-work__heading-block">
+      <SectionLabel withDot>Architecture in production</SectionLabel>
       <h2 class="ent-work__heading">Trade-offs and lessons from platforms connected to real operations.</h2>
     </div>
     <Button href="/shipped/" variant="outline" class="ent-work__all">All selected work</Button>
@@ -33,7 +32,7 @@ const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder).slic
           <div class="mono-label">{item.data.client}</div>
           <h3 class="ent-work__title">{item.data.tagline}</h3>
           <p class="body-copy" style="margin:0;max-width:40ch">{item.data.description}</p>
-          <a href={withBase(`/shipped/${item.id}/`)} class="ent-work__link">Read the engineering story &rarr;</a>
+          <a href={`/shipped/${item.id}/`} class="ent-work__link">Read the engineering story &rarr;</a>
         </div>
       </div>
     ))}
@@ -53,8 +52,14 @@ const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder).slic
     margin-bottom: clamp(44px, 6vh, 84px);
   }
 
+  .ent-work__heading-block {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
   .ent-work__heading {
-    margin: 26px 0 0;
+    margin: 0;
     font-size: clamp(36px, 5vw, 80px);
     line-height: .94;
     letter-spacing: -.045em;

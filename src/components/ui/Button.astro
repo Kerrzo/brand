@@ -1,6 +1,4 @@
 ---
-import { withBase } from '../../lib/paths';
-
 interface Props {
   href: string;
   variant?: 'solid' | 'outline' | 'solid-dark' | 'inverse';
@@ -9,10 +7,9 @@ interface Props {
 }
 
 const { href, variant = 'solid', withDot = false, class: className = '' } = Astro.props;
-const resolvedHref = withBase(href);
 ---
 
-<a href={resolvedHref} class:list={['btn', `btn--${variant}`, className]}>
+<a href={href} class:list={['btn', `btn--${variant}`, className]}>
   <slot />
   {withDot && <span class="dot" aria-hidden="true"></span>}
 </a>

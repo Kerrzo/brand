@@ -2,7 +2,6 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PlaceholderMedia from '../../../components/ui/PlaceholderMedia.astro';
 import FinalCTA from '../../../components/ui/FinalCTA.astro';
-import { withBase } from '../../../lib/paths';
 
 const explorations = [
   {
@@ -32,7 +31,7 @@ const roadmap = ['Research', 'Architecture', 'Private Alpha', 'Real Customers'];
   current="building"
 >
   <article class="kerrzo container">
-    <a href={withBase('/building/')} class="kerrzo__back">&larr; Building</a>
+    <a href="/building/" class="kerrzo__back">&larr; Building</a>
 
     <header class="kerrzo__hero" data-reveal>
       <div class="mono-label">Building</div>
@@ -125,7 +124,7 @@ const roadmap = ['Research', 'Architecture', 'Private Alpha', 'Real Customers'];
     <section class="kerrzo__section kerrzo__related" data-reveal>
       <h2 class="kerrzo__heading">Related</h2>
       <div class="kerrzo__related-grid">
-        <a href={withBase('/building/brilliancy/')} class="kerrzo__related-card">
+        <a href="/building/brilliancy/" class="kerrzo__related-card">
           <PlaceholderMedia label="Brilliancy · placeholder" ratio="16/10" radius="md" />
           <div class="kerrzo__related-copy">
             <h3 class="kerrzo__related-title">Brilliancy</h3>

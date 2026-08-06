@@ -2,7 +2,6 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PlaceholderMedia from '../../../components/ui/PlaceholderMedia.astro';
 import FinalCTA from '../../../components/ui/FinalCTA.astro';
-import { withBase } from '../../../lib/paths';
 
 const explorations = [
   {
@@ -32,7 +31,7 @@ const roadmap = ['Research', 'Private Alpha', 'Public Beta', 'Hosted Coaching Pl
   current="building"
 >
   <article class="brilliancy container">
-    <a href={withBase('/building/')} class="brilliancy__back">&larr; Building</a>
+    <a href="/building/" class="brilliancy__back">&larr; Building</a>
 
     <header class="brilliancy__hero" data-reveal>
       <div class="mono-label">Building</div>
@@ -121,7 +120,7 @@ const roadmap = ['Research', 'Private Alpha', 'Public Beta', 'Hosted Coaching Pl
     <section class="brilliancy__section brilliancy__related" data-reveal>
       <h2 class="brilliancy__heading">Related</h2>
       <div class="brilliancy__related-grid">
-        <a href={withBase('/building/kerrzo/')} class="brilliancy__related-card">
+        <a href="/building/kerrzo/" class="brilliancy__related-card">
           <PlaceholderMedia label="Kerrzo · placeholder" ratio="16/10" radius="md" />
           <div class="brilliancy__related-copy">
             <h3 class="brilliancy__related-title">Kerrzo</h3>

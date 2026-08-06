@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://kerrzo.github.io/brand',
+  site: 'https://paulkerr.com.au',
   output: 'static',
   trailingSlash: 'always',
   integrations: [sitemap()],
@@ -22,6 +22,4 @@ export default defineConfig({
       },
     },
   },
-  // GitHub Pages serves this repo under /brand/
-  base: process.env.NODE_ENV === 'production' ? '/brand/' : '/',
 });

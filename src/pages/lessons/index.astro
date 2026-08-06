@@ -5,7 +5,6 @@ import ListingHero from '../../components/content/ListingHero.astro';
 import FilterBar from '../../components/ui/FilterBar.astro';
 import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
 import { readingTime } from '../../lib/readingTime';
-import { withBase } from '../../lib/paths';
 
 const all = await getCollection('writing', ({ data }) => !data.draft);
 const sorted = all.sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf());
@@ -27,6 +26,7 @@ const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
   <ListingHero
     heading="Learnings"
     headingSize="clamp(58px, 12vw, 200px)"
+    eyebrowTop="Notes from the work"
     eyebrow="Learning in public"
     meta={`No content calendar.\nOnly lessons worth writing down.`}
     lede={`<p>Building raises questions.</p><p>Writing helps me answer them.</p><p><strong>These are notes from AI products, architecture decisions and experiments that changed how I think.</strong></p>`}
@@ -38,7 +38,7 @@ const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
 
   {featured && (
     <section class="container writing-page__featured" data-card data-cat={featured.data.category}>
-      <a href={withBase(`/lessons/${featured.id}/`)} class="writing-page__featured-grid" data-reveal>
+      <a href={`/lessons/${featured.id}/`} class="writing-page__featured-grid" data-reveal>
         <div class="writing-page__featured-media-wrap">
           <PlaceholderMedia label="Hero image · replace" src={featured.data.heroImage} alt={featured.data.heroAlt} ratio="16/9" radius="lg" />
           <span class="writing-page__featured-badge">Featured</span>
@@ -60,7 +60,7 @@ const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
   <section class="container writing-page__grid-wrap">
     <div class="writing-page__grid" data-narrow="repeat(2,minmax(0,1fr))" data-reveal>
       {grid.map((post) => (
-        <a href={withBase(`/lessons/${post.id}/`)} class="writing-page__card" data-card data-cat={post.data.category}>
+        <a href={`/lessons/${post.id}/`} class="writing-page__card" data-card data-cat={post.data.category}>
           <PlaceholderMedia label="Image" src={post.data.heroImage} alt={post.data.heroAlt} ratio="4/3" radius="md" />
           <span class="pill-tag">{post.data.category}</span>
           <h3 class="writing-page__card-title">{post.data.title}</h3>
@@ -91,7 +91,7 @@ const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
       </div>
       <div class="writing-page__earlier-rows" data-reveal>
         {earlier.map((post) => (
-          <a href={withBase(`/lessons/${post.id}/`)} class="writing-page__earlier-row" data-card data-cat={post.data.category}>
+          <a href={`/lessons/${post.id}/`} class="writing-page__earlier-row" data-card data-cat={post.data.category}>
             <h3 class="writing-page__earlier-title">{post.data.title}</h3>
             <span class="writing-page__earlier-desc">{post.data.description}</span>
             <span class="mono-label" style="color:var(--color-label-dim);text-align:right">{dateFmtShort.format(post.data.publishedDate)}</span>

@@ -1,5 +1,4 @@
 ---
-import { withBase } from '../../lib/paths';
 
 interface Props {
   current?: 'building' | 'shipped' | 'experiments' | 'lessons' | 'about';
@@ -9,16 +8,16 @@ interface Props {
 const { current, transparent = false } = Astro.props;
 
 const links = [
-  { key: 'building', label: 'Building', href: withBase('/building/') },
-  { key: 'shipped', label: 'Shipped', href: withBase('/shipped/') },
-  { key: 'experiments', label: 'Experiments', href: withBase('/experiments/') },
-  { key: 'lessons', label: 'Learnings', href: withBase('/lessons/') },
-  { key: 'about', label: 'About', href: withBase('/about/') },
+  { key: 'building', label: 'Building', href: '/building/' },
+  { key: 'shipped', label: 'Shipped', href: '/shipped/' },
+  { key: 'experiments', label: 'Experiments', href: '/experiments/' },
+  { key: 'lessons', label: 'Learnings', href: '/lessons/' },
+  { key: 'about', label: 'About', href: '/about/' },
 ] as const;
 ---
 
 <header class:list={['site-header', { 'site-header--transparent': transparent, 'is-dark': transparent }]} data-site-header>
-  <a href={withBase('/')} class="site-header__logo">paulkerr.com.au</a>
+  <a href="/" class="site-header__logo">paulkerr.com.au</a>
 
   <nav class="site-header__nav" data-site-nav aria-label="Primary">
     {links.map((link) => (
@@ -32,7 +31,7 @@ const links = [
   </nav>
 
   <div class="site-header__actions">
-    <a href={withBase('/work-with-paul/#contact')} class="site-header__cta" data-site-cta>
+    <a href="/work-with-paul/#contact" class="site-header__cta" data-site-cta>
       Work with Paul
       <span class="dot" aria-hidden="true"></span>
     </a>
@@ -55,7 +54,7 @@ const links = [
     ))}
   </nav>
   <div class="menu-panel__footer">
-    <a href={withBase('/work-with-paul/#contact')} class="menu-panel__cta" data-menu-link>
+    <a href="/work-with-paul/#contact" class="menu-panel__cta" data-menu-link>
       Work with Paul
       <span class="dot" aria-hidden="true"></span>
     </a>

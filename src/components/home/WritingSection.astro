@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import SectionLabel from '../ui/SectionLabel.astro';
 import Button from '../ui/Button.astro';
-import { withBase } from '../../lib/paths';
 
 const all = await getCollection('writing', ({ data }) => !data.draft);
 const items = all
@@ -14,8 +13,8 @@ const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeri
 
 <section id="writing" class="writing-teaser container">
   <div class="writing-teaser__intro" data-reveal>
-    <div>
-      <SectionLabel>Build notes</SectionLabel>
+    <div class="writing-teaser__heading-block">
+      <SectionLabel withDot>Build notes</SectionLabel>
       <h2 class="writing-teaser__heading">What I&rsquo;m learning while building.</h2>
     </div>
     <Button href="/lessons/" variant="outline" class="writing-teaser__all">All learnings</Button>
@@ -23,7 +22,7 @@ const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeri
 
   <div class="writing-teaser__list" data-reveal>
     {items.map((item) => (
-      <a href={withBase(`/lessons/${item.id}/`)} class="writing-teaser__row">
+      <a href={`/lessons/${item.id}/`} class="writing-teaser__row">
         <h3 class="writing-teaser__title">{item.data.title}</h3>
         <span class="writing-teaser__desc">{item.data.description}</span>
         <span class="mono-label writing-teaser__date">{dateFmt.format(item.data.publishedDate)}</span>
@@ -45,8 +44,14 @@ const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeri
     margin-bottom: clamp(36px, 5vh, 64px);
   }
 
+  .writing-teaser__heading-block {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
   .writing-teaser__heading {
-    margin: 26px 0 0;
+    margin: 0;
     font-size: clamp(36px, 5.4vw, 88px);
     line-height: .94;
     letter-spacing: -.045em;

@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import SectionLabel from '../ui/SectionLabel.astro';
 import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
-import { withBase } from '../../lib/paths';
 
 const all = await getCollection(
   'work',
@@ -13,11 +12,13 @@ const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
 
 <section class="emerging">
   <div class="container">
-    <SectionLabel dark data-reveal>Emerging technology</SectionLabel>
-    <h2 class="emerging__heading" data-reveal>Exploring what product architecture looks like beyond the conventional screen.</h2>
+    <div class="emerging__heading-block" data-reveal>
+      <SectionLabel dark withDot>Emerging technology</SectionLabel>
+      <h2 class="emerging__heading">Exploring what product architecture looks like beyond the conventional screen.</h2>
+    </div>
     <div class="emerging__grid" data-reveal>
       {items.map((item, i) => (
-        <a href={withBase(`/shipped/${item.id}/`)} class:list={['emerging__item', { 'emerging__item--offset': i % 2 === 1 }]}>
+        <a href={`/shipped/${item.id}/`} class:list={['emerging__item', { 'emerging__item--offset': i % 2 === 1 }]}>
           <PlaceholderMedia
             label={`${item.data.title} · headset capture`}
             src={item.data.heroImage}
@@ -44,8 +45,15 @@ const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
     padding: clamp(70px, 11vh, 150px) 0;
   }
 
+  .emerging__heading-block {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: clamp(44px, 7vh, 96px);
+  }
+
   .emerging__heading {
-    margin: 0 0 clamp(44px, 7vh, 96px);
+    margin: 0;
     font-size: clamp(34px, 4.8vw, 78px);
     line-height: .96;
     letter-spacing: -.045em;

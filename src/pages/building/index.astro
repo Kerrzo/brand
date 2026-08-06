@@ -5,7 +5,6 @@ import ListingHero from '../../components/content/ListingHero.astro';
 import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
 import FinalCTA from '../../components/ui/FinalCTA.astro';
 import EditorialScrollSequence from '../../components/ui/EditorialScrollSequence.astro';
-import { withBase } from '../../lib/paths';
 
 const all = await getCollection('projects', ({ data }) => !data.draft);
 const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
@@ -38,6 +37,7 @@ const pageCopy: Record<string, { title?: string; href?: string; category: string
   <ListingHero
     heading="Building"
     headingSize="clamp(48px, 9vw, 160px)"
+    eyebrowTop="Building in public"
     eyebrow="Active explorations"
     meta="The products are the experiments. The lessons are the outcome."
     lede="I build products to explore how AI is changing software. Every project represents a real engineering problem, an architectural decision or a new way of thinking about AI-first product development."
@@ -80,7 +80,7 @@ const pageCopy: Record<string, { title?: string; href?: string; category: string
             <div class="projects-page__tags">
               {focus.map((tag) => <span class:list={['pill-tag', { 'pill-tag--dark': i % 2 === 1 }]}>{tag}</span>)}
             </div>
-            <a href={withBase(copy?.href ?? `/building/${item.id}/`)} class="projects-page__link">Read More</a>
+            <a href={copy?.href ?? `/building/${item.id}/`} class="projects-page__link">Read More</a>
           </div>
         </div>
       );

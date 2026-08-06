@@ -2,7 +2,6 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PlaceholderMedia from '../../../components/ui/PlaceholderMedia.astro';
 import FinalCTA from '../../../components/ui/FinalCTA.astro';
-import { withBase } from '../../../lib/paths';
 
 const explorations = [
   {
@@ -32,7 +31,7 @@ const roadmap = ['Research', 'Proof of Concept', 'Pilot Demonstration', 'Operati
   current="building"
 >
   <article class="poszo container">
-    <a href={withBase('/building/')} class="poszo__back">&larr; Building</a>
+    <a href="/building/" class="poszo__back">&larr; Building</a>
 
     <header class="poszo__hero" data-reveal>
       <div class="mono-label">Building</div>
@@ -127,7 +126,7 @@ const roadmap = ['Research', 'Proof of Concept', 'Pilot Demonstration', 'Operati
     <section class="poszo__section poszo__related" data-reveal>
       <h2 class="poszo__heading">Related</h2>
       <div class="poszo__related-grid">
-        <a href={withBase('/building/brilliancy/')} class="poszo__related-card">
+        <a href="/building/brilliancy/" class="poszo__related-card">
           <PlaceholderMedia label="Brilliancy · placeholder" ratio="16/10" radius="md" />
           <div class="poszo__related-copy">
             <h3 class="poszo__related-title">Brilliancy</h3>

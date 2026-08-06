@@ -1,5 +1,6 @@
 ---
 import Button from '../ui/Button.astro';
+import SectionLabel from '../ui/SectionLabel.astro';
 ---
 
 <section id="top" class="hero" data-hero-wrap>
@@ -14,14 +15,18 @@ import Button from '../ui/Button.astro';
     </div>
 
     <div class="hero__over" data-hero-over>
-      <div class="hero__over-eyebrow">Paul Kerr &mdash; CTO &middot; AI Product Architect &middot; Builder</div>
-      <h1 class="hero__over-heading">Architecting the AI Era</h1>
+      <div class="hero__over-heading-block">
+        <SectionLabel dark withDot>Paul Kerr &mdash; CTO &middot; AI Product Architect &middot; Builder</SectionLabel>
+        <h1 class="hero__over-heading">Architecting the AI Era</h1>
+      </div>
     </div>
 
     <div class="hero__locked" data-hero-locked>
       <div class="hero__locked-inner">
-        <div class="hero__locked-eyebrow">Paul Kerr &middot; CTO &middot; AI Product Architect &middot; Builder</div>
-        <h2 class="hero__locked-heading">Architecting the AI Era</h2>
+        <div class="hero__locked-heading-block">
+          <SectionLabel withDot>Paul Kerr &middot; CTO &middot; AI Product Architect &middot; Builder</SectionLabel>
+          <h2 class="hero__locked-heading">Architecting the AI Era</h2>
+        </div>
         <p class="hero__locked-copy" data-hero-locked-copy>
           Exploring how AI is reshaping software, products and the way we build them.
           Everything here comes from real products, real experiments and real engineering lessons.
@@ -35,9 +40,21 @@ import Button from '../ui/Button.astro';
 
     <div class="hero__frags" data-hero-frags>
       <div class="hero__frag">
+        <img
+          src="/media/projects/brilliancy.png"
+          alt="Brilliancy chess coaching interface"
+          class="hero__frag-img"
+          loading="lazy"
+        />
         <span>02 &middot; Brilliancy</span>
       </div>
       <div class="hero__frag hero__frag--alt">
+        <img
+          src="/media/projects/gameworld.png"
+          alt="AI-assisted game world concept art"
+          class="hero__frag-img"
+          loading="lazy"
+        />
         <span>03 &middot; Game world</span>
       </div>
     </div>
@@ -110,16 +127,14 @@ import Button from '../ui/Button.astro';
     pointer-events: none;
   }
 
-  .hero__over-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, .72);
-    margin-bottom: 26px;
+  .hero__over-heading-block {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
   }
 
   .hero__over-heading {
+    margin: 0;
     font-size: clamp(42px, 7.6vw, 124px);
     line-height: .94;
     letter-spacing: -.045em;
@@ -142,15 +157,14 @@ import Button from '../ui/Button.astro';
     max-width: 44vw;
   }
 
-  .hero__locked-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--color-label);
+  .hero__locked-heading-block {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
   }
 
   .hero__locked-heading {
+    margin: 0;
     font-size: clamp(34px, 4.3vw, 72px);
     line-height: .96;
     letter-spacing: -.04em;
@@ -197,15 +211,25 @@ import Button from '../ui/Button.astro';
     background: repeating-linear-gradient(122deg, #DEDCD7 0 10px, #E7E5E1 10px 20px);
   }
 
+  .hero__frag-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   .hero__frag span {
     position: absolute;
     left: 12px;
     bottom: 10px;
+    z-index: 1;
     font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: .12em;
     text-transform: uppercase;
-    color: var(--color-caption);
+    color: rgba(255, 255, 255, .85);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .45);
   }
 
   .hero__cred {

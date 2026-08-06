@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import SectionLabel from '../ui/SectionLabel.astro';
 import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
-import { withBase } from '../../lib/paths';
 
 const work = await getCollection('work', ({ data }) => !data.draft);
 const strategyConnect = work.find((item) => item.id === 'strategy-connect');
@@ -18,9 +17,11 @@ const rows = [
 ---
 
 <section class="ai-case container">
-  <SectionLabel class="ai-case__eyebrow" data-reveal>Engineering Stories</SectionLabel>
   <div class="ai-case__intro" data-reveal>
-    <h2 class="ai-case__heading">Finding real consensus without flattening human perspective.</h2>
+    <div class="ai-case__heading-block">
+      <SectionLabel withDot>Engineering Stories</SectionLabel>
+      <h2 class="ai-case__heading">Finding real consensus without flattening human perspective.</h2>
+    </div>
     <div class="ai-case__meta">
       <div class="mono-label">Strategy Connect</div>
       <p class="body-copy" style="margin:0">
@@ -28,7 +29,7 @@ const rows = [
         vector analysis — architecture, trade-offs and lessons from revealing consensus without
         averaging minority viewpoints away.
       </p>
-      <a href={withBase('/shipped/strategy-connect/')} class="ai-case__link">Read the engineering story &rarr;</a>
+      <a href="/shipped/strategy-connect/" class="ai-case__link">Read the engineering story &rarr;</a>
     </div>
   </div>
 
@@ -42,14 +43,15 @@ const rows = [
     ))}
   </div>
 
-  <PlaceholderMedia
-    label="Strategy Connect · cluster map screenshot"
-    src={strategyConnect?.data.heroImage}
-    alt={strategyConnect?.data.heroAlt}
-    ratio="24/9"
-    radius="lg"
-    class="ai-case__media"
-  />
+  <div class="ai-case__media">
+    <PlaceholderMedia
+      label="Strategy Connect · cluster map screenshot"
+      src={strategyConnect?.data.heroImage}
+      alt={strategyConnect?.data.heroAlt}
+      ratio="24/9"
+      radius="lg"
+    />
+  </div>
 </section>
 
 <style>
@@ -57,15 +59,17 @@ const rows = [
     padding-top: clamp(90px, 13vh, 180px);
   }
 
-  .ai-case__eyebrow {
-    margin-bottom: 30px;
-  }
-
   .ai-case__intro {
     display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-    gap: clamp(28px, 5vw, 90px);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 72px);
     align-items: end;
+  }
+
+  .ai-case__heading-block {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
   }
 
   .ai-case__heading {
@@ -122,7 +126,7 @@ const rows = [
   }
 
   .ai-case__media {
-    margin-top: clamp(40px, 6vh, 72px);
+    margin-top: clamp(72px, 10vh, 120px);
   }
 
   @media (max-width: 900px) {

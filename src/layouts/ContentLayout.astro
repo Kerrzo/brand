@@ -2,7 +2,6 @@
 import BaseLayout from './BaseLayout.astro';
 import PlaceholderMedia from '../components/ui/PlaceholderMedia.astro';
 import FinalCTA from '../components/ui/FinalCTA.astro';
-import { withBase } from '../lib/paths';
 
 interface Props {
   title: string;
@@ -24,7 +23,7 @@ const { title, description, current, eyebrow, heading, tagline, backHref, backLa
 
 <BaseLayout title={title} description={description} current={current}>
   <article class="detail container">
-    <a href={withBase(backHref)} class="detail__back">&larr; {backLabel}</a>
+    <a href={backHref} class="detail__back">&larr; {backLabel}</a>
     <div class="detail__intro" data-reveal>
       <div class="mono-label">{eyebrow}</div>
       <h1 class="detail__heading">{heading}</h1>

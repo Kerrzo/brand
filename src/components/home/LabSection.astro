@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import SectionLabel from '../ui/SectionLabel.astro';
 import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
 import Button from '../ui/Button.astro';
-import { withBase } from '../../lib/paths';
 
 const all = await getCollection('lab', ({ data }) => !data.draft);
 const order = [
@@ -19,12 +18,15 @@ const spans = [4, 2, 2, 2, 2, 4];
 const ratios = ['16/9', '3/4', '1/1', '1/1', '1/1', '16/7'];
 const dark = [false, false, false, true, false, false];
 const offsets = [false, true, false, false, false, false];
+const mediaBySlug: Record<string, string> = {
+  'realtime-drive-through-ordering': '/media/projects/poszo.png',
+};
 ---
 
 <section id="lab" class="lab container">
   <div class="lab__intro" data-reveal>
-    <div>
-      <SectionLabel>AI Lab</SectionLabel>
+    <div class="lab__heading-block">
+      <SectionLabel withDot>AI Lab</SectionLabel>
       <h2 class="lab__heading">Experiments from tools under real constraints.</h2>
     </div>
     <Button href="/experiments/" variant="outline" class="lab__all">Enter the lab</Button>
@@ -33,10 +35,17 @@ const offsets = [false, true, false, false, false, false];
   <div class="lab__grid" data-reveal>
     {items.map((item, i) => (
       <a
-        href={withBase(`/experiments/${item.id}/`)}
+        href={`/experiments/${item.id}/`}
         class:list={['lab__item', `lab__item--span-${spans[i]}`, { 'lab__item--offset': offsets[i] }]}
       >
-        <PlaceholderMedia label={item.data.type} ratio={ratios[i]} radius="md" dark={dark[i]} />
+        <PlaceholderMedia
+          label={item.data.type}
+          src={mediaBySlug[item.id] ? mediaBySlug[item.id] : undefined}
+          alt={item.data.title}
+          ratio={ratios[i]}
+          radius="md"
+          dark={dark[i]}
+        />
         <div class="lab__item-footer">
           <span class="lab__item-title">{item.data.title}</span>
           <span class="mono-label" style="color:var(--color-label-dim)">{String(i + 1).padStart(2, '0')}</span>
@@ -59,8 +68,14 @@ const offsets = [false, true, false, false, false, false];
     margin-bottom: clamp(40px, 6vh, 72px);
   }
 
+  .lab__heading-block {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
   .lab__heading {
-    margin: 26px 0 0;
+    margin: 0;
     font-size: clamp(36px, 5.4vw, 88px);
     line-height: .94;
     letter-spacing: -.045em;
