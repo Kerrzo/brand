@@ -1,7 +1,7 @@
 ---
 
 interface Props {
-  current?: 'building' | 'shipped' | 'experiments' | 'lessons' | 'about';
+  current?: 'building' | 'shipped' | 'experiments' | 'learnings' | 'about';
   transparent?: boolean;
 }
 
@@ -11,7 +11,7 @@ const links = [
   { key: 'building', label: 'Building', href: '/building/' },
   { key: 'shipped', label: 'Shipped', href: '/shipped/' },
   { key: 'experiments', label: 'Experiments', href: '/experiments/' },
-  { key: 'lessons', label: 'Learnings', href: '/lessons/' },
+  { key: 'learnings', label: 'Learnings', href: '/learnings/' },
   { key: 'about', label: 'About', href: '/about/' },
 ] as const;
 ---

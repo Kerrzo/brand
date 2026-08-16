@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
 import FinalCTA from '../../components/ui/FinalCTA.astro';
+import ArticleTwoCol from '../../components/content/article/ArticleTwoCol.astro';
 import { readingTime } from '../../lib/readingTime';
 
 export async function getStaticPaths() {
@@ -17,38 +18,43 @@ const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric'
 const rich = item.data.richLayout;
 ---
 
-<BaseLayout title={item.data.title} description={item.data.description} current="lessons">
-  <div class="article-frame container">
-    <a href="/lessons/" class="article__back">&larr; Learnings</a>
+<BaseLayout title={item.data.title} description={item.data.description} current="learnings">
+  <div class:list={['article-frame', 'container', { 'article-frame--rich': rich }]}>
+    <a href="/learnings/" class="article__back">&larr; Learnings</a>
 
     <div class="article__intro" data-reveal>
-      <span class="pill-tag">{item.data.category}</span>
-      <h1 class="article__heading">{item.data.title}</h1>
-      <p class="article__deck">{item.data.description}</p>
-      <div class="article__meta">
-        <span>{dateFmt.format(item.data.publishedDate)}</span>
-        <span>&middot;</span>
-        <span>{minutes}</span>
-        {item.data.placeholder && (
-          <>
-            <span>&middot;</span>
-            <span class="article__placeholder-flag">Placeholder &mdash; full piece coming soon</span>
-          </>
-        )}
-      </div>
+      <ArticleTwoCol>
+        <span slot="label" class="pill-tag">{item.data.category}</span>
+        <div class="article__intro-main">
+          <div class="article__intro-copy">
+            <h1 class="article__heading">{item.data.title}</h1>
+            <p class="article__deck">{item.data.description}</p>
+            <div class="article__meta">
+              <span>{dateFmt.format(item.data.publishedDate)}</span>
+              <span>&middot;</span>
+              <span>{minutes}</span>
+              {item.data.placeholder && (
+                <>
+                  <span>&middot;</span>
+                  <span class="article__placeholder-flag">Placeholder &mdash; full piece coming soon</span>
+                </>
+              )}
+            </div>
+          </div>
+          <figure class="article__hero-figure">
+            <PlaceholderMedia
+              label={item.data.heroMediaLabel ?? 'Hero image · replace'}
+              src={item.data.heroImage}
+              alt={item.data.heroAlt}
+              ratio="16/9"
+              radius="lg"
+              class="article__hero"
+            />
+            {item.data.heroCaption && <figcaption class="article__hero-caption">{item.data.heroCaption}</figcaption>}
+          </figure>
+        </div>
+      </ArticleTwoCol>
     </div>
-
-    <figure class="article__hero-figure">
-      <PlaceholderMedia
-        label={item.data.heroMediaLabel ?? 'Hero image · replace'}
-        src={item.data.heroImage}
-        alt={item.data.heroAlt}
-        ratio="16/9"
-        radius="lg"
-        class="article__hero"
-      />
-      {item.data.heroCaption && <figcaption class="article__hero-caption">{item.data.heroCaption}</figcaption>}
-    </figure>
   </div>
 
   {rich ? (
@@ -73,6 +79,10 @@ const rich = item.data.richLayout;
     padding-bottom: clamp(40px, 6vh, 72px);
   }
 
+  .article-frame--rich {
+    max-width: none;
+  }
+
   .article__back {
     display: inline-flex;
     font-size: 14px;
@@ -86,17 +96,29 @@ const rich = item.data.richLayout;
   }
 
   .article__intro {
+    margin-bottom: 0;
+  }
+
+  .article__intro-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+    width: 100%;
+  }
+
+  .article__intro-copy {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     align-items: flex-start;
-    margin-bottom: clamp(36px, 5vh, 64px);
+    padding-right: clamp(0px, 2vw, 24px);
   }
 
   .article__heading {
     margin: 0;
     font-size: clamp(34px, 5.4vw, 64px);
-    line-height: 1.02;
+    line-height: 1.06;
     letter-spacing: -.04em;
     font-weight: 500;
   }
@@ -104,9 +126,9 @@ const rich = item.data.richLayout;
   .article__deck {
     margin: 0;
     font-size: 19px;
-    line-height: 1.5;
+    line-height: 1.55;
     color: var(--color-body);
-    max-width: 50ch;
+    max-width: 42ch;
   }
 
   .article__meta {
@@ -126,6 +148,7 @@ const rich = item.data.richLayout;
 
   .article__hero-figure {
     margin: 0;
+    min-width: 0;
   }
 
   .article__hero-caption {
@@ -138,5 +161,11 @@ const rich = item.data.richLayout;
 
   .article-body {
     margin-top: clamp(64px, 9vh, 110px);
+  }
+
+  @media (max-width: 900px) {
+    .article__intro-main {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 </style>

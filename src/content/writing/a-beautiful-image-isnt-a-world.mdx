@@ -24,89 +24,64 @@ import SectionLabel from '../../components/ui/SectionLabel.astro';
 import Button from '../../components/ui/Button.astro';
 
 <ArticleSection id="the-question">
-  <SectionLabel>The question</SectionLabel>
-
-  <ArticleStatement size="lg" class="section-spacing-top">
-    I'd seen a still image turned into a cinematic camera move. I wanted to know how much of that I could reproduce locally.
-  </ArticleStatement>
-
-  <div class="section-spacing-top narrow-copy">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">The question</SectionLabel>
+    <h2 class="h-2">I'd seen a still image turned into a cinematic camera move. I wanted to know how much of that I could reproduce locally.</h2>
     <p class="body-copy">
       I first saw the idea in a video by <a href="https://www.youtube.com/watch?v=GJxchJkk4Lk&t=329s" class="inline-link" target="_blank" rel="noopener noreferrer">Jason Lee</a>. He was using Higgsfield to turn generated architectural imagery into cinematic camera movements for the web.
     </p>
     <p class="body-copy">I loved the result. But it immediately gave me another question: could I get somewhere similar without the hosted workflow?</p>
     <p class="body-copy">That question became Vesper — a fictional cabin-rental experience, deliberately visual and simple enough that I could concentrate on the production workflow rather than the product itself.</p>
-  </div>
-
-  <div class="section-spacing-top">
-    <Button href="/sandbox/vesper/" variant="outline" newTab>View the Vesper experiment &rarr;</Button>
-  </div>
+    <div>
+      <Button href="/sandbox/vesper/" variant="outline" newTab>View the Vesper experiment &rarr;</Button>
+    </div>
+  </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection tight id="the-approach">
-  <SectionLabel>The approach</SectionLabel>
-  <h2 class="h-2 section-spacing-top">From prompt to page.</h2>
-
-  <div class="section-spacing-top narrow-copy">
+<ArticleSection dark tight id="the-approach">
+  <ArticleTwoCol>
+    <SectionLabel slot="label" dark>The approach</SectionLabel>
+    <h2 class="h-2">From prompt to page.</h2>
     <p class="body-copy">I didn't rebuild the workflow I'd seen. I changed one of its assumptions.</p>
     <p class="body-copy">Instead of using a hosted creative platform, I connected Claude Code to ComfyUI through MCP and explored how much of the same process I could run locally.</p>
     <p class="body-copy">That meant I could work from the coding environment while Claude orchestrated generation through ComfyUI.</p>
     <p class="body-copy">The interesting part wasn't MCP itself. It was that code, prompts, generated assets and the website were beginning to feel like one production environment.</p>
-  </div>
-
-  <div class="section-spacing-top">
-    <ArticlePipeline steps={["Claude Code", "MCP", "ComfyUI", "Local model", "Vesper"]} />
-  </div>
+    <div class="section-spacing-top">
+      <ArticlePipeline dark steps={["Claude Code", "MCP", "ComfyUI", "Local model", "Vesper"]} />
+    </div>
+  </ArticleTwoCol>
 </ArticleSection>
 
 <ArticleSection tight id="the-engine">
-  <SectionLabel>The engine</SectionLabel>
-  <h2 class="h-2 section-spacing-top">What was actually generating the movement?</h2>
-
-  <div class="section-spacing-top narrow-copy">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">The engine</SectionLabel>
+    <h2 class="h-2">What was actually generating the movement?</h2>
     <p class="body-copy">The camera movement in Vesper comes from Wan2.2, a local video generation model running through ComfyUI on my own hardware.</p>
     <p class="body-copy">Wan2.2 takes a still image and generates a short clip of plausible motion from it — not by moving a virtual camera through a 3D scene, but by predicting frames that plausibly follow on from the one it started with.</p>
     <p class="body-copy">Vesper's flythrough is built from several of these clips generated in sequence, each one picking up from where the last left off, then stitched together into a single continuous journey.</p>
     <p class="body-copy">That distinction matters: the model was never navigating a real cabin. It was generating a plausible next frame, conditioned on what came before.</p>
-  </div>
+  </ArticleTwoCol>
 </ArticleSection>
 
 <ArticleSection dark id="it-worked">
-  <SectionLabel dark>The result</SectionLabel>
-  <h2 class="h-2 section-spacing-top">And for a while, the illusion worked.</h2>
-
-  <div class="section-spacing-top narrow-copy">
+  <ArticleTwoCol>
+    <SectionLabel slot="label" dark>The result</SectionLabel>
+    <h2 class="h-2">And for a while, the illusion worked.</h2>
     <p class="body-copy">A strong source image and a good video model can create remarkably convincing movement. Small camera pushes worked. Atmospheric movement worked. Individual transitions could look beautiful.</p>
     <p class="body-copy">Placed inside the website, it felt more expensive and cinematic than the effort involved would suggest.</p>
     <p class="body-copy">That alone was useful. But pushing the camera further exposed a much more interesting limitation.</p>
-  </div>
-
-  <div class="section-spacing-top">
-    <ArticleMedia
-      label="GENERATED SEQUENCE — VIDEO"
-      src="/media/writing/vesper-leg1.mp4"
-      poster="/media/writing/vesper-leg1-poster.jpg"
-      alt="One leg of the generated camera flythrough moving through the Vesper property"
-      caption="One of the individual generated camera moves used to assemble the final flythrough."
-      ratio="16/9"
-      dark
-    />
-  </div>
-</ArticleSection>
-
-<ArticleSection id="the-discovery">
-  <ArticleStatement size="xl">A beautiful image isn't a world.</ArticleStatement>
-
-  <div class="section-spacing-top narrow-copy">
-    <p class="body-copy">A still image only has to explain what the camera can see. Move the camera and the problem changes.</p>
-    <p class="body-copy">There was no cabin behind my cabin. No floorplan. No persistent geometry. No authoritative answer to what existed around the corner.</p>
-    <p class="body-copy">The model could generate a convincing journey through the image, but the further I asked it to travel, the more of the world it had to invent.</p>
-    <p class="body-copy">That is where the illusion started to break.</p>
-  </div>
-
-  <div class="section-spacing-top">
-    <ArticleMedia label="SOURCE FRAME → GENERATED CAMERA MOVEMENT → SPATIAL DRIFT" caption="I will provide real frames later." ratio="21/9" />
-  </div>
+    <div class="section-spacing-top">
+      <ArticleMedia
+        label="GENERATED SEQUENCE — VIDEO"
+        src="/media/writing/vesper-leg1.mp4"
+        poster="/media/writing/vesper-leg1-poster.jpg"
+        alt="One leg of the generated camera flythrough moving through the Vesper property"
+        caption="One of the individual generated camera moves used to assemble the final flythrough."
+        ratio="16/9"
+        dark
+      />
+    </div>
+  </ArticleTwoCol>
 </ArticleSection>
 
 <ArticleSection id="mental-model">
@@ -115,39 +90,40 @@ import Button from '../../components/ui/Button.astro';
     <h2 class="h-2">Next time, I'll design the space before generating the journey.</h2>
     <p class="body-copy">Rather than asking a video model to continuously invent what exists beyond the frame, I would first establish more of the world — a floorplan or a simple 3D spatial model, rooms, relationships between spaces, and an intentional camera path.</p>
     <p class="body-copy">AI can then generate or enhance imagery around a structure that already exists. The model is still doing creative work. It just has fewer architectural decisions to hallucinate.</p>
+
+    <div class="compare-stack section-spacing-top-lg">
+      <ArticlePipeline
+        label="First attempt"
+        steps={["Image", "Camera instruction", "Video", "Next image", "Video", "Assemble"]}
+      />
+      <ArticlePipeline
+        label="Next attempt"
+        steps={["Floorplan / simple 3D world", "Camera path", "Key viewpoints", "Generated frames", "Video transitions", "Assemble"]}
+      />
+    </div>
   </ArticleTwoCol>
-
-  <div class="compare-grid section-spacing-top-lg">
-    <ArticlePipeline
-      label="First attempt"
-      steps={["Image", "Camera instruction", "Video", "Next image", "Video", "Assemble"]}
-    />
-    <ArticlePipeline
-      label="Next attempt"
-      steps={["Floorplan / simple 3D world", "Camera path", "Key viewpoints", "Generated frames", "Video transitions", "Assemble"]}
-    />
-  </div>
-</ArticleSection>
-
-<ArticleSection tight id="local-ai">
-  <h3 class="h-3">Local was not the limitation I expected.</h3>
-  <div class="section-spacing-top narrow-copy">
-    <p class="body-copy">I started this experiment wondering whether local AI could reproduce an idea I'd seen built with hosted tools.</p>
-    <p class="body-copy">It could get much closer than I expected.</p>
-    <p class="body-copy">The more interesting limitation turned out not to be where the model was running. It was what the model knew about the world it was moving through.</p>
-  </div>
 </ArticleSection>
 
 <ArticleSection dark id="what-survived">
-  <SectionLabel dark>What I learned</SectionLabel>
-  <div class="section-spacing-top">
+  <ArticleTwoCol>
+    <SectionLabel slot="label" dark>What I learned</SectionLabel>
     <ArticleLearnings items={[
       { title: "AI can create motion without understanding the world.", copy: "A generated sequence can look convincing while the space behind it is completely undefined." },
       { title: "Camera movement turns image generation into a spatial problem.", copy: "The further the camera travels, the more consistency the system has to hold." },
       { title: "Constraints give generative models something coherent to build around.", copy: "Structure isn't a limitation on generative models — it's what they build on." },
       { title: "The workflow matters as much as the model.", copy: "Connecting code, generation and iteration changed how quickly I could explore the idea." },
     ]} />
-  </div>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection tight id="local-ai">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">Local AI</SectionLabel>
+    <h2 class="h-2">Local was not the limitation I expected.</h2>
+    <p class="body-copy">I started this experiment wondering whether local AI could reproduce an idea I'd seen built with hosted tools.</p>
+    <p class="body-copy">It could get much closer than I expected.</p>
+    <p class="body-copy">The more interesting limitation turned out not to be where the model was running. It was what the model knew about the world it was moving through.</p>
+  </ArticleTwoCol>
 </ArticleSection>
 
 <ArticleSection dark id="the-artefact">
@@ -157,7 +133,7 @@ import Button from '../../components/ui/Button.astro';
     copy="The fictional cabin experience I built while exploring the workflow."
     href="/sandbox/vesper/"
     buttonLabel="Explore Vesper &rarr;"
-    secondary="Built with local AI, ComfyUI and a lot of iteration."
+    secondary="Built with local AI, ComfyUI and a sprinkle of MCP."
     mediaLabel="VESPER — WEBSITE"
     mediaSrc="/media/writing/vesperwebsite.jpg"
     mediaAlt="Vesper cabin rental website hero — misty lakeside cabin with booking panel"
@@ -166,9 +142,6 @@ import Button from '../../components/ui/Button.astro';
   />
 </ArticleSection>
 
-<ArticleSection dark id="final-statement">
-  <ArticleStatement size="xl" align="center">
-    The model can generate the frames.<br />Someone still has to direct the camera.
-  </ArticleStatement>
-  <p class="body-copy final-statement-copy">The capability changed. The need for judgement didn't.</p>
+<ArticleSection id="final-statement">
+  <ArticleStatement size="xl" align="center">The model can generate the frames. Someone still has to direct the camera.</ArticleStatement>
 </ArticleSection>

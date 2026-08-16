@@ -17,12 +17,12 @@ const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeri
       <SectionLabel withDot>Build notes</SectionLabel>
       <h2 class="writing-teaser__heading">What I&rsquo;m learning while building.</h2>
     </div>
-    <Button href="/lessons/" variant="outline" class="writing-teaser__all">All learnings</Button>
+    <Button href="/learnings/" variant="outline" class="writing-teaser__all">All learnings</Button>
   </div>
 
   <div class="writing-teaser__list" data-reveal>
     {items.map((item) => (
-      <a href={`/lessons/${item.id}/`} class="writing-teaser__row">
+      <a href={`/learnings/${item.id}/`} class="writing-teaser__row">
         <h3 class="writing-teaser__title">{item.data.title}</h3>
         <span class="writing-teaser__desc">{item.data.description}</span>
         <span class="mono-label writing-teaser__date">{dateFmt.format(item.data.publishedDate)}</span>

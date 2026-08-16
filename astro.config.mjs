@@ -30,6 +30,10 @@ export default defineConfig({
   site: 'https://paulkerr.com.au',
   output: 'static',
   trailingSlash: 'always',
+  redirects: {
+    '/lessons/': '/learnings/',
+    '/lessons/[...slug]/': '/learnings/[...slug]/',
+  },
   integrations: [sitemap(), mdx()],
   vite: {
     plugins: [publicDirIndexFallback()],

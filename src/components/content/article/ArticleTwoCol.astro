@@ -28,7 +28,16 @@ const { ratio = 'minmax(0, .5fr) minmax(0, 1.5fr)', class: className = '' } = As
   .article-two-col__content {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 0;
+  }
+
+  /* Default beat between major blocks; body paragraphs sit tighter. */
+  .article-two-col__content > :global(* + *) {
+    margin-top: 30px;
+  }
+
+  .article-two-col__content > :global(.body-copy + .body-copy) {
+    margin-top: 16px;
   }
 
   @media (max-width: 900px) {

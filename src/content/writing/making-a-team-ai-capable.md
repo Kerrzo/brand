@@ -8,6 +8,6 @@ featured: false
 placeholder: true
 ---
 
-This piece is a placeholder for build notes on "Making a team AI-capable without a transformation programme". The full write-up hasn't been drafted yet — check back soon, or read the other pieces in [Writing](/lessons/) in the meantime.
+This piece is a placeholder for build notes on "Making a team AI-capable without a transformation programme". The full write-up hasn't been drafted yet — check back soon, or read the other pieces in [Writing](/learnings/) in the meantime.
 
 What actually changes how a team builds, day to day.

@@ -59,9 +59,13 @@ const {
 <style>
   .article-experiment {
     display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    gap: clamp(28px, 5vw, 80px);
+    align-items: center;
+  }
+
+  .article-experiment:not(:has(.article-experiment__media)) {
     grid-template-columns: minmax(0, 1fr);
-    gap: clamp(36px, 5vw, 64px);
-    align-items: start;
   }
 
   .article-experiment__copy {
@@ -69,7 +73,6 @@ const {
     flex-direction: column;
     gap: 22px;
     align-items: flex-start;
-    max-width: 52ch;
   }
 
   .article-experiment__heading {
@@ -98,5 +101,12 @@ const {
 
   .article-experiment__media {
     width: 100%;
+  }
+
+  @media (max-width: 900px) {
+    .article-experiment {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 28px;
+    }
   }
 </style>
