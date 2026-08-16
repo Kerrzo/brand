@@ -3,13 +3,19 @@ interface Props {
   href: string;
   variant?: 'solid' | 'outline' | 'solid-dark' | 'inverse';
   withDot?: boolean;
+  newTab?: boolean;
   class?: string;
 }
 
-const { href, variant = 'solid', withDot = false, class: className = '' } = Astro.props;
+const { href, variant = 'solid', withDot = false, newTab = false, class: className = '' } = Astro.props;
 ---
 
-<a href={href} class:list={['btn', `btn--${variant}`, className]}>
+<a
+  href={href}
+  class:list={['btn', `btn--${variant}`, className]}
+  target={newTab ? '_blank' : undefined}
+  rel={newTab ? 'noopener noreferrer' : undefined}
+>
   <slot />
   {withDot && <span class="dot" aria-hidden="true"></span>}
 </a>

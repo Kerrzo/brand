@@ -13,9 +13,10 @@ interface Props {
   mediaLabel?: string;
   mediaSrc?: string;
   mediaAlt?: string;
+  newTab?: boolean;
 }
 
-const { eyebrow, heading, copy, href, buttonLabel, secondary, mediaLabel, mediaSrc, mediaAlt } = Astro.props;
+const { eyebrow, heading, copy, href, buttonLabel, secondary, mediaLabel, mediaSrc, mediaAlt, newTab = false } = Astro.props;
 ---
 
 <div class="article-experiment">
@@ -24,7 +25,7 @@ const { eyebrow, heading, copy, href, buttonLabel, secondary, mediaLabel, mediaS
     <h2 class="article-experiment__heading">{heading}</h2>
     <p class="article-experiment__body">{copy}</p>
     <div class="article-experiment__actions">
-      <Button href={href} variant="inverse">{buttonLabel}</Button>
+      <Button href={href} variant="inverse" newTab={newTab}>{buttonLabel}</Button>
     </div>
     {secondary && <div class="article-experiment__secondary">{secondary}</div>}
   </div>
