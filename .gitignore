@@ -24,6 +24,6 @@ pnpm-debug.log*
 .idea/
 design-handoff-extracted/
 
-# scratch source copies — the deployed artefact lives in public/sandbox/vespa/
+# scratch source copies — the deployed artefact lives in public/sandbox/vesper/
 temp/
 vespersource/

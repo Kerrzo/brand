@@ -6,6 +6,7 @@ interface Props {
   radius?: 'sm' | 'md' | 'lg' | 'xl';
   src?: string;
   alt?: string;
+  poster?: string;
   class?: string;
 }
 
@@ -16,6 +17,7 @@ const {
   radius = 'md',
   src,
   alt = '',
+  poster,
   class: className = '',
 } = Astro.props;
 
@@ -28,7 +30,7 @@ const isVideo = Boolean(src && /\.(mp4|webm|mov)(\?|$)/i.test(src));
 >
   {src ? (
     isVideo ? (
-      <video src={src} autoplay muted loop playsinline aria-label={alt || label} />
+      <video src={src} poster={poster} autoplay muted loop playsinline aria-label={alt || label} />
     ) : (
       <img src={src} alt={alt} loading="lazy" />
     )

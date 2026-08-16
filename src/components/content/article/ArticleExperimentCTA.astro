@@ -11,9 +11,11 @@ interface Props {
   buttonLabel: string;
   secondary?: string;
   mediaLabel?: string;
+  mediaSrc?: string;
+  mediaAlt?: string;
 }
 
-const { eyebrow, heading, copy, href, buttonLabel, secondary, mediaLabel } = Astro.props;
+const { eyebrow, heading, copy, href, buttonLabel, secondary, mediaLabel, mediaSrc, mediaAlt } = Astro.props;
 ---
 
 <div class="article-experiment">
@@ -27,7 +29,15 @@ const { eyebrow, heading, copy, href, buttonLabel, secondary, mediaLabel } = Ast
     {secondary && <div class="article-experiment__secondary">{secondary}</div>}
   </div>
   {mediaLabel && (
-    <PlaceholderMedia label={mediaLabel} ratio="4/5" radius="lg" dark class="article-experiment__media" />
+    <PlaceholderMedia
+      label={mediaLabel}
+      src={mediaSrc}
+      alt={mediaAlt}
+      ratio="4/3"
+      radius="lg"
+      dark
+      class="article-experiment__media"
+    />
   )}
 </div>
 

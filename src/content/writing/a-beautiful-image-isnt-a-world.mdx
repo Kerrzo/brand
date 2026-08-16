@@ -7,8 +7,10 @@ tags: ["ComfyUI", "local AI", "image-to-video", "workflow"]
 featured: true
 placeholder: false
 richLayout: true
-heroMediaLabel: "VESPA — FINAL EXPERIENCE"
-heroCaption: "A fictional cabin-rental experience built as a test bed for local AI-generated imagery and motion."
+heroImage: "/media/writing/vesper-flight.mp4"
+heroAlt: "Cinematic camera flythrough of the Vesper cabin, generated with local AI and assembled into the final website"
+heroMediaLabel: "VESPER — FINAL EXPERIENCE"
+heroCaption: "Vesper, a fictional cabin-rental experience built as a test bed for local AI-generated imagery and motion."
 ---
 
 import ArticleSection from '../../components/content/article/ArticleSection.astro';
@@ -32,11 +34,11 @@ import Button from '../../components/ui/Button.astro';
     <p class="body-copy">I wasn't particularly interested in making another AI-generated website.</p>
     <p class="body-copy">The interesting question was whether a local workflow could produce the kind of controlled, cinematic motion I'd seen created with hosted tools such as Higgsfield.</p>
     <p class="body-copy">Could I generate the visual world, create the movement, direct the transitions and turn the result into something that actually felt designed?</p>
-    <p class="body-copy">Vespa became the experiment. It is a fictional cabin-rental experience: deliberately visual, atmospheric and simple enough that I could concentrate on the production workflow rather than the product itself.</p>
+    <p class="body-copy">Vesper became the experiment. It is a fictional cabin-rental experience: deliberately visual, atmospheric and simple enough that I could concentrate on the production workflow rather than the product itself.</p>
   </div>
 
   <div class="section-spacing-top">
-    <Button href="/sandbox/vespa/" variant="outline">View the Vespa experiment &rarr;</Button>
+    <Button href="/sandbox/vesper/" variant="outline">View the Vesper experiment &rarr;</Button>
   </div>
 </ArticleSection>
 
@@ -75,7 +77,15 @@ import Button from '../../components/ui/Button.astro';
   </div>
 
   <div class="section-spacing-top">
-    <ArticleMedia label="GENERATED SEQUENCE — VIDEO" ratio="21/9" dark />
+    <ArticleMedia
+      label="GENERATED SEQUENCE — VIDEO"
+      src="/media/writing/vesper-leg1.mp4"
+      poster="/media/writing/vesper-leg1-poster.jpg"
+      alt="One leg of the generated camera flythrough moving through the Vesper property"
+      caption="One of the individual generated camera moves used to assemble the final flythrough."
+      ratio="16/9"
+      dark
+    />
   </div>
 </ArticleSection>
 
@@ -150,11 +160,13 @@ import Button from '../../components/ui/Button.astro';
 <ArticleSection dark id="the-artefact">
   <ArticleExperimentCTA
     eyebrow="The artefact"
-    heading="Vespa"
+    heading="Vesper"
     copy="The fictional cabin experience I built while exploring the workflow."
-    href="/sandbox/vespa/"
-    buttonLabel="Explore Vespa &rarr;"
+    href="/sandbox/vesper/"
+    buttonLabel="Explore Vesper &rarr;"
     secondary="Built with local AI, ComfyUI and a lot of iteration."
-    mediaLabel="VESPA — FULL EXPERIENCE"
+    mediaLabel="VESPER — FULL EXPERIENCE"
+    mediaSrc="/media/writing/vesper-hero-still.png"
+    mediaAlt="The Vesper cabin at golden hour, generated with local AI"
   />
 </ArticleSection>

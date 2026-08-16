@@ -9,6 +9,7 @@ interface Props {
   radius?: 'sm' | 'md' | 'lg' | 'xl';
   src?: string;
   alt?: string;
+  poster?: string;
   class?: string;
 }
 
@@ -20,12 +21,13 @@ const {
   radius = 'lg',
   src,
   alt,
+  poster,
   class: className = '',
 } = Astro.props;
 ---
 
 <figure class:list={['article-media', className]}>
-  <PlaceholderMedia label={label} src={src} alt={alt} ratio={ratio} radius={radius} dark={dark} />
+  <PlaceholderMedia label={label} src={src} alt={alt} poster={poster} ratio={ratio} radius={radius} dark={dark} />
   {caption && <figcaption class="article-media__caption">{caption}</figcaption>}
 </figure>
 
