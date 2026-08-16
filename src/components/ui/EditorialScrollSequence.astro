@@ -4,6 +4,10 @@ interface Props {
   eyebrow?: string;
   showRail?: boolean;
   accentColor?: string;
+  /** Dark = building/about style. Light = inverted for light editorial pages. */
+  tone?: 'dark' | 'light';
+  /** Default matches Building/About. Large is ~50% bigger for closing statements. */
+  size?: 'default' | 'large';
 }
 
 const {
@@ -11,14 +15,17 @@ const {
   eyebrow = '',
   showRail = true,
   accentColor = 'var(--color-accent)',
+  tone = 'dark',
+  size = 'default',
 } = Astro.props;
 ---
 
 <section
-  class="editorial-seq"
+  class:list={['editorial-seq', `editorial-seq--${tone}`, `editorial-seq--size-${size}`]}
   data-editorial-seq
   data-show-rail={showRail ? 'true' : 'false'}
   data-accent={accentColor}
+  data-tone={tone}
   aria-label="Editorial quote"
 >
   <div class="editorial-seq__inner">
@@ -36,10 +43,18 @@ const {
 
 <style>
   .editorial-seq {
-    background: var(--color-dark-bg);
-    color: var(--color-dark-fg);
     position: relative;
     margin-top: clamp(56px, 9vh, 120px);
+  }
+
+  .editorial-seq--dark {
+    background: var(--color-dark-bg);
+    color: var(--color-dark-fg);
+  }
+
+  .editorial-seq--light {
+    background: var(--color-bg);
+    color: var(--color-ink);
   }
 
   .editorial-seq__inner {
@@ -58,8 +73,15 @@ const {
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(243, 242, 240, 0.4);
     margin-bottom: clamp(18px, 4vh, 52px);
+  }
+
+  .editorial-seq--dark .editorial-seq__eyebrow {
+    color: rgba(243, 242, 240, 0.4);
+  }
+
+  .editorial-seq--light .editorial-seq__eyebrow {
+    color: var(--color-label);
   }
 
   .editorial-seq__lines {
@@ -76,9 +98,26 @@ const {
     line-height: 1.2;
     letter-spacing: -0.03em;
     font-weight: 500;
-    color: var(--color-dark-fg);
     opacity: 0.16;
     transition: opacity 0.45s ease;
+  }
+
+  .editorial-seq--size-large .editorial-seq__lines p {
+    font-size: clamp(32px, 4.35vw, 69px);
+    letter-spacing: -0.035em;
+  }
+
+  .editorial-seq--size-large .editorial-seq__lines {
+    max-width: 72ch;
+    gap: 16px;
+  }
+
+  .editorial-seq--dark .editorial-seq__lines p {
+    color: var(--color-dark-fg);
+  }
+
+  .editorial-seq--light .editorial-seq__lines p {
+    color: var(--color-ink);
   }
 
   .editorial-seq__rail {
@@ -95,8 +134,15 @@ const {
     display: block;
     width: 2px;
     height: 22px;
-    background: rgba(243, 242, 240, 0.2);
     transition: background 0.4s ease, height 0.4s ease;
+  }
+
+  .editorial-seq--dark .editorial-seq__rail :global(span) {
+    background: rgba(243, 242, 240, 0.2);
+  }
+
+  .editorial-seq--light .editorial-seq__rail :global(span) {
+    background: rgba(14, 14, 13, 0.16);
   }
 </style>
 
@@ -117,6 +163,9 @@ const {
 
       const showRail = wrap.dataset.showRail !== 'false';
       const accent = wrap.dataset.accent || '#E14A22';
+      const light = wrap.dataset.tone === 'light';
+      const railPast = light ? 'rgba(14,14,13,.4)' : 'rgba(243,242,240,.4)';
+      const railFuture = light ? 'rgba(14,14,13,.14)' : 'rgba(243,242,240,.16)';
 
       if (rail) {
         rail.style.display = showRail ? 'flex' : 'none';
@@ -148,10 +197,8 @@ const {
           }
         });
 
-        // Prefer the line currently crossing the focus band while the section is on screen
         const section = wrap.getBoundingClientRect();
         if (section.bottom < 0 || section.top > window.innerHeight) {
-          // Off-screen: keep last state, no work
           return;
         }
 
@@ -163,7 +210,7 @@ const {
           const tick = rail?.children[i] as HTMLElement | undefined;
           if (tick) {
             tick.style.background =
-              i === active ? accent : i < active ? 'rgba(243,242,240,.4)' : 'rgba(243,242,240,.16)';
+              i === active ? accent : i < active ? railPast : railFuture;
             tick.style.height = i === active ? '34px' : '22px';
           }
         });

@@ -42,6 +42,10 @@ const { dark = false, tight = false, id, class: className = '' } = Astro.props;
     color: rgba(243, 242, 240, .62);
   }
 
+  .article-section--dark :global(.body-copy strong) {
+    color: var(--color-dark-fg);
+  }
+
   .article-section--dark :global(.mono-label) {
     color: var(--color-dark-label);
   }
