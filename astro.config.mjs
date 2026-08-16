@@ -31,8 +31,8 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   redirects: {
-    '/lessons/': '/learnings/',
-    '/lessons/[...slug]/': '/learnings/[...slug]/',
+    '/lessons': '/learnings',
+    '/lessons/[slug]': '/learnings/[slug]',
   },
   integrations: [sitemap(), mdx()],
   vite: {
