@@ -11,6 +11,10 @@
   margin-top: 48px;
 }
 
+.article-ticker {
+  margin-bottom: clamp(8px, 2vh, 24px);
+}
+
 .narrow-copy {
   display: flex;
   flex-direction: column;
