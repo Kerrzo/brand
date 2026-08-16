@@ -23,3 +23,7 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 design-handoff-extracted/
+
+# scratch source copies — the deployed artefact lives in public/sandbox/vespa/
+temp/
+vespersource/

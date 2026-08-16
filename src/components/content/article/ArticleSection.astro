@@ -1,0 +1,52 @@
+---
+// Generic full-bleed section wrapper for the Learnings editorial article
+// system. Light sections render on the page background; dark sections break
+// out to full width with a near-black background, matching the alternating
+// light/dark rhythm used elsewhere on the site (e.g. homepage dark blocks).
+interface Props {
+  dark?: boolean;
+  tight?: boolean;
+  id?: string;
+  class?: string;
+}
+
+const { dark = false, tight = false, id, class: className = '' } = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={['article-section', { 'article-section--dark': dark, 'article-section--tight': tight }, className]}
+>
+  <div class="article-section__inner container">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .article-section {
+    padding-block: clamp(64px, 10vh, 120px);
+  }
+
+  .article-section--tight {
+    padding-block: clamp(40px, 6vh, 72px);
+  }
+
+  .article-section--dark {
+    background: var(--color-dark-bg);
+    color: var(--color-dark-fg);
+  }
+
+  /* Standard prose utility classes hardcode light-mode colors — repoint them
+     inside a dark section so MDX content doesn't need theme-aware variants. */
+  .article-section--dark :global(.body-copy) {
+    color: rgba(243, 242, 240, .62);
+  }
+
+  .article-section--dark :global(.mono-label) {
+    color: var(--color-dark-label);
+  }
+
+  .article-section--dark :global(.pill-tag) {
+    border-color: rgba(243, 242, 240, .25);
+  }
+</style>

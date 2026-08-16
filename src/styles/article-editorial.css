@@ -1,0 +1,39 @@
+/* Layout utility classes used by rich (MDX) Learnings articles — see
+   src/components/content/article/ and src/content/writing/*.mdx. Kept as a
+   plain stylesheet rather than component-scoped <style> because Astro's MDX
+   integration doesn't support <style> blocks inside .mdx content files. */
+
+.section-spacing-top {
+  margin-top: 32px;
+}
+
+.section-spacing-top-lg {
+  margin-top: 48px;
+}
+
+.narrow-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 64ch;
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px;
+}
+
+.final-statement-copy {
+  margin: 28px auto 0;
+  max-width: 48ch;
+  text-align: center;
+  font-size: 17px;
+}
+
+@media (max-width: 900px) {
+  .compare-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+}

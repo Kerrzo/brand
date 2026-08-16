@@ -1,0 +1,48 @@
+---
+import PlaceholderMedia from '../../ui/PlaceholderMedia.astro';
+
+interface Props {
+  label: string;
+  caption?: string;
+  ratio?: string;
+  dark?: boolean;
+  radius?: 'sm' | 'md' | 'lg' | 'xl';
+  src?: string;
+  alt?: string;
+  class?: string;
+}
+
+const {
+  label,
+  caption,
+  ratio = '16/9',
+  dark = false,
+  radius = 'lg',
+  src,
+  alt,
+  class: className = '',
+} = Astro.props;
+---
+
+<figure class:list={['article-media', className]}>
+  <PlaceholderMedia label={label} src={src} alt={alt} ratio={ratio} radius={radius} dark={dark} />
+  {caption && <figcaption class="article-media__caption">{caption}</figcaption>}
+</figure>
+
+<style>
+  .article-media {
+    margin: 0;
+  }
+
+  .article-media__caption {
+    margin-top: 16px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--color-body);
+    max-width: 52ch;
+  }
+
+  :global(.article-section--dark) .article-media__caption {
+    color: rgba(243, 242, 240, 0.55);
+  }
+</style>

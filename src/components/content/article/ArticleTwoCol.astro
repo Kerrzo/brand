@@ -1,0 +1,40 @@
+---
+// Narrow label/eyebrow column + wide content column — the same 0.5fr/1.5fr
+// editorial split used elsewhere on the site (e.g. the About page).
+interface Props {
+  ratio?: string;
+  class?: string;
+}
+
+const { ratio = 'minmax(0, .5fr) minmax(0, 1.5fr)', class: className = '' } = Astro.props;
+---
+
+<div class:list={['article-two-col', className]} style={{ gridTemplateColumns: ratio }}>
+  <div class="article-two-col__label">
+    <slot name="label" />
+  </div>
+  <div class="article-two-col__content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .article-two-col {
+    display: grid;
+    gap: clamp(24px, 4vw, 72px);
+    align-items: start;
+  }
+
+  .article-two-col__content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  @media (max-width: 900px) {
+    .article-two-col {
+      grid-template-columns: minmax(0, 1fr) !important;
+      row-gap: 20px;
+    }
+  }
+</style>

@@ -14,10 +14,11 @@ const { item } = Astro.props;
 const { Content } = await render(item);
 const minutes = readingTime(item.body ?? '');
 const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const rich = item.data.richLayout;
 ---
 
 <BaseLayout title={item.data.title} description={item.data.description} current="lessons">
-  <article class="article container">
+  <div class="article-frame container">
     <a href="/lessons/" class="article__back">&larr; Learnings</a>
 
     <div class="article__intro" data-reveal>
@@ -37,20 +38,39 @@ const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric'
       </div>
     </div>
 
-    <PlaceholderMedia label="Hero image · replace" src={item.data.heroImage} alt={item.data.heroAlt} ratio="16/9" radius="lg" class="article__hero" />
+    <figure class="article__hero-figure">
+      <PlaceholderMedia
+        label={item.data.heroMediaLabel ?? 'Hero image · replace'}
+        src={item.data.heroImage}
+        alt={item.data.heroAlt}
+        ratio="16/9"
+        radius="lg"
+        class="article__hero"
+      />
+      {item.data.heroCaption && <figcaption class="article__hero-caption">{item.data.heroCaption}</figcaption>}
+    </figure>
+  </div>
 
-    <div class="prose" data-reveal>
+  {rich ? (
+    <div class="article-body" data-reveal>
       <Content />
     </div>
-  </article>
+  ) : (
+    <div class="container">
+      <div class="prose" data-reveal>
+        <Content />
+      </div>
+    </div>
+  )}
 
   <FinalCTA />
 </BaseLayout>
 
 <style>
-  .article {
-    padding-top: clamp(120px, 18vh, 200px);
+  .article-frame {
     max-width: 900px;
+    padding-top: clamp(120px, 18vh, 200px);
+    padding-bottom: clamp(40px, 6vh, 72px);
   }
 
   .article__back {
@@ -104,7 +124,19 @@ const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric'
     color: var(--color-accent);
   }
 
-  .article__hero {
-    margin-bottom: clamp(40px, 6vh, 72px);
+  .article__hero-figure {
+    margin: 0;
+  }
+
+  .article__hero-caption {
+    margin-top: 16px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--color-body);
+    max-width: 52ch;
+  }
+
+  .article-body {
+    margin-top: clamp(64px, 9vh, 110px);
   }
 </style>

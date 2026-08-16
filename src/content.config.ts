@@ -6,7 +6,7 @@ import { glob } from 'astro/loaders';
 // but our assets live in public/ so they can be dropped in without a rebuild step.
 
 const writing = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/writing' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/writing' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -19,6 +19,12 @@ const writing = defineCollection({
     placeholder: z.boolean().default(false),
     heroImage: z.string().optional(),
     heroAlt: z.string().optional(),
+    heroMediaLabel: z.string().optional(),
+    heroCaption: z.string().optional(),
+    // Rich MDX articles compose full-bleed editorial sections themselves and
+    // opt out of the narrow .prose reading column; plain Markdown pieces
+    // keep the default constrained layout.
+    richLayout: z.boolean().default(false),
     socialImage: z.string().optional(),
     relatedProjects: z.array(z.string()).default([]),
     relatedLab: z.array(z.string()).default([]),

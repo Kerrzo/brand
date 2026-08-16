@@ -1,0 +1,83 @@
+---
+import SectionLabel from '../../ui/SectionLabel.astro';
+import Button from '../../ui/Button.astro';
+import PlaceholderMedia from '../../ui/PlaceholderMedia.astro';
+
+interface Props {
+  eyebrow: string;
+  heading: string;
+  copy: string;
+  href: string;
+  buttonLabel: string;
+  secondary?: string;
+  mediaLabel?: string;
+}
+
+const { eyebrow, heading, copy, href, buttonLabel, secondary, mediaLabel } = Astro.props;
+---
+
+<div class="article-experiment">
+  <div class="article-experiment__copy">
+    <SectionLabel dark>{eyebrow}</SectionLabel>
+    <h2 class="article-experiment__heading">{heading}</h2>
+    <p class="article-experiment__body">{copy}</p>
+    <div class="article-experiment__actions">
+      <Button href={href} variant="inverse">{buttonLabel}</Button>
+    </div>
+    {secondary && <div class="article-experiment__secondary">{secondary}</div>}
+  </div>
+  {mediaLabel && (
+    <PlaceholderMedia label={mediaLabel} ratio="4/5" radius="lg" dark class="article-experiment__media" />
+  )}
+</div>
+
+<style>
+  .article-experiment {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 80px);
+    align-items: center;
+  }
+
+  .article-experiment:not(:has(.article-experiment__media)) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .article-experiment__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    align-items: flex-start;
+  }
+
+  .article-experiment__heading {
+    margin: 0;
+    font-size: clamp(36px, 5.4vw, 72px);
+    line-height: .96;
+    letter-spacing: -.045em;
+    font-weight: 500;
+  }
+
+  .article-experiment__body {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(243, 242, 240, .62);
+    max-width: 46ch;
+  }
+
+  .article-experiment__secondary {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(243, 242, 240, .4);
+  }
+
+  @media (max-width: 900px) {
+    .article-experiment {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 28px;
+    }
+  }
+</style>

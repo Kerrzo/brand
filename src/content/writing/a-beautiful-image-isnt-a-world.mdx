@@ -1,0 +1,160 @@
+---
+title: "A beautiful image isn't a world"
+description: "What building a cinematic website with local AI taught me about camera movement, spatial consistency and the limits of image-to-video."
+publishedDate: 2026-08-16
+category: "Creative AI"
+tags: ["ComfyUI", "local AI", "image-to-video", "workflow"]
+featured: true
+placeholder: false
+richLayout: true
+heroMediaLabel: "VESPA — FINAL EXPERIENCE"
+heroCaption: "A fictional cabin-rental experience built as a test bed for local AI-generated imagery and motion."
+---
+
+import ArticleSection from '../../components/content/article/ArticleSection.astro';
+import ArticleStatement from '../../components/content/article/ArticleStatement.astro';
+import ArticleMedia from '../../components/content/article/ArticleMedia.astro';
+import ArticlePipeline from '../../components/content/article/ArticlePipeline.astro';
+import ArticleLearnings from '../../components/content/article/ArticleLearnings.astro';
+import ArticleTwoCol from '../../components/content/article/ArticleTwoCol.astro';
+import ArticleExperimentCTA from '../../components/content/article/ArticleExperimentCTA.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import Button from '../../components/ui/Button.astro';
+
+<ArticleSection id="the-question">
+  <SectionLabel>The question</SectionLabel>
+
+  <ArticleStatement size="lg" class="section-spacing-top">
+    I'd seen AI turn still images into beautiful cinematic experiences. I wanted to know how much of that I could reproduce locally.
+  </ArticleStatement>
+
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">I wasn't particularly interested in making another AI-generated website.</p>
+    <p class="body-copy">The interesting question was whether a local workflow could produce the kind of controlled, cinematic motion I'd seen created with hosted tools such as Higgsfield.</p>
+    <p class="body-copy">Could I generate the visual world, create the movement, direct the transitions and turn the result into something that actually felt designed?</p>
+    <p class="body-copy">Vespa became the experiment. It is a fictional cabin-rental experience: deliberately visual, atmospheric and simple enough that I could concentrate on the production workflow rather than the product itself.</p>
+  </div>
+
+  <div class="section-spacing-top">
+    <Button href="/sandbox/vespa/" variant="outline">View the Vespa experiment &rarr;</Button>
+  </div>
+</ArticleSection>
+
+<ArticleSection id="the-workflow">
+  <h2 class="h-2">From prompt to page</h2>
+  <p class="body-copy section-spacing-top narrow-copy">
+    The workflow became an experiment in its own right. Instead of moving between disconnected AI
+    tools manually, I wanted to see how much of the process could become one connected production
+    environment.
+  </p>
+
+  <div class="section-spacing-top">
+    <ArticlePipeline steps={["Claude Code", "MCP", "ComfyUI", "Local models", "Generated imagery", "Image-to-video", "Web experience"]} />
+  </div>
+
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">I connected Claude Code to ComfyUI through MCP so the coding environment could participate directly in the generation workflow.</p>
+    <p class="body-copy">The important part wasn't MCP itself. It was the change in workflow.</p>
+    <p class="body-copy">Code, prompts, generated assets and the website could increasingly be treated as parts of the same production process rather than separate disciplines.</p>
+  </div>
+
+  <div class="section-spacing-top">
+    <ArticleMedia label="WORKFLOW / COMFYUI CAPTURE" caption="I will later provide a real ComfyUI workflow screenshot or diagram." ratio="16/9" />
+  </div>
+</ArticleSection>
+
+<ArticleSection dark id="it-worked">
+  <SectionLabel dark>The result</SectionLabel>
+  <h2 class="h-2 section-spacing-top">And for a while, the illusion worked.</h2>
+
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">A strong source image plus a good video model can create remarkably convincing movement.</p>
+    <p class="body-copy">Small camera pushes worked. Atmospheric movement worked. Individual transitions could look beautiful.</p>
+    <p class="body-copy">Placed inside the website, the generated sequences created something that felt much more expensive and cinematic than the effort involved would traditionally suggest.</p>
+    <p class="body-copy">That alone was useful. But pushing the camera further exposed a much more interesting limitation.</p>
+  </div>
+
+  <div class="section-spacing-top">
+    <ArticleMedia label="GENERATED SEQUENCE — VIDEO" ratio="21/9" dark />
+  </div>
+</ArticleSection>
+
+<ArticleSection id="the-discovery">
+  <ArticleStatement size="xl">A beautiful image isn't a world.</ArticleStatement>
+
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">A still image only needs to describe what the camera can see. The moment I asked the camera to travel through the scene, the model had a much harder problem.</p>
+    <p class="body-copy">The cabin looked coherent from one viewpoint, but there was no real cabin behind the image. There was no floorplan. No persistent geometry. No authoritative answer to what should exist around the corner.</p>
+    <p class="body-copy">As the generated camera travelled further, the model increasingly had to invent the space itself. Doors could lead somewhere unexpected. Rooms could subtly change. Geometry could drift. A convincing image could become a less convincing place.</p>
+    <p class="body-copy">This was the point where the experiment became much more useful than simply producing a nice website.</p>
+  </div>
+
+  <div class="section-spacing-top">
+    <ArticleMedia label="SOURCE FRAME → GENERATED CAMERA MOVEMENT → SPATIAL DRIFT" caption="I will provide real frames later." ratio="21/9" />
+  </div>
+</ArticleSection>
+
+<ArticleSection id="mental-model">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">What I'd change</SectionLabel>
+    <h2 class="h-2">Next time, I'd design the space before generating the journey.</h2>
+    <p class="body-copy">My first instinct was: <strong>image &rarr; motion</strong></p>
+    <p class="body-copy">My next attempt would start further upstream: <strong>space &rarr; viewpoints &rarr; camera path &rarr; key frames &rarr; motion</strong></p>
+    <p class="body-copy">Rather than asking a video model to continuously invent what exists beyond the frame, I would first establish more of the world. That might begin with a floorplan or simple 3D spatial model. From that I could define rooms, relationships between spaces, important viewpoints and an intentional camera path.</p>
+    <p class="body-copy">AI can then generate or enhance imagery around a structure that already exists. The model is still doing creative work. It just has fewer architectural decisions to hallucinate.</p>
+  </ArticleTwoCol>
+
+  <div class="compare-grid section-spacing-top-lg">
+    <ArticlePipeline
+      label="First approach"
+      steps={["Still image", "Prompt camera movement", "Generate video", "Hope the world remains coherent"]}
+    />
+    <ArticlePipeline
+      label="Next approach"
+      steps={["Floorplan / spatial model", "Camera path", "Key viewpoints", "Generated frames", "Video transitions", "Assemble journey"]}
+    />
+  </div>
+</ArticleSection>
+
+<ArticleSection tight id="local-ai">
+  <h3 class="h-3">Local was not the limitation I expected.</h3>
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">One reason for doing the experiment was simply to see whether I needed the hosted tools that originally inspired it. For this experiment, I didn't.</p>
+    <p class="body-copy">ComfyUI gave me enough control to explore the workflow locally, iterate freely and connect generation into the rest of the build process.</p>
+    <p class="body-copy">That doesn't mean local is always better. Hosted models may produce better results, expose different capabilities or remove significant setup work.</p>
+    <p class="body-copy">But the experiment changed the question for me from &ldquo;Can local AI do this?&rdquo; to &ldquo;Which parts of this workflow actually benefit from being local?&rdquo;</p>
+    <p class="body-copy">That is a much more useful question.</p>
+  </div>
+</ArticleSection>
+
+<ArticleSection dark id="what-survived">
+  <SectionLabel dark>What I learned</SectionLabel>
+  <div class="section-spacing-top">
+    <ArticleLearnings items={[
+      { title: "AI can create motion without understanding the world.", copy: "A generated sequence can be visually convincing while the underlying space is completely undefined." },
+      { title: "Camera movement turns image generation into a spatial problem.", copy: "The further the camera travels, the more consistency the system has to maintain." },
+      { title: "Constraints improve generation.", copy: "Giving AI structure isn't working against generative models. It gives them something coherent to build upon." },
+      { title: "The workflow matters as much as the model.", copy: "Connecting code, generation and iteration changed how quickly I could explore the idea." },
+    ]} />
+  </div>
+</ArticleSection>
+
+<ArticleSection id="final-statement">
+  <ArticleStatement size="xl" align="center">The model can generate the frames. Someone still has to direct the camera.</ArticleStatement>
+  <p class="body-copy final-statement-copy">
+    That is probably the part of AI-assisted creative work I find most interesting.<br />
+    The capability keeps moving. The need for judgement doesn't.
+  </p>
+</ArticleSection>
+
+<ArticleSection dark id="the-artefact">
+  <ArticleExperimentCTA
+    eyebrow="The artefact"
+    heading="Vespa"
+    copy="The fictional cabin experience I built while exploring the workflow."
+    href="/sandbox/vespa/"
+    buttonLabel="Explore Vespa &rarr;"
+    secondary="Built with local AI, ComfyUI and a lot of iteration."
+    mediaLabel="VESPA — FULL EXPERIENCE"
+  />
+</ArticleSection>

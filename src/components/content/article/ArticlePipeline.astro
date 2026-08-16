@@ -1,0 +1,82 @@
+---
+// A labelled chain of steps connected by arrows — used for production
+// pipelines and before/after workflow comparisons in Learnings articles.
+interface Props {
+  steps: string[];
+  label?: string;
+  dark?: boolean;
+  class?: string;
+}
+
+const { steps, label, dark = false, class: className = '' } = Astro.props;
+---
+
+<div class:list={['article-pipeline', { 'article-pipeline--dark': dark }, className]}>
+  {label && <div class="article-pipeline__label">{label}</div>}
+  <ol class="article-pipeline__row">
+    {steps.map((step, i) => (
+      <>
+        <li class="article-pipeline__step">{step}</li>
+        {i < steps.length - 1 && <li class="article-pipeline__arrow" aria-hidden="true">&rarr;</li>}
+      </>
+    ))}
+  </ol>
+</div>
+
+<style>
+  .article-pipeline__label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--color-label);
+    margin-bottom: 16px;
+  }
+
+  .article-pipeline--dark .article-pipeline__label {
+    color: var(--color-dark-label);
+  }
+
+  .article-pipeline__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .article-pipeline__step {
+    font-family: var(--font-mono);
+    font-size: clamp(12px, 1.6vw, 14px);
+    letter-spacing: .02em;
+    padding: 10px 16px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+  }
+
+  .article-pipeline--dark .article-pipeline__step {
+    border-color: rgba(243, 242, 240, .25);
+    color: var(--color-dark-fg);
+  }
+
+  .article-pipeline__arrow {
+    color: var(--color-accent);
+    font-size: 15px;
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 640px) {
+    .article-pipeline__row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .article-pipeline__arrow {
+      transform: rotate(90deg);
+      margin-left: 20px;
+    }
+  }
+</style>
