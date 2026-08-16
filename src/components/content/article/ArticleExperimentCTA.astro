@@ -13,10 +13,24 @@ interface Props {
   mediaLabel?: string;
   mediaSrc?: string;
   mediaAlt?: string;
+  /** CSS aspect-ratio value; match the asset so the frame doesn’t crop it. */
+  mediaRatio?: string;
   newTab?: boolean;
 }
 
-const { eyebrow, heading, copy, href, buttonLabel, secondary, mediaLabel, mediaSrc, mediaAlt, newTab = false } = Astro.props;
+const {
+  eyebrow,
+  heading,
+  copy,
+  href,
+  buttonLabel,
+  secondary,
+  mediaLabel,
+  mediaSrc,
+  mediaAlt,
+  mediaRatio = '16/9',
+  newTab = false,
+} = Astro.props;
 ---
 
 <div class="article-experiment">
@@ -34,7 +48,7 @@ const { eyebrow, heading, copy, href, buttonLabel, secondary, mediaLabel, mediaS
       label={mediaLabel}
       src={mediaSrc}
       alt={mediaAlt}
-      ratio="4/3"
+      ratio={mediaRatio}
       radius="lg"
       dark
       class="article-experiment__media"
@@ -45,13 +59,9 @@ const { eyebrow, heading, copy, href, buttonLabel, secondary, mediaLabel, mediaS
 <style>
   .article-experiment {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-    gap: clamp(28px, 5vw, 80px);
-    align-items: center;
-  }
-
-  .article-experiment:not(:has(.article-experiment__media)) {
     grid-template-columns: minmax(0, 1fr);
+    gap: clamp(36px, 5vw, 64px);
+    align-items: start;
   }
 
   .article-experiment__copy {
@@ -59,11 +69,12 @@ const { eyebrow, heading, copy, href, buttonLabel, secondary, mediaLabel, mediaS
     flex-direction: column;
     gap: 22px;
     align-items: flex-start;
+    max-width: 52ch;
   }
 
   .article-experiment__heading {
     margin: 0;
-    font-size: clamp(36px, 5.4vw, 72px);
+    font-size: clamp(40px, 6.4vw, 88px);
     line-height: .96;
     letter-spacing: -.045em;
     font-weight: 500;
@@ -85,10 +96,7 @@ const { eyebrow, heading, copy, href, buttonLabel, secondary, mediaLabel, mediaS
     color: rgba(243, 242, 240, .4);
   }
 
-  @media (max-width: 900px) {
-    .article-experiment {
-      grid-template-columns: minmax(0, 1fr);
-      row-gap: 28px;
-    }
+  .article-experiment__media {
+    width: 100%;
   }
 </style>

@@ -18,6 +18,28 @@
   max-width: 64ch;
 }
 
+/* Slightly larger than the sitewide .body-copy (17px) — matches the About
+   page's lede treatment and gives rich articles a bit more editorial
+   confidence without changing the shared base style used elsewhere. */
+.narrow-copy .body-copy {
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.inline-link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-border-strong);
+}
+
+.inline-link:hover {
+  text-decoration-color: var(--color-accent);
+}
+
+.article-section--dark .inline-link {
+  text-decoration-color: rgba(243, 242, 240, .35);
+}
+
 .compare-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
