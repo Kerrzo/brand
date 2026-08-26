@@ -4,7 +4,7 @@ Astro implementation of the Paul Kerr website, built from the Claude Design hand
 (`design-handoff-extracted/`) as the source of truth for layout, typography, spacing,
 copy and interaction.
 
-## Stack
+## Stack 2
 
 - Astro (static output), TypeScript, plain CSS, minimal vanilla JS
 - Astro content collections (`writing`, `work`, `projects`, `lab`) — Markdown in `src/content/`
