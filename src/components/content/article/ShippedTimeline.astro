@@ -1,0 +1,62 @@
+---
+// Editorial evolution timeline for Shipped case studies — deliberately distinct
+// from the Learnings ArticlePipeline (chips + arrows): milestones read as a
+// numbered, ruled sequence rather than a workflow chain, since a case study's
+// "timeline" is chronological evidence, not a process diagram.
+interface Props {
+  milestones: string[];
+  class?: string;
+}
+
+const { milestones, class: className = '' } = Astro.props;
+---
+
+<ol class:list={['shipped-timeline', className]}>
+  {milestones.map((m, i) => (
+    <li class="shipped-timeline__item">
+      <span class="shipped-timeline__index">{String(i + 1).padStart(2, '0')}</span>
+      <span class="shipped-timeline__label">{m}</span>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .shipped-timeline {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .shipped-timeline__item {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .shipped-timeline__index {
+    flex: 0 0 auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-label-dim);
+    width: 24px;
+  }
+
+  .shipped-timeline__label {
+    font-size: clamp(17px, 1.8vw, 22px);
+    font-weight: 500;
+    letter-spacing: -.02em;
+  }
+
+  :global(.article-section--dark) .shipped-timeline {
+    border-top-color: var(--color-dark-border);
+  }
+
+  :global(.article-section--dark) .shipped-timeline__item {
+    border-bottom-color: var(--color-dark-border);
+  }
+</style>

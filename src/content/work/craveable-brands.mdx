@@ -1,0 +1,302 @@
+---
+title: "Craveable Brands"
+client: "Craveable Brands"
+tagline: "Building restaurants of the future"
+eyebrow: "Shipped / Product Architecture"
+description: "Nine years evolving the online ordering platform behind Red Rooster, Oporto and Chicken Treat."
+category: "Enterprise platforms"
+yearRange: "2019 — 2023"
+meta: ["Online Ordering Platform", "Web · iOS · Android · AWS", "Red Rooster · Oporto · Chicken Treat"]
+tags: ["Ordering", "POS integration", "Loyalty"]
+displayOrder: 2
+featured: true
+richLayout: true
+heroImage: "/media/work/redsapp.png"
+heroAlt: "Red Rooster ordering app showing checkout, loyalty points and combo options"
+heroMediaLabel: "CRAVEABLE OLO — ORDERING APP"
+heroCaption: "The Red Rooster ordering experience — one of three brands running on the shared OLO platform."
+---
+
+import ArticleSection from '../../components/content/article/ArticleSection.astro';
+import ArticleStatement from '../../components/content/article/ArticleStatement.astro';
+import ArticleMedia from '../../components/content/article/ArticleMedia.astro';
+import ShippedTimeline from '../../components/content/article/ShippedTimeline.astro';
+
+<ArticleSection tight id="intro">
+  <p class="lede narrow-copy" style="max-width:56ch">
+    What started as a small piece of frontend work became a long-term relationship spanning ordering, payments, delivery, mobile, loyalty, restaurant operations and the architecture connecting it all.
+  </p>
+</ArticleSection>
+
+<ArticleSection id="the-beginning">
+  <div class="mono-label">The beginning</div>
+  <h2 class="h-2 section-spacing-top">We didn't build the platform.<br />We inherited it.</h2>
+
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">42 Interactive originally came in to help with a relatively small piece of React frontend work.</p>
+    <p class="body-copy">The platform behind it was anything but small.</p>
+    <p class="body-copy">The original delivery team had largely moved on, taking much of the knowledge of the system with them. We had some handover, but not enough to understand a platform of this size.</p>
+    <p class="body-copy">There were around 170 microservices, native iOS and Android applications, a React ordering experience, serverless infrastructure on AWS, DynamoDB, multiple delivery providers, loyalty, payments, menus, POS integrations and a long list of dependencies between them.</p>
+    <p class="body-copy">Serverless was relatively new to us too.</p>
+    <p class="body-copy">So we were learning the technology, reverse-engineering the platform and shipping production work at the same time.</p>
+    <p class="body-copy">The first deployment didn't go particularly well.</p>
+    <p class="body-copy">Our CI/CD run broke the platform and former developers had to help us recover it.</p>
+    <p class="body-copy">It was an uncomfortable introduction.</p>
+    <p class="body-copy">It was also the beginning of understanding the system properly.</p>
+  </div>
+
+  <ArticleStatement size="lg" class="section-spacing-top-lg">
+    You don't really understand a system until you understand what happens when it leaves the screen.
+  </ArticleStatement>
+</ArticleSection>
+
+<ArticleSection id="the-restaurant">
+  <div class="mono-label">The restaurant</div>
+  <h2 class="h-2 section-spacing-top">So I went to work in one.</h2>
+
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">Looking at the architecture told me how the software was connected.</p>
+    <p class="body-copy">It didn't tell me how a restaurant actually worked.</p>
+    <p class="body-copy">I asked Craveable if I could spend time inside one of their stores. I went to Lakemba and worked alongside the team.</p>
+    <p class="body-copy">I watched orders arrive.</p>
+    <p class="body-copy">I learned how the POS interacted with the Kitchen Display System.</p>
+    <p class="body-copy">I watched the different food preparation stations.</p>
+    <p class="body-copy">I saw how orders were packed, how drive-through worked, how delivery drivers arrived, and what happened when the systems didn't behave the way the software assumed they would.</p>
+    <p class="body-copy">I spoke to the people actually using the platform.</p>
+    <p class="body-copy">That changed my understanding of the problem.</p>
+    <p class="body-copy">Things that looked like software issues were often operational issues.</p>
+    <p class="body-copy">Things that looked sensible in an architecture diagram didn't always make sense when there was a queue of cars outside and food waiting on a counter.</p>
+    <p class="body-copy">And small technical decisions could affect whether someone's dinner arrived hot.</p>
+  </div>
+
+  <ArticleStatement size="lg" class="section-spacing-top-lg">
+    The architecture made more sense once I understood the kitchen.
+  </ArticleStatement>
+</ArticleSection>
+
+<ArticleSection id="the-recommendations">
+  <div class="mono-label">The recommendations</div>
+  <h2 class="h-2 section-spacing-top">17 things I thought we should change.</h2>
+
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">In August 2021 we consolidated what we'd learned into a set of recommendations for the OLO platform.</p>
+    <p class="body-copy">The objective wasn't architectural purity.</p>
+    <p class="body-copy">It was to increase orders.</p>
+    <p class="body-copy">That meant looking at the system through three lenses:</p>
+    <p class="body-copy"><strong>Driving more traffic.</strong></p>
+    <p class="body-copy"><strong>Increasing conversion.</strong></p>
+    <p class="body-copy"><strong>Increasing retention.</strong></p>
+    <p class="body-copy">The recommendations ranged from reliability and failed-order handling through to delivery timing, customer accounts, operational visibility, store experience, SEO, testing, payments and consolidating the three brands onto one platform.</p>
+    <p class="body-copy">Some were small.</p>
+    <p class="body-copy">Some would become major engineering programmes.</p>
+    <p class="body-copy">Most would eventually be implemented.</p>
+  </div>
+
+  <div class="section-spacing-top-lg">
+    <ArticleMedia
+      label="OLO RECOMMENDATIONS — PDF PREVIEW PENDING"
+      caption="OLO Recommendations — August 2021"
+      ratio="4/3"
+    />
+  </div>
+</ArticleSection>
+
+<ArticleSection dark id="the-platform">
+  <div class="mono-label">The platform</div>
+  <h2 class="h-2 section-spacing-top">An order touches a surprising amount of software.</h2>
+
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">Ordering a chicken burger looks simple from the customer's side.</p>
+    <p class="body-copy">Behind it sits a distributed system coordinating stores, products, menus, pricing, vouchers, payments, loyalty, delivery providers, restaurant systems and the applications customers interact with.</p>
+    <p class="body-copy">A product can have different prices by store.</p>
+    <p class="body-copy">Pickup and delivery can behave differently.</p>
+    <p class="body-copy">Menus have to remain synchronised with restaurant systems.</p>
+    <p class="body-copy">An order can pass through several systems before it appears on a kitchen screen.</p>
+    <p class="body-copy">And payment succeeding doesn't necessarily mean the restaurant successfully received the order.</p>
+    <p class="body-copy">That last distinction became particularly important.</p>
+  </div>
+
+  <div class="section-spacing-top-lg">
+    <ArticleMedia
+      label="CRAVEABLE OLO PLATFORM OVERVIEW — ARCHITECTURE DIAGRAM PENDING"
+      caption="A conceptual view of the OLO platform and its major integrations."
+      ratio="21/9"
+      dark
+    />
+  </div>
+</ArticleSection>
+
+<ArticleSection id="reliability">
+  <div class="mono-label">Reliability</div>
+  <h2 class="h-2 section-spacing-top">Payment success isn't order success.</h2>
+
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">One of the first major problems we tackled was failed ordering.</p>
+    <p class="body-copy">The platform could successfully take a customer's payment and then fail while pushing the order through the restaurant integration.</p>
+    <p class="body-copy">From the customer's perspective, that's about as bad as ecommerce gets.</p>
+    <p class="body-copy">You have my money.</p>
+    <p class="body-copy">The restaurant doesn't have my order.</p>
+    <p class="body-copy">Historically those failures could require someone to identify the problem and manually refund the customer.</p>
+    <p class="body-copy">We changed the payment flow to use pre-authorisation.</p>
+    <p class="body-copy">Instead of completing the payment before knowing the order had made it through the critical parts of the journey, the platform could authorise the funds and complete or release them based on the outcome.</p>
+    <p class="body-copy">It required significant changes to the ordering flow.</p>
+    <p class="body-copy">But the important change wasn't technical.</p>
+    <p class="body-copy">Failure became something the architecture expected rather than something support had to clean up afterwards.</p>
+  </div>
+
+  <div class="section-spacing-top-lg">
+    <ArticleMedia
+      label="Red Rooster checkout"
+      src="/media/work/redspay.png"
+      alt="Red Rooster checkout screen showing Apple Pay, Google Pay and PayPal options alongside Red Royalty loyalty balance"
+      caption="Red Rooster checkout — payment, loyalty and delivery fees resolve in one flow before the order reaches the restaurant."
+      ratio="377/735"
+      radius="lg"
+    />
+  </div>
+
+  <ArticleStatement size="lg" class="section-spacing-top-lg">
+    Failure isn't an edge case in a distributed system.<br />It's part of the design.
+  </ArticleStatement>
+</ArticleSection>
+
+<ArticleSection id="delivery">
+  <div class="mono-label">Delivery</div>
+  <h2 class="h-2 section-spacing-top">Software can decide when the chips get cooked.</h2>
+
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">Delivery exposed another connection between architecture and the physical world.</p>
+    <p class="body-copy">At the time of our original recommendations, average delivery time was just over 36 minutes.</p>
+    <p class="body-copy">The target for food quality was under 30.</p>
+    <p class="body-copy">One of the biggest sources of delay was the relationship between when a restaurant started preparing an order and when the delivery driver actually arrived.</p>
+    <p class="body-copy">Prepare it too early and the customer gets cold food.</p>
+    <p class="body-copy">Prepare it too late and the driver waits.</p>
+    <p class="body-copy">We worked with DoorDash's Automatic Order Release capability so the driver's proximity to the restaurant could help determine when the order was released to the POS and kitchen.</p>
+    <p class="body-copy">The aim was simple:</p>
+    <p class="body-copy"><strong>Have the food reach the counter as the driver reaches the restaurant.</strong></p>
+    <p class="body-copy">The implementation involved APIs, webhooks, geofencing and restaurant systems.</p>
+    <p class="body-copy">The outcome we cared about was much less technical.</p>
+    <p class="body-copy">Hotter food, delivered faster.</p>
+  </div>
+
+  <ArticleStatement size="lg" class="section-spacing-top-lg">
+    Sometimes the output of an API call is dinner.
+  </ArticleStatement>
+</ArticleSection>
+
+<ArticleSection id="web">
+  <div class="mono-label">Web</div>
+  <h2 class="h-2 section-spacing-top">The marketing site and the ordering site were solving the same customer journey.</h2>
+
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">Red Rooster effectively had two websites.</p>
+    <p class="body-copy">The brand and marketing experience lived in WordPress.</p>
+    <p class="body-copy">The ordering application lived separately in React.</p>
+    <p class="body-copy">The arrangement made technical sense historically, but it created a break in the customer journey.</p>
+    <p class="body-copy">The marketing site was good at attracting people.</p>
+    <p class="body-copy">The ordering site was good at taking orders.</p>
+    <p class="body-copy">Neither had the full context of the other.</p>
+    <p class="body-copy">It also limited SEO. Much of the useful product, menu, store and pricing experience lived inside the ordering application rather than the site search engines understood best.</p>
+    <p class="body-copy">We recommended bringing them together.</p>
+    <p class="body-copy">The eventual solution moved the web experience to Next.js and introduced Contentful as the headless content platform.</p>
+    <p class="body-copy">Marketing content and ecommerce could now exist inside the same application.</p>
+    <p class="body-copy">A campaign could lead directly into an order.</p>
+    <p class="body-copy">Store and menu content could participate in the wider web experience.</p>
+    <p class="body-copy">And the customer no longer had to cross an architectural boundary simply because they pressed "Order".</p>
+  </div>
+</ArticleSection>
+
+<ArticleSection id="consolidation">
+  <div class="mono-label">Consolidation</div>
+  <h2 class="h-2 section-spacing-top">One platform.<br />Three brands.</h2>
+
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">As the platform evolved, Red Rooster was no longer the only brand we needed to think about.</p>
+    <p class="body-copy">Oporto and Chicken Treat had their own ordering implementations based on forks of the original code.</p>
+    <p class="body-copy">Over time those codebases diverged.</p>
+    <p class="body-copy">Different brands used different delivery providers.</p>
+    <p class="body-copy">Business rules differed.</p>
+    <p class="body-copy">Features evolved independently.</p>
+    <p class="body-copy">Every platform-wide change risked becoming three pieces of work.</p>
+    <p class="body-copy">We brought the codebases back together.</p>
+    <p class="body-copy">Where brands genuinely behaved differently, the difference became configuration or a provider rather than another fork.</p>
+    <p class="body-copy">Delivery is a good example.</p>
+    <p class="body-copy">One brand could use Uber while another used DoorDash, but both could operate through the same underlying platform.</p>
+    <p class="body-copy">The same principle applied elsewhere.</p>
+    <p class="body-copy">The goal wasn't to make the brands identical.</p>
+    <p class="body-copy">It was to make difference intentional.</p>
+  </div>
+
+  <ArticleStatement size="lg" class="section-spacing-top-lg">
+    Shared where possible.<br />Different where necessary.
+  </ArticleStatement>
+
+  <div class="section-spacing-top-lg narrow-copy">
+    <p class="body-copy">That decision paid off repeatedly.</p>
+    <p class="body-copy">When payment infrastructure changed later, we could implement the new provider against the shared platform rather than rebuild the same capability independently for three brands.</p>
+    <p class="body-copy">The mobile applications followed a similar path, moving from separate native iOS and Android implementations toward a shared React Native codebase.</p>
+    <p class="body-copy">Less duplication meant more of the engineering effort could go into improving the product rather than maintaining copies of it.</p>
+  </div>
+</ArticleSection>
+
+<ArticleSection dark id="evolution">
+  <div class="mono-label">Evolution</div>
+  <h2 class="h-2 section-spacing-top">Nine years is a lot of releases.</h2>
+
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">The platform kept changing because the business kept changing.</p>
+    <p class="body-copy">Some projects were architectural.</p>
+    <p class="body-copy">Some were operational.</p>
+    <p class="body-copy">Some arrived because the world changed unexpectedly.</p>
+    <p class="body-copy">During COVID we introduced kerbside collection so customers could describe their vehicle and have food brought outside.</p>
+    <p class="body-copy">Drive-through ordering moved into the digital experience.</p>
+    <p class="body-copy">Apple Pay and Google Pay expanded payment options.</p>
+    <p class="body-copy">Fraud detection was introduced.</p>
+    <p class="body-copy">Automated testing reduced reliance on large manual regression cycles.</p>
+    <p class="body-copy">Delivery integrations evolved.</p>
+    <p class="body-copy">Customer accounts became first-class parts of the platform.</p>
+    <p class="body-copy">Observability improved.</p>
+    <p class="body-copy">The payment architecture evolved again, eventually supporting a controlled migration between payment providers store by store.</p>
+    <p class="body-copy">And through all of it there was the less glamorous work that matters just as much: supporting production, investigating failed orders, deploying releases and keeping a national ordering platform running.</p>
+  </div>
+
+  <div class="section-spacing-top-lg">
+    <ShippedTimeline milestones={[
+      "Inherited OLO",
+      "Restaurant research",
+      "Ordering resilience / Pre-auth",
+      "Kerbside + drive-through",
+      "Recommendations",
+      "Brand + ordering site merge",
+      "Multi-brand consolidation",
+      "React Native",
+      "Apple Pay + Google Pay",
+      "Delivery evolution",
+      "Automated testing",
+      "Payment platform migration",
+    ]} />
+  </div>
+</ArticleSection>
+
+<ArticleSection dark id="looking-back">
+  <div class="mono-label">Looking back</div>
+  <h2 class="h-2 section-spacing-top">The tools changed.<br />The job didn't.</h2>
+
+  <div class="section-spacing-top narrow-copy">
+    <p class="body-copy">Over the years almost every layer of the platform changed in some way.</p>
+    <p class="body-copy">Frameworks changed.</p>
+    <p class="body-copy">Payment providers changed.</p>
+    <p class="body-copy">Delivery providers changed.</p>
+    <p class="body-copy">Mobile architecture changed.</p>
+    <p class="body-copy">The way we deployed and tested changed.</p>
+    <p class="body-copy">But the most useful thing I did at the beginning had nothing to do with a framework.</p>
+    <p class="body-copy">I went into the restaurant and watched.</p>
+    <p class="body-copy">Architecture is easier when you understand the system.</p>
+    <p class="body-copy">Product decisions are easier when you understand the people using it.</p>
+    <p class="body-copy">And technology decisions become much clearer when you understand what happens when they reach the real world.</p>
+  </div>
+
+  <ArticleStatement size="xl" align="center" class="section-spacing-top-lg">
+    Understand the kitchen.<br />Then design the system.
+  </ArticleStatement>
+</ArticleSection>

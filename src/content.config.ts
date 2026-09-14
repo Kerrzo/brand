@@ -32,18 +32,31 @@ const writing = defineCollection({
 });
 
 const work = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/work' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/work' }),
   schema: z.object({
     title: z.string(),
     client: z.string(),
     description: z.string(),
     tagline: z.string(),
+    // Small label above the rich hero's title (e.g. "Shipped / Product
+    // Architecture") — distinct from `tagline`, which stays on display on
+    // the /shipped/ listing card.
+    eyebrow: z.string().optional(),
     category: z.enum(['AI Strategy Platform', 'AI and intelligence', 'Enterprise platforms', 'Immersive technology', 'Health and wellbeing']),
     yearRange: z.string(),
     role: z.string().optional(),
     deliveredVia: z.string().optional(),
     heroImage: z.string().optional(),
     heroAlt: z.string().optional(),
+    heroMediaLabel: z.string().optional(),
+    heroCaption: z.string().optional(),
+    // Same convention as the writing collection: rich MDX case studies compose
+    // their own full-bleed editorial sections and skip the narrow ContentLayout.
+    richLayout: z.boolean().default(false),
+    // Short descriptive lines for a rich case study's hero (platform type,
+    // surfaces, brands) — separate from `tags`, which renders as pill chips
+    // on the /shipped/ listing and shouldn't double up as hero copy.
+    meta: z.array(z.string()).default([]),
     featured: z.boolean().default(false),
     displayOrder: z.number().default(0),
     sourceUrl: z.string().optional(),
