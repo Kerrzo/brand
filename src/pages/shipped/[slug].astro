@@ -2,7 +2,6 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ContentLayout from '../../layouts/ContentLayout.astro';
-import ArticleMedia from '../../components/content/article/ArticleMedia.astro';
 import FinalCTA from '../../components/ui/FinalCTA.astro';
 
 export async function getStaticPaths() {
@@ -46,18 +45,6 @@ const facts = [
           {item.data.meta.map((line) => <span class="case__meta-line">{line}</span>)}
         </div>
       </div>
-
-      {item.data.heroImage && (
-        <div class="case__hero" data-reveal>
-          <ArticleMedia
-            label={item.data.heroMediaLabel ?? 'Hero image · replace'}
-            src={item.data.heroImage}
-            alt={item.data.heroAlt}
-            caption={item.data.heroCaption}
-            ratio="16/9"
-          />
-        </div>
-      )}
     </div>
 
     <div class="case-body" data-reveal>
