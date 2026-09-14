@@ -125,25 +125,18 @@ import ShippedTimeline from '../../components/content/article/ShippedTimeline.as
     <p class="body-copy">That last distinction became particularly important.</p>
   </div>
 
-  {/*
-    Pending: Craveable OLO Platform Overview architecture diagram.
-    Once the file lands at /public/media/work/craveable-olo-architecture.png,
-    replace the .evidence-pending block below with:
+  <figure class="evidence-figure bleed-full section-spacing-top-lg">
+    <a href="/media/work/craveable-olo-architecture.png" target="_blank" rel="noopener noreferrer">
+      <img src="/media/work/craveable-olo-architecture.png" alt="Craveable OLO platform architecture diagram — client applications, AWS microservices, storage and delivery/payment/content integrations" />
+    </a>
+    <figcaption>A conceptual view of the OLO platform and its major integrations. Click to view full size.</figcaption>
+  </figure>
 
-    <figure class="evidence-figure bleed-full">
-      <a href="/media/work/craveable-olo-architecture.png" target="_blank" rel="noopener noreferrer">
-        <img src="/media/work/craveable-olo-architecture.png" alt="Craveable OLO platform architecture diagram — client applications, AWS microservices, storage and delivery/payment/content integrations" />
-      </a>
-      <figcaption>A conceptual view of the OLO platform and its major integrations. Click to view full size.</figcaption>
-    </figure>
-
-    (natural aspect ratio, no crop, full-bleed width, click-through to the
-    full-resolution image in a new tab as the simplest "view full size")
-  */}
-  <div class="section-spacing-top-lg bleed-full">
-    <div class="evidence-pending">Architecture diagram pending — awaiting asset</div>
+  <div class="metric section-spacing-top-lg">
+    <div class="metric__figure">~580 restaurants</div>
+    <div class="metric__label">1M+ customers per week</div>
+    <p class="metric__note" style="max-width:52ch">At this scale, small architectural decisions become operational decisions.</p>
   </div>
-  <p class="section-spacing-top narrow-copy" style="color:rgba(243,242,240,.55);font-size:15px">A conceptual view of the OLO platform and its major integrations.</p>
 </ArticleSection>
 
 <ArticleSection id="reliability">
@@ -176,6 +169,13 @@ import ShippedTimeline from '../../components/content/article/ShippedTimeline.as
   <ArticleStatement size="lg" class="section-spacing-top-lg">
     Failure isn't an edge case in a distributed system.<br />It's part of the design.
   </ArticleStatement>
+
+  <p class="body-copy section-spacing-top-lg narrow-copy">Fraud prevention evolved alongside this work, integrating Forter through the Fat Zebra payment gateway. The business has publicly reported the outcome:</p>
+
+  <div class="metric section-spacing-top">
+    <div class="metric__figure">2.6%</div>
+    <div class="metric__label">Fewer fraudulent transactions</div>
+  </div>
 </ArticleSection>
 
 <ArticleSection id="delivery">
@@ -195,6 +195,11 @@ import ShippedTimeline from '../../components/content/article/ShippedTimeline.as
     <p class="body-copy">The implementation involved APIs, webhooks, geofencing and restaurant systems.</p>
     <p class="body-copy">The outcome we cared about was much less technical.</p>
     <p class="body-copy">Hotter food, delivered faster.</p>
+  </div>
+
+  <div class="metric section-spacing-top-lg">
+    <div class="metric__figure">6 minutes</div>
+    <div class="metric__label">Reduction in delivery time</div>
   </div>
 
   <ArticleStatement size="lg" class="section-spacing-top-lg">
@@ -222,13 +227,34 @@ import ShippedTimeline from '../../components/content/article/ShippedTimeline.as
     <p class="body-copy">Store and menu content could participate in the wider web experience.</p>
     <p class="body-copy">And the customer no longer had to cross an architectural boundary simply because they pressed "Order".</p>
   </div>
+
+  <div class="metric metric--feature section-spacing-top-lg">
+    <div class="metric__figure">3% &rarr; 4.5%</div>
+    <div class="metric__label">Online conversion</div>
+    <p class="metric__note">A 50% increase, publicly reported as an outcome of the SEO and UX work behind bringing the two experiences together.</p>
+  </div>
 </ArticleSection>
 
 <ArticleSection id="consolidation">
   <div class="mono-label">Consolidation</div>
   <h2 class="h-2 section-spacing-top">One platform.<br />Three brands.</h2>
 
-  <div class="section-spacing-top narrow-copy">
+  <div class="brand-trio section-spacing-top-lg">
+    <figure>
+      <img src="/media/work/craveable-brand-redrooster.png" alt="Red Rooster's consumer website" />
+      <figcaption>Red Rooster</figcaption>
+    </figure>
+    <figure>
+      <img src="/media/work/craveable-brand-oporto.png" alt="Oporto's consumer website" />
+      <figcaption>Oporto</figcaption>
+    </figure>
+    <figure>
+      <img src="/media/work/craveable-brand-chickentreat.png" alt="Chicken Treat's consumer website" />
+      <figcaption>Chicken Treat</figcaption>
+    </figure>
+  </div>
+
+  <div class="section-spacing-top-lg narrow-copy">
     <p class="body-copy">As the platform evolved, Red Rooster was no longer the only brand we needed to think about.</p>
     <p class="body-copy">Oporto and Chicken Treat had their own ordering implementations based on forks of the original code.</p>
     <p class="body-copy">Over time those codebases diverged.</p>
@@ -277,6 +303,11 @@ import ShippedTimeline from '../../components/content/article/ShippedTimeline.as
     <p class="body-copy">The payment architecture evolved again, eventually supporting a controlled migration between payment providers store by store.</p>
     <p class="body-copy">And through all of it there was the less glamorous work that matters just as much: supporting production, investigating failed orders, deploying releases and keeping a national ordering platform running.</p>
   </div>
+
+  <figure class="evidence-figure section-spacing-top-lg" style="max-width:420px">
+    <img src="/media/work/craveable-kerbside.png" alt="A Red Rooster team member handing over a kerbside pickup order in a designated kerbside parking bay" />
+    <figcaption>Kerbside collection, introduced during COVID.</figcaption>
+  </figure>
 
   <div class="section-spacing-top-lg">
     <ShippedTimeline milestones={[
