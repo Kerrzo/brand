@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
 import FinalCTA from '../../components/ui/FinalCTA.astro';
 import ArticleTwoCol from '../../components/content/article/ArticleTwoCol.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
 import { readingTime } from '../../lib/readingTime';
 
 export async function getStaticPaths() {
@@ -20,15 +21,21 @@ const rich = item.data.richLayout;
 
 <BaseLayout title={item.data.title} description={item.data.description} current="learnings">
   <div class:list={['article-frame', 'container', { 'article-frame--rich': rich }]}>
-    <a href="/learnings/" class="article__back">&larr; Learnings</a>
-
     <div class="article__intro" data-reveal>
       <ArticleTwoCol>
-        <span slot="label" class="pill-tag">{item.data.category}</span>
+        {item.data.eyebrow ? (
+          <SectionLabel slot="label" withDot>{item.data.eyebrow}</SectionLabel>
+        ) : (
+          <span slot="label" class="pill-tag">{item.data.category}</span>
+        )}
         <div class="article__intro-main">
           <div class="article__intro-copy">
             <h1 class="article__heading">{item.data.title}</h1>
-            <p class="article__deck">{item.data.description}</p>
+            {item.data.heroIntro?.length ? (
+              item.data.heroIntro.map((line) => <p class="article__deck">{line}</p>)
+            ) : (
+              <p class="article__deck">{item.data.description}</p>
+            )}
             <div class="article__meta">
               <span>{dateFmt.format(item.data.publishedDate)}</span>
               <span>&middot;</span>
@@ -40,6 +47,11 @@ const rich = item.data.richLayout;
                 </>
               )}
             </div>
+            {item.data.heroIntro?.length && item.data.tags.length > 0 && (
+              <div class="article__tags">
+                {item.data.tags.map((tag) => <span class="article__tags-line">{tag}</span>)}
+              </div>
+            )}
           </div>
           <figure class="article__hero-figure">
             <PlaceholderMedia
@@ -58,7 +70,7 @@ const rich = item.data.richLayout;
   </div>
 
   {rich ? (
-    <div class="article-body" data-reveal>
+    <div class="article-body">
       <Content />
     </div>
   ) : (
@@ -81,18 +93,6 @@ const rich = item.data.richLayout;
 
   .article-frame--rich {
     max-width: none;
-  }
-
-  .article__back {
-    display: inline-flex;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--color-label);
-    margin-bottom: clamp(28px, 4vh, 48px);
-  }
-
-  .article__back:hover {
-    color: var(--color-accent);
   }
 
   .article__intro {
@@ -143,6 +143,25 @@ const rich = item.data.richLayout;
 
   .article__placeholder-flag {
     color: var(--color-accent);
+  }
+
+  .article__tags {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+    width: 100%;
+    max-width: 44ch;
+  }
+
+  .article__tags-line {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--color-label);
   }
 
   .article__hero-figure {

@@ -1,0 +1,159 @@
+---
+// The one reusable editorial outcome primitive for Shipped case studies — a
+// verified figure presented as site typography (large number + small mono
+// unit/label, optional strong statement, optional supporting note), never a
+// bordered/shadowed SaaS stat card. Used for every outcome moment on a case
+// study (platform scale, fraud reduction, delivery time, conversion);
+// weight/composition vary through props, not through separate components.
+// Auto-adapts to light or dark sections via the ancestor .article-section--dark
+// class, the same convention used by ArticleLearnings/ShippedTimeline.
+interface Stat {
+  figure: string;
+  unit: string;
+}
+
+interface Props {
+  stats: Stat[];
+  label?: string;
+  statement?: string;
+  note?: string;
+  size?: 'default' | 'feature' | 'compact';
+  layout?: 'row' | 'stack';
+  rule?: boolean;
+  class?: string;
+}
+
+const {
+  stats,
+  label,
+  statement,
+  note,
+  size = 'default',
+  layout = 'row',
+  rule = true,
+  class: className = '',
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    'editorial-outcome',
+    `editorial-outcome--${size}`,
+    `editorial-outcome--${layout}`,
+    { 'editorial-outcome--rule': rule },
+    className,
+  ]}
+>
+  <div class="editorial-outcome__stats">
+    {stats.map((s) => (
+      <div class="editorial-outcome__stat">
+        <div class="editorial-outcome__figure">{s.figure}</div>
+        <div class="editorial-outcome__unit">{s.unit}</div>
+      </div>
+    ))}
+  </div>
+  {label && <div class="editorial-outcome__label">{label}</div>}
+  {statement && <p class="editorial-outcome__statement">{statement}</p>}
+  {note && <p class="editorial-outcome__note">{note}</p>}
+</div>
+
+<style>
+  .editorial-outcome {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .editorial-outcome--rule {
+    border-top: 1px solid var(--color-border);
+    padding-top: 22px;
+  }
+
+  :global(.article-section--dark) .editorial-outcome--rule {
+    border-top-color: var(--color-dark-border);
+  }
+
+  .editorial-outcome__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(24px, 4vw, 56px);
+  }
+
+  .editorial-outcome--stack .editorial-outcome__stats {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .editorial-outcome__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .editorial-outcome__figure {
+    font-size: clamp(34px, 4.6vw, 60px);
+    font-weight: 500;
+    letter-spacing: -.03em;
+    line-height: 1;
+  }
+
+  .editorial-outcome--feature .editorial-outcome__figure {
+    font-size: clamp(42px, 6.4vw, 84px);
+  }
+
+  .editorial-outcome--compact .editorial-outcome__figure {
+    font-size: clamp(24px, 2.8vw, 34px);
+  }
+
+  .editorial-outcome__unit {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--color-label);
+  }
+
+  :global(.article-section--dark) .editorial-outcome__unit {
+    color: var(--color-dark-label);
+  }
+
+  .editorial-outcome__label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+    margin-top: 2px;
+  }
+
+  :global(.article-section--dark) .editorial-outcome__label {
+    color: rgba(243, 242, 240, .75);
+  }
+
+  .editorial-outcome__statement {
+    margin: 6px 0 0;
+    font-size: clamp(22px, 2.6vw, 34px);
+    font-weight: 500;
+    letter-spacing: -.03em;
+    line-height: 1.15;
+    max-width: 20ch;
+    color: var(--color-ink);
+  }
+
+  :global(.article-section--dark) .editorial-outcome__statement {
+    color: var(--color-dark-fg);
+  }
+
+  .editorial-outcome__note {
+    margin: 6px 0 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--color-body);
+    max-width: 46ch;
+  }
+
+  :global(.article-section--dark) .editorial-outcome__note {
+    color: rgba(243, 242, 240, .55);
+  }
+</style>

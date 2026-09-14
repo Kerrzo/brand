@@ -4,9 +4,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ListingHero from '../../components/content/ListingHero.astro';
 import FilterBar from '../../components/ui/FilterBar.astro';
 import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import NavRow from '../../components/ui/NavRow.astro';
 import { readingTime } from '../../lib/readingTime';
 
-const all = await getCollection('writing', ({ data }) => !data.draft);
+// Only real, published Learning articles — placeholder entries are excluded
+// until they have real write-ups.
+const all = await getCollection('writing', ({ data }) => !data.draft && !data.placeholder);
 const sorted = all.sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf());
 
 const featured = sorted.find((p) => p.data.featured) ?? sorted[0];
@@ -20,6 +24,16 @@ const dateFmtLong = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'num
 const featuredReadingTime = readingTime(featured.body ?? '');
 
 const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
+
+// Cross-section "Keep exploring" links — the same pool every section page can
+// reuse, each excluding a link back to itself.
+const KEEP_EXPLORING_LINKS = [
+  { key: 'building', href: '/building/', label: 'Building', description: "See what I'm working on now." },
+  { key: 'shipped', href: '/shipped/', label: 'Shipped', description: 'See the products and systems behind the learnings.' },
+  { key: 'experiments', href: '/experiments/', label: 'Experiments', description: 'See the open, unfinished experiments.' },
+  { key: 'learnings', href: '/learnings/', label: 'Learnings', description: 'Notes from the work — ideas discovered building and shipping.' },
+];
+const keepExploringLinks = KEEP_EXPLORING_LINKS.filter((link) => link.key !== 'learnings');
 ---
 
 <BaseLayout title="Learnings" description="Notes on AI products, architecture decisions and the things that only become obvious once you ship." current="learnings">
@@ -100,6 +114,18 @@ const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
       </div>
     </section>
   )}
+
+  <section class="learnings-keep-exploring">
+    <div class="container learnings-keep-exploring__inner" data-reveal>
+      <SectionLabel withDot>Keep exploring</SectionLabel>
+      <h2 class="h-2 learnings-keep-exploring__statement">One learning usually<br />leads to another.</h2>
+      <div class="learnings-keep-exploring__rows">
+        {keepExploringLinks.map((link) => (
+          <NavRow href={link.href} label={link.label} description={link.description} />
+        ))}
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
@@ -284,6 +310,39 @@ const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
   @media (max-width: 640px) {
     .writing-page__grid {
       grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  /* Final white chapter between the black "real projects" editorial section
+     and the black site footer — replaces what was previously empty page
+     background with a purposeful transition. Not a hero: bounded to a
+     comfortable min-height rather than the viewport. */
+  .learnings-keep-exploring {
+    background: var(--color-bg);
+  }
+
+  .learnings-keep-exploring__inner {
+    /* The footer below already carries its own top margin, so the bottom
+       half of this padding needs to be noticeably smaller than the top half
+       for the visible gap above and below the section's content to match. */
+    padding-top: clamp(64px, 10vh, 120px);
+    padding-bottom: clamp(24px, 3vh, 48px);
+    width: 100%;
+  }
+
+  .learnings-keep-exploring__statement {
+    margin-top: clamp(20px, 3vh, 36px);
+    max-width: 68%;
+  }
+
+  .learnings-keep-exploring__rows {
+    margin-top: clamp(48px, 7vh, 80px);
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (max-width: 900px) {
+    .learnings-keep-exploring__statement {
+      max-width: none;
     }
   }
 </style>

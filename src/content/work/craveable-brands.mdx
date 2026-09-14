@@ -16,49 +16,53 @@ heroAlt: "Red Rooster ordering app showing checkout, loyalty points and combo op
 ---
 
 import ArticleSection from '../../components/content/article/ArticleSection.astro';
-import ArticleStatement from '../../components/content/article/ArticleStatement.astro';
 import ArticleTwoCol from '../../components/content/article/ArticleTwoCol.astro';
 import ArticlePipeline from '../../components/content/article/ArticlePipeline.astro';
-import ShippedTimeline from '../../components/content/article/ShippedTimeline.astro';
+import Ticker from '../../components/ui/Ticker.astro';
+import ArticleLearnings from '../../components/content/article/ArticleLearnings.astro';
+import '../../styles/craveable-editorial.css';
 import SectionLabel from '../../components/ui/SectionLabel.astro';
 import EditorialScrollSequence from '../../components/ui/EditorialScrollSequence.astro';
 
-<ArticleSection id="the-beginning">
+<div className="craveable-story">
+
+<ArticleSection dark tight id="the-beginning">
   <ArticleTwoCol>
-    <SectionLabel slot="label">The beginning</SectionLabel>
+    <SectionLabel slot="label" dark>The beginning</SectionLabel>
     <p class="lede">What started as a small piece of frontend work became a long-term relationship spanning ordering, payments, delivery, mobile, loyalty, restaurant operations and the architecture connecting it all.</p>
     <h2 class="h-2">We didn't build the platform.<br />We inherited it.</h2>
     <p class="body-copy">42 Interactive originally came in to help with a relatively small piece of React frontend work. The platform behind it was anything but small.</p>
     <p class="body-copy">The original delivery team had largely moved on, taking much of the knowledge of the system with them. We had some handover, but not enough to understand a platform of this size.</p>
-    <p class="body-copy">There were around 170 microservices, native iOS and Android applications, a React ordering experience, serverless infrastructure on AWS, DynamoDB, multiple delivery providers, loyalty, payments, menus, POS integrations and a long list of dependencies between them. Serverless was relatively new to us too.</p>
-    <p class="body-copy">So we were learning the technology, reverse-engineering the platform and shipping production work at the same time.</p>
+    <p class="body-copy">There were <strong>around 170 microservices</strong>, native iOS and Android applications, a React ordering experience, serverless infrastructure on AWS, DynamoDB, multiple delivery providers, loyalty, payments, menus, POS integrations and a long list of dependencies between them. Serverless was relatively new to us too.</p>
+    <p class="body-copy">So we were <strong>learning the technology, reverse-engineering the platform and shipping production work at the same time</strong>.</p>
     <p class="body-copy">The first deployment didn't go particularly well. Our CI/CD run broke the platform and former developers had to help us recover it.</p>
-    <p class="body-copy"><strong>It was an uncomfortable introduction. It was also the beginning of understanding the system properly.</strong></p>
+    <p class="body-copy">It was an uncomfortable introduction. It was also the beginning of <strong>understanding the system properly.</strong></p>
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection dark id="the-restaurant">
+<ArticleSection id="the-restaurant">
   <ArticleTwoCol>
-    <SectionLabel slot="label" dark>The restaurant</SectionLabel>
+    <SectionLabel slot="label">The restaurant</SectionLabel>
     <h2 class="h-2">So I went to work in one.</h2>
     <p class="body-copy">Looking at the architecture told me how the software was connected. It didn't tell me how a restaurant actually worked.</p>
-    <p class="body-copy">I asked Craveable if I could spend time inside one of their stores. I went to Lakemba and worked alongside the team.</p>
+    <p class="body-copy">I asked Craveable if I could spend time inside one of their stores. I went to Lakemba and <strong>worked alongside the team</strong>.</p>
     <p class="body-copy">I watched orders arrive. I learned how the POS interacted with the Kitchen Display System. I watched the different food preparation stations.</p>
     <p class="body-copy">I saw how orders were packed, how drive-through worked, how delivery drivers arrived, and what happened when the systems didn't behave the way the software assumed they would.</p>
     <p class="body-copy">I spoke to the people actually using the platform. That changed my understanding of the problem.</p>
     <p class="body-copy"><strong>Things that looked like software issues were often operational issues.</strong> Things that looked sensible in an architecture diagram didn't always make sense when there was a queue of cars outside and food waiting on a counter. And small technical decisions could affect whether someone's dinner arrived hot.</p>
 
-    <div class="scope-field section-spacing-top-lg">
+    <div class="section-spacing-top-lg" style="display:flex;flex-wrap:wrap;gap:8px">
       {["POS", "KDS", "Packing", "Drive-through", "Delivery", "Aggregators"].map((item) => (
-        <span class="scope-field__item">{item}</span>
+        <span class="pill-tag">{item}</span>
       ))}
     </div>
+
   </ArticleTwoCol>
 </ArticleSection>
 
 <EditorialScrollSequence
   tone="dark"
-  eyebrow="The restaurant"
+  size="large"
   lines={[
     'The architecture made more sense',
     'once I understood the kitchen.',
@@ -69,117 +73,125 @@ import EditorialScrollSequence from '../../components/ui/EditorialScrollSequence
   <ArticleTwoCol>
     <SectionLabel slot="label">The recommendations</SectionLabel>
     <h2 class="h-2">17 things I thought we should change.</h2>
-    <p class="body-copy">In August 2021 we consolidated what we'd learned into a set of recommendations for the OLO platform.</p>
+    <p class="body-copy">That time in the restaurant changed how I looked at the platform.</p>
+    <p class="body-copy">In August 2021, we consolidated what we'd learned into a set of recommendations for OLO.</p>
 
-    <figure class="evidence-figure bleed-wide section-spacing-top-lg">
-      <img src="/media/work/redsapp.png" alt="Red Rooster ordering app screens showing checkout, Red Royalty loyalty, offers and menu browsing" />
-      <figcaption>The Red Rooster ordering experience — the product these recommendations were written about.</figcaption>
-    </figure>
+    <p class="craveable-objective">The objective wasn't architectural purity.<br />It was to increase orders.</p>
 
-    <ArticleStatement size="lg" class="section-spacing-top-lg">
-      The objective wasn't architectural purity.<br />It was to increase orders.
-    </ArticleStatement>
-
-    <p class="body-copy section-spacing-top">That meant looking at the system through three lenses:</p>
-    <div class="section-spacing-top" style="display:flex;flex-direction:column;gap:10px">
-      <p class="lens-line">Driving more traffic.</p>
-      <p class="lens-line">Increasing conversion.</p>
-      <p class="lens-line">Increasing retention.</p>
-    </div>
-
-    <p class="body-copy section-spacing-top-lg">The recommendations ranged from reliability and failed-order handling through to delivery timing, customer accounts, operational visibility, store experience, SEO, testing, payments and consolidating the three brands onto one platform.</p>
-    <p class="body-copy">Some were small. Some would become major engineering programmes. Most would eventually be implemented.</p>
-
-    <div class="scope-field section-spacing-top-lg">
-      {["Reliability", "Delivery", "Customers", "Operations", "Store experience", "Observability", "SEO", "Testing", "Payments", "Multi-brand", "Staging", "POS integration"].map((item) => (
-        <span class="scope-field__item">{item}</span>
-      ))}
+    <p class="body-copy craveable-lenses-intro">That meant looking at the system through three lenses:</p>
+    <div class="section-spacing-top">
+      <ArticleLearnings items={[
+        { title: "Driving more traffic." },
+        { title: "Increasing conversion." },
+        { title: "Increasing retention." },
+      ]} />
     </div>
   </ArticleTwoCol>
+
+  <figure class="craveable-montage">
+    <img src="/media/work/redsapp.png" alt="Red Rooster ordering app screens showing checkout, Red Royalty loyalty, offers and menu browsing" />
+  </figure>
+
+  <ArticleTwoCol>
+    <span slot="label" />
+    <p class="body-copy">The recommendations ranged from reliability and failed-order handling through to delivery timing, customer accounts, operational visibility, store experience, SEO, testing, payments and bringing the three brands onto one platform.</p>
+    <p class="body-copy">Some were small. Others became major engineering programmes. <strong>Most would eventually be implemented.</strong></p>
+
+
+  </ArticleTwoCol>
 </ArticleSection>
+
+    <div class="craveable-scope-ticker">
+      <Ticker text="Reliability · Delivery · Customers · Operations · Store experience · Observability · SEO · Testing · Payments · Multi-brand · Staging · POS integration" />
+    </div>
 
 <ArticleSection dark id="the-platform">
   <ArticleTwoCol>
-    <SectionLabel slot="label" dark>The platform</SectionLabel>
-    <h2 class="h-2">An order touches a surprising amount of software.</h2>
+      <SectionLabel slot="label" dark>The platform</SectionLabel>
+      <h2 class="h-2 section-spacing-top">An order touches a surprising amount of software.</h2>
+    <p class="body-copy section-spacing-top">The recommendations sounded straightforward on paper. Implementing them wasn't.</p>
     <p class="body-copy">Ordering a chicken burger looks simple from the customer's side. Behind it sits a distributed system coordinating stores, products, menus, pricing, vouchers, payments, loyalty, delivery providers, restaurant systems and the applications customers interact with.</p>
-    <p class="body-copy">A product can have different prices by store. Pickup and delivery can behave differently. Menus have to remain synchronised with restaurant systems.</p>
-    <p class="body-copy">An order can pass through several systems before it appears on a kitchen screen. And payment succeeding doesn't necessarily mean the restaurant successfully received the order.</p>
-    <p class="body-copy"><strong>That last distinction became particularly important.</strong></p>
+    <p class="body-copy">A product can have different prices by store. Pickup and delivery behave differently. Menus have to remain synchronised with restaurant systems.</p>
+    <p class="body-copy">An order can pass through several systems before it appears on a kitchen screen. And <strong>payment succeeding doesn't necessarily mean the restaurant successfully received the order.</strong></p>
+    <p class="body-copy">That last distinction became particularly important.</p>
+
   </ArticleTwoCol>
+    <figure class="craveable-architecture">
+      <a href="/media/work/craveable-olo-architecture.png" target="_blank" rel="noopener noreferrer">
+        <img src="/media/work/craveable-olo-architecture.png" alt="Craveable OLO platform architecture diagram — client applications, AWS microservices, storage and delivery/payment/content integrations" />
+      </a>
+      <figcaption class="evidence-split__caption">A conceptual view of the OLO platform and its major integrations. Click to view full size — the complexity is part of the evidence.</figcaption>
+    </figure>
+</ArticleSection>
 
-  <figure class="evidence-figure bleed-full section-spacing-top-lg">
-    <a href="/media/work/craveable-olo-architecture.png" target="_blank" rel="noopener noreferrer">
-      <img src="/media/work/craveable-olo-architecture.png" alt="Craveable OLO platform architecture diagram — client applications, AWS microservices, storage and delivery/payment/content integrations" />
-    </a>
-  </figure>
-
-  <ArticleTwoCol class="section-spacing-top">
-    <span slot="label" />
-    <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,5vw,64px);align-items:flex-end;justify-content:space-between">
-      <p class="body-copy" style="margin:0;max-width:44ch">A conceptual view of the OLO platform and its major integrations. Click to view full size — the complexity is part of the evidence.</p>
-      <div class="metric">
-        <div class="metric__figure">~580 restaurants</div>
-        <div class="metric__label">1M+ customers per week</div>
-      </div>
-    </div>
-    <p class="body-copy section-spacing-top" style="max-width:52ch"><strong>At this scale, small architectural decisions become operational decisions.</strong></p>
+<ArticleSection id="platform-scale" class="craveable-scale">
+  <ArticleTwoCol>
+    <SectionLabel slot="label"></SectionLabel>
+  <div class="craveable-scale__numbers">
+    <p><span>~580</span><span class="craveable-caption">Restaurants</span></p>
+    <p><span>1M+</span><span class="craveable-caption">Customers / week</span></p>
+  </div>
+  <p class="craveable-scale__statement">And this wasn't a system we could casually experiment on.<br /><br />At this scale, small architectural decisions become operational decisions.</p>
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection id="reliability">
+<ArticleSection dark id="reliability">
   <ArticleTwoCol>
-    <SectionLabel slot="label">Reliability</SectionLabel>
-    <h2 class="h-2">Payment success isn't order success.</h2>
-    <p class="body-copy">One of the first major problems we tackled was failed ordering. The platform could successfully take a customer's payment and then fail while pushing the order through the restaurant integration.</p>
-    <p class="body-copy">From the customer's perspective, that's about as bad as ecommerce gets. You have my money. The restaurant doesn't have my order.</p>
-    <p class="body-copy">Historically those failures could require someone to identify the problem and manually refund the customer.</p>
+      <SectionLabel slot="label" dark>Reliability</SectionLabel>
+      <h2 class="h-2 section-spacing-top">Payment success isn't order success.</h2>
+    <p class="body-copy section-spacing-top">One of the first major problems we tackled was failed ordering.</p>
+    <p class="body-copy">The platform could successfully take a customer's payment and then fail while pushing the order through the restaurant integration.</p>
+    <p class="body-copy">From the customer's perspective, that's about as bad as ecommerce gets: you have my money, but the restaurant doesn't have my order.</p>
+    <p class="body-copy">Historically, those failures could require someone to identify the problem and manually refund the customer.</p>
+    <p class="body-copy">We changed the payment flow to use <strong>pre-authorisation.</strong> Instead of completing payment before knowing the order had made it through the critical parts of the journey, the platform could authorise the funds and complete or release them based on the outcome.</p>
+    <p class="body-copy">It required significant changes to the ordering flow.</p>
+    <p class="body-copy">But the important change wasn't technical.</p>
+    <p class="body-copy"><strong>Failure became something the architecture expected</strong> rather than something support had to clean up afterwards.</p>
 
-    <div class="evidence-split section-spacing-top-lg">
-      <div>
-        <p class="body-copy">We changed the payment flow to use <strong>pre-authorisation</strong>. Instead of completing the payment before knowing the order had made it through the critical parts of the journey, the platform could authorise the funds and complete or release them based on the outcome.</p>
-        <p class="body-copy section-spacing-top">It required significant changes to the ordering flow. But the important change wasn't technical: <strong>failure became something the architecture expected</strong> rather than something support had to clean up afterwards.</p>
+      <div class="craveable-fraud">
+        <p class="craveable-fraud__number">2.6%</p>
+        <p class="craveable-caption">Fewer fraudulent transactions</p>
+        <p class="body-copy">Payments evolved elsewhere too.</p>
+    <p class="body-copy">In a separate initiative, integrating Forter through the Fat Zebra payment gateway reduced fraudulent transactions by 2.6%.</p>
       </div>
-      <div>
-        <figure class="evidence-split__media">
-          <img src="/media/work/redspay.png" alt="Red Rooster checkout screen showing Apple Pay, Google Pay and PayPal options alongside Red Royalty loyalty balance" />
-          <figcaption class="evidence-split__caption">Payment, loyalty and delivery fees resolve in one flow before the order reaches the restaurant.</figcaption>
-        </figure>
-        <div class="metric section-spacing-top">
-          <div class="metric__figure">2.6%</div>
-          <div class="metric__label">Fewer fraudulent transactions</div>
-          <p class="metric__note">A parallel effort, integrating Forter through the Fat Zebra payment gateway.</p>
-        </div>
-      </div>
-    </div>
-
-    <ArticleStatement size="lg" class="section-spacing-top-lg">
-      Failure isn't an edge case in a distributed system.<br />It's part of the design.
-    </ArticleStatement>
   </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection id="reliability-insight">
+  <p class="craveable-failure">Failure isn't an edge case in a distributed system.<br />It's part of the design.</p>
 </ArticleSection>
 
 <ArticleSection dark id="delivery">
   <ArticleTwoCol>
     <SectionLabel slot="label" dark>Delivery</SectionLabel>
     <h2 class="h-2">Software can decide when the chips get cooked.</h2>
-    <p class="body-copy">Delivery exposed another connection between architecture and the physical world. At the time of our original recommendations, average delivery time was just over 36 minutes. The target for food quality was under 30.</p>
-    <p class="body-copy">One of the biggest sources of delay was the relationship between when a restaurant started preparing an order and when the delivery driver actually arrived. Prepare it too early and the customer gets cold food. Prepare it too late and the driver waits.</p>
-    <p class="body-copy">We worked with DoorDash's Automatic Order Release capability so the driver's proximity to the restaurant could help determine when the order was released to the POS and kitchen. The aim was simple: <strong>have the food reach the counter as the driver reaches the restaurant.</strong></p>
+    <p class="body-copy">Payments weren't the only place where software decisions reached into the restaurant.</p>
+    <p class="body-copy">Delivery made that relationship even more physical.</p>
+    <p class="body-copy">At the time of our original recommendations, average delivery time was just over 36 minutes. The target for food quality was under 30.</p>
+    <p class="body-copy">One of the biggest sources of delay was the relationship between when a restaurant started preparing an order and when the delivery driver actually arrived.</p>
+    <p class="body-copy">Prepare it too early and the customer gets cold food. Prepare it too late and the driver waits.</p>
+    <p class="body-copy">We worked with DoorDash's Automatic Order Release capability so the driver's proximity to the restaurant could help determine when the order was released to the POS and kitchen.</p>
+    <p class="body-copy">The aim was simple: <strong>have the food reach the counter as the driver reaches the restaurant.</strong></p>
 
     <div class="section-spacing-top-lg">
       <ArticlePipeline dark steps={["Driver approaches", "Order released", "Kitchen prepares", "Driver arrives"]} />
-      <div class="metric" style="margin-top:20px">
-        <div class="metric__figure">6 minutes</div>
-        <div class="metric__label">Reduction in delivery time</div>
+    </div>
+
+    <div class="craveable-delivery-result">
+      <div class="craveable-delivery-result__metric">
+        <span class="craveable-delivery-result__six">6</span>
+        <div><span class="craveable-delivery-result__minutes">Minutes</span><span class="craveable-caption">Reduction in delivery time</span></div>
+      </div>
+      <div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          {["APIs", "Webhooks", "Geofencing", "POS / KDS"].map((item) => (
+            <span class="pill-tag pill-tag--dark">{item}</span>
+          ))}
+        </div>
       </div>
     </div>
 
-    <p class="body-copy section-spacing-top-lg">The implementation involved APIs, webhooks, geofencing and restaurant systems. The outcome we cared about was much less technical: <strong>hotter food, delivered faster.</strong></p>
-
-    <ArticleStatement size="lg" class="section-spacing-top-lg">
-      Sometimes the output of an API call is dinner.
-    </ArticleStatement>
+    <p class="craveable-delivery-close">Hotter food.<br />Delivered faster.</p>
   </ArticleTwoCol>
 </ArticleSection>
 
@@ -187,15 +199,24 @@ import EditorialScrollSequence from '../../components/ui/EditorialScrollSequence
   <ArticleTwoCol>
     <SectionLabel slot="label">Web</SectionLabel>
     <h2 class="h-2">The marketing site and the ordering site were solving the same customer journey.</h2>
-    <p class="body-copy">Red Rooster effectively had two websites. The brand and marketing experience lived in WordPress. The ordering application lived separately in React. The arrangement made technical sense historically, but it created a break in the customer journey.</p>
-    <p class="body-copy">The marketing site was good at attracting people. The ordering site was good at taking orders. Neither had the full context of the other. It also limited SEO — much of the useful product, menu, store and pricing experience lived inside the ordering application rather than the site search engines understood best.</p>
-    <p class="body-copy">We recommended bringing them together. The eventual solution moved the web experience to <strong>Next.js</strong> and introduced <strong>Contentful</strong> as the headless content platform. Marketing content and ecommerce could now exist inside the same application, a campaign could lead directly into an order, and store and menu content could participate in the wider web experience.</p>
-    <p class="body-copy">And the customer no longer had to cross an architectural boundary simply because they pressed "Order".</p>
+    <p class="body-copy">Not every boundary in the platform was a microservice. Some were visible to the customer.</p>
+    <p class="body-copy">Red Rooster effectively had two websites.</p>
+    <p class="body-copy">The brand and marketing experience lived in WordPress. The ordering application lived separately in React.</p>
+    <p class="body-copy">The arrangement made technical sense historically, but it created <strong>a break in the customer journey.</strong></p>
+    <p class="body-copy">The marketing site was good at attracting people. The ordering site was good at taking orders. Neither had the full context of the other.</p>
+    <p class="body-copy">It also limited SEO — much of the useful product, menu, store and pricing experience lived inside the ordering application rather than the site search engines understood best.</p>
+    <p class="body-copy">We recommended bringing them together.</p>
+    <p class="body-copy">The eventual solution moved the web experience to <strong>Next.js</strong> and introduced <strong>Contentful</strong> as the headless content platform.</p>
+    <p class="body-copy">Marketing content and ecommerce could now exist inside the same application. A campaign could lead directly into an order, while store and menu content could participate in the wider web experience.</p>
+    <p class="body-copy">And the customer no longer had to cross an architectural boundary simply because they pressed 'Order'.</p>
 
-    <div class="metric metric--feature section-spacing-top-lg">
-      <div class="metric__figure">3% &rarr; 4.5%</div>
-      <div class="metric__label">Online conversion</div>
-      <p class="metric__note">A 50% increase, publicly reported as an outcome of the SEO and UX work behind bringing the two experiences together.</p>
+    <div class="craveable-conversion">
+      <p class="craveable-conversion__rate">3% <span>→</span> 4.5%</p>
+      <p class="craveable-caption">Online conversion</p>
+      <div class="craveable-conversion__context">
+        <p><span class="craveable-conversion__increase">+50%</span><span class="craveable-caption">Increase</span></p>
+        <p class="body-copy">Publicly reported as an outcome of the SEO and UX work behind bringing the two experiences together.</p>
+      </div>
     </div>
   </ArticleTwoCol>
 </ArticleSection>
@@ -204,83 +225,79 @@ import EditorialScrollSequence from '../../components/ui/EditorialScrollSequence
   <ArticleTwoCol>
     <SectionLabel slot="label" dark>Consolidation</SectionLabel>
     <h2 class="h-2">One platform.<br />Three brands.</h2>
+    <p class="body-copy section-spacing-top-lg">As the platform evolved, Red Rooster was no longer the only brand we needed to think about.</p>
+    <p class="body-copy">Oporto and Chicken Treat had ordering implementations based on forks of the original code. Over time those codebases diverged. Different brands used different delivery providers, business rules differed and features evolved independently.</p>
+    <p class="body-copy">Every platform-wide change risked becoming three pieces of work.</p>
+    <p class="body-copy">We brought the codebases back together.</p>
+    <p class="body-copy">Where brands genuinely behaved differently, the difference became <strong>configuration or a provider rather than another fork.</strong></p>
+    <p class="body-copy">One brand could use Uber while another used DoorDash, while both operated through the same underlying platform.</p>
 
-    <div class="brand-trio section-spacing-top-lg">
-      <figure class="brand-trio__lead">
-        <img src="/media/work/craveable-brand-redrooster.png" alt="Red Rooster's consumer website" />
-        <figcaption>Red Rooster</figcaption>
-      </figure>
-      <figure class="brand-trio__secondary">
+    <p class="craveable-shared">Shared where possible.<br />Different where necessary.</p>
+
+    <p class="body-copy section-spacing-top-lg"><strong>The goal wasn't to make the brands identical. It was to make difference intentional.</strong></p>
+    <p class="body-copy">That decision paid off repeatedly. When payment infrastructure changed later, we could implement the new provider against the shared platform rather than rebuild the capability three times.</p>
+    <p class="body-copy">Mobile followed a similar path, moving from separate native iOS and Android implementations toward a <strong>shared React Native codebase.</strong></p>
+  </ArticleTwoCol>
+    <div class="brand-layers craveable-brands">
+      <figure class="brand-layers__figure brand-layers__figure--oporto">
         <img src="/media/work/craveable-brand-oporto.png" alt="Oporto's consumer website" />
         <figcaption>Oporto</figcaption>
       </figure>
-      <figure class="brand-trio__secondary">
+      <figure class="brand-layers__figure brand-layers__figure--chickentreat">
         <img src="/media/work/craveable-brand-chickentreat.png" alt="Chicken Treat's consumer website" />
         <figcaption>Chicken Treat</figcaption>
       </figure>
+      <figure class="brand-layers__figure brand-layers__figure--lead">
+        <img src="/media/work/craveable-brand-redrooster.png" alt="Red Rooster's consumer website" />
+        <figcaption>Red Rooster</figcaption>
+      </figure>
     </div>
-
-    <p class="body-copy section-spacing-top-lg">As the platform evolved, Red Rooster was no longer the only brand we needed to think about. Oporto and Chicken Treat had their own ordering implementations based on forks of the original code, and over time those codebases diverged: different brands used different delivery providers, business rules differed, features evolved independently. Every platform-wide change risked becoming three pieces of work.</p>
-    <p class="body-copy">We brought the codebases back together. Where brands genuinely behaved differently, the difference became configuration or a provider rather than another fork — delivery is a good example. One brand could use Uber while another used DoorDash, but both could operate through the same underlying platform.</p>
-    <p class="body-copy">The same principle applied elsewhere. <strong>The goal wasn't to make the brands identical. It was to make difference intentional.</strong></p>
-
-    <ArticleStatement size="lg" class="section-spacing-top-lg">
-      Shared where possible.<br />Different where necessary.
-    </ArticleStatement>
-
-    <p class="body-copy section-spacing-top-lg">That decision paid off repeatedly. When payment infrastructure changed later, we could implement the new provider against the shared platform rather than rebuild the same capability independently for three brands.</p>
-    <p class="body-copy">The mobile applications followed a similar path, moving from separate native iOS and Android implementations toward a shared React Native codebase. Less duplication meant more of the engineering effort could go into improving the product rather than maintaining copies of it.</p>
-  </ArticleTwoCol>
 </ArticleSection>
 
 <ArticleSection id="evolution">
   <ArticleTwoCol>
     <SectionLabel slot="label">Evolution</SectionLabel>
     <h2 class="h-2">A platform never stops changing.</h2>
-    <p class="body-copy">The platform kept changing because the business kept changing. Some projects were architectural, some were operational, and some arrived because the world changed unexpectedly.</p>
-    <p class="body-copy">During COVID we introduced kerbside collection so customers could describe their vehicle and have food brought outside, and drive-through ordering moved into the digital experience. Apple Pay and Google Pay expanded payment options. Fraud detection was introduced.</p>
-    <p class="body-copy">Automated testing reduced reliance on large manual regression cycles. Delivery integrations evolved. Customer accounts became first-class parts of the platform. Observability improved. The payment architecture evolved again, eventually supporting a controlled migration between payment providers store by store.</p>
-    <p class="body-copy">And through all of it there was the less glamorous work that matters just as much: <strong>supporting production, investigating failed orders, deploying releases and keeping a national ordering platform running.</strong></p>
+    <p class="body-copy"><strong>The platform never stopped changing because the business never stopped changing.</strong></p>
+    <p class="body-copy">COVID brought kerbside collection and drive-through ordering into the digital experience. Payments evolved. Delivery evolved. Mobile evolved. Testing and observability improved.</p>
+    <p class="body-copy">And beneath all of it was the less glamorous work that mattered just as much: supporting production, investigating failed orders, deploying releases and <strong>keeping a national ordering platform running.</strong></p>
 
-    <figure class="evidence-figure section-spacing-top-lg" style="max-width:360px">
-      <img src="/media/work/craveable-kerbside.png" alt="A Red Rooster team member handing over a kerbside pickup order in a designated kerbside parking bay" />
-      <figcaption>Kerbside collection, introduced during COVID.</figcaption>
-    </figure>
+    <div class="section-spacing-top-lg">
+      <ArticleLearnings items={[
+        "Inherited OLO",
+        "Restaurant research",
+        "Ordering resilience / Pre-auth",
+        "Kerbside + drive-through",
+        "Recommendations",
+        "Brand + ordering site merge",
+        "Multi-brand consolidation",
+        "React Native",
+        "Apple Pay + Google Pay",
+        "Delivery evolution",
+        "Automated testing",
+        "Payment platform migration",
+      ].map((title) => ({ title }))} />
+    </div>
   </ArticleTwoCol>
-
-  <div class="section-spacing-top-lg">
-    <ShippedTimeline milestones={[
-      "Inherited OLO",
-      "Restaurant research",
-      "Ordering resilience / Pre-auth",
-      "Kerbside + drive-through",
-      "Recommendations",
-      "Brand + ordering site merge",
-      "Multi-brand consolidation",
-      "React Native",
-      "Apple Pay + Google Pay",
-      "Delivery evolution",
-      "Automated testing",
-      "Payment platform migration",
-    ]} />
-  </div>
 </ArticleSection>
 
 <ArticleSection dark tight id="looking-back">
   <ArticleTwoCol>
     <SectionLabel slot="label" dark>Looking back</SectionLabel>
     <h2 class="h-2">The tools changed.<br />The job didn't.</h2>
-    <p class="body-copy">Over the years almost every layer of the platform changed in some way. Frameworks changed. Payment providers changed. Delivery providers changed. Mobile architecture changed. The way we deployed and tested changed.</p>
-    <p class="body-copy">But the most useful thing I did at the beginning had nothing to do with a framework. I went into the restaurant and watched.</p>
-    <p class="body-copy"><strong>Architecture is easier when you understand the system. Product decisions are easier when you understand the people using it. And technology decisions become much clearer when you understand what happens when they reach the real world.</strong></p>
+    <p class="body-copy">Over the years almost every layer of the platform changed.</p>
+    <p class="body-copy">Frameworks changed. Payment providers changed. Delivery providers changed. Mobile architecture changed. The way we deployed and tested changed.</p>
+    <p class="body-copy">But the most useful thing I did at the beginning had nothing to do with a framework.</p>
+    <p class="body-copy craveable-payoff"><strong>I went into the restaurant and watched.</strong></p>
   </ArticleTwoCol>
 </ArticleSection>
 
-<EditorialScrollSequence
-  tone="light"
-  size="large"
-  lines={[
-    'Understand the kitchen.',
-    'Then design the system.',
-  ]}
-/>
+<ArticleSection id="looking-back-reflection">
+  <div class="craveable-reflection">
+    <p class="craveable-reflection__line">Architecture gets easier when you understand the <strong>system.</strong></p>
+    <p class="craveable-reflection__line">Product decisions get easier when you understand the <strong>people using it.</strong></p>
+    <p class="craveable-reflection__line">And technology decisions become clearer when you understand what happens when they reach the <strong>real world.</strong></p>
+  </div>
+</ArticleSection>
+
+</div>

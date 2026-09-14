@@ -17,6 +17,13 @@ const writing = defineCollection({
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
     placeholder: z.boolean().default(false),
+    // Small label above a rich article's title (e.g. "Learning / AI-Assisted
+    // Development") — same convention as the work collection's `eyebrow`.
+    // Optional so existing pieces keep falling back to their category pill.
+    eyebrow: z.string().optional(),
+    // Optional multi-paragraph hero intro for rich articles whose deck needs
+    // more than one sentence. Falls back to rendering `description` alone.
+    heroIntro: z.array(z.string()).optional(),
     heroImage: z.string().optional(),
     heroAlt: z.string().optional(),
     heroMediaLabel: z.string().optional(),

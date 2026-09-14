@@ -15,6 +15,7 @@ const { dark = false, tight = false, id, class: className = '' } = Astro.props;
 
 <section
   id={id}
+  data-reveal
   class:list={['article-section', { 'article-section--dark': dark, 'article-section--tight': tight }, className]}
 >
   <div class="article-section__inner container">

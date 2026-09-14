@@ -171,6 +171,80 @@
   }
 }
 
+/* The Platform's top composition: a dedicated 40/60 copy+diagram split
+   (wider than .evidence-split's phone-screenshot proportions) so the
+   architecture diagram reads as genuinely important, not a shrunk aside.
+   Mobile stacks copy then image, same convention as .evidence-split. */
+.platform-split {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .platform-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Reliability's story+outcome vs. product-evidence split: 60/40, vertically
+   centred so the phone doesn't dictate the section's height and the 2.6%
+   outcome reads as belonging to the narrative, not stranded under the
+   image. Mobile stacks copy → outcome → phone (source order). */
+.reliability-split {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .reliability-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Asymmetric evidence + supporting-copy pairing where the evidence (an
+   EditorialOutcome) should read as visually dominant — used by Delivery's
+   outcome composition (large metric left, supporting explanation right). */
+.outcome-split {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .outcome-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Full-bleed centred image used as a visual divider between two chunks of
+   copy in the same section — deliberately wide (75-85vw) but not edge to
+   edge, with no caption or text sitting beside it. */
+.evidence-divider {
+  margin: 0;
+  margin-inline: calc(50% - 50vw);
+  display: flex;
+  justify-content: center;
+  padding-block: clamp(40px, 6vh, 72px);
+}
+
+.evidence-divider img {
+  display: block;
+  width: 80vw;
+  max-width: 1400px;
+  height: auto;
+}
+
+@media (max-width: 900px) {
+  .evidence-divider img {
+    width: 92vw;
+  }
+}
+
 /* A typographic "field" of scope/category words — explicitly not pill
    badges, so it reads as the breadth of a review rather than feature tags. */
 .scope-field {
@@ -206,14 +280,6 @@
 .article-section--dark .scope-field__item {
   color: rgba(243, 242, 240, .75);
   border-right-color: var(--color-dark-border);
-}
-
-.lens-line {
-  font-size: clamp(19px, 1.9vw, 26px);
-  line-height: 1.4;
-  letter-spacing: -.01em;
-  font-weight: 500;
-  margin: 0;
 }
 
 /* Inline evidence metric — a verified public figure surfaced beside the
@@ -257,36 +323,35 @@
   color: rgba(243, 242, 240, .55);
 }
 
-/* Three brands, deliberately unequal: one lead screen carries the visual
-   weight, the other two stack smaller and offset — "one platform" reads as
-   the dominant shape, "three brands" as variation on it, not three equal
-   cards in a row. */
-.brand-trio {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-  gap: clamp(16px, 2.4vw, 32px);
+/* Three brands, layered rather than aligned side by side: Red Rooster is
+   the dominant foreground screen, Oporto and Chicken Treat sit behind it,
+   offset and gently rotated. The composition's bottom is clipped by the
+   container so the screens read as continuing past the visible frame — the
+   tops (the actual product content) stay fully visible. Mobile drops the
+   overlap entirely for a clean stacked list; forcing angled overlap on a
+   narrow screen would only hurt readability. */
+.brand-layers {
+  position: relative;
+  height: clamp(340px, 34vw, 480px);
+  overflow: hidden;
 }
 
-.brand-trio__lead {
-  grid-row: 1 / 3;
-}
-
-.brand-trio__secondary:last-child {
-  margin-top: clamp(28px, 6vw, 64px);
-}
-
-.brand-trio figure {
+.brand-layers__figure {
+  position: absolute;
+  top: 0;
   margin: 0;
+  width: clamp(220px, 28vw, 400px);
 }
 
-.brand-trio img {
+.brand-layers img {
   display: block;
   width: 100%;
   height: auto;
   border-radius: var(--radius-md);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, .4);
 }
 
-.brand-trio figcaption {
+.brand-layers figcaption {
   margin-top: 10px;
   font-family: var(--font-mono);
   font-size: 11px;
@@ -295,20 +360,47 @@
   color: var(--color-label);
 }
 
-.article-section--dark .brand-trio figcaption {
+.article-section--dark .brand-layers figcaption {
   color: var(--color-dark-label);
 }
 
+.brand-layers__figure--lead {
+  left: 4%;
+  z-index: 3;
+  width: clamp(250px, 32vw, 440px);
+}
+
+.brand-layers__figure--oporto {
+  left: 36%;
+  z-index: 2;
+  transform: rotate(-3deg);
+}
+
+.brand-layers__figure--chickentreat {
+  left: 58%;
+  z-index: 1;
+  transform: rotate(4deg);
+}
+
 @media (max-width: 900px) {
-  .brand-trio {
-    grid-template-columns: minmax(0, 1fr);
+  .brand-layers {
+    position: static;
+    height: auto;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
 
-  .brand-trio__lead {
-    grid-row: auto;
+  .brand-layers__figure {
+    position: static;
+    width: 100%;
+    transform: none;
   }
 
-  .brand-trio__secondary:last-child {
-    margin-top: 0;
+  /* Reading order on the stacked mobile list: Red Rooster (the visual
+     anchor) first, regardless of the desktop layering's source order. */
+  .brand-layers__figure--lead {
+    order: -1;
   }
 }

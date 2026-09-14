@@ -1,7 +1,7 @@
 ---
 interface Item {
   title: string;
-  copy: string;
+  copy?: string;
 }
 
 interface Props {
@@ -17,7 +17,7 @@ const { items } = Astro.props;
       <span class="article-learnings__index">{String(i + 1).padStart(2, '0')}</span>
       <div class="article-learnings__body">
         <h3 class="article-learnings__title">{item.title}</h3>
-        <p class="article-learnings__copy">{item.copy}</p>
+        {item.copy && <p class="article-learnings__copy">{item.copy}</p>}
       </div>
     </li>
   ))}
@@ -28,7 +28,7 @@ const { items } = Astro.props;
     margin: 0;
     padding: 0;
     list-style: none;
-    border-top: 1px solid var(--color-dark-border);
+    border-top: 1px solid var(--color-border);
   }
 
   .article-learnings__item {
@@ -36,13 +36,13 @@ const { items } = Astro.props;
     grid-template-columns: 70px minmax(0, 1fr);
     gap: 20px;
     padding: 30px 0;
-    border-bottom: 1px solid var(--color-dark-border);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .article-learnings__index {
     font-family: var(--font-mono);
     font-size: 11px;
-    color: var(--color-dark-label);
+    color: var(--color-label);
   }
 
   .article-learnings__body {
@@ -63,7 +63,26 @@ const { items } = Astro.props;
     margin: 0;
     font-size: 15px;
     line-height: 1.6;
-    color: rgba(243, 242, 240, .55);
+    color: var(--color-body);
     max-width: 56ch;
+  }
+
+  /* Dark article sections (e.g. Learning's "What I learned") hardcode
+     light-mode colors above — repoint them here the same way ArticleSection
+     already does for .body-copy/.mono-label. */
+  :global(.article-section--dark) .article-learnings {
+    border-top-color: var(--color-dark-border);
+  }
+
+  :global(.article-section--dark) .article-learnings__item {
+    border-bottom-color: var(--color-dark-border);
+  }
+
+  :global(.article-section--dark) .article-learnings__index {
+    color: var(--color-dark-label);
+  }
+
+  :global(.article-section--dark) .article-learnings__copy {
+    color: rgba(243, 242, 240, .55);
   }
 </style>

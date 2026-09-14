@@ -3,6 +3,8 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ContentLayout from '../../layouts/ContentLayout.astro';
 import FinalCTA from '../../components/ui/FinalCTA.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import ArticleTwoCol from '../../components/content/article/ArticleTwoCol.astro';
 
 export async function getStaticPaths() {
   const items = await getCollection('work', ({ data }) => !data.draft);
@@ -34,20 +36,20 @@ const facts = [
 {rich ? (
   <BaseLayout title={item.data.title} description={item.data.description} current="shipped">
     <div class="case-frame container">
-      <a href="/shipped/" class="case__back">&larr; Shipped</a>
-
       <div class="case__intro" data-reveal>
-        <div class="mono-label">{item.data.eyebrow ?? item.data.tagline}</div>
-        <h1 class="case__heading">{item.data.title}</h1>
-        <p class="case__deck">{item.data.description}</p>
+        <ArticleTwoCol>
+          <SectionLabel slot="label" withDot>{item.data.eyebrow ?? item.data.tagline}</SectionLabel>
+          <h1 class="case__heading">{item.data.title}</h1>
+          <p class="case__deck">{item.data.description}</p>
 
-        <div class="case__meta">
-          {item.data.meta.map((line) => <span class="case__meta-line">{line}</span>)}
-        </div>
+          <div class="case__meta">
+            {item.data.meta.map((line) => <span class="case__meta-line">{line}</span>)}
+          </div>
+        </ArticleTwoCol>
       </div>
     </div>
 
-    <div class="case-body" data-reveal>
+    <div class="case-body">
       <Content />
     </div>
 
@@ -87,29 +89,20 @@ const facts = [
 
 <style>
   .case-frame {
-    max-width: 1000px;
     padding-top: clamp(120px, 18vh, 200px);
     padding-bottom: clamp(56px, 8vh, 96px);
   }
 
-  .case__back {
-    display: inline-flex;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--color-label);
-    margin-bottom: clamp(28px, 4vh, 48px);
-  }
-
-  .case__back:hover {
-    color: var(--color-accent);
-  }
-
   .case__intro {
-    display: flex;
-    flex-direction: column;
+    margin-bottom: 40px;
+  }
+
+  .case__intro :global(.article-two-col__content) {
     gap: 22px;
-    align-items: flex-start;
-    margin-bottom: clamp(48px, 7vh, 84px);
+  }
+
+  .case__intro :global(.article-two-col__content) > :global(* + *) {
+    margin-top: 0;
   }
 
   .case__heading {
@@ -149,7 +142,16 @@ const facts = [
   }
 
   .case-body {
-    margin-top: clamp(24px, 4vh, 48px);
+    margin-top: 0;
+  }
+
+  /* The rich body's first section (.article-section) already carries its own
+     padding-block — this fixed override keeps the hero-to-first-chapter gap
+     a deliberate ~80-120px regardless of viewport height, instead of the
+     vh-scaled padding every other chapter uses (which is what made the
+     opening balloon on tall screens). */
+  .case-body :global(#the-beginning) {
+    padding-top: 56px;
   }
 
   .case-related {

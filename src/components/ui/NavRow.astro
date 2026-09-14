@@ -1,0 +1,93 @@
+---
+// Reusable ruled navigation row — a full-row link pairing a strong label
+// with supporting copy and a trailing arrow. Intended for "explore next"
+// style navigation between site sections (e.g. Learnings -> Building /
+// Shipped) and written generically so other listing pages can reuse it.
+interface Props {
+  href: string;
+  label: string;
+  description: string;
+  class?: string;
+}
+
+const { href, label, description, class: className = '' } = Astro.props;
+---
+
+<a href={href} class:list={['nav-row', className]}>
+  <span class="nav-row__label">{label}</span>
+  <span class="nav-row__desc">{description}</span>
+  <span class="nav-row__arrow" aria-hidden="true">&rarr;</span>
+</a>
+
+<style>
+  .nav-row {
+    display: grid;
+    grid-template-columns: minmax(120px, 200px) minmax(0, 1fr) 32px;
+    align-items: center;
+    gap: 24px;
+    padding: clamp(24px, 3.2vw, 34px) 0;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-ink);
+  }
+
+  .nav-row__label {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--color-ink);
+    transition: color var(--dur-fast) ease;
+  }
+
+  .nav-row__desc {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-body);
+  }
+
+  .nav-row__arrow {
+    font-size: 20px;
+    text-align: right;
+    color: var(--color-ink);
+    transition: transform var(--dur-fast) ease, color var(--dur-fast) ease;
+  }
+
+  .nav-row:hover .nav-row__label,
+  .nav-row:hover .nav-row__arrow {
+    color: var(--color-accent);
+  }
+
+  .nav-row:hover .nav-row__arrow {
+    transform: translateX(4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-row:hover .nav-row__arrow {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .nav-row {
+      grid-template-columns: minmax(0, 1fr) 24px;
+      grid-template-areas:
+        'label arrow'
+        'desc desc';
+      row-gap: 10px;
+      padding: 22px 0;
+    }
+
+    .nav-row__label {
+      grid-area: label;
+    }
+
+    .nav-row__arrow {
+      grid-area: arrow;
+    }
+
+    .nav-row__desc {
+      grid-area: desc;
+    }
+  }
+</style>
