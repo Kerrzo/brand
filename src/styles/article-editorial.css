@@ -198,6 +198,16 @@
   margin-right: 0;
 }
 
+.article-section--dark .scope-field {
+  border-top-color: var(--color-dark-border);
+  border-bottom-color: var(--color-dark-border);
+}
+
+.article-section--dark .scope-field__item {
+  color: rgba(243, 242, 240, .75);
+  border-right-color: var(--color-dark-border);
+}
+
 .lens-line {
   font-size: clamp(19px, 1.9vw, 26px);
   line-height: 1.4;
@@ -247,10 +257,22 @@
   color: rgba(243, 242, 240, .55);
 }
 
+/* Three brands, deliberately unequal: one lead screen carries the visual
+   weight, the other two stack smaller and offset — "one platform" reads as
+   the dominant shape, "three brands" as variation on it, not three equal
+   cards in a row. */
 .brand-trio {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(14px, 2vw, 24px);
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(16px, 2.4vw, 32px);
+}
+
+.brand-trio__lead {
+  grid-row: 1 / 3;
+}
+
+.brand-trio__secondary:last-child {
+  margin-top: clamp(28px, 6vw, 64px);
 }
 
 .brand-trio figure {
@@ -273,8 +295,20 @@
   color: var(--color-label);
 }
 
+.article-section--dark .brand-trio figcaption {
+  color: var(--color-dark-label);
+}
+
 @media (max-width: 900px) {
   .brand-trio {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .brand-trio__lead {
+    grid-row: auto;
+  }
+
+  .brand-trio__secondary:last-child {
+    margin-top: 0;
   }
 }
