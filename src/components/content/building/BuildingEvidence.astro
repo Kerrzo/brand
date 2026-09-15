@@ -1,0 +1,32 @@
+---
+interface Props {
+  src?: string;
+  poster?: string;
+  alt: string;
+  label: string;
+  caption: string;
+  eager?: boolean;
+}
+const { src, poster, alt, label, caption, eager = false } = Astro.props;
+const video = src?.endsWith('.mp4');
+---
+<figure class="building-evidence">
+  <div class="building-evidence__media">
+    {src ? video ? (
+      <video src={src} poster={poster} controls muted playsinline preload="none" aria-label={alt} />
+    ) : (
+      <img src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+    ) : <div class="building-evidence__pending">Product capture to follow · {label}</div>}
+  </div>
+  <figcaption><span class="mono-label">{label}</span><p>{caption}</p></figcaption>
+</figure>
+<style>
+  .building-evidence { margin: 0; width: 100%; }
+  .building-evidence__media { overflow: hidden; border-radius: var(--radius-md); background: #080807; border: 1px solid var(--color-dark-border); }
+  img, video { display: block; width: 100%; height: auto; }
+  figcaption { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 24px; align-items: baseline; margin-top: 20px; }
+  figcaption p { font-size: 15px; line-height: 1.55; color: var(--color-body); max-width: 54ch; }
+  :global(.article-section--dark) figcaption p { color: var(--color-dark-body); }
+  .building-evidence__pending { min-height: 280px; display: grid; place-items: center; padding: 32px; color: var(--color-dark-label); font-family: var(--font-mono); font-size: 12px; }
+  @media (max-width: 640px) { figcaption { grid-template-columns: 1fr; gap: 10px; } }
+</style>

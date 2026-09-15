@@ -135,3 +135,8 @@ button {
 .section-divider {
   border-top: 1px solid var(--color-border);
 }
+
+/* Shared editorial grid: use inside a container; evidence can keep its full width. */
+:root { --editorial-gap: clamp(24px, 4vw, 72px); --editorial-spine: calc(25% + var(--editorial-gap) * .75); }
+.editorial-spine { margin-inline-start: var(--editorial-spine); min-width: 0; }
+@media (max-width: 900px) { :root { --editorial-spine: 0px; } }

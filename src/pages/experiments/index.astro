@@ -13,17 +13,21 @@ const all = await getCollection('lab', ({ data }) => !data.draft);
 const bySlug = (slug: string) => all.find((item) => item.id === slug)!;
 
 const exp01 = bySlug('consistent-character-workflows');
+const poszo = bySlug('realtime-drive-through-ordering');
+const wifi = bySlug('wifi-human-sensing');
+const podcast = bySlug('ai-podcast-production');
 const exp07 = bySlug('ltx-video-experiments');
+// Retain the unfinished listing sections so they can return when content is ready.
+const showUnfinishedExperiments = false;
 
 const featuredOrder = [
-  { slug: 'realtime-drive-through-ordering', span: 4, ratio: '16/9', offset: false },
   { slug: 'modular-2d-characters', span: 2, ratio: '3/4', offset: true },
   { slug: 'concept-to-3d-asset', span: 2, ratio: '1/1', offset: false, dark: true },
   { slug: 'local-ai-versus-cloud', span: 2, ratio: '1/1', offset: false },
   { slug: 'modular-environment-kits', span: 2, ratio: '1/1', offset: false },
 ];
 
-const labLog = [
+const unfinishedLabLog = [
   { slug: 'realtime-drive-through-ordering', title: 'AI-native voice ordering' },
   { slug: 'consistent-character-workflows', title: 'Consistent game character pipeline' },
   { slug: 'modular-environment-kits', title: 'Cinematic website fly-through generation' },
@@ -31,7 +35,15 @@ const labLog = [
   { slug: 'ltx-video-experiments', title: 'LTX Video workflow evaluation' },
 ];
 
-const categories = ['Generative imagery', 'Voice and real-time', '3D and assets', 'Infrastructure'];
+const labLog = [
+  { slug: 'realtime-drive-through-ordering', title: 'Poszo' },
+  { slug: 'wifi-human-sensing', title: 'Wi-Fi human sensing' },
+  { slug: 'ai-podcast-production', title: 'AI Podcast Production' },
+  ...(showUnfinishedExperiments ? unfinishedLabLog.filter(entry => entry.slug !== 'realtime-drive-through-ordering') : []),
+];
+const categories = showUnfinishedExperiments
+  ? ['Generative imagery', 'Voice and real-time', '3D and assets', 'Infrastructure']
+  : ['Voice and real-time', 'Infrastructure'];
 ---
 
 <BaseLayout title="Experiments" description="Small experiments exploring technologies before they become products. Every experiment answers one question: is this genuinely useful?" current="experiments">
@@ -41,7 +53,7 @@ const categories = ['Generative imagery', 'Voice and real-time', '3D and assets'
     headingSize="clamp(46px, 9.2vw, 158px)"
     eyebrow="Open experiments"
     meta="Unfinished on purpose. Published as they are, notes included."
-    lede={`<p>Small experiments exploring technologies before they become products. Every experiment answers one question: <strong>is this genuinely useful?</strong></p>`}
+    lede={`<p>Real experiments exploring emerging technologies before deciding whether they deserve to become products. Every experiment answers one question: <strong>Is this genuinely useful?</strong></p>`}
   />
 
   <div class="lab-page__ticker">
@@ -52,6 +64,58 @@ const categories = ['Generative imagery', 'Voice and real-time', '3D and assets'
     <FilterBar categories={categories} allLabel="All experiments" bordered={false} />
   </section>
 
+  {poszo && (
+    <section class="container lab-page__poszo" data-card data-cat={poszo.data.category}>
+      <a href={`/experiments/${poszo.id}/`} class="lab-page__grid-item" data-reveal>
+        <div class="mono-label">EXP 01 — Poszo · Active experiment</div>
+        <PlaceholderMedia src="/media/projects/poszo.png" alt="Poszo drive-through voice ordering concept" label="Poszo" ratio="16/9" radius="md" />
+        <div class="lab-page__exp01-grid">
+          <h2 class="lab-page__exp01-heading">Poszo</h2>
+          <div>
+            <p class="body-copy">{poszo.data.description}</p>
+            <span class="lab-page__poszo-link">Explore voice ordering →</span>
+          </div>
+        </div>
+      </a>
+    </section>
+  )}
+
+  {wifi && (
+    <section class="container lab-page__poszo" data-card data-cat={wifi.data.category}>
+      <a href={`/experiments/${wifi.id}/`} class="lab-page__grid-item" data-reveal>
+        <div class="mono-label">EXP 02 — Wi-Fi human sensing · Starting</div>
+        <PlaceholderMedia src={wifi.data.heroImage} alt={wifi.data.heroAlt} label="RuView upstream demo" ratio="16/9" radius="md" />
+        <span class="lab-page__grid-item-desc">RuView demo by ruvnet · Not my test results</span>
+        <div class="lab-page__exp01-grid">
+          <h2 class="lab-page__exp01-heading">Can Wi-Fi count people in a room?</h2>
+          <div>
+            <p class="body-copy">{wifi.data.description}</p>
+            <span class="lab-page__poszo-link">Explore Wi-Fi sensing →</span>
+          </div>
+        </div>
+      </a>
+    </section>
+  )}
+
+  {podcast && (
+    <section class="container lab-page__poszo" data-card data-cat={podcast.data.category}>
+      <a href={`/experiments/${podcast.id}/`} class="lab-page__grid-item" data-reveal>
+        <div class="mono-label">EXP 03 — AI Podcast Production · Starting</div>
+        <PlaceholderMedia src={podcast.data.heroImage} alt={podcast.data.heroAlt} label="AI Podcast Production" ratio="3/2" radius="md" />
+        <span class="lab-page__grid-item-desc">Concept image · Experiment results still to come</span>
+        <div class="lab-page__exp01-grid">
+          <h2 class="lab-page__exp01-heading">AI Podcast Production</h2>
+          <div>
+            <p class="body-copy">Can AI turn an off-the-cuff conversation into a finished podcast?</p>
+            <p class="lab-page__grid-item-desc">Frontier models · Audio · Editorial AI</p>
+            <span class="lab-page__poszo-link">Explore the production experiment →</span>
+          </div>
+        </div>
+      </a>
+    </section>
+  )}
+
+  {showUnfinishedExperiments && <>
   {exp01 && (
     <section class="container lab-page__exp01" data-card data-cat={exp01.data.category}>
       <div class="lab-page__exp01-meta" data-reveal>
@@ -83,7 +147,7 @@ const categories = ['Generative imagery', 'Voice and real-time', '3D and assets'
             <PlaceholderMedia label={item.data.type} src={item.data.heroImage} alt={item.data.heroAlt} ratio={entry.ratio} radius="md" dark={entry.dark} />
             <div class="lab-page__grid-item-footer">
               <span class="lab-page__grid-item-title">{item.data.title}</span>
-              <span class="mono-label" style="color:var(--color-label-dim)">EXP {String(i + 2).padStart(2, '0')}</span>
+              <span class="mono-label" style="color:var(--color-label-dim)">EXP {String(i + 3).padStart(2, '0')}</span>
             </div>
             <span class="lab-page__grid-item-desc">{item.data.description}</span>
           </a>
@@ -101,6 +165,8 @@ const categories = ['Generative imagery', 'Voice and real-time', '3D and assets'
       <VideoReveal />
     </section>
   )}
+
+  </>}
 
   <section class="lab-page__graph">
     <div class="container">
@@ -158,6 +224,8 @@ const categories = ['Generative imagery', 'Voice and real-time', '3D and assets'
 </BaseLayout>
 
 <style>
+  .lab-page__poszo { padding-top: clamp(20px, 3vh, 40px); padding-bottom: clamp(64px, 9vh, 120px); }
+  .lab-page__poszo-link { display: inline-block; margin-top: 20px; border-bottom: 1px solid var(--color-border-strong); padding-bottom: 4px; }
   .lab-page__ticker {
     padding-top: clamp(44px, 7vh, 80px);
   }

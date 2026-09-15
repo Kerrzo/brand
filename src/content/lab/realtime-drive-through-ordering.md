@@ -1,15 +1,15 @@
 ---
-title: "Realtime AI drive-through ordering"
-description: "Testing whether local AI can replace traditional voice ordering with natural conversations and human escalation."
+title: "Poszo — Realtime drive-through ordering"
+description: "Testing whether realtime AI can keep a conversation natural, maintain a valid restaurant order and know when to involve a person."
 category: "Voice and real-time"
 type: "Experiment"
-status: "Demo ready"
+status: "Running"
 publishedDate: 2026-01-20
 tools: ["Whisper", "Realtime voice"]
 displayOrder: 2
 featured: true
 ---
 
-Testing whether local AI can replace traditional voice ordering with natural conversations and human escalation — a real-time voice ordering system built to survive an actual drive-through lane, not a quiet demo room.
+Poszo is a working prototype exploring realtime conversational ordering. The AI handles the conversation; the ordering system remains responsible for the order.
 
-Latency was the product. Every architectural decision traded against the 400ms window where a conversation starts to feel broken.
+Response latency, interruptions, corrections, menu grounding, modifiers, confirmation and human escalation are the experiment, not solved capabilities.

@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArticleSection from '../../../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../../../components/content/article/ArticleTwoCol.astro';
+import ArticlePipeline from '../../../components/content/article/ArticlePipeline.astro';
+import SectionLabel from '../../../components/ui/SectionLabel.astro';
+import EditorialScrollSequence from '../../../components/ui/EditorialScrollSequence.astro';
+import KeepExploring from '../../../components/content/KeepExploring.astro';
+import ExperimentResults from '../../../components/content/experiments/ExperimentResults.astro';
+const source = 'https://github.com/ruvnet/RuView';
+const tests = ['Empty vs occupied', 'People count', 'Enter / leave', 'Stationary people'].map(name => ({ name, status: 'Not run' }));
+---
+<BaseLayout title="Wi-Fi human sensing — Can Wi-Fi count people in a room?" description="Investigating RuView's Wi-Fi sensing claims, one controlled test at a time. Starting with an empty room and one person." current="experiments">
+  <article class="wifi-experiment">
+    <header class="container wifi-hero">
+      <ArticleTwoCol>
+        <SectionLabel slot="label" withDot>Experiment / Wi-Fi sensing</SectionLabel>
+        <h1>Can Wi-Fi count people in a room?</h1>
+        <p class="lede">I found an open-source project claiming it can detect human presence and movement from changes in Wi-Fi signals — without cameras.</p>
+        <p class="body-copy"><strong>I'm testing how much of that actually works.</strong></p>
+        <div class="wifi-status"><span>Starting · 2026</span><span>Wi-Fi CSI · RuView · Spatial sensing</span></div>
+        <p class="body-copy">An independent experiment with <a href={source}>RuView, the open-source project by ruvnet ↗</a>. I haven't personally verified its sensing claims.</p>
+      </ArticleTwoCol>
+      <figure class="editorial-spine wifi-evidence">
+        <img src="/media/experiments/ruview/upstream-demo.png" width="1996" height="1653" alt="RuView Observatory demo showing its sensing interface; these are upstream demo values, not my measurements" fetchpriority="high" />
+        <figcaption><a href="https://ruvnet.github.io/RuView/">RuView / Upstream demo ↗</a><span>Source visualisation by ruvnet. The displayed figures are demo values, not my test results.</span></figcaption>
+      </figure>
+    </header>
+    <ArticleSection tight id="the-claim"><ArticleTwoCol>
+      <SectionLabel slot="label">01 / The claim</SectionLabel>
+      <h2 class="h-2">Wi-Fi changes when people move through it.</h2>
+      <p class="body-copy">People alter the radio channel around them. RuView explores using Channel State Information — CSI — to turn those changes into spatial sensing.</p>
+      <p class="body-copy">The <a href={source}>project claims</a> presence detection, person counting, movement and entry/exit tracking, activity sensing, contactless vital signs and camera-free pose estimation.</p>
+      <p class="body-copy"><strong>Those are capabilities to investigate, not my results.</strong> The interesting question is how much survives contact with a real room.</p>
+    </ArticleTwoCol></ArticleSection>
+    <div class="wifi-moment">
+      <EditorialScrollSequence tone="dark" lines={['A camera needs to see you.', "Wi-Fi doesn't."]} />
+      <div class="container"><p class="body-copy editorial-spine">If the sensing is reliable enough, that changes where occupancy data could come from. Camera-free sensing still raises privacy questions.</p></div>
+    </div>
+    <ArticleSection tight id="first-test"><ArticleTwoCol>
+      <SectionLabel slot="label">02 / First test</SectionLabel>
+      <h2 class="h-2">Start with the boring question.</h2>
+      <p class="body-copy">I'm not starting with skeletal pose. First: <strong>is the room empty?</strong> Then: <strong>how many people are in it?</strong></p>
+      <ul class="wifi-list">{['0 people', '1 person', '2 people', '3 people', 'Entering', 'Leaving', 'Moving', 'Sitting still'].map(text => <li>{text}</li>)}</ul>
+      <p class="body-copy">These are planned, controlled scenarios. I'll compare what the system predicts with what is actually happening.</p>
+    </ArticleTwoCol></ArticleSection>
+    <ArticleSection dark tight id="hardware"><ArticleTwoCol>
+      <SectionLabel slot="label">03 / Hardware</SectionLabel>
+      <h2 class="h-2">The Wi-Fi card in my laptop isn't enough.</h2>
+      <p class="body-copy">For the sensing I want to test, RuView's documentation distinguishes <strong>coarse RSSI-based presence and motion</strong> on ordinary laptops from advanced sensing using CSI-capable hardware.</p>
+      <p class="body-copy">Its <a href={`${source}#-quick-start`}>hardware guidance</a> includes ESP32-S3 nodes for live CSI capture. That's the low-cost route I'm exploring; the exact setup is still being decided.</p>
+      <ArticlePipeline steps={['Wi-Fi signal', 'CSI sensor', 'RuView', 'Occupancy estimate', 'My test dashboard']} label="Planned experiment flow" />
+      <p class="body-copy">Running a demo isn't the same as sensing a room. The documented Docker evaluation can use simulated data, and the project describes its CSI-only pose model as first-cut.</p>
+    </ArticleTwoCol></ArticleSection>
+    <ArticleSection tight id="ground-truth"><ArticleTwoCol>
+      <SectionLabel slot="label">04 / Ground truth</SectionLabel>
+      <h2 class="h-2">A demo isn't enough.</h2>
+      <p class="body-copy">I want to know whether the sensing is correct, not whether the visualisation looks convincing. Each test will record actual and detected people, confidence where available, movement state, response time and notes.</p>
+      <div class="wifi-metrics" aria-label="Awaiting test data">{['Actual', 'Detected', 'Accuracy'].map(label => <div><span class="mono-label">{label}</span><strong>—</strong></div>)}</div>
+      <span class="mono-label">Awaiting test data</span>
+      <p class="body-copy">Planned measurements include exact count and presence accuracy, false positives, false negatives, count error, and response time when someone enters or leaves. <strong>No measurements yet.</strong></p>
+    </ArticleTwoCol></ArticleSection>
+    <div class="wifi-moment">
+      <EditorialScrollSequence tone="dark" lines={['If it says three people,', 'I want to know there were three people.']} />
+      <div class="container"><p class="body-copy editorial-spine">The interesting result might be where it fails.</p></div>
+    </div>
+    <ArticleSection tight id="why-i-care"><ArticleTwoCol>
+      <SectionLabel slot="label">05 / Why I care</SectionLabel>
+      <h2 class="h-2">Buildings already have a reason to know whether spaces are occupied.</h2>
+      <p class="body-copy">I've spent years working on software for commercial buildings. Room utilisation, bookings versus actual use, cleaning, after-hours presence and energy decisions are the kinds of problems that made this interesting to me.</p>
+      <p class="body-copy"><strong>A booking tells you who planned to use a room. A sensor might tell you whether anyone actually did.</strong></p>
+      <p class="body-copy">These are possible applications, not implemented features. This is my independent experiment, with no commercial deployment or involvement from Amica or International Towers. Even aggregate occupancy data needs care around privacy and consent.</p>
+    </ArticleTwoCol></ArticleSection>
+    <ArticleSection dark tight id="a-serious-question"><ArticleTwoCol>
+      <SectionLabel slot="label">06 / A more serious question</SectionLabel>
+      <h2 class="h-2">Could this become another signal during an emergency?</h2>
+      <p class="body-copy">Much further out: could validated sensing give trained responders an additional indication that a supposedly cleared area may still contain someone?</p>
+      <p class="wifi-statement">Perhaps: possible human presence.<br /><span>Never: proof an area is clear.</span></p>
+      <p class="body-copy"><strong>This experiment is not a life-safety system, and I would never use an unvalidated sensing prototype to declare an area safe.</strong></p>
+      <p class="body-copy">A reliable indication of possible presence might eventually add information. A lack of detection must not be interpreted as proof that nobody is there.</p>
+    </ArticleTwoCol></ArticleSection>
+    <ArticleSection tight id="the-real-test"><ArticleTwoCol>
+      <SectionLabel slot="label">07 / The real test</SectionLabel>
+      <h2 class="h-2">Presence is easy to claim. Reliability is the product question.</h2>
+      <ArticlePipeline steps={['Empty / occupied', 'People count', 'Enter / leave', 'Stationary people', 'Rough location', 'Pose']} label="Only progress when the simpler layer is credible" />
+      <p class="body-copy">The goal isn't to prove RuView right. It's to discover: <strong>what can Wi-Fi sensing actually tell me reliably enough to build something around?</strong></p>
+    </ArticleTwoCol></ArticleSection>
+    <ArticleSection dark tight id="status"><ArticleTwoCol>
+        <SectionLabel slot="label">08 / Status</SectionLabel>
+        <h2 class="h-2">I don't know if this works yet.</h2>
+        <p class="body-copy">That's why it's in Experiments. I've found the technology. I'm starting the hardware setup. Next comes the controlled test.</p>
+        <p class="body-copy">If it works, I'll keep pushing it. If it doesn't, the failures may be more interesting than a polished demo.</p>
+        <div class="wifi-status"><span>Wi-Fi human sensing</span><span>Status / Starting</span><span>2026 → now</span></div>
+        <p class="mono-label">Next test / Empty room → one person</p>
+        <ExperimentResults tests={tests} />
+    </ArticleTwoCol></ArticleSection>
+  </article>
+  <KeepExploring routes={['experiments', 'building', 'learnings']} descriptions={{ experiments: "See the other questions I'm testing.", building: "See what I'm turning into products.", learnings: 'See what the experiments teach me.' }} />
+</BaseLayout>
+<style>
+  .wifi-hero { padding-top: clamp(120px, 18vh, 180px); padding-bottom: 40px; }
+  h1 { font-size: clamp(38px, 5.4vw, 78px); line-height: 1.04; letter-spacing: -.04em; max-width: 19ch; }
+  a { text-decoration: underline; text-underline-offset: 4px; }
+  .wifi-status { display: flex; flex-wrap: wrap; gap: 12px 28px; padding-top: 20px; border-top: 1px solid var(--color-border); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+  .wifi-status span:first-child { color: var(--color-accent); }
+  .wifi-evidence { margin-top: 32px; margin-bottom: 0; margin-right: 0; }
+  .wifi-evidence img { display: block; width: 100%; height: auto; border-radius: var(--radius-md); }
+  figcaption { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; margin-top: 16px; font-size: 13px; line-height: 1.5; color: var(--color-body); }
+  .wifi-moment { background: var(--color-dark-bg); color: var(--color-dark-fg); padding-bottom: 40px; }
+  .wifi-moment :global(.editorial-seq) { margin-top: 0; }
+  .wifi-moment :global(.editorial-seq__inner) { padding-block: clamp(48px, 8vh, 88px); }
+  .wifi-moment .body-copy { color: var(--color-dark-body); }
+  .wifi-list { display: grid; grid-template-columns: 1fr 1fr; list-style: none; padding: 0; margin: 0; gap: 0 24px; }
+  .wifi-list li { padding: 12px 0; border-bottom: 1px solid var(--color-border); }
+  .wifi-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; border-block: 1px solid var(--color-border); padding: 24px 0; }
+  .wifi-metrics strong { display: block; font-size: clamp(36px, 5vw, 64px); font-weight: 500; }
+  .wifi-statement { font-size: clamp(24px, 3vw, 40px); line-height: 1.2; letter-spacing: -.025em; }
+  .wifi-statement span { color: var(--color-accent); }
+  :global(#status.article-section--dark) { --color-border: var(--color-dark-border); }
+  @media(max-width: 600px) { figcaption { grid-template-columns: 1fr; gap: 8px; } }
+</style>

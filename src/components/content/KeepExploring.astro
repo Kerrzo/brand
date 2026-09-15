@@ -1,0 +1,41 @@
+---
+import SectionLabel from '../ui/SectionLabel.astro';
+import NavRow from '../ui/NavRow.astro';
+import ArticleTwoCol from './article/ArticleTwoCol.astro';
+
+interface Props {
+  /** Omit the row pointing back at the section this component is rendered
+      on — same key convention as Header/BaseLayout's `current` prop. */
+  current?: 'building' | 'shipped' | 'experiments' | 'learnings';
+  routes?: Array<'building' | 'shipped' | 'experiments' | 'learnings'>;
+  descriptions?: Partial<Record<'building' | 'shipped' | 'experiments' | 'learnings', string>>;
+}
+
+const { current, routes, descriptions = {} }: Props = Astro.props;
+
+// Same order as the primary nav (minus About, which isn't part of this flow).
+const allLinks = [
+  { key: 'experiments', href: '/experiments/', label: 'Experiments', description: 'See the open, unfinished experiments.' },
+  { key: 'building', href: '/building/', label: 'Building', description: "See what I'm working on now." },
+  { key: 'shipped', href: '/shipped/', label: 'Shipped', description: 'See the products and systems behind the learnings.' },
+  { key: 'learnings', href: '/learnings/', label: 'Learnings', description: 'See the lessons pulled out of the building and shipping.' },
+];
+const links = routes
+  ? routes.flatMap((key) => allLinks.filter((link) => link.key === key))
+  : current ? allLinks.filter((link) => link.key !== current) : allLinks;
+---
+<section class="keep-exploring container">
+  <div data-reveal>
+    <ArticleTwoCol>
+    <SectionLabel slot="label" withDot>Keep exploring</SectionLabel>
+    <h2 class="h-2">One learning usually<br />leads to another.</h2>
+    <div class="keep-exploring__rows section-spacing-top-lg">
+      {links.map((link) => <NavRow {...link} description={descriptions[link.key as keyof typeof descriptions] ?? link.description} />)}
+    </div>
+    </ArticleTwoCol>
+  </div>
+</section>
+<style>
+  .keep-exploring { padding-block: clamp(64px, 10vh, 120px) clamp(24px, 3vh, 48px); }
+  .keep-exploring__rows { margin-top: 48px; border-top: 1px solid var(--color-border); }
+</style>

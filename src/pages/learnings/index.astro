@@ -4,8 +4,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ListingHero from '../../components/content/ListingHero.astro';
 import FilterBar from '../../components/ui/FilterBar.astro';
 import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
-import SectionLabel from '../../components/ui/SectionLabel.astro';
-import NavRow from '../../components/ui/NavRow.astro';
+import KeepExploring from '../../components/content/KeepExploring.astro';
+import LearningCard from '../../components/content/LearningCard.astro';
 import { readingTime } from '../../lib/readingTime';
 
 // Only real, published Learning articles — placeholder entries are excluded
@@ -25,15 +25,6 @@ const featuredReadingTime = readingTime(featured.body ?? '');
 
 const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
 
-// Cross-section "Keep exploring" links — the same pool every section page can
-// reuse, each excluding a link back to itself.
-const KEEP_EXPLORING_LINKS = [
-  { key: 'building', href: '/building/', label: 'Building', description: "See what I'm working on now." },
-  { key: 'shipped', href: '/shipped/', label: 'Shipped', description: 'See the products and systems behind the learnings.' },
-  { key: 'experiments', href: '/experiments/', label: 'Experiments', description: 'See the open, unfinished experiments.' },
-  { key: 'learnings', href: '/learnings/', label: 'Learnings', description: 'Notes from the work — ideas discovered building and shipping.' },
-];
-const keepExploringLinks = KEEP_EXPLORING_LINKS.filter((link) => link.key !== 'learnings');
 ---
 
 <BaseLayout title="Learnings" description="Notes on AI products, architecture decisions and the things that only become obvious once you ship." current="learnings">
@@ -73,14 +64,7 @@ const keepExploringLinks = KEEP_EXPLORING_LINKS.filter((link) => link.key !== 'l
 
   <section class="container writing-page__grid-wrap">
     <div class="writing-page__grid" data-narrow="repeat(2,minmax(0,1fr))" data-reveal>
-      {grid.map((post) => (
-        <a href={`/learnings/${post.id}/`} class="writing-page__card" data-card data-cat={post.data.category}>
-          <PlaceholderMedia label="Image" src={post.data.heroImage} alt={post.data.heroAlt} ratio="4/3" radius="md" />
-          <span class="pill-tag">{post.data.category}</span>
-          <h3 class="writing-page__card-title">{post.data.title}</h3>
-          <span class="mono-label">{dateFmtShort.format(post.data.publishedDate)}</span>
-        </a>
-      ))}
+      {grid.map((post) => <LearningCard post={post} />)}
     </div>
   </section>
 
@@ -115,17 +99,7 @@ const keepExploringLinks = KEEP_EXPLORING_LINKS.filter((link) => link.key !== 'l
     </section>
   )}
 
-  <section class="learnings-keep-exploring">
-    <div class="container learnings-keep-exploring__inner" data-reveal>
-      <SectionLabel withDot>Keep exploring</SectionLabel>
-      <h2 class="h-2 learnings-keep-exploring__statement">One learning usually<br />leads to another.</h2>
-      <div class="learnings-keep-exploring__rows">
-        {keepExploringLinks.map((link) => (
-          <NavRow href={link.href} label={link.label} description={link.description} />
-        ))}
-      </div>
-    </div>
-  </section>
+  <KeepExploring current="learnings" />
 </BaseLayout>
 
 <style>
@@ -191,11 +165,7 @@ const keepExploringLinks = KEEP_EXPLORING_LINKS.filter((link) => link.key !== 'l
     padding-top: clamp(56px, 8vh, 100px);
   }
 
-  .writing-page__grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(18px, 2.2vw, 34px);
-  }
+  .writing-page__grid { display: flex; flex-direction: column; }
 
   .writing-page__card {
     display: flex;
@@ -302,49 +272,13 @@ const keepExploringLinks = KEEP_EXPLORING_LINKS.filter((link) => link.key !== 'l
       row-gap: 16px;
     }
 
-    .writing-page__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+    .writing-page__grid { display: flex; flex-direction: column; }
   }
 
   @media (max-width: 640px) {
-    .writing-page__grid {
-      grid-template-columns: minmax(0, 1fr);
-    }
+    .writing-page__grid { display: flex; flex-direction: column; }
   }
 
-  /* Final white chapter between the black "real projects" editorial section
-     and the black site footer — replaces what was previously empty page
-     background with a purposeful transition. Not a hero: bounded to a
-     comfortable min-height rather than the viewport. */
-  .learnings-keep-exploring {
-    background: var(--color-bg);
-  }
-
-  .learnings-keep-exploring__inner {
-    /* The footer below already carries its own top margin, so the bottom
-       half of this padding needs to be noticeably smaller than the top half
-       for the visible gap above and below the section's content to match. */
-    padding-top: clamp(64px, 10vh, 120px);
-    padding-bottom: clamp(24px, 3vh, 48px);
-    width: 100%;
-  }
-
-  .learnings-keep-exploring__statement {
-    margin-top: clamp(20px, 3vh, 36px);
-    max-width: 68%;
-  }
-
-  .learnings-keep-exploring__rows {
-    margin-top: clamp(48px, 7vh, 80px);
-    border-top: 1px solid var(--color-border);
-  }
-
-  @media (max-width: 900px) {
-    .learnings-keep-exploring__statement {
-      max-width: none;
-    }
-  }
 </style>
 
 <script>

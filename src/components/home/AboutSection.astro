@@ -43,9 +43,12 @@ import PlaceholderMedia from '../ui/PlaceholderMedia.astro';
   .about-teaser__copy {
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 0;
     padding-top: clamp(0px, 3vw, 48px);
   }
+
+  .about-teaser__copy > * + * { margin-top: 28px; }
+  .about-teaser__copy > p + p { margin-top: var(--prose-gap); }
 
   .about-teaser__heading {
     margin: 0;

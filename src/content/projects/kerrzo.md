@@ -1,7 +1,7 @@
 ---
 title: "Kerrzo"
-tagline: "An AI-native operating system, under exploration"
-description: "An exploration into what an AI-native operating system for small businesses could become — and what architecture looks like when agents sit at the centre of the system."
+tagline: "An AI-first business operating system, actively being built"
+description: "I'm building Kerrzo to explore what business software should look like when AI is part of the architecture — connecting business context, people and agents."
 status: "In development"
 tags: ["AI agents", "CRM", "Operations"]
 displayOrder: 1

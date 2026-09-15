@@ -18,9 +18,15 @@
 .narrow-copy {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  max-width: 64ch;
+  gap: 0;
+  max-width: var(--prose-measure);
 }
+
+.narrow-copy > * + * { margin-top: 20px; }
+.narrow-copy > p + p { margin-top: var(--prose-gap); }
+.narrow-copy > .prose-emphasis { margin-top: var(--prose-pause); }
+.narrow-copy > .section-spacing-top { margin-top: 32px; }
+.narrow-copy > .section-spacing-top-lg { margin-top: 48px; }
 
 /* Slightly larger than the sitewide .body-copy (17px) — matches the About
    page's lede treatment and gives rich articles a bit more editorial
@@ -404,3 +410,11 @@
     order: -1;
   }
 }
+
+.foundation-evidence { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center; border-block: 1px solid var(--color-border); padding-block: 40px; }
+.foundation-evidence p { margin: 0; }
+.foundation-evidence__word { display: block; font-size: clamp(48px, 7vw, 104px); font-weight: 500; line-height: 1; letter-spacing: -.055em; }
+.foundation-evidence__label { display: block; margin-top: 18px; font-family: var(--font-mono); font-size: 12px; line-height: 1.5; text-transform: uppercase; letter-spacing: .06em; }
+.foundation-evidence__arrow { font-size: clamp(32px, 4vw, 60px); color: var(--color-accent); }
+.article-section--dark .foundation-evidence { border-color: var(--color-dark-border); }
+@media (max-width: 640px) { .foundation-evidence { grid-template-columns: 1fr; gap: 28px; } .foundation-evidence__arrow { transform: rotate(90deg); width: fit-content; } }

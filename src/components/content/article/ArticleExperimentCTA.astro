@@ -33,13 +33,17 @@ const {
 } = Astro.props;
 ---
 
+<!-- Theme-agnostic: colors and the button variant below adapt to an
+     ancestor .article-section--dark via CSS, the same convention SectionLabel
+     uses, so this reuses cleanly whether its ArticleSection is dark or light
+     without the caller having to sync a `dark` prop by hand. -->
 <div class="article-experiment">
   <div class="article-experiment__copy">
-    <SectionLabel dark>{eyebrow}</SectionLabel>
+    <SectionLabel>{eyebrow}</SectionLabel>
     <h2 class="article-experiment__heading">{heading}</h2>
     <p class="article-experiment__body">{copy}</p>
     <div class="article-experiment__actions">
-      <Button href={href} variant="inverse" newTab={newTab}>{buttonLabel}</Button>
+      <Button href={href} variant="outline" newTab={newTab}>{buttonLabel}</Button>
     </div>
     {secondary && <div class="article-experiment__secondary">{secondary}</div>}
   </div>
@@ -50,7 +54,6 @@ const {
       alt={mediaAlt}
       ratio={mediaRatio}
       radius="lg"
-      dark
       class="article-experiment__media"
     />
   )}
@@ -87,8 +90,12 @@ const {
     margin: 0;
     font-size: 17px;
     line-height: 1.6;
-    color: rgba(243, 242, 240, .62);
+    color: var(--color-body);
     max-width: 46ch;
+  }
+
+  :global(.article-section--dark) .article-experiment__body {
+    color: rgba(243, 242, 240, .62);
   }
 
   .article-experiment__secondary {
@@ -96,6 +103,10 @@ const {
     font-size: 11px;
     letter-spacing: .1em;
     text-transform: uppercase;
+    color: var(--color-label);
+  }
+
+  :global(.article-section--dark) .article-experiment__secondary {
     color: rgba(243, 242, 240, .4);
   }
 

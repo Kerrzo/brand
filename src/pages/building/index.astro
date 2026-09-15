@@ -5,8 +5,9 @@ import ListingHero from '../../components/content/ListingHero.astro';
 import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
 import FinalCTA from '../../components/ui/FinalCTA.astro';
 import EditorialScrollSequence from '../../components/ui/EditorialScrollSequence.astro';
+import KeepExploring from '../../components/content/KeepExploring.astro';
 
-const all = await getCollection('projects', ({ data }) => !data.draft);
+const all = await getCollection('projects', ({ id, data }) => !data.draft && id !== 'ai-game-world');
 const items = all.sort((a, b) => a.data.displayOrder - b.data.displayOrder);
 
 const pageCopy: Record<string, { title?: string; href?: string; category: string; description: string; focus: string[] }> = {
@@ -19,8 +20,8 @@ const pageCopy: Record<string, { title?: string; href?: string; category: string
   brilliancy: {
     category: 'AI Chess Coach',
     description:
-      'Brilliancy explores whether AI can become a genuinely useful personal chess coach. It also serves as a platform for experimenting with local AI, cloud inference and modern AI product architecture.',
-    focus: ['Personalised coaching', 'Local AI', 'Cloud architecture'],
+      "I'm building the chess coach I want to use: bringing engine analysis, AI explanation and a player's own history into one learning system.",
+    focus: ['Personalised coaching', 'Game review', 'Learning memory'],
   },
   'ai-game-world': {
     title: 'Poszo',
@@ -43,6 +44,39 @@ const pageCopy: Record<string, { title?: string; href?: string; category: string
     lede="I build products to explore how AI is changing software. Every project represents a real engineering problem, an architectural decision or a new way of thinking about AI-first product development."
   />
 
+  <section class="container projects-page__rows">
+    {items.map((item, i) => {
+      const copy = pageCopy[item.id];
+      const title = copy?.title ?? item.data.title;
+      const category = copy?.category ?? item.data.status;
+      const description = copy?.description ?? item.data.description;
+      const focus = copy?.focus ?? item.data.tags;
+      return (
+        <div class:list={['projects-page__row', { 'projects-page__row--dark': i % 2 === 0 }]} data-reveal>
+          <PlaceholderMedia
+            label={`${title} hero image`}
+            src={item.id === 'kerrzo' ? '/media/projects/kerrzo.mp4' : item.id === 'brilliancy' ? '/media/projects/brilliancy2.png' : item.id === 'ai-game-world' ? '/media/projects/poszo.png' : item.data.heroImage}
+            alt={item.id === 'kerrzo' ? 'Kerrzo platform interface' : item.id === 'brilliancy' ? 'Brilliancy chess board and coaching UI' : item.id === 'ai-game-world' ? 'Poszo voice ordering interface' : item.data.heroAlt}
+            ratio="16/11"
+            radius="md"
+            dark={i % 2 === 0}
+            class="projects-page__media"
+          />
+          <div class="projects-page__copy">
+            <div class:list={['mono-label', { 'eyebrow--dark': i % 2 === 0 }]}>({String(i + 1).padStart(2, '0')}) &middot; Active exploration</div>
+            <h2 class="projects-page__title">{title}</h2>
+            <div class="projects-page__tagline">{category}</div>
+            <p class="projects-page__desc">{description}</p>
+            <div class="projects-page__tags">
+              {focus.map((tag) => <span class:list={['pill-tag', { 'pill-tag--dark': i % 2 === 0 }]}>{tag}</span>)}
+            </div>
+            <a href={copy?.href ?? `/building/${item.id}/`} class="projects-page__link">Read More</a>
+          </div>
+        </div>
+      );
+    })}
+  </section>
+
   <EditorialScrollSequence
     lines={[
       'The tools have changed.',
@@ -54,38 +88,7 @@ const pageCopy: Record<string, { title?: string; href?: string; category: string
     ]}
   />
 
-  <section class="container projects-page__rows">
-    {items.map((item, i) => {
-      const copy = pageCopy[item.id];
-      const title = copy?.title ?? item.data.title;
-      const category = copy?.category ?? item.data.status;
-      const description = copy?.description ?? item.data.description;
-      const focus = copy?.focus ?? item.data.tags;
-      return (
-        <div class:list={['projects-page__row', { 'projects-page__row--dark': i % 2 === 1 }]} data-reveal>
-          <PlaceholderMedia
-            label={`${title} hero image`}
-            src={item.data.heroImage}
-            alt={item.data.heroAlt}
-            ratio="16/11"
-            radius="md"
-            dark={i % 2 === 1}
-            class="projects-page__media"
-          />
-          <div class="projects-page__copy">
-            <div class:list={['mono-label', { 'eyebrow--dark': i % 2 === 1 }]}>({String(i + 1).padStart(2, '0')}) &middot; Active exploration</div>
-            <h2 class="projects-page__title">{title}</h2>
-            <div class="projects-page__tagline">{category}</div>
-            <p class="projects-page__desc">{description}</p>
-            <div class="projects-page__tags">
-              {focus.map((tag) => <span class:list={['pill-tag', { 'pill-tag--dark': i % 2 === 1 }]}>{tag}</span>)}
-            </div>
-            <a href={copy?.href ?? `/building/${item.id}/`} class="projects-page__link">Read More</a>
-          </div>
-        </div>
-      );
-    })}
-  </section>
+  <KeepExploring current="building" />
 
   <FinalCTA />
 </BaseLayout>

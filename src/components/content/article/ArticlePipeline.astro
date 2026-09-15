@@ -37,6 +37,13 @@ const { steps, label, dark = false, class: className = '' } = Astro.props;
     color: var(--color-dark-label);
   }
 
+  /* Auto-adapt when nested inside a dark ArticleSection, so a reused
+     pipeline doesn't need its `dark` prop kept in sync by hand every time a
+     chapter's background is toggled — same convention as SectionLabel. */
+  :global(.article-section--dark) .article-pipeline__label {
+    color: var(--color-dark-label);
+  }
+
   .article-pipeline__row {
     display: flex;
     flex-wrap: wrap;
@@ -58,6 +65,11 @@ const { steps, label, dark = false, class: className = '' } = Astro.props;
   }
 
   .article-pipeline--dark .article-pipeline__step {
+    border-color: rgba(243, 242, 240, .25);
+    color: var(--color-dark-fg);
+  }
+
+  :global(.article-section--dark) .article-pipeline__step {
     border-color: rgba(243, 242, 240, .25);
     color: var(--color-dark-fg);
   }

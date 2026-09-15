@@ -52,6 +52,19 @@ const { href, variant = 'solid', withDot = false, newTab = false, class: classNa
     color: var(--color-ink);
   }
 
+  /* .btn--outline is styled for a light background; auto-adapt when reused
+     inside a dark ArticleSection instead of requiring every caller to
+     switch to a separate dark-only variant and remember to swap it back. */
+  :global(.article-section--dark) .btn--outline {
+    border-color: rgba(243, 242, 240, .3);
+    color: var(--color-dark-fg);
+  }
+
+  :global(.article-section--dark) .btn--outline:hover {
+    border-color: var(--color-dark-fg);
+    color: var(--color-dark-fg);
+  }
+
   .btn--solid-dark {
     background: var(--color-bg);
     color: var(--color-ink);

@@ -101,7 +101,7 @@ const lab = defineCollection({
     description: z.string(),
     category: z.enum(['Generative imagery', 'Voice and real-time', '3D and assets', 'Infrastructure']),
     type: z.string(),
-    status: z.enum(['Running', 'Written up', 'Paused', 'Demo ready']),
+    status: z.enum(['Starting', 'Running', 'Written up', 'Paused', 'Demo ready']),
     publishedDate: z.coerce.date(),
     heroImage: z.string().optional(),
     heroAlt: z.string().optional(),

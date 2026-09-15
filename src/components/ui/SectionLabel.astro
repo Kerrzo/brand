@@ -28,4 +28,13 @@ const { dark = false, withDot = false, class: className = '' } = Astro.props;
   .section-label--dark {
     color: var(--color-dark-label);
   }
+
+  /* Auto-adapt when nested inside a dark ArticleSection, so toggling a
+     chapter's dark prop is enough on its own — callers don't also have to
+     remember to pass `dark` to every child component by hand. The explicit
+     `dark` prop above still works for SectionLabel used outside that
+     context (e.g. a page hero). */
+  :global(.article-section--dark) .section-label {
+    color: var(--color-dark-label);
+  }
 </style>

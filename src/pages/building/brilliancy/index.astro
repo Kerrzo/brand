@@ -1,383 +1,230 @@
 ---
+import { getEntry } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import PlaceholderMedia from '../../../components/ui/PlaceholderMedia.astro';
-import FinalCTA from '../../../components/ui/FinalCTA.astro';
-
-const explorations = [
-  {
-    title: 'Personalised Coaching',
-    copy: 'Helping players understand why decisions matter rather than simply identifying mistakes.',
-  },
-  {
-    title: 'Learning Memory',
-    copy: 'Building long-term understanding from previous games, recurring mistakes and improvement over time.',
-  },
-  {
-    title: 'Cloud-first Architecture',
-    copy: 'Combining background AI analysis with fast, responsive client experiences across desktop, mobile and web.',
-  },
-  {
-    title: 'Local AI Exploration',
-    copy: 'Understanding where local models provide meaningful value and where cloud models remain the better architectural choice.',
-  },
+import BuildingHero from '../../../components/content/building/BuildingHero.astro';
+import BuildingEvidence from '../../../components/content/building/BuildingEvidence.astro';
+import ArticleSection from '../../../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../../../components/content/article/ArticleTwoCol.astro';
+import ArticlePipeline from '../../../components/content/article/ArticlePipeline.astro';
+import SectionLabel from '../../../components/ui/SectionLabel.astro';
+import EditorialScrollSequence from '../../../components/ui/EditorialScrollSequence.astro';
+import NavRow from '../../../components/ui/NavRow.astro';
+import KeepExploring from '../../../components/content/KeepExploring.astro';
+import '../../../styles/brilliancy-editorial.css';
+const project = await getEntry('projects', 'brilliancy');
+if (!project) throw new Error('Brilliancy project metadata is missing');
+const questions = ['Why is Nc7 useful?', 'Why was that pawn push wrong?', 'Why did I feel boxed in?', 'When should I stop following the opening plan and develop instead?', 'What was my opponent actually threatening?'];
+const architecture = [
+  { name: 'Chess engine', role: 'Position evaluation / candidate moves' },
+  { name: 'Chess logic', role: 'Game state / legal moves / notation' },
+  { name: 'AI', role: 'Explanation / conversation / coaching' },
+  { name: 'Player history', role: 'Games / mistakes / repertoire / learning history' },
 ];
-
-const roadmap = ['Research', 'Private Alpha', 'Public Beta', 'Hosted Coaching Platform'];
+// Product screenshots supplied for the detail page.
+const screens = {
+  review: '/media/projects/brilliancy/game.png',
+  openings: '/media/projects/brilliancy/openings.png',
+  progress: '/media/projects/brilliancy/progress.png',
+  training: '/media/projects/brilliancy/training.png',
+};
 ---
+<BaseLayout title="Brilliancy — Building the chess coach I want to use" description={project.data.description} image={screens.review} current="building">
+  <article class="brilliancy-story">
+    <BuildingHero name={project.data.title} title="Chess engines tell me what I did wrong. I want a coach that helps me stop doing it again." category="Chess · AI coaching · Personalised learning" status="Active" period="2026 — now">
+      <p class="lede">I'm building Brilliancy to explore what happens when engine analysis, AI explanation and a player's own history become one coaching system.</p>
+        <p class="body-copy">The engine can already find the mistake.</p>
+        <p class="body-copy">I'm interested in whether software can help me understand it, remember it and make a better decision next time.</p>
+      <BuildingEvidence slot="evidence" src={screens.review} eager label="Brilliancy / Game review" alt="Brilliancy game review showing the chessboard, move history, game details and engine-selected review positions" caption="The board, move history and review in one place. This capture shows an engine-only review; the coaching still has to prove its value." />
+    </BuildingHero>
 
-<BaseLayout
-  title="Brilliancy"
-  description="Exploring whether AI can become a genuinely useful personal chess coach."
-  current="building"
->
-  <article class="brilliancy container">
-    <a href="/building/" class="brilliancy__back">&larr; Building</a>
+    <ArticleSection dark id="the-problem">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">01 / The problem</SectionLabel>
+        <h2 class="h-2">The engine already knows I made a mistake.</h2>
+                <p class="body-copy">Chess software is extraordinarily good at analysing positions.</p>
+        <p class="body-copy">After a game I can see evaluation changes, inaccuracies, mistakes, blunders, best moves and engine lines.</p>
+        <p class="body-copy">But knowing that my move was wrong isn't the same as understanding why.</p>
+        <p class="body-copy">The engine might tell me Nf5?! and show me a stronger move.</p>
+        <p class="body-copy">What I actually want to know is:</p>
+        <p class="body-copy"><strong>What did I misunderstand about the position?</strong></p>
+        <p class="body-copy">And perhaps more importantly:</p>
+        <p class="body-copy"><strong>Have I misunderstood this before?</strong></p>
+        <p class="body-copy">That's the question behind Brilliancy.</p>
+      <div class="chess-question"><span aria-label="Illustrative move notation">Nf5?!</span><span aria-hidden="true">→</span><strong>Why?</strong><small>Illustrative notation / a question, not analysis of the position above.</small></div>
+      </ArticleTwoCol>
+    </ArticleSection>
 
-    <header class="brilliancy__hero" data-reveal>
-      <div class="mono-label">Building</div>
-      <h1 class="brilliancy__title">Brilliancy</h1>
-      <p class="brilliancy__support">
-        Exploring whether AI can become a genuinely useful personal chess coach.
-      </p>
-      <div class="brilliancy__lede body-copy">
-        <p>Most chess software tells players what move was best.</p>
-        <p>
-          Brilliancy explores whether AI can instead become a coach that understands how each
-          individual learns, remembers mistakes and improves over time.
-        </p>
+    <EditorialScrollSequence tone="light" size="large" lines={['An engine finds the move.', 'A coach explains the idea.']} />
+
+    <ArticleSection dark id="my-games">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">02 / My games are the curriculum</SectionLabel>
+        <h2 class="h-2">The best training material might already be in my history.</h2>
+                <p class="body-copy">Generic chess lessons are useful.</p>
+        <p class="body-copy">But my own games contain something much more personal: <strong>the positions I actually misunderstand.</strong></p>
+        <p class="body-copy">I'm exploring how Brilliancy can use game history to look for recurring tactical mistakes, positional misunderstandings, opening problems, missed opportunities and positions worth revisiting.</p>
+        <p class="body-copy">The idea isn't simply to analyse the last game.</p>
+        <p class="body-copy"><strong>It's to build an understanding of the player over time.</strong></p>
+        <p class="body-copy">My mistakes become part of the curriculum.</p>
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection id="explanation">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">03 / Explanation</SectionLabel>
+        <h2 class="h-2">“Best move: Nc7” isn't coaching.</h2>
+                <p class="body-copy">An engine can tell me which move it prefers.</p>
+        <p class="body-copy">That's useful evidence. But it often isn't the thing I need to learn.</p>
+        <p class="body-copy">I find myself asking questions like:</p>
+        <ul class="coaching-questions">{questions.map(question => <li>{question}</li>)}</ul>
+                <p class="body-copy">A coach needs to translate engine analysis into something I can use: the idea, the threat, the plan, the trade-off, and what I should notice next time.</p>
+        <p class="body-copy"><strong>The move matters.<br />The reason is what I need to remember.</strong></p>
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection dark id="memory">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">04 / Memory</SectionLabel>
+        <h2 class="h-2">A coach should remember what I keep getting wrong.</h2>
+                <p class="body-copy">Most chess analysis effectively starts again with every game.</p>
+        <p class="body-copy">I don't think a coach should.</p>
+        <p class="body-copy">If I've misunderstood the same structure three times, that matters.</p>
+        <p class="body-copy">If I repeatedly delay development, miss the same tactical pattern or mishandle the same kind of endgame, the next review shouldn't treat that as an isolated mistake.</p>
+        <p class="body-copy"><strong>The engine knows the position.<br />The coach should know the player.</strong></p>
+        <p class="body-copy">That memory is what turns a collection of game reviews into a coaching system.</p>
+      </ArticleTwoCol>
+      <div class="chess-learning-loop">
+        <ArticlePipeline steps={['Play', 'Review', 'Understand', 'Remember', 'Revisit', 'Play']} label="The learning loop / product direction" />
+        <p class="body-copy">A game shouldn't disappear after analysis. It should become part of what the coach knows about the player.</p>
       </div>
-    </header>
+    </ArticleSection>
 
-    <PlaceholderMedia
-      label="Future cinematic product video"
-      ratio="16/9"
-      radius="lg"
-      class="brilliancy__media"
-    />
+    <ArticleSection id="spaced-repetition">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">05 / Spaced repetition</SectionLabel>
+        <h2 class="h-2">Finding a mistake once isn't enough.</h2>
+                <p class="body-copy">Remembering a weakness is only useful if the product helps me work on it.</p>
+        <p class="body-copy">A position from one of my own games can become training material. This is the learning loop I'm working towards.</p>
+        <p class="body-copy">Later, the coach could bring it back:</p>
+        <p class="body-copy">What would you play here?</p>
+        <p class="body-copy">What is your opponent threatening?</p>
+        <p class="body-copy">What plan would you choose?</p>
+        <p class="body-copy">The aim isn't to memorise an engine move.</p>
+        <p class="body-copy"><strong>It's to recognise the idea when I see it again.</strong></p>
+      <BuildingEvidence src={screens.training} label="Brilliancy / Training" alt="A training challenge from a played game, with a chess position, coaching prompt and hint" caption="A position from my own game becomes a training challenge. Bringing the right ideas back over time is the learning loop I'm working towards." />
+      </ArticleTwoCol>
+    </ArticleSection>
 
-    <section class="brilliancy__section" data-reveal>
-      <h2 class="brilliancy__heading">The Question</h2>
-      <div class="brilliancy__copy body-copy">
-        <p>Chess engines have become incredibly strong.</p>
-        <p>Coaching hasn&rsquo;t.</p>
-        <p>
-          What happens when AI stops behaving like an engine and starts behaving like a personal
-          coach?
-        </p>
-        <p>Brilliancy exists to explore that question.</p>
+    <ArticleSection dark id="openings">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">06 / Openings</SectionLabel>
+        <h2 class="h-2">Openings are easier when I understand the plan.</h2>
+                <p class="body-copy">I don't want to memorise twenty engine moves.</p>
+        <p class="body-copy">As an improving player, I want to understand:</p>
+        <p class="body-copy">Where do my pieces normally belong?</p>
+        <p class="body-copy">What pawn breaks matter?</p>
+        <p class="body-copy">What is my opponent trying to achieve?</p>
+        <p class="body-copy">What mistakes should I recognise?</p>
+        <p class="body-copy">And when has the position changed enough that the normal opening plan no longer applies?</p>
+        <p class="body-copy">Opening study becomes more useful when it connects back to the games I've actually played.</p>
+        <p class="body-copy">If I repeatedly reach the same structure and make the same strategic mistake, <strong>that belongs in the coaching system too.</strong></p>
+        <BuildingEvidence src={screens.openings} label="Brilliancy / Opening catalogue" alt="Brilliancy opening catalogue with board positions, opening plans and repertoire controls" caption="Opening positions alongside the ideas behind them, with a route into repertoire study." />
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection id="the-coach">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">07 / The coach</SectionLabel>
+        <h2 class="h-2">Analysis should feel like a conversation.</h2>
+                <p class="body-copy">A static report can tell me what happened.</p>
+        <p class="body-copy">A coach should let me ask why.</p>
+        <p class="body-copy">Why was that move bad?</p>
+        <p class="body-copy">What did I miss?</p>
+        <p class="body-copy">What would have happened if I'd played this instead?</p>
+        <p class="body-copy">Have I made this mistake before?</p>
+        <p class="body-copy">The longer-term idea is a coach that can walk through a game, answer follow-up questions, challenge a decision and connect the current position to things we've already discussed.</p>
+        <p class="body-copy">The important part isn't giving the AI a personality.</p>
+        <p class="body-copy"><strong>It's continuity.</strong></p>
+        <p class="body-copy">A useful coach should know what we've already talked about.</p>
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection dark id="the-product">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">08 / Product</SectionLabel>
+        <h2 class="h-2">The board is still the centre of the experience.</h2>
+                <p class="body-copy">Brilliancy is still a chess product.</p>
+        <p class="body-copy">The board, the position and the moves have to remain at the centre of the experience.</p>
+        <p class="body-copy">AI should make those things easier to understand — not bury them underneath another interface.</p>
+        <p class="body-copy">The product brings together the board, move history, engine analysis, evaluation, annotations and coaching narrative so I can move between what happened, why it happened, and what I should learn from it.</p>
+      </ArticleTwoCol>
+      <div class="brilliancy-screens">
+        <BuildingEvidence src={screens.review} label="01 / Reviewing the game" alt="Brilliancy game review with move navigation, game details and lessons from the game" caption="Moving between the position, the moves and the lessons from a game." />
+        <BuildingEvidence src={screens.progress} label="02 / Learning over time" alt="Brilliancy progress screen showing reviewed games, opening mastery, a skill map and recurring patterns" caption="The progress view brings reviewed games, skills and recurring patterns together. It is a view of the learning history, not proof of improved chess." />
       </div>
-    </section>
+      <div class="editorial-spine brilliancy-principle"><p>AI should make the chess<br /><span>easier to understand.</span></p><p class="body-copy">It shouldn't make the interface more complicated.</p></div>
+    </ArticleSection>
 
-    <section class="brilliancy__section" data-reveal>
-      <h2 class="brilliancy__heading">Why I&rsquo;m Building It</h2>
-      <div class="brilliancy__copy body-copy">
-        <p>I wanted a coach that understands my games, my habits and the way I learn.</p>
-        <p>
-          Rather than analysing every move in isolation, Brilliancy explores how AI can build
-          long-term understanding across hundreds of games to deliver personalised coaching over
-          time.
-        </p>
-      </div>
-    </section>
+    <ArticleSection id="architecture">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">09 / Architecture</SectionLabel>
+        <h2 class="h-2">Engine truth. AI explanation. Player memory.</h2>
+                <p class="body-copy">Different parts of the system have different jobs.</p>
+        <p class="body-copy">The chess engine evaluates the position.</p>
+        <p class="body-copy">Deterministic chess logic handles the game state, legal moves and notation.</p>
+        <p class="body-copy">AI explains, converses and coaches.</p>
+        <p class="body-copy">Player history provides the context that makes the coaching personal.</p>
+        <p class="body-copy"><strong>Use deterministic chess tools for chess truth.<br />Use AI for explanation and coaching.</strong></p>
+      </ArticleTwoCol>
+      <figure class="coaching-architecture">
+        <div class="mono-label">Conceptual architecture / responsibilities</div>
+        <dl>{architecture.map(layer => <div><dt>{layer.name}</dt><dd>{layer.role}</dd></div>)}</dl>
+        <figcaption><span aria-hidden="true">↓</span> One coaching experience</figcaption>
+      </figure>
+    </ArticleSection>
 
-    <section class="brilliancy__section" data-reveal>
-      <h2 class="brilliancy__heading">Current Areas of Exploration</h2>
-      <ul class="brilliancy__areas">
-        {explorations.map((item) => (
-          <li class="brilliancy__area">
-            <h3 class="brilliancy__area-title">{item.title}</h3>
-            <p class="body-copy">{item.copy}</p>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <ArticleSection dark id="local-and-cloud">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">10 / Local vs cloud</SectionLabel>
+        <h2 class="h-2">The architecture follows the coaching.</h2>
+        <p class="body-copy">The first version explored fully local AI. That remains interesting for privacy, experimentation and control.</p>
+        <p class="body-copy">The current direction is cloud-first. It offers a simpler product experience and access to stronger hosted models. I want local inference to remain an architectural question, rather than become the reason the product exists.</p>
+        <p class="body-copy">The question here is whether the coaching helps. The local-versus-cloud trade-offs deserve their own Learning.</p>
+      </ArticleTwoCol>
+    </ArticleSection>
 
-    <section class="brilliancy__section" data-reveal>
-      <h2 class="brilliancy__heading">Latest Lesson</h2>
-      <div class="brilliancy__copy body-copy">
-        <p>The first version explored fully local AI.</p>
-        <p>
-          The more I built, the clearer it became that coaching benefits from cloud-first
-          architecture with intelligent clients rather than local inference alone.
-        </p>
-        <p>The architecture changed because the learning changed.</p>
-      </div>
-      <a href="#" class="brilliancy__cta" aria-disabled="true">Read the Lesson</a>
-    </section>
+    <ArticleSection id="the-test">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">11 / The test</SectionLabel>
+        <h2 class="h-2">The test isn't whether AI can explain a chess move.</h2>
+                <p class="body-copy">It can.</p>
+        <p class="body-copy">The harder question is whether that explanation changes what happens later.</p>
+        <p class="body-copy">Do I understand the position better?</p>
+        <p class="body-copy">Do I remember the idea?</p>
+        <p class="body-copy">Do I recognise it in another game?</p>
+        <p class="body-copy">Do I stop repeating the same mistake?</p>
+        <p class="body-copy">Do I make a better decision next time?</p>
+        <p class="body-copy">That's what Brilliancy still has to prove.</p>
+      </ArticleTwoCol>
+    </ArticleSection>
+    <EditorialScrollSequence tone="dark" size="large" lines={["A good explanation isn't the outcome.", 'A better decision next time is.']} />
 
-    <section class="brilliancy__section" data-reveal>
-      <h2 class="brilliancy__heading">Roadmap</h2>
-      <ol class="brilliancy__roadmap">
-        {roadmap.map((step, i) => (
-          <li class="brilliancy__milestone">
-            <span class="mono-label">{String(i + 1).padStart(2, '0')}</span>
-            <span class="brilliancy__milestone-title">{step}</span>
-          </li>
-        ))}
-      </ol>
-    </section>
-
-    <section class="brilliancy__section brilliancy__related" data-reveal>
-      <h2 class="brilliancy__heading">Related</h2>
-      <div class="brilliancy__related-grid">
-        <a href="/building/kerrzo/" class="brilliancy__related-card">
-          <PlaceholderMedia label="Kerrzo · placeholder" ratio="16/10" radius="md" />
-          <div class="brilliancy__related-copy">
-            <h3 class="brilliancy__related-title">Kerrzo</h3>
-            <p class="body-copy">Exploring AI-native business software.</p>
-            <span class="brilliancy__cta">View Project</span>
-          </div>
-        </a>
-        <div class="brilliancy__related-card brilliancy__related-card--static">
-          <PlaceholderMedia label="Lesson · placeholder" ratio="16/10" radius="md" dark />
-          <div class="brilliancy__related-copy">
-            <h3 class="brilliancy__related-title">Latest Lesson</h3>
-            <p class="body-copy">Cloud-first beats local-first</p>
-            <span class="brilliancy__cta brilliancy__cta--muted">Read Lesson</span>
-          </div>
-        </div>
-      </div>
-    </section>
+    <ArticleSection id="building-in-public">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">12 / Building in public</SectionLabel>
+        <h2 class="h-2">I'm building the coach I want to use.</h2>
+                <p class="body-copy">I'm using my own games as the first test environment.</p>
+        <p class="body-copy">That makes it easy to notice when the coaching genuinely helps — and when it's merely producing plausible-sounding chess commentary.</p>
+        <p class="body-copy">The product will change.</p>
+        <p class="body-copy">The coaching will change.</p>
+        <p class="body-copy">Some ideas will survive. Others won't.</p>
+        <p class="body-copy">But the question I'm trying to answer is simple:</p>
+        <p class="body-copy"><strong>Can software move from analysing my chess to actually helping me learn it?</strong></p>
+      <div class="brilliancy-status"><span>Brilliancy</span><span>Status / Building</span><span>2026 → now</span></div>
+        {project.data.externalUrl && <a class="inline-link" href={project.data.externalUrl} target="_blank" rel="noopener noreferrer">Visit Brilliancy →</a>}
+        <NavRow href="/building/kerrzo/" label="Also building" description="Kerrzo — my other active product, exploring AI-first business software." />
+      </ArticleTwoCol>
+    </ArticleSection>
   </article>
-
-  <FinalCTA />
+  <KeepExploring current="building" descriptions={{ shipped: "See the products and systems I've already delivered.", learnings: 'See what building and shipping has taught me.' }} />
 </BaseLayout>
-
-<style>
-  .brilliancy {
-    padding-top: clamp(120px, 18vh, 200px);
-  }
-
-  .brilliancy__back {
-    display: inline-flex;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--color-label);
-    margin-bottom: clamp(28px, 4vh, 48px);
-  }
-
-  .brilliancy__back:hover {
-    color: var(--color-accent);
-  }
-
-  .brilliancy__hero {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    margin-bottom: clamp(36px, 5vh, 64px);
-  }
-
-  .brilliancy__title {
-    margin: 0;
-    font-size: clamp(38px, 5.6vw, 84px);
-    line-height: 0.96;
-    letter-spacing: -0.045em;
-    font-weight: 500;
-  }
-
-  .brilliancy__support {
-    margin: 0;
-    font-size: 19px;
-    font-weight: 500;
-    color: var(--color-body);
-    max-width: 36ch;
-  }
-
-  .brilliancy__lede {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    max-width: 52ch;
-    margin-top: 8px;
-  }
-
-  .brilliancy__lede p {
-    margin: 0;
-  }
-
-  .brilliancy__media {
-    margin-bottom: clamp(56px, 8vh, 96px);
-  }
-
-  .brilliancy__section {
-    padding: clamp(40px, 6vh, 72px) 0;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .brilliancy__heading {
-    margin: 0 0 clamp(22px, 3vh, 36px);
-    font-size: clamp(30px, 3.6vw, 52px);
-    line-height: 1.02;
-    letter-spacing: -0.035em;
-    font-weight: 500;
-    max-width: 18ch;
-  }
-
-  .brilliancy__copy {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 54ch;
-  }
-
-  .brilliancy__copy p {
-    margin: 0;
-  }
-
-  .brilliancy__areas {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .brilliancy__area {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 28px 24px 28px 0;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .brilliancy__area:nth-child(even) {
-    padding-left: 24px;
-    padding-right: 0;
-    border-left: 1px solid var(--color-border);
-  }
-
-  .brilliancy__area p {
-    margin: 0;
-    max-width: 36ch;
-  }
-
-  .brilliancy__area-title {
-    margin: 0;
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: -0.025em;
-  }
-
-  .brilliancy__cta {
-    display: inline-flex;
-    align-items: center;
-    margin-top: 28px;
-    font-size: 15px;
-    font-weight: 500;
-    border-bottom: 1px solid var(--color-border-strong);
-    padding-bottom: 4px;
-    align-self: flex-start;
-  }
-
-  .brilliancy__cta:hover {
-    color: var(--color-accent);
-    border-bottom-color: var(--color-accent);
-  }
-
-  .brilliancy__cta--muted,
-  .brilliancy__cta[aria-disabled='true'] {
-    color: var(--color-label);
-    border-bottom-color: var(--color-border);
-    pointer-events: none;
-  }
-
-  .brilliancy__roadmap {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .brilliancy__milestone {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding: 28px 20px 8px 0;
-    border-right: 1px solid var(--color-border);
-  }
-
-  .brilliancy__milestone:last-child {
-    border-right: none;
-    padding-right: 0;
-  }
-
-  .brilliancy__milestone-title {
-    font-size: clamp(20px, 2.2vw, 28px);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-  }
-
-  .brilliancy__related-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(20px, 3vw, 40px);
-  }
-
-  .brilliancy__related-card {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    color: inherit;
-  }
-
-  .brilliancy__related-card:hover {
-    color: inherit;
-  }
-
-  .brilliancy__related-card:hover .brilliancy__cta {
-    color: var(--color-accent);
-    border-bottom-color: var(--color-accent);
-  }
-
-  .brilliancy__related-copy {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-  }
-
-  .brilliancy__related-title {
-    margin: 0;
-    font-size: clamp(24px, 2.4vw, 32px);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-  }
-
-  .brilliancy__related-copy .body-copy {
-    margin: 0;
-    max-width: 32ch;
-  }
-
-  .brilliancy__related-copy .brilliancy__cta {
-    margin-top: 8px;
-  }
-
-  @media (max-width: 900px) {
-    .brilliancy__areas,
-    .brilliancy__roadmap,
-    .brilliancy__related-grid {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
-    .brilliancy__area,
-    .brilliancy__area:nth-child(even) {
-      padding: 24px 0;
-      border-left: none;
-    }
-
-    .brilliancy__milestone {
-      border-right: none;
-      border-bottom: 1px solid var(--color-border);
-      padding: 22px 0;
-    }
-
-    .brilliancy__milestone:last-child {
-      border-bottom: none;
-    }
-  }
-</style>

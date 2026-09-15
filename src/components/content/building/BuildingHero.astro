@@ -1,0 +1,29 @@
+---
+import ArticleTwoCol from '../article/ArticleTwoCol.astro';
+import SectionLabel from '../../ui/SectionLabel.astro';
+interface Props { name: string; title: string; category: string; status: string; period: string; }
+const { name, title, category, status, period } = Astro.props;
+---
+<header class="building-hero container">
+  <ArticleTwoCol>
+    <SectionLabel slot="label" withDot>Building / {name}</SectionLabel>
+    <h1>{title}</h1>
+    <div class="building-hero__copy"><slot /></div>
+    <dl class="building-hero__status">
+      <div><dt>Product</dt><dd>{name}</dd></div>
+      <div><dt>Exploring</dt><dd>{category}</dd></div>
+      <div><dt>Status</dt><dd><span class="building-hero__active">{status}</span> · {period}</dd></div>
+    </dl>
+  </ArticleTwoCol>
+  <div class="building-hero__evidence"><slot name="evidence" /></div>
+</header>
+<style>
+  .building-hero { padding-top: clamp(120px, 18vh, 200px); padding-bottom: clamp(48px, 7vh, 88px); }
+  h1 { font-size: clamp(38px, 5.7vw, 88px); line-height: 1.02; letter-spacing: -.045em; max-width: 22ch; }
+  .building-hero__copy { max-width: var(--prose-measure); }
+  .building-hero__status { display: flex; flex-wrap: wrap; gap: 24px 48px; border-top: 1px solid var(--color-border); padding-top: 24px; margin-bottom: 0; }
+  dt { font-family: var(--font-mono); text-transform: uppercase; font-size: 10px; letter-spacing: .14em; color: var(--color-label); margin-bottom: 10px; }
+  dd { margin: 0; font-size: 14px; }
+  .building-hero__active { color: var(--color-accent); font-weight: 600; }
+  .building-hero__evidence { margin-top: clamp(40px, 6vw, 88px); }
+</style>

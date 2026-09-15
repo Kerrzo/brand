@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArticleSection from '../../../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../../../components/content/article/ArticleTwoCol.astro';
+import ArticlePipeline from '../../../components/content/article/ArticlePipeline.astro';
+import SectionLabel from '../../../components/ui/SectionLabel.astro';
+import EditorialScrollSequence from '../../../components/ui/EditorialScrollSequence.astro';
+import KeepExploring from '../../../components/content/KeepExploring.astro';
+import ExperimentResults from '../../../components/content/experiments/ExperimentResults.astro';
+const stages = [
+  ['Understand', 'Transcribe the conversation and identify its themes, arguments, stories and useful moments.'],
+  ['Edit', 'Decide what belongs, what repeats, what drags and what can disappear.'],
+  ['Structure', 'Create a journey for the listener, rather than keeping everything in the order it was said.'],
+  ['Produce', 'Clean the audio, improve pacing and levels, and use music or transitions only where they help.'],
+  ['Package', 'Create the title, description, chapters, show notes and supporting assets.'],
+  ['Publish', 'Bring the episode to a point where its creator can put their name on it.'],
+];
+const criteria = [['Story', 'Does the episode actually have a point?'], ['Pacing', 'Does it drag?'], ['Fidelity', 'Did the edit preserve what people meant?'], ['Voice', 'Does it still sound like the people involved?'], ['Production', 'Does it feel finished?'], ['Intervention', 'How much manual work was still required?']];
+const tests = ['Source → story', 'Story → edit', 'Edit → produced episode', 'Would I publish it?'].map(name => ({name, status: 'Not run'}));
+---
+<BaseLayout title="AI Podcast Production — From conversation to finished episode" description="Can AI turn an off-the-cuff conversation into a finished podcast? An experiment in editorial judgement and audio production." current="experiments">
+  <article class="podcast-experiment">
+    <header class="container podcast-hero"><ArticleTwoCol>
+      <SectionLabel slot="label" withDot>Experiment / AI Podcast Production</SectionLabel>
+      <h1>Can AI turn an off-the-cuff conversation into a finished podcast?</h1>
+      <p class="lede">I watched someone record a podcast at their desk. It was casual. A conversation, a camera, and then they were done.</p>
+      <p class="body-copy">But I found myself wondering <strong>what happened after they pressed stop.</strong></p>
+      <p class="body-copy">Someone still had to find the story, remove the dead parts, clean the audio, structure the episode, package it and publish it.</p>
+      <p class="body-copy">I'm testing how much of that work frontier AI models can now do.</p>
+      <div class="podcast-status"><span>Starting · 2026</span><span>Frontier models · Audio · Editorial AI</span></div>
+    </ArticleTwoCol>
+      <figure class="editorial-spine podcast-evidence">
+        <img src="/media/experiments/ai-podcast-production/podcast.png" width="1536" height="1024" alt="Podcast production concept showing a source recording and edited episode on a laptop" fetchpriority="high" />
+        <figcaption>Concept image / The waveforms and timings illustrate the idea; experiment results are still to come.</figcaption>
+      </figure>
+    </header>
+
+    <ArticleSection tight id="the-observation"><ArticleTwoCol>
+      <SectionLabel slot="label">01 / The observation</SectionLabel>
+      <h2 class="h-2">Recording looked like the easy part.</h2>
+      <p class="body-copy">At a CUB event, I watched the receptionist record a podcast at her desk. It wasn't a carefully scripted studio production. It was off-the-cuff, and that was what made it interesting.</p>
+      <p class="body-copy">The source material appeared almost effortlessly. The finished piece didn't. Review, editing, structure, audio cleanup, production, packaging and publishing were still ahead.</p>
+      <p class="body-copy"><strong>Much of that work involves judgement.</strong> That became the experiment.</p>
+    </ArticleTwoCol></ArticleSection>
+    <EditorialScrollSequence tone="dark" lines={['The recording can be off-the-cuff.', "The finished episode can't feel that way."]} />
+
+    <ArticleSection tight id="the-real-question"><ArticleTwoCol>
+      <SectionLabel slot="label">02 / The real question</SectionLabel>
+      <h2 class="h-2">The hard part isn't generating audio.</h2>
+      <p class="body-copy">Transcription, summaries, generated voices, music and copy can all be useful ingredients. They don't automatically add up to something worth listening to.</p>
+      <ul class="podcast-questions">{["What's the story?", "What's actually interesting?", 'What should disappear?', 'What deserves more time?', 'Where does the conversation drag?', 'What context does the listener need?', 'What should they remember afterwards?'].map(question => <li>{question}</li>)}</ul>
+      <p class="body-copy">Can frontier models move beyond processing the recording and <strong>participate meaningfully in editing it?</strong></p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark tight id="start-with-mess"><ArticleTwoCol>
+      <SectionLabel slot="label">03 / Start with mess</SectionLabel>
+      <h2 class="h-2">A polished input would prove very little.</h2>
+      <p class="body-copy">The first source should be ordinary: a rough interview, an unscripted discussion, a meeting or a collection of voice notes.</p>
+      <p class="body-copy">Repetition, pauses, tangents, unfinished thoughts and weak questions are part of the test. There may be useful ideas buried inside an otherwise unremarkable conversation.</p>
+      <p class="body-copy"><strong>Can the workflow discover the finished piece inside the mess?</strong> If the source already sounds like a finished podcast, I've avoided the interesting problem.</p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection tight id="the-pipeline"><ArticleTwoCol>
+      <SectionLabel slot="label">04 / The pipeline</SectionLabel>
+      <h2 class="h-2">What happens after record?</h2>
+      <ArticlePipeline steps={['Record', 'Understand', 'Edit', 'Produce', 'Package', 'Publish']} label="Proposed workflow / Stages to test" />
+      <dl class="podcast-rows">{stages.map(([name, description]) => <div><dt>{name}</dt><dd>{description}</dd></div>)}</dl>
+      <p class="body-copy">These are stages I'm testing. <strong>They aren't an automated pipeline I've already proved.</strong></p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark tight id="editorial-judgement"><ArticleTwoCol>
+      <SectionLabel slot="label">05 / Editing is judgement</SectionLabel>
+      <h2 class="h-2">Removing silence is automation. Knowing what to keep is editing.</h2>
+      <p class="body-copy">Audio processing is relatively easy to evaluate. Editorial judgement is harder. A model has to recognise the strongest idea, a weak explanation, missing context or a tangent that goes nowhere.</p>
+      <p class="body-copy">Sometimes the important moment is buried in ordinary conversation. Sometimes one sentence makes several previous minutes unnecessary. <strong>Recognising that is the work I want to test.</strong></p>
+      <p class="podcast-statement">Clean audio is production.<br /><span>Knowing what to keep is editing.</span></p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection tight id="keep-the-people"><ArticleTwoCol>
+      <SectionLabel slot="label">06 / Keep the people</SectionLabel>
+      <h2 class="h-2">Polished shouldn't mean synthetic.</h2>
+      <p class="body-copy">The obvious failure is technically perfect content that no longer sounds like the people who recorded it. Their opinions, humour, hesitation, disagreement and phrasing are part of the source.</p>
+      <p class="body-copy">I want to reveal the best version of the conversation that actually happened, while preserving what people meant.</p>
+      <p class="podcast-statement">Remove the noise.<br /><strong>Keep the people.</strong></p>
+    </ArticleTwoCol></ArticleSection>
+    <ArticleSection dark tight id="the-test"><ArticleTwoCol>
+        <SectionLabel slot="label">07 / The test</SectionLabel>
+        <h2 class="h-2">Would I publish it?</h2>
+        <p class="body-copy">A completed pipeline isn't the benchmark. <strong>Would I willingly put my name on the finished result?</strong></p>
+        <div class="podcast-comparison" aria-label="Future source and output comparison">
+          <div><span class="mono-label">Raw source</span><p>Awaiting a source recording</p></div>
+          <div><span class="mono-label">AI-produced episode</span><p>Awaiting the first production test</p></div>
+        </div>
+        <dl class="podcast-rows">{criteria.map(([name, description]) => <div><dt>{name}</dt><dd>{description}</dd></div>)}</dl>
+        <p class="mono-label">Awaiting evidence / No scores yet</p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection tight id="more-than-one-output"><ArticleTwoCol>
+      <SectionLabel slot="label">08 / More than one output</SectionLabel>
+      <h2 class="h-2">The episode might only be the beginning.</h2>
+      <p class="body-copy">If the editorial understanding works, the same source could support a shorter cut, chapters, show notes, an article, quotes, social clips, LinkedIn posts or short-form video.</p>
+      <p class="body-copy">But the first test is simpler: <strong>can AI produce one genuinely good episode from a rough conversation?</strong> If that doesn't work, the downstream automation doesn't matter.</p>
+    </ArticleTwoCol></ArticleSection>
+    <ArticleSection dark tight id="current-status"><ArticleTwoCol>
+        <SectionLabel slot="label">09 / Current status</SectionLabel>
+        <h2 class="h-2">I haven't proved it yet.</h2>
+        <p class="body-copy">The idea came from watching a simple recording workflow. Now I need to test the other half: take a deliberately rough conversation, let frontier models help understand, edit and produce it, then listen to the result.</p>
+        <p class="body-copy">If it still needs hours of human editorial work, that's useful evidence. If it produces something I'd genuinely publish, that's much more interesting.</p>
+        <div class="podcast-status"><span>AI Podcast Production</span><span>Status / Starting</span><span>2026 → now</span></div>
+        <p class="mono-label">Next test / Off-the-cuff conversation → publishable episode</p>
+        <ExperimentResults tests={tests} />
+    </ArticleTwoCol></ArticleSection>
+  </article>
+  <KeepExploring routes={['experiments', 'building', 'learnings']} descriptions={{experiments: "See the other questions I'm testing.", building: "See what I'm turning into products.", learnings: 'See what the experiments teach me.'}} />
+</BaseLayout>
+<style>
+  .podcast-hero { padding-top: clamp(120px,18vh,180px); padding-bottom: 40px; }
+  .podcast-evidence { margin-top: 32px; margin-bottom: 0; margin-right: 0; }
+  .podcast-evidence img { display: block; width: 100%; height: auto; border-radius: var(--radius-md); }
+  .podcast-evidence figcaption { margin-top: 16px; font-size: 13px; line-height: 1.5; color: var(--color-body); }
+  h1 { font-size: clamp(36px,5vw,72px); line-height: 1.04; letter-spacing: -.04em; max-width: 23ch; }
+  .podcast-status { display: flex; flex-wrap: wrap; gap: 12px 28px; border-top: 1px solid var(--color-border); padding-top: 20px; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+  .podcast-status span:first-child { color: var(--color-accent); }
+  .podcast-experiment :global(.editorial-seq) { margin-top: 0; }
+  .podcast-experiment :global(.editorial-seq__inner) { padding-block: clamp(56px,9vh,100px); }
+  .podcast-questions { list-style: none; padding: 0; margin: 0; }
+  .podcast-questions li { border-bottom: 1px solid var(--color-border); padding: 10px 0; font-size: 18px; }
+  .podcast-rows { margin: 0; border-top: 1px solid var(--color-border); }
+  .podcast-rows div { display: grid; grid-template-columns: 120px 1fr; gap: 24px; border-bottom: 1px solid var(--color-border); padding: 16px 0; }
+  dt { font-weight: 600; } dd { margin: 0; color: var(--color-body); max-width: 56ch; line-height: 1.6; }
+  .podcast-statement { font-size: clamp(26px,3.5vw,46px); line-height: 1.15; letter-spacing: -.03em; }
+  .podcast-statement span { color: var(--color-accent); }
+  .podcast-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .podcast-comparison > div { border: 1px solid var(--color-border); padding: 24px; min-height: 150px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
+  .podcast-comparison p { color: var(--color-body); font-size: 15px; }
+  :global(#the-test.article-section--dark), :global(#current-status.article-section--dark) { --color-border: var(--color-dark-border); --color-body: var(--color-dark-body); }
+  @media(max-width:600px) { .podcast-rows div { grid-template-columns: 1fr; gap: 8px; } .podcast-comparison { grid-template-columns: 1fr; } }
+</style>

@@ -29,7 +29,7 @@ import Ticker from '../../components/ui/Ticker.astro';
   <Ticker text="Local AI · ComfyUI · Wan2.2 · Claude Code · MCP · Image-to-Video · Camera Movement · Spatial Consistency · Vesper" />
 </div>
 
-<ArticleSection id="the-question">
+<ArticleSection dark id="the-question">
   <ArticleTwoCol>
     <SectionLabel slot="label">The question</SectionLabel>
     <h2 class="h-2">I'd seen a still image turned into a cinematic camera move. I wanted to know how much of it I could reproduce locally.</h2>
@@ -44,21 +44,21 @@ import Ticker from '../../components/ui/Ticker.astro';
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection dark tight id="the-approach">
+<ArticleSection tight id="the-approach">
   <ArticleTwoCol>
-    <SectionLabel slot="label" dark>The approach</SectionLabel>
+    <SectionLabel slot="label">The approach</SectionLabel>
     <h2 class="h-2">From prompt to page.</h2>
     <p class="body-copy">I didn't simply copy the workflow. I changed one assumption: <strong>run the generation locally</strong>.</p>
     <p class="body-copy">I connected Claude Code to ComfyUI through MCP, with the models running <strong>locally on my machine</strong>.</p>
     <p class="body-copy">Claude could work on the site and orchestrate ComfyUI from the same coding environment.</p>
-    <p class="body-copy">That was more interesting than MCP itself: code, prompts, generated assets and the website had become <strong>one production environment</strong>.</p>
+    <p class="body-copy prose-emphasis">That was more interesting than MCP itself: code, prompts, generated assets and the website had become <strong>one production environment</strong>.</p>
     <div class="section-spacing-top">
-      <ArticlePipeline dark steps={["Claude Code", "MCP", "ComfyUI", "Local model", "Vesper"]} />
+      <ArticlePipeline steps={["Claude Code", "MCP", "ComfyUI", "Local model", "Vesper"]} />
     </div>
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection tight id="the-engine">
+<ArticleSection dark tight id="the-engine">
   <ArticleTwoCol>
     <SectionLabel slot="label">The engine</SectionLabel>
     <h2 class="h-2">What was actually generating the movement?</h2>
@@ -68,9 +68,9 @@ import Ticker from '../../components/ui/Ticker.astro';
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection dark id="it-worked">
+<ArticleSection id="it-worked">
   <ArticleTwoCol>
-    <SectionLabel slot="label" dark>The result</SectionLabel>
+    <SectionLabel slot="label">The result</SectionLabel>
     <h2 class="h-2">And for a while, the illusion worked.</h2>
     <p class="body-copy">Small camera moves worked. Atmospheric movement worked. Some of the individual transitions looked fantastic.</p>
     <p class="body-copy">Put them into the website and the effect was <strong>surprisingly convincing</strong>.</p>
@@ -83,13 +83,12 @@ import Ticker from '../../components/ui/Ticker.astro';
         alt="One leg of the generated camera flythrough moving through the Vesper property"
         caption="One of the generated moves used in the final flythrough."
         ratio="16/9"
-        dark
       />
     </div>
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection id="mental-model">
+<ArticleSection dark id="mental-model">
   <ArticleTwoCol>
     <SectionLabel slot="label">What I'd change</SectionLabel>
     <h2 class="h-2">Next time, I'll design the space before generating the journey.</h2>
@@ -109,9 +108,9 @@ import Ticker from '../../components/ui/Ticker.astro';
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection dark id="what-survived">
+<ArticleSection id="what-survived">
   <ArticleTwoCol>
-    <SectionLabel slot="label" dark>What I learned</SectionLabel>
+    <SectionLabel slot="label">What I learned</SectionLabel>
     <ArticleLearnings items={[
       { title: "AI can create motion without understanding the world.", copy: "A sequence can look convincing even when the world behind it doesn't exist." },
       { title: "Camera movement turns image generation into a spatial problem.", copy: "The moment the camera moves, an image problem becomes a spatial problem. The further it travels, the more of the world has to remain true." },
@@ -121,7 +120,7 @@ import Ticker from '../../components/ui/Ticker.astro';
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection tight id="local-ai">
+<ArticleSection dark tight id="local-ai">
   <ArticleTwoCol>
     <SectionLabel slot="label">Local AI</SectionLabel>
     <h2 class="h-2">Local was not the limitation I expected.</h2>
@@ -130,7 +129,7 @@ import Ticker from '../../components/ui/Ticker.astro';
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection dark id="the-artefact">
+<ArticleSection id="the-artefact">
   <ArticleExperimentCTA
     eyebrow="The artefact"
     heading="Vesper"
@@ -147,7 +146,7 @@ import Ticker from '../../components/ui/Ticker.astro';
 </ArticleSection>
 
 <EditorialScrollSequence
-  tone="light"
+  tone="dark"
   size="large"
   lines={[
     'The model can generate the frames.',

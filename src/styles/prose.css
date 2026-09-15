@@ -5,7 +5,7 @@
 }
 
 .prose:not(.prose--rich) {
-  max-width: 68ch;
+  max-width: 82ch;
 }
 
 .prose > * + * {
@@ -30,6 +30,14 @@
 
 .prose p {
   margin: 0;
+}
+
+.prose p + p:not(.section-spacing-top):not(.section-spacing-top-lg):not(.prose-emphasis) {
+  margin-top: var(--prose-gap);
+}
+
+.prose p.prose-emphasis {
+  margin-top: var(--prose-pause);
 }
 
 .prose a {

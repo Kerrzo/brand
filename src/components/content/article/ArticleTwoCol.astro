@@ -21,7 +21,7 @@ const { ratio = 'minmax(0, .5fr) minmax(0, 1.5fr)', class: className = '' } = As
 <style>
   .article-two-col {
     display: grid;
-    gap: clamp(24px, 4vw, 72px);
+    gap: var(--editorial-gap);
     align-items: start;
   }
 
@@ -36,8 +36,20 @@ const { ratio = 'minmax(0, .5fr) minmax(0, 1.5fr)', class: className = '' } = As
     margin-top: 30px;
   }
 
-  .article-two-col__content > :global(.body-copy + .body-copy) {
-    margin-top: 16px;
+  .article-two-col__content > :global(p + p:not(.section-spacing-top):not(.section-spacing-top-lg):not(.prose-emphasis)) {
+    margin-top: var(--prose-gap);
+  }
+
+  .article-two-col__content > :global(.section-spacing-top) {
+    margin-top: 32px;
+  }
+
+  .article-two-col__content > :global(.section-spacing-top-lg) {
+    margin-top: 48px;
+  }
+
+  .article-two-col__content > :global(.prose-emphasis) {
+    margin-top: var(--prose-pause);
   }
 
   @media (max-width: 900px) {

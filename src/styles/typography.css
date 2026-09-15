@@ -1,3 +1,24 @@
+:root {
+  --prose-gap: 12px;
+  --prose-pause: 28px;
+  --prose-measure: 64ch;
+}
+
+/* One source of paragraph spacing, including paragraphs in flex layouts. */
+p {
+  margin: 0;
+  /* Cap reading lines without narrowing headings, media or their containers. */
+  max-width: min(100%, var(--prose-measure));
+}
+
+p + p {
+  margin-top: var(--prose-gap);
+}
+
+p.prose-emphasis {
+  margin-top: var(--prose-pause);
+}
+
 h1, h2, h3, h4 {
   margin: 0;
   font-weight: 500;

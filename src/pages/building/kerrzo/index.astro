@@ -1,387 +1,167 @@
 ---
+import { getEntry } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import PlaceholderMedia from '../../../components/ui/PlaceholderMedia.astro';
-import FinalCTA from '../../../components/ui/FinalCTA.astro';
+import BuildingHero from '../../../components/content/building/BuildingHero.astro';
+import BuildingEvidence from '../../../components/content/building/BuildingEvidence.astro';
+import ArticleSection from '../../../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../../../components/content/article/ArticleTwoCol.astro';
+import ArticleLearnings from '../../../components/content/article/ArticleLearnings.astro';
+import SectionLabel from '../../../components/ui/SectionLabel.astro';
+import EditorialScrollSequence from '../../../components/ui/EditorialScrollSequence.astro';
+import NavRow from '../../../components/ui/NavRow.astro';
+import KeepExploring from '../../../components/content/KeepExploring.astro';
+import '../../../styles/building-editorial.css';
 
-const explorations = [
-  {
-    title: 'AI Agents',
-    copy: 'Exploring specialised agents that perform meaningful business tasks while keeping humans in control.',
-  },
-  {
-    title: 'Knowledge Systems',
-    copy: 'Connecting organisational knowledge so AI can reason over business context.',
-  },
-  {
-    title: 'Workflow Orchestration',
-    copy: 'Replacing rigid workflows with intelligent, adaptable processes.',
-  },
-  {
-    title: 'Model Gateways',
-    copy: 'Treating AI providers as infrastructure rather than application logic.',
-  },
+const project = await getEntry('projects', 'kerrzo');
+if (!project) throw new Error('Kerrzo project metadata is missing');
+const context = ['Customers', 'Sales', 'Support', 'Projects', 'People', 'Knowledge', 'Operations'];
+const principles = [
+  { title: 'Shared data', copy: 'Operational data and AI context should not become disconnected worlds. The same business model needs to support both.' },
+  { title: 'Permissions', copy: 'AI should operate within the same organisational and user boundaries as the application. Access to a tool is not permission to use every record.' },
+  { title: 'Knowledge', copy: 'Documents and unstructured knowledge need to participate alongside structured business data. Retrieval is part of that connection.' },
+  { title: 'Models', copy: "I don't want the product to assume one model or provider will solve every workload forever." },
+  { title: 'Agents', copy: 'Agents need context, tools and boundaries. The important work is deciding what they can do, for whom, and where a person needs to remain involved.' },
 ];
-
-const roadmap = ['Research', 'Architecture', 'Private Alpha', 'Real Customers'];
+// User-supplied marketing UI exports; preserve their original proportions.
+const mediaBase = '/media/projects/kerrzo/marketing';
+const evidence = [
+  { src: mediaBase + '/operations-projects-portfolio-status-and-budget.png', label: '01 / Planning and delivering work', alt: 'Kerrzo marketing UI mockup showing a project portfolio with status, progress and milestones', caption: 'Projects, progress and delivery milestones in one operational view. From the Kerrzo marketing UI collection.' },
+  { src: mediaBase + '/ai-agents-workspace-department-agents-and-activity.png', label: '02 / Agents across the business', alt: 'Kerrzo marketing UI mockup showing an agent workspace organised around business departments', caption: 'The agent workspace presents the direction across sales, support, operations, production and people. Marketing UI mockup; capabilities are still evolving.' },
+];
 ---
+<BaseLayout title="Kerrzo — Building an AI-first business operating system" description={project.data.description} current="building">
+  <article class="building-story">
+    <BuildingHero name={project.data.title} title="What should business software look like when AI is part of the architecture?" category="AI-first business operating system" status="Active" period="2026 — now">
+      <p class="lede">I'm building Kerrzo to explore that question.</p>
+              <p class="body-copy">Kerrzo brings the operational context of a business together so people and AI can work from the same understanding.</p>
+        <p class="body-copy">Customers, sales, support, projects, people and knowledge become connected parts of the same system, with AI designed into the architecture from the beginning.</p>
+      <BuildingEvidence slot="evidence" src={mediaBase + '/sales-pipeline-kanban-board-with-deal-cards-and-icp-scores.png'} eager label="Kerrzo / Sales pipeline" alt="Kerrzo marketing UI mockup showing sales opportunities across qualified, proposal and negotiation stages" caption="Customer context alongside the sales pipeline. A view from Kerrzo's marketing UI collection, while the product continues to evolve." />
+    </BuildingHero>
 
-<BaseLayout
-  title="Kerrzo"
-  description="Exploring what an AI-native operating system for small businesses could become."
-  current="building"
->
-  <article class="kerrzo container">
-    <a href="/building/" class="kerrzo__back">&larr; Building</a>
+    <ArticleSection id="the-question" class="building-question">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">01 / The question</SectionLabel>
+        <h2 class="h-2">Most business software was designed before AI could do the work.</h2>
+                <p class="body-copy">CRMs store customer records. Support systems store tickets. Project tools store tasks. HR systems store people. Knowledge bases store documents.</p>
+        <p class="body-copy">Each system understands one part of the business.</p>
+        <p class="body-copy">AI changes an interesting assumption:</p>
+        <p class="body-copy"><strong>What happens when the software can understand the context across all of them?</strong></p>
+        <p class="body-copy">That's the question behind Kerrzo.</p>
+        <p class="body-copy">I don't want to bolt a chatbot onto a collection of traditional business tools. I'm interested in what the underlying product should become when AI is part of the architecture from the beginning.</p>
+      </ArticleTwoCol>
+    </ArticleSection>
 
-    <header class="kerrzo__hero" data-reveal>
-      <div class="mono-label">Building</div>
-      <h1 class="kerrzo__title">Kerrzo</h1>
-      <p class="kerrzo__support">
-        Exploring what an AI-native operating system for small businesses could become.
-      </p>
-      <div class="kerrzo__lede body-copy">
-        <p>
-          Every generation of business software has been built around a different interaction model.
-        </p>
-        <p>
-          Kerrzo explores what changes when AI becomes the primary interface instead of forms, menus
-          and workflows.
-        </p>
+    <EditorialScrollSequence tone="dark" size="large" lines={["The interesting part isn't adding AI to business software.", "It's rethinking the software around it."]} />
+
+    <ArticleSection id="shared-context">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">02 / One business, shared context</SectionLabel>
+        <h2 class="h-2">The useful intelligence is often between the systems.</h2>
+                <p class="body-copy">A customer isn't just a row in a CRM.</p>
+        <p class="body-copy">They might also have an active sales opportunity, support conversations, contracts, projects, meetings, invoices and documents — with people responsible for the relationship and a history of decisions.</p>
+        <p class="body-copy">Traditional business software fragments that context across systems.</p>
+        <p class="body-copy">Kerrzo is being designed around a shared business model where those relationships can be connected.</p>
+        <p class="body-copy">I'm not trying to recreate every category of business software simply to put it under one roof.</p>
+        <p class="body-copy"><strong>The breadth exists because context compounds.</strong></p>
+        <p class="body-copy">A sales opportunity means more when the system also understands the customer, their history, the people involved and the work already underway.</p>
+        <p class="body-copy">The goal is to give people — and eventually agents — enough context to understand what is actually happening.</p>
+      </ArticleTwoCol>
+      <figure class="business-context" aria-label="Customers, sales, support, projects, people, knowledge and operations connect through shared business context to people and AI">
+        <ul>{context.map(item => <li>{item}</li>)}</ul>
+        <span class="business-context__arrow" aria-hidden="true">→</span>
+        <div class="business-context__core"><span class="mono-label">One connected model</span><p>Shared<br />business context</p></div>
+        <span class="business-context__arrow" aria-hidden="true">→</span>
+        <div class="business-context__people">People<br /><span>+ AI</span></div>
+        <figcaption>Connect the business context before asking AI to act on it.</figcaption>
+      </figure>
+      <p class="body-copy editorial-spine section-spacing-top"><strong>The modules aren't the interesting part.<br />The context between them is.</strong></p>
+    </ArticleSection>
+
+    <ArticleSection dark id="the-product">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">03 / The product</SectionLabel>
+        <h2 class="h-2">Start with the work businesses already do.</h2>
+                <p class="body-copy">AI only becomes useful when it has meaningful business context to work with.</p>
+        <p class="body-copy">Kerrzo starts with recognisable workflows: leads, pipeline, customers, sales and campaigns alongside support, knowledge, projects, people and operations.</p>
+        <p class="body-copy">Some areas exist today. Some are evolving. Others are still the direction of the product.</p>
+        <p class="body-copy">The important part is that the operational system and the intelligence layer are being designed together.</p>
+      </ArticleTwoCol>
+      <div class="building-product-evidence">
+        {evidence.map(item => <BuildingEvidence {...item} />)}
       </div>
-    </header>
+      <div class="editorial-spine building-payoff"><p>The application creates the context.<br /><span>The AI makes the context useful.</span></p></div>
+    </ArticleSection>
 
-    <PlaceholderMedia
-      label="Future cinematic product video"
-      ratio="16/9"
-      radius="lg"
-      class="kerrzo__media"
-    />
-
-    <section class="kerrzo__section" data-reveal>
-      <h2 class="kerrzo__heading">The Question</h2>
-      <div class="kerrzo__copy body-copy">
-        <p>Traditional business software assumes humans navigate applications.</p>
-        <p>AI changes that assumption.</p>
-        <p>What happens when intelligent agents become the primary way work gets done?</p>
-        <p>Kerrzo exists to explore that question.</p>
-      </div>
-    </section>
-
-    <section class="kerrzo__section" data-reveal>
-      <h2 class="kerrzo__heading">Why I&rsquo;m Building It</h2>
-      <div class="kerrzo__copy body-copy">
-        <p>
-          Rather than adding AI to existing software, Kerrzo starts with AI at the centre of the
-          architecture.
-        </p>
-        <p>
-          The goal isn&rsquo;t to build another CRM. It&rsquo;s to understand what business software
-          looks like when knowledge, automation and conversation become first-class architectural
-          concepts.
-        </p>
-      </div>
-    </section>
-
-    <section class="kerrzo__section" data-reveal>
-      <h2 class="kerrzo__heading">Current Areas of Exploration</h2>
-      <ul class="kerrzo__areas">
-        {explorations.map((item) => (
-          <li class="kerrzo__area">
-            <h3 class="kerrzo__area-title">{item.title}</h3>
-            <p class="body-copy">{item.copy}</p>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section class="kerrzo__section" data-reveal>
-      <h2 class="kerrzo__heading">Latest Lesson</h2>
-      <div class="kerrzo__copy body-copy">
-        <p>
-          Every product eventually becomes coupled to its AI model unless that dependency is
-          intentionally designed away.
-        </p>
-        <p>
-          Building a model gateway early proved to be an architectural decision rather than an
-          implementation detail.
-        </p>
-      </div>
-      <a href="#" class="kerrzo__cta" aria-disabled="true">Read the Lesson</a>
-    </section>
-
-    <section class="kerrzo__section" data-reveal>
-      <h2 class="kerrzo__heading">Roadmap</h2>
-      <ol class="kerrzo__roadmap">
-        {roadmap.map((step, i) => (
-          <li class="kerrzo__milestone">
-            <span class="mono-label">{String(i + 1).padStart(2, '0')}</span>
-            <span class="kerrzo__milestone-title">{step}</span>
-          </li>
-        ))}
-      </ol>
-    </section>
-
-    <section class="kerrzo__section kerrzo__related" data-reveal>
-      <h2 class="kerrzo__heading">Related</h2>
-      <div class="kerrzo__related-grid">
-        <a href="/building/brilliancy/" class="kerrzo__related-card">
-          <PlaceholderMedia label="Brilliancy · placeholder" ratio="16/10" radius="md" />
-          <div class="kerrzo__related-copy">
-            <h3 class="kerrzo__related-title">Brilliancy</h3>
-            <p class="body-copy">Can AI become a genuine personal chess coach?</p>
-            <span class="kerrzo__cta">View Project</span>
-          </div>
-        </a>
-        <div class="kerrzo__related-card kerrzo__related-card--static">
-          <PlaceholderMedia label="Lesson · placeholder" ratio="16/10" radius="md" dark />
-          <div class="kerrzo__related-copy">
-            <h3 class="kerrzo__related-title">Latest Lesson</h3>
-            <p class="body-copy">Why Model Gateways Matter</p>
-            <span class="kerrzo__cta kerrzo__cta--muted">Read Lesson</span>
-          </div>
+    <ArticleSection id="assistant-to-agent">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">04 / From assistant to agent</SectionLabel>
+        <h2 class="h-2">Answering questions is only the beginning.</h2>
+        <p class="body-copy">The first useful layer is straightforward: let someone ask questions about their business.</p>
+        <div class="building-questions" aria-label="Questions the product is being designed to help answer">
+          <p>What happened with this customer?</p><p>Why are these opportunities stuck?</p><p>Which support issues keep appearing?</p><p>What changed this week?</p>
         </div>
-      </div>
-    </section>
+                <p class="body-copy">But answering questions is only one use of shared context.</p>
+        <p class="body-copy">If the system understands the business, the user, their permissions, the relevant data, the workflows and the available tools, AI can increasingly help with the work itself.</p>
+        <p class="body-copy">I'm exploring things like preparing follow-ups, researching leads, summarising customer history, spotting stalled opportunities, triaging support, preparing meetings, updating records and surfacing things that need attention.</p>
+        <p class="body-copy">These are things to build and test — not a list of finished capabilities.</p>
+        <p class="body-copy prose-emphasis"><strong>The direction is from software you operate to software that increasingly helps operate the business with you.</strong></p>
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection dark id="architecture">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">05 / Architecture</SectionLabel>
+        <h2 class="h-2">AI-first still needs good architecture.</h2>
+                <p class="body-copy">The current stack includes Next.js, Vercel, Supabase and Postgres, with retrieval, AI models, agent workflows and integrations.</p>
+        <p class="body-copy">The interesting decisions aren't the logos. They're the boundaries between them.</p>
+      <div class="building-stack" aria-label="Architecture building blocks">
+          <div><span class="mono-label">Application</span><p>Next.js · Vercel</p></div>
+          <div><span class="mono-label">Business data + knowledge</span><p>Supabase · Postgres · pgvector</p></div>
+          <div><span class="mono-label">Intelligence + action</span><p>Models · Agents · Integrations</p></div>
+          <p class="building-stack__boundary">Across every layer / organisational boundaries and user permissions</p>
+        </div>
+        <ArticleLearnings items={principles} />
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection id="building-ai-native">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">06 / Building AI-native</SectionLabel>
+        <h2 class="h-2">The way I'm building it is changing too.</h2>
+                <p class="body-copy">Kerrzo is also changing how I think about building serious products.</p>
+        <p class="body-copy">The workflow increasingly combines product thinking, architecture, AI-assisted coding, rapid prototyping, testing, real usage and iteration.</p>
+        <p class="body-copy">The same technology changing the product is changing the economics and speed of building it.</p>
+        <p class="body-copy">That lets me explore more — but <strong>being able to build more doesn't remove the need to decide what matters.</strong></p>
+      <NavRow href="/learnings/the-moment-software-development-changed/" label="Related learning" description="The moment software development changed" />
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection dark id="the-test">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">07 / The test</SectionLabel>
+        <h2 class="h-2">Building it isn't the test.</h2>
+                <p class="body-copy">AI-assisted development makes it possible to build more.</p>
+        <p class="body-copy">That creates its own danger: it's easier to confuse software shipped with value created.</p>
+        <p class="body-copy">Kerrzo is my primary commercial product bet. But product-market fit still has to be earned.</p>
+        <p class="body-copy">The platform only becomes interesting as a business if people use it, rely on it and eventually pay for it.</p>
+        <p class="body-copy">The next phase isn't about proving that I can build the platform.</p>
+      <p class="building-test-statement">It's proving that the platform <span>deserves to exist.</span></p>
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection id="building-in-public">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">08 / Building in public</SectionLabel>
+        <h2 class="h-2">This page will change.</h2>
+                <p class="body-copy">Kerrzo is active work.</p>
+        <p class="body-copy">Some ideas here will survive. Some won't.</p>
+        <p class="body-copy">The architecture will change. The product will change. And hopefully my understanding of the problem will change with it.</p>
+        <p class="body-copy">That's the point of putting it in Building rather than pretending it's already Shipped.</p>
+        <p class="body-copy"><strong>I'm documenting the product as I build it.</strong></p>
+      <div class="building-status"><span>Kerrzo</span><span>Status / Building</span><span>2026 → now</span></div>
+        {project.data.externalUrl && <a class="inline-link" href={project.data.externalUrl} target="_blank" rel="noopener noreferrer">Visit Kerrzo →</a>}
+      </ArticleTwoCol>
+    </ArticleSection>
   </article>
-
-  <FinalCTA />
+  <KeepExploring current="building" descriptions={{ shipped: 'See the products and systems behind the work.', learnings: 'See what building and shipping has taught me.' }} />
 </BaseLayout>
-
-<style>
-  .kerrzo {
-    padding-top: clamp(120px, 18vh, 200px);
-  }
-
-  .kerrzo__back {
-    display: inline-flex;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--color-label);
-    margin-bottom: clamp(28px, 4vh, 48px);
-  }
-
-  .kerrzo__back:hover {
-    color: var(--color-accent);
-  }
-
-  .kerrzo__hero {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    margin-bottom: clamp(36px, 5vh, 64px);
-  }
-
-  .kerrzo__title {
-    margin: 0;
-    font-size: clamp(38px, 5.6vw, 84px);
-    line-height: 0.96;
-    letter-spacing: -0.045em;
-    font-weight: 500;
-  }
-
-  .kerrzo__support {
-    margin: 0;
-    font-size: 19px;
-    font-weight: 500;
-    color: var(--color-body);
-    max-width: 36ch;
-  }
-
-  .kerrzo__lede {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    max-width: 52ch;
-    margin-top: 8px;
-  }
-
-  .kerrzo__lede p {
-    margin: 0;
-  }
-
-  .kerrzo__media {
-    margin-bottom: clamp(56px, 8vh, 96px);
-  }
-
-  .kerrzo__section {
-    padding: clamp(40px, 6vh, 72px) 0;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .kerrzo__heading {
-    margin: 0 0 clamp(22px, 3vh, 36px);
-    font-size: clamp(30px, 3.6vw, 52px);
-    line-height: 1.02;
-    letter-spacing: -0.035em;
-    font-weight: 500;
-    max-width: 18ch;
-  }
-
-  .kerrzo__copy {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 54ch;
-  }
-
-  .kerrzo__copy p {
-    margin: 0;
-  }
-
-  .kerrzo__areas {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .kerrzo__area {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 28px 24px 28px 0;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .kerrzo__area:nth-child(even) {
-    padding-left: 24px;
-    padding-right: 0;
-    border-left: 1px solid var(--color-border);
-  }
-
-  .kerrzo__area p {
-    margin: 0;
-    max-width: 36ch;
-  }
-
-  .kerrzo__area-title {
-    margin: 0;
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: -0.025em;
-  }
-
-  .kerrzo__cta {
-    display: inline-flex;
-    align-items: center;
-    margin-top: 28px;
-    font-size: 15px;
-    font-weight: 500;
-    border-bottom: 1px solid var(--color-border-strong);
-    padding-bottom: 4px;
-    align-self: flex-start;
-  }
-
-  .kerrzo__cta:hover {
-    color: var(--color-accent);
-    border-bottom-color: var(--color-accent);
-  }
-
-  .kerrzo__cta--muted,
-  .kerrzo__cta[aria-disabled='true'] {
-    color: var(--color-label);
-    border-bottom-color: var(--color-border);
-    pointer-events: none;
-  }
-
-  .kerrzo__roadmap {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .kerrzo__milestone {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding: 28px 20px 8px 0;
-    border-right: 1px solid var(--color-border);
-  }
-
-  .kerrzo__milestone:last-child {
-    border-right: none;
-    padding-right: 0;
-  }
-
-  .kerrzo__milestone-title {
-    font-size: clamp(20px, 2.2vw, 28px);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-  }
-
-  .kerrzo__related-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(20px, 3vw, 40px);
-  }
-
-  .kerrzo__related-card {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    color: inherit;
-  }
-
-  .kerrzo__related-card:hover {
-    color: inherit;
-  }
-
-  .kerrzo__related-card:hover .kerrzo__cta {
-    color: var(--color-accent);
-    border-bottom-color: var(--color-accent);
-  }
-
-  .kerrzo__related-copy {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-  }
-
-  .kerrzo__related-title {
-    margin: 0;
-    font-size: clamp(24px, 2.4vw, 32px);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-  }
-
-  .kerrzo__related-copy .body-copy {
-    margin: 0;
-    max-width: 32ch;
-  }
-
-  .kerrzo__related-copy .kerrzo__cta {
-    margin-top: 8px;
-  }
-
-  @media (max-width: 900px) {
-    .kerrzo__areas,
-    .kerrzo__roadmap,
-    .kerrzo__related-grid {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
-    .kerrzo__area,
-    .kerrzo__area:nth-child(even) {
-      padding: 24px 0;
-      border-left: none;
-    }
-
-    .kerrzo__milestone {
-      border-right: none;
-      border-bottom: 1px solid var(--color-border);
-      padding: 22px 0;
-    }
-
-    .kerrzo__milestone:last-child {
-      border-bottom: none;
-    }
-  }
-</style>

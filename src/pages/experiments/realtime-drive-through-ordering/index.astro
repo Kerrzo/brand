@@ -1,0 +1,113 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArticleSection from '../../../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../../../components/content/article/ArticleTwoCol.astro';
+import ArticlePipeline from '../../../components/content/article/ArticlePipeline.astro';
+import BuildingEvidence from '../../../components/content/building/BuildingEvidence.astro';
+import SectionLabel from '../../../components/ui/SectionLabel.astro';
+import EditorialScrollSequence from '../../../components/ui/EditorialScrollSequence.astro';
+import KeepExploring from '../../../components/content/KeepExploring.astro';
+const experiment = await getEntry('lab', 'realtime-drive-through-ordering');
+if (!experiment) throw new Error('Missing Poszo experiment');
+const changes = ['Can I get a large chicken combo?', 'Actually make that spicy.', 'No drink.', 'Wait — make it two.'];
+const tests = ['Response latency', 'Interruptions', 'Corrections', 'Menu grounding', 'Modifiers', 'Order state', 'Confirmation', 'Human escalation'];
+---
+<BaseLayout title="Poszo — Can AI take a drive-through order?" description={experiment.data.description} current="experiments">
+  <article class="poszo-experiment">
+    <header class="poszo-hero container">
+      <ArticleTwoCol>
+        <SectionLabel slot="label" withDot>Experiment / Poszo</SectionLabel>
+        <h1>Can AI take a drive-through order without making the experience worse?</h1>
+        <div class="poszo-intro">
+          <p class="lede">Voice AI can hold a conversation. Taking a restaurant order is a harder test.</p>
+          <p class="body-copy">I'm building Poszo to explore whether realtime AI can understand a menu, handle interruptions and changes, construct a valid order and know when it should hand the conversation to a person.</p>
+        </div>
+        <div class="poszo-meta"><span>Active experiment · 2026</span><span>Realtime voice · Ordering · AI</span></div>
+      </ArticleTwoCol>
+      <div class="poszo-hero-media editorial-spine">
+        <BuildingEvidence src="/media/projects/poszo.png" label="Poszo / Voice ordering" alt="Poszo drive-through voice ordering concept" caption="Exploring realtime conversation and restaurant ordering." eager />
+      </div>
+    </header>
+
+    <ArticleSection tight id="the-question">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">01 / The question</SectionLabel>
+        <h2 class="h-2">A conversation isn't an order.</h2>
+        <ol class="poszo-conversation" aria-label="Illustrative customer corrections">{changes.map(line => <li>“{line}”</li>)}</ol>
+        <p class="body-copy">A useful ordering system has to do more than transcribe those sentences. It has to understand what changed, map the conversation to a real menu and maintain a valid order while the customer changes their mind.</p>
+        <p class="body-copy"><strong>The interesting problem isn't speech recognition. It's maintaining the state of the order while the conversation keeps moving.</strong></p>
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <EditorialScrollSequence tone="dark" lines={['People speak in conversations.', 'Restaurants need orders.', 'The system has to translate between the two.']} />
+
+    <ArticleSection tight id="the-prototype">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">02 / The prototype</SectionLabel>
+        <h2 class="h-2">Keep the conversation natural. Keep the order structured.</h2>
+        <p class="body-copy">The experiment combines realtime voice with structured ordering tools. <strong>The AI handles the conversation. The ordering system remains responsible for the order.</strong></p>
+        <ArticlePipeline steps={['Customer', 'Realtime conversation', 'Menu + order tools', 'Structured order']} label="Conceptual flow" />
+        <p class="body-copy">The language model should not invent products, prices or modifiers. It needs to work against the actual menu and available ordering actions. Natural conversation has to map onto deterministic business actions.</p>
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection dark tight id="the-hard-part">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">03 / The hard part</SectionLabel>
+        <h2 class="h-2">Latency is part of the product.</h2>
+        <p class="body-copy">A drive-through conversation has a rhythm. If every response takes several seconds, the technology may be impressive but the experience feels broken.</p>
+        <p class="body-copy">Customers interrupt, change their minds and ask questions. Sometimes the system doesn't understand. Sometimes the right answer is to involve a person.</p>
+        <p class="body-copy">I'm testing more than whether the AI can eventually produce the correct order:</p>
+        <ul class="poszo-tests">{tests.map(test => <li>{test}</li>)}</ul>
+        <p class="body-copy">These aren't solved capabilities. They are the experiment.</p>
+      </ArticleTwoCol>
+      <div class="poszo-subsection" id="the-test">
+        <ArticleTwoCol>
+          <SectionLabel slot="label">04 / The test</SectionLabel>
+          <h2 class="h-2">The benchmark isn't whether the AI sounds human.</h2>
+          <p class="body-copy">It's whether ordering feels easier: the right products, modifiers, quantities and price, and a customer who isn't frustrated.</p>
+          <p class="poszo-result">A natural conversation<br />that produces<br /><span>a valid order.</span></p>
+          <p class="body-copy">That is the experiment.</p>
+        </ArticleTwoCol>
+      </div>
+    </ArticleSection>
+
+    <ArticleSection tight id="where-it-could-go">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">05 / Where it could go</SectionLabel>
+        <h2 class="h-2">If it works, the interface almost disappears.</h2>
+        <p class="body-copy">Drive-through is the obvious test environment because conversation is already the interface. But sometimes the best interface to another system might also be a question: “Can I change my booking?” “Where's my order?” “Can I move my appointment?”</p>
+        <p class="body-copy">Voice becomes useful when it can safely operate the systems behind the conversation. <strong>The current experiment remains restaurant ordering.</strong></p>
+      </ArticleTwoCol>
+    </ArticleSection>
+    <ArticleSection dark tight id="current-status">
+        <ArticleTwoCol>
+          <SectionLabel slot="label">06 / Current status</SectionLabel>
+          <h2 class="h-2">Still an experiment.</h2>
+          <p class="body-copy">Poszo is a working prototype I'm using to explore realtime conversational ordering. The goal right now isn't a polished product. It's to understand where realtime voice works, where it breaks, and what architecture is required before I'd trust it with a real transaction.</p>
+          <p class="body-copy"><strong>If the conversation sounds impressive but the order is wrong, the experiment failed.</strong></p>
+          <div class="poszo-meta"><span>Poszo</span><span>Status / Experimenting</span><span>2026 → now</span></div>
+        </ArticleTwoCol>
+    </ArticleSection>
+  </article>
+  <KeepExploring routes={['experiments', 'building', 'learnings']} descriptions={{ experiments: "See the other questions I'm testing.", building: "See what I'm turning into products.", learnings: 'See what the experiments taught me.' }} />
+</BaseLayout>
+<style>
+  .poszo-hero { padding-top: clamp(120px, 18vh, 180px); padding-bottom: 48px; }
+  h1 { font-size: clamp(36px, 5vw, 72px); line-height: 1.04; letter-spacing: -.04em; max-width: 23ch; }
+  .poszo-intro { max-width: var(--prose-measure); }
+  .poszo-meta { display: flex; flex-wrap: wrap; gap: 12px 32px; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; border-top: 1px solid var(--color-border); padding-top: 20px; }
+  .poszo-meta span:first-child { color: var(--color-accent); }
+  .poszo-hero-media { margin-top: 32px; }
+  .poszo-experiment :global(.editorial-seq) { margin-top: 0; }
+  .poszo-experiment :global(.editorial-seq__inner) { padding-block: clamp(64px, 10vh, 110px); }
+  .poszo-conversation { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--color-border); }
+  .poszo-conversation li { padding: 12px 0; border-bottom: 1px solid var(--color-border); font-size: clamp(18px, 2vw, 25px); line-height: 1.4; }
+  .poszo-tests { display: grid; grid-template-columns: 1fr 1fr; list-style: none; padding: 0; margin: 0; gap: 0 24px; }
+  .poszo-tests li { border-bottom: 1px solid var(--color-dark-border); padding: 10px 0; font-size: 15px; }
+  .poszo-subsection { margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--color-border); }
+  :global(.article-section--dark) .poszo-subsection { border-color: var(--color-dark-border); }
+  .poszo-result { font-size: clamp(30px, 4vw, 56px); line-height: 1.08; letter-spacing: -.035em; }
+  .poszo-result span { color: var(--color-accent); }
+</style>

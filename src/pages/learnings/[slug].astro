@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
-import FinalCTA from '../../components/ui/FinalCTA.astro';
+import KeepExploring from '../../components/content/KeepExploring.astro';
 import ArticleTwoCol from '../../components/content/article/ArticleTwoCol.astro';
 import SectionLabel from '../../components/ui/SectionLabel.astro';
 import { readingTime } from '../../lib/readingTime';
@@ -32,7 +32,13 @@ const rich = item.data.richLayout;
           <div class="article__intro-copy">
             <h1 class="article__heading">{item.data.title}</h1>
             {item.data.heroIntro?.length ? (
-              item.data.heroIntro.map((line) => <p class="article__deck">{line}</p>)
+              item.data.heroIntro.map((line) => (
+                <p class="article__deck">
+                  {line.startsWith('**') && line.endsWith('**')
+                    ? <strong>{line.slice(2, -2)}</strong>
+                    : line}
+                </p>
+              ))
             ) : (
               <p class="article__deck">{item.data.description}</p>
             )}
@@ -81,7 +87,7 @@ const rich = item.data.richLayout;
     </div>
   )}
 
-  <FinalCTA />
+  <KeepExploring current="learnings" />
 </BaseLayout>
 
 <style>
