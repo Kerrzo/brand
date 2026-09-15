@@ -1,0 +1,148 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArticleSection from '../../../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../../../components/content/article/ArticleTwoCol.astro';
+import ArticlePipeline from '../../../components/content/article/ArticlePipeline.astro';
+import SectionLabel from '../../../components/ui/SectionLabel.astro';
+import EditorialScrollSequence from '../../../components/ui/EditorialScrollSequence.astro';
+import KeepExploring from '../../../components/content/KeepExploring.astro';
+const project = await getEntry('work', 'boxofficevr');
+if (!project) throw new Error('Missing BoxOfficeVR metadata');
+const media = '/media/work/boxofficevr';
+const platform = ['Catalogue / discovery', 'Accounts / purchasing', 'Access / entitlement', 'Immersive playback', 'Headset / mobile support', 'Media delivery / quality levels'];
+---
+<BaseLayout title="BoxOfficeVR — Theatre, technology and the product we missed" description="We built theatre for VR. Then theatre-goers taught me what we had missed. A shipped story about technical delivery and product-market fit." image={`${media}/theatre-at-home.webp`} current="shipped">
+  <article class="boxoffice-story">
+    <header class="container boxoffice-hero">
+      <ArticleTwoCol>
+        <SectionLabel slot="label" withDot>Shipped / Immersive media</SectionLabel>
+        <h1>We built theatre for VR. Then theatre-goers taught me what we had missed.</h1>
+        <p class="lede">BoxOfficeVR was built around an ambitious idea: capture professional theatre in immersive video and let someone experience the performance from home in VR.</p>
+        <p class="body-copy"><strong>Technically, it worked.</strong></p>
+        <p class="body-copy">What I learned later was that a great experience and a viable product aren't the same thing.</p>
+        <div class="boxoffice-meta"><span>BoxOfficeVR</span><span>42 Interactive × Neon 8</span><span>{project.data.yearRange}</span><span>VR / Streaming / Product architecture</span></div>
+      </ArticleTwoCol>
+      <figure class="boxoffice-hero-media"><img src={`${media}/theatre-at-home.webp`} width="1440" height="900" alt="BoxOfficeVR promotional visual combining a headset viewer at home with an immersive theatre performance" fetchpriority="high" /><figcaption>Theatre at home / Original BoxOfficeVR promotional visual.</figcaption></figure>
+    </header>
+
+    <ArticleSection tight id="the-moment"><ArticleTwoCol>
+      <SectionLabel slot="label">01 / The moment</SectionLabel>
+      <h2 class="h-2">What if the audience couldn't get to the theatre?</h2>
+      <p class="body-copy">The idea became especially relevant when COVID closed theatres. Actors couldn't perform for normal audiences. Audiences couldn't attend.</p>
+      <p class="body-copy">Neon 8 brought theatre relationships, production expertise, immersive video and spatial audio capture, and the content and rights relationships. At 42 Interactive, we built the technology to get those performances into people's homes.</p>
+      <ArticlePipeline steps={['Choose a performance', 'Buy access', 'Put on a headset', 'Enter the performance']} label="The proposition" />
+      <p class="body-copy">This wasn't meant to feel like watching a recording on television. <strong>The ambition was presence.</strong></p>
+    </ArticleTwoCol></ArticleSection>
+    <EditorialScrollSequence tone="dark" lines={["We weren't trying to film theatre.", 'We were trying to put the audience inside it.']} />
+
+    <ArticleSection tight id="the-experience"><ArticleTwoCol>
+      <SectionLabel slot="label">02 / The experience</SectionLabel>
+      <h2 class="h-2">Theatre from the best seat in the house.</h2>
+      <p class="body-copy">The productions were captured specifically for immersive viewing. Stereoscopic video created depth. Spatial audio helped establish where performers and sound existed around the viewer.</p>
+      <p class="body-copy">The aim was a sense of <strong>sitting inside the performance</strong>, rather than simply putting a large screen inside a headset.</p>
+    </ArticleTwoCol>
+    <div class="boxoffice-performance editorial-spine">
+      <figure><img src={`${media}/performance-still.webp`} width="480" height="360" alt="A theatre performer on a lit stage in a supplied BoxOfficeVR performance still" loading="lazy" /><figcaption>A performance prepared for immersive viewing.</figcaption></figure>
+      <figure><img src={`${media}/auditorium-still.webp`} width="480" height="360" alt="A presenter seated in a theatre auditorium with a VR viewer" loading="lazy" /><figcaption>The theatre and the headset / Supplied project still.</figcaption></figure>
+    </div>
+    </ArticleSection>
+
+    <figure class="boxoffice-separator"><img src={`${media}/platform-montage.webp`} width="1440" height="900" alt="BoxOfficeVR design montage showing the web catalogue, production pages, purchasing and mobile player" loading="lazy" /></figure>
+
+    <ArticleSection dark tight id="the-platform"><ArticleTwoCol>
+      <SectionLabel slot="label">03 / The platform</SectionLabel>
+      <h2 class="h-2">Getting the performance into the headset was another problem entirely.</h2>
+      <p class="body-copy">The theatre production was the content. <strong>Everything around it had to become a product.</strong> The catalogue, purchase flow and playback had to hold together across web, mobile and supported headsets.</p>
+      <p class="body-copy">I led the technical architecture and the development team on the 42 Interactive side. My work was architecture, platform decisions and delivery; the team wrote the implementation code.</p>
+      <ul class="boxoffice-list">{platform.map(item => <li>{item}</li>)}</ul>
+      <p class="body-copy">A Vue frontend, serverless backend and Unity clients formed parts of that system. The challenge was connecting them into one usable experience.</p>
+    </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection tight id="early-vr"><ArticleTwoCol>
+      <SectionLabel slot="label">04 / Early VR</SectionLabel>
+      <h2 class="h-2">Consumer VR still had rough edges.</h2>
+      <p class="body-copy">Headsets often depended on PCs. Devices behaved differently, setup could be awkward, and people needed guidance just to get from purchasing a performance to seeing it correctly.</p>
+      <p class="body-copy">Mobile offered another route. Our Unity-based experience supported iOS and Android, including phone-based VR viewers.</p>
+      <p class="body-copy"><strong>The product had to absorb the complexity of the hardware ecosystem.</strong></p>
+      <figure><img src={`${media}/mobile-viewer.webp`} width="1437" height="681" alt="BoxOfficeVR mobile playback displayed in a phone-based VR viewer" loading="lazy" /><figcaption>The mobile route / A phone-based viewer and stereoscopic playback.</figcaption></figure>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark tight id="streaming"><ArticleTwoCol>
+      <SectionLabel slot="label">05 / The streaming problem</SectionLabel>
+      <h2 class="h-2">The better the experience became, the harder it was to deliver.</h2>
+      <p class="body-copy">Immersive theatre demanded very high-quality stereoscopic video. Better quality helped the sense of presence, but increased the volume of data we had to deliver reliably.</p>
+      <ArticlePipeline steps={['More resolution', 'More presence', 'More bandwidth']} label="The delivery trade-off" />
+      <p class="body-copy">One architectural idea we explored was prioritising the part of the scene inside — or just outside — the viewer's field of vision, rather than treating the entire immersive frame equally.</p>
+      <div class="boxoffice-view-study" aria-label="Architectural exploration, not a shipped capability"><div><span class="mono-label">Full immersive frame</span><p>Deliver the whole scene equally</p></div><span aria-hidden="true">→</span><div><span class="mono-label">Current view + buffer</span><p>Prioritise where the viewer is looking</p></div></div>
+      <p class="body-copy"><strong>An architectural exploration, not a claim that this shipped.</strong></p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection tight id="audio"><ArticleTwoCol>
+      <SectionLabel slot="label">06 / What surprised us</SectionLabel>
+      <h2 class="h-2">We expected video to be difficult. Audio surprised us.</h2>
+      <p class="body-copy">Spatial audio was fundamental to presence. It also brought encoding, compatibility and delivery challenges. A performer sounding as though they were in the wrong place could undermine the illusion even when the video looked excellent.</p>
+      <p class="boxoffice-statement">Immersion isn't only<br /><strong>what you see.</strong></p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark id="the-real-test"><ArticleTwoCol>
+      <SectionLabel slot="label">07 / The real test</SectionLabel>
+      <h2 class="h-2">Then I watched theatre-goers try it.</h2>
+      <p class="body-copy">I travelled to a major theatre event at Alexandra Palace in the UK. We had a booth where theatre-goers could experience BoxOfficeVR.</p>
+      <p class="body-copy">These were people who loved theatre, rather than technology enthusiasts being shown VR. They enjoyed it. Some reactions were deeply emotional. <strong>The immersive experience worked.</strong></p>
+      <p class="body-copy">Then came the more important question: would this replace going to the theatre?</p>
+      <p class="body-copy">My recollection is that the sentiment was consistent: they loved the experience, but it would not replace the real thing.</p>
+    </ArticleTwoCol></ArticleSection>
+    <EditorialScrollSequence tone="light" size="large" lines={['They loved it.', 'They still wanted to go to the theatre.']} />
+
+    <ArticleSection dark tight id="what-we-missed"><ArticleTwoCol>
+      <SectionLabel slot="label">08 / What we had missed</SectionLabel>
+      <h2 class="h-2">We could digitise the performance. We couldn't digitise going to the theatre.</h2>
+      <p class="body-copy">Theatre is also anticipation, travelling there, the building and the audience. Drinks before the show. The interval. Applause. Conversation afterwards.</p>
+      <p class="body-copy">For the people I spoke to, those things weren't peripheral. <strong>They were part of the product.</strong> VR could represent the performance impressively, but it couldn't recreate the whole ritual.</p>
+      <p class="boxoffice-statement">The performance<br /><span>wasn't the whole product.</span></p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection tight id="product-market-fit"><ArticleTwoCol>
+      <SectionLabel slot="label">09 / Product-market fit</SectionLabel>
+      <h2 class="h-2">People loving the demo wasn't enough.</h2>
+      <p class="body-copy">The technology worked. The content was strong. People often enjoyed the experience. But sales didn't follow at the level required to establish a viable product.</p>
+      <p class="body-copy">Limited headset ownership, awkward setup and an emerging consumer VR market all added friction. COVID restrictions eventually ended. The real theatre experience was available again.</p>
+      <p class="body-copy">I came to believe the deeper issue was product-market fit. We were asking people to change a behaviour they already valued, and the alternative was very good: <strong>actually going to the theatre.</strong></p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark id="looking-back"><ArticleTwoCol>
+      <SectionLabel slot="label">10 / Looking back</SectionLabel>
+      <h2 class="h-2">I'm still proud of what we built.</h2>
+      <p class="body-copy">BoxOfficeVR is one of those projects I still look back on with mixed feelings. We solved difficult technical problems. The content was beautiful. The platform worked. And people who tried it genuinely enjoyed the experience.</p>
+      <p class="body-copy"><strong>But enjoyment wasn't enough to change behaviour.</strong> That's a harder lesson than any architecture decision we made on the platform.</p>
+      <p class="body-copy">Building something technically impressive isn't the same as building something people will change their behaviour to use.</p>
+    </ArticleTwoCol></ArticleSection>
+  </article>
+  <KeepExploring routes={['shipped', 'learnings', 'building']} descriptions={{shipped: "See the other products and systems I've delivered.", learnings: 'See what the work taught me.', building: "See what I'm working on now."}} />
+</BaseLayout>
+<style>
+  .boxoffice-hero { padding-top: clamp(120px,18vh,180px); padding-bottom: 40px; }
+  h1 { font-size: clamp(38px,5.5vw,80px); line-height: 1.03; letter-spacing: -.04em; max-width: 23ch; }
+  figure { margin: 0; min-width: 0; } img { display: block; width: 100%; height: auto; border-radius: var(--radius-md); }
+  figcaption { margin-top: 16px; font-size: 14px; line-height: 1.55; color: var(--color-body); max-width: 70ch; }
+  :global(.article-section--dark) figcaption { color: var(--color-dark-body); }
+  .boxoffice-hero-media { margin-top: 40px; }
+  .boxoffice-separator { width: 100%; margin: 0; padding: 0; }
+  .boxoffice-separator img { border-radius: 0; }
+  .boxoffice-meta { display: flex; flex-wrap: wrap; gap: 12px 28px; border-top: 1px solid var(--color-border); padding-top: 20px; font: 11px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+  .boxoffice-meta span:first-child { color: var(--color-accent); }
+  .boxoffice-story :global(.editorial-seq) { margin-top: 0; }
+  .boxoffice-story :global(.editorial-seq__inner) { padding-block: clamp(64px,10vh,120px); }
+  .boxoffice-performance { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; max-width: 984px; }
+  .boxoffice-performance > figure:last-child { margin-top: 48px; }
+  .boxoffice-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; list-style: none; margin: 0; padding: 0; }
+  .boxoffice-list li { padding: 12px 0; border-bottom: 1px solid var(--color-dark-border); }
+  .boxoffice-view-study { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center; padding-block: 28px; border-block: 1px solid var(--color-dark-border); }
+  .boxoffice-view-study p { font-size: 16px; line-height: 1.5; margin-top: 12px; color: var(--color-dark-body); }
+  .boxoffice-view-study > span { color: var(--color-accent); }
+  .boxoffice-statement { font-size: clamp(28px,4vw,54px); line-height: 1.1; letter-spacing: -.035em; }
+  .boxoffice-statement span { color: var(--color-accent); }
+  @media(max-width:600px) { .boxoffice-performance, .boxoffice-list, .boxoffice-view-study { grid-template-columns: 1fr; } .boxoffice-performance > figure:last-child { margin-top: 0; } .boxoffice-view-study > span { transform: rotate(90deg); justify-self: start; } }
+</style>

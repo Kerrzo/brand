@@ -1,6 +1,9 @@
 /* Brilliancy shares Building primitives, with chess notation and learning loops. */
 .brilliancy-story > .editorial-seq { margin-top: 0; }
-.brilliancy-story .building-hero__evidence { max-width: 1100px; margin-left: auto; }
+.brilliancy-story .building-hero__evidence { margin-inline-start: var(--editorial-spine); }
+.brilliancy-story #spaced-repetition .building-evidence { margin-top: 48px; }
+.brilliancy-story #openings .building-evidence { margin-top: 48px; }
+.brilliancy-story #building-in-public { --color-ink: var(--color-dark-fg); --color-body: var(--color-dark-body); --color-border: var(--color-dark-border); }
 .chess-question { display: grid; grid-template-columns: auto auto 1fr; align-items: baseline; gap: 16px 32px; border-block: 1px solid var(--color-dark-border); padding-block: 32px; }
 .chess-question > span:first-child { font-family: var(--font-mono); font-size: clamp(36px, 6vw, 84px); letter-spacing: -.06em; }
 .chess-question > span:nth-child(2) { font-size: 32px; color: var(--color-dark-label); }

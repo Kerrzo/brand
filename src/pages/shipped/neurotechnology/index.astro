@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArticleSection from '../../../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../../../components/content/article/ArticleTwoCol.astro';
+import SectionLabel from '../../../components/ui/SectionLabel.astro';
+import NavRow from '../../../components/ui/NavRow.astro';
+import ArticlePipeline from '../../../components/content/article/ArticlePipeline.astro';
+import EditorialScrollSequence from '../../../components/ui/EditorialScrollSequence.astro';
+const media = '/media/work/cognitivr';
+const facts = [
+  ['Role', 'CTO / Product & Technology'],
+  ['Company', 'Neurotechnology'],
+  ['Product', 'CognitiVR'],
+  ['Domain', 'VR · Digital Health · Human-computer interaction'],
+  ['My work', 'Technical leadership · Product architecture · Swift / iPad body tracking · Sensor abstraction · Platform development'],
+];
+const elements = ['Immersive VR experience', 'Anatomical 3D body model', 'Body / movement tracking', 'Pain location and attribute representation', 'Clinician-facing controls', 'Multiple virtual environments'];
+---
+<BaseLayout title="CognitiVR — Neurotechnology" description="Helping make an existing VR treatment more robust and portable, and learning that technical feasibility and reaching patients are different product problems." image={`${media}/clinical-hero.webp`} current="shipped">
+  <article class="cognitivr-story">
+    <header class="container cognitivr-hero">
+      <ArticleTwoCol>
+        <SectionLabel slot="label" withDot>Shipped</SectionLabel>
+        <h1>CognitiVR</h1>
+        <p class="cognitivr-deck">A virtual reality platform for exploring and treating chronic pain.</p>
+        <p class="body-copy">CognitiVR was already treating patients when I became involved. I helped make the system <strong>more robust, portable and repeatable</strong> — and came to understand that the harder problem was getting it to people.</p>
+      </ArticleTwoCol>
+      <figure class="cognitivr-hero-image">
+        <img src={`${media}/clinical-hero.webp`} width="1672" height="941" alt="Illustration of a VR session alongside the CognitiVR anatomical interface" fetchpriority="high" />
+        <figcaption>Illustrative composite / The real project photography and recordings follow below.</figcaption>
+      </figure>
+      <dl class="cognitivr-facts">{facts.map(([label,value]) => <div><dt class="mono-label">{label}</dt><dd>{value}</dd></div>)}</dl>
+    </header>
+
+    <ArticleSection dark tight id="the-idea">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">01 / The idea</SectionLabel>
+        <h2 class="h-2">Making pain visible</h2>
+        <p class="body-copy">Chronic pain is deeply personal and difficult to communicate. CognitiVR explored whether immersive technology could give patients a different way to <strong>experience, describe and interact with pain.</strong></p>
+        <p class="body-copy">The system combined a virtual representation of the body with immersive environments and tools that allowed pain attributes and locations to be represented spatially.</p>
+      <figure class="cognitivr-person">
+        <img src="/media/work/neurotech.png" width="1440" height="900" alt="A person wearing the Neurotechnology VR headset during a session" loading="lazy" decoding="async" />
+        <figcaption>Inside the experience / Real project photography.</figcaption>
+      </figure>
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection tight id="the-system">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">02 / The system</SectionLabel>
+        <h2 class="h-2">The core experience already worked when I arrived.</h2>
+        <p class="body-copy">When I joined 42 Interactive, CognitiVR was already running in the Edgecliff clinic. The Unity experience existed. Body tracking worked. Clinicians could guide patients through the treatment.</p>
+        <p class="body-copy"><strong>I didn't need to invent the core idea.</strong> My role was CTO and technical leadership: architecture, technical guidance and helping make the system more robust and portable.</p>
+        <p class="body-copy">The companion application allowed the experience to be configured and observed outside VR. The person inside the headset interacted with a tracked representation of their own body.</p>
+        <p class="body-copy">The question I became increasingly interested in was what had to happen around that experience if it was ever going to reach more people.</p>
+        <ul class="cognitivr-elements">{elements.map(element => <li>{element}</li>)}</ul>
+        <figure>
+          <img src={`${media}/product-frame-35.jpg`} width="1920" height="1080" alt="CognitiVR application showing session controls and pain markings on virtual body models" loading="lazy" decoding="async" />
+          <figcaption>The companion application / Frame from the supplied product recording.</figcaption>
+        </figure>
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection dark id="product-in-motion">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">03 / The product in motion</SectionLabel>
+        <h2 class="h-2">The product in motion</h2>
+        <p class="body-copy">The interaction makes much more sense when you see it running.</p>
+      </ArticleTwoCol>
+      <figure class="cognitivr-primary-video">
+        <video controls autoplay muted loop playsinline preload="metadata" poster={`${media}/product-poster.jpg`} width="1920" height="1080" aria-label="CognitiVR product demonstration" aria-describedby="product-video-caption">
+          <source src={`${media}/product-in-motion.mp4`} type="video/mp4" />
+          <a href={`${media}/product-in-motion.mp4`}>Watch the CognitiVR product demonstration</a>
+        </video>
+        <figcaption id="product-video-caption">CognitiVR connected the person inside VR with a companion application used to configure and observe the experience.</figcaption>
+      </figure>
+    </ArticleSection>
+
+    <ArticleSection tight id="real-world-development">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">04 / Real-world development</SectionLabel>
+        <h2 class="h-2">Built with real people, not just prototypes</h2>
+        <p class="body-copy">VR products are difficult to design from a monitor. Much of the work happened through <strong>repeated testing</strong> — putting people into the experience, observing what worked, changing the interaction model and trying again.</p>
+      </ArticleTwoCol>
+      <div class="cognitivr-gallery">
+        <figure>
+          <img src="/media/work/ntechui.png" width="784" height="449" alt="Two workstation monitors showing the headset view and anatomical body controls" loading="lazy" decoding="async" />
+          <figcaption>Outside the headset / The workstation used to observe and configure the experience.</figcaption>
+        </figure>
+        <figure>
+          <img src={`${media}/interaction-poster.jpg`} width="1920" height="1080" alt="Development recording showing the headset mirror alongside a virtual body and tracked controller" loading="lazy" decoding="async" />
+          <figcaption>Inside the development process / Frame from the interaction recording.</figcaption>
+        </figure>
+      </div>
+    </ArticleSection>
+
+    <ArticleSection dark tight id="building-the-interaction">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">05 / Body tracking</SectionLabel>
+        <h2 class="h-2">The treatment shouldn't depend on one sensor.</h2>
+        <p class="body-copy">The existing system used Kinect-style body tracking to drive the patient's avatar. Sourcing and depending on that hardware became increasingly problematic.</p>
+        <p class="body-copy"><strong>I personally developed a Swift implementation using an iPad's LiDAR / body-tracking capabilities as an alternative pose source.</strong> It captured body pose on the Apple device, mapped it into the skeleton representation Unity expected and transmitted the tracking data into the existing experience.</p>
+        <p class="body-copy">Different coordinate systems and skeleton conventions made that translation difficult. I also helped create an abstraction around tracking providers, so the avatar could receive a common pose representation rather than be hard-wired to one sensor.</p>
+        <ArticlePipeline steps={['Kinect or iPad / LiDAR', 'Tracking provider', 'Unity', 'Patient avatar']} label="Alternative tracking sources / Common interface" />
+        <p class="body-copy"><strong>The treatment should survive the hardware changing underneath it.</strong> This was an alternative tracking implementation, not a wholesale replacement of Kinect across every installation.</p>
+        <figure class="cognitivr-secondary-video">
+          <video controls autoplay muted loop playsinline preload="metadata" poster={`${media}/interaction-poster.jpg`} width="1920" height="1080" aria-label="Early CognitiVR pain representation development" aria-describedby="interaction-video-caption">
+            <source src={`${media}/pain-representation.mp4`} type="video/mp4" />
+            <a href={`${media}/pain-representation.mp4`}>Watch the interaction development recording</a>
+          </video>
+          <figcaption id="interaction-video-caption">Early development and interaction work behind the pain representation experience. This recording shows the existing development process, not the later iPad tracking implementation.</figcaption>
+        </figure>
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection tight id="the-platform">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">06 / The platform</SectionLabel>
+        <h2 class="h-2">The VR experience wasn't the whole product.</h2>
+        <p class="body-copy">A clinic experience could work technically and still be difficult to replicate. We started building out the software around the treatment and thinking about what a repeatable service would need.</p>
+        <p class="body-copy">That meant patient profiles, clinician notes, treatment history and loading the right patient context. It also meant digitising previously paper-based measurements, tracking pain over time and collecting evidence of treatment progression.</p>
+        <p class="body-copy"><strong>The headset was where the treatment happened.</strong> Everything needed to remember the patient, measure progress and reproduce the service somewhere else had to exist outside it.</p>
+        <p class="body-copy">The aim was a platform that could support additional clinics, rather than a single installation that only worked in one room.</p>
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection dark tight id="portability"><ArticleTwoCol>
+      <SectionLabel slot="label">07 / Portability</SectionLabel>
+      <h2 class="h-2">What if the clinic could come to the patient?</h2>
+      <p class="body-copy">The treatment was centred on one Sydney clinic. People interested in it weren't necessarily in Sydney. Physical reach kept coming back as a constraint.</p>
+      <p class="body-copy">We explored untethered Quest-class hardware, lighter tracking requirements, iPad/mobile support, remote clinician involvement and a reduced home experience. Later, as AI capabilities emerged, we also considered whether some aspects of clinician interaction could be supported differently.</p>
+      <p class="body-copy"><strong>These were product explorations.</strong> They weren't a launched home product, clinically validated remote treatment or a replacement for the clinician.</p>
+      <p class="body-copy">The question was: how could the treatment reach someone who couldn't get to the clinic?</p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection id="the-real-constraint"><ArticleTwoCol>
+      <SectionLabel slot="label">08 / The real constraint</SectionLabel>
+      <h2 class="h-2">The technology wasn't the bottleneck.</h2>
+      <p class="body-copy">I spent a lot of my career assuming difficult technical problems were the thing standing between an idea and success. CognitiVR complicated that assumption.</p>
+      <p class="body-copy">We improved robustness, explored alternative tracking, added platform capability and considered portability. But <strong>another technical feature didn't create another patient.</strong></p>
+      <p class="body-copy">People had to discover the treatment and be able to access it. Referral pathways, geography and the operating model mattered. Distribution mattered.</p>
+      <p class="body-copy">The question that remained was: <strong>how do we get the treatment into the hands of the people who need it?</strong></p>
+    </ArticleTwoCol></ArticleSection>
+    <EditorialScrollSequence tone="dark" size="large" lines={['We made the technology more capable.', 'The harder problem was getting it to people.']} />
+
+    <ArticleSection tight id="patients"><ArticleTwoCol>
+      <SectionLabel slot="label">09 / Patients</SectionLabel>
+      <h2 class="h-2">What kept me believing in it was watching people use it.</h2>
+      <p class="body-copy">I saw people arrive after living with pain for years and watched them engage with the treatment in ways that were difficult to forget.</p>
+      <p class="body-copy">From what I witnessed, I believed there were people who could potentially benefit from the approach. Those were personal observations, not a clinical evaluation.</p>
+      <p class="body-copy">Those experiences made the distribution problem frustrating. <strong>The challenge was reaching enough of them.</strong></p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection tight id="looking-back"><ArticleTwoCol>
+      <SectionLabel slot="label">10 / Looking back</SectionLabel>
+      <h2 class="h-2">Looking back, I would have spent more time on reach.</h2>
+      <p class="body-copy">I'm proud of the technical work we did on CognitiVR. The body tracking was difficult. The interaction design was unusual. Making the platform more robust and portable mattered.</p>
+      <p class="body-copy">But I don't think another technical feature was what the product needed most. The core experience was already good enough to test the bigger question: <strong>could we get it to enough of the people who needed it?</strong></p>
+      <p class="body-copy">That's the problem I would have focused on earlier.</p>
+      <p class="body-copy">After several years working with Wilfred on Neurotechnology, 42 Interactive recently exited the joint venture. I left with a much stronger appreciation for a lesson that now influences how I think about products: <strong>technical feasibility and product distribution are different problems.</strong></p>
+    </ArticleTwoCol></ArticleSection>
+    <EditorialScrollSequence tone="dark" size="large" lines={['The technology worked.', 'The harder problem was reach.']} />
+    <div class="container cognitivr-ending">
+      <nav class="cognitivr-next editorial-spine" aria-label="Explore shipped work">
+        <NavRow href="/shipped/" label="Shipped" description="Back to all shipped work" />
+        <NavRow href="/shipped/craveable-brands/" label="Next project" description="Craveable Brands — evolving the systems behind restaurant ordering" />
+      </nav>
+    </div>
+  </article>
+</BaseLayout>
+<style>
+  .cognitivr-hero { padding-top: clamp(120px,18vh,180px); padding-bottom: clamp(48px,7vh,80px); }
+  h1 { font-size: clamp(54px,9vw,140px); line-height: .98; letter-spacing: -.055em; }
+  .cognitivr-deck { font-size: clamp(24px,3vw,42px); line-height: 1.15; letter-spacing: -.025em; max-width: 30ch; }
+  figure { margin: 0; min-width: 0; }
+  img, video { display: block; width: 100%; height: auto; border-radius: var(--radius-md); }
+  video { aspect-ratio: 16 / 9; background: #080807; }
+  figcaption { margin-top: 16px; font-size: 14px; line-height: 1.55; color: var(--color-body); max-width: 75ch; }
+  :global(.article-section--dark) figcaption { color: var(--color-dark-body); }
+  .cognitivr-hero-image { margin-top: clamp(32px,5vh,64px); }
+  .cognitivr-facts { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 28px 40px; border-top: 1px solid var(--color-border); margin: 40px 0 0; padding-top: 28px; }
+  .cognitivr-facts > div:last-child { grid-column: span 2; }
+  dt { margin-bottom: 10px; } dd { margin: 0; font-size: 16px; line-height: 1.5; max-width: 60ch; }
+  .cognitivr-person { margin-top: 32px; max-width: 900px; }
+  .cognitivr-elements { display: grid; grid-template-columns: 1fr 1fr; list-style: none; margin: 0; padding: 0; gap: 0 28px; }
+  .cognitivr-elements li { padding: 12px 0; border-bottom: 1px solid var(--color-border); font-size: 16px; }
+  .cognitivr-primary-video { margin-top: 40px; }
+  .cognitivr-secondary-video { max-width: 880px; }
+  .cognitivr-gallery { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(24px,4vw,64px); align-items: start; margin-top: 40px; }
+  .cognitivr-gallery > figure:last-child { margin-top: 80px; }
+  .cognitivr-next { margin-top: clamp(48px,8vh,96px); }
+  .cognitivr-ending { padding-bottom: clamp(48px,8vh,96px); }
+  .cognitivr-story :global(.editorial-seq) { margin-top: 0; }
+  @media(max-width:900px) { .cognitivr-gallery { grid-template-columns: 1fr; } .cognitivr-gallery > figure:last-child { margin-top: 0; max-width: 85%; } .cognitivr-facts { grid-template-columns: 1fr 1fr; } }
+  @media(max-width:600px) { .cognitivr-facts, .cognitivr-elements { grid-template-columns: 1fr; } .cognitivr-facts > div:last-child { grid-column: auto; } .cognitivr-gallery > figure:last-child { max-width: 100%; } }
+</style>

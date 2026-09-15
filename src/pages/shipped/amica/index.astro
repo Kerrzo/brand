@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArticleSection from '../../../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../../../components/content/article/ArticleTwoCol.astro';
+import ArticlePipeline from '../../../components/content/article/ArticlePipeline.astro';
+import SectionLabel from '../../../components/ui/SectionLabel.astro';
+import EditorialScrollSequence from '../../../components/ui/EditorialScrollSequence.astro';
+import KeepExploring from '../../../components/content/KeepExploring.astro';
+const media = '/media/work/amica';
+const source = 'https://42interactive.com/what-we-do/connecting-people-to-workplace/';
+const areas = ['Access', 'Permits', 'Spaces', 'Car parking', 'Lockers', 'People', 'Wardens', 'Incidents', 'Payments', 'Analytics', 'Content', 'Building data', 'ESG', 'Search'];
+---
+<BaseLayout title="Amica — Software as part of the building" description="Years evolving International Towers' workplace platform, connecting digital bookings, access, permits and community with the physical experience of the people inside." image={`${media}/lobby.webp`} current="shipped">
+  <article class="amica-story">
+    <header class="container amica-hero"><ArticleTwoCol>
+      <SectionLabel slot="label" withDot>Shipped / Workplace platform</SectionLabel>
+      <h1>What happens when software becomes part of the building?</h1>
+      <p class="lede">Amica connects the digital experience of International Towers with the physical experience of the people inside them.</p>
+      <p class="body-copy">Bookings can open doors. Mobile credentials provide access. Contractor workflows protect the building. Events, rewards and vouchers turn digital interactions into things that happen in the real world.</p>
+      <p class="body-copy"><strong>I've spent years helping evolve the platform behind it.</strong></p>
+      <div class="amica-meta"><span>Amica</span><span>International Towers</span><span>Workplace platform / Product architecture</span></div>
+    </ArticleTwoCol>
+    <figure class="amica-wide"><img src={`${media}/lobby.webp`} width="1440" height="900" alt="International Towers lobby with people, entrances and digital screens displaying local retailer offers" fetchpriority="high" /><figcaption>International Towers, Barangaroo / The place the platform serves.</figcaption></figure>
+    </header>
+
+    <ArticleSection dark tight id="the-place"><ArticleTwoCol>
+      <SectionLabel slot="label">01 / The place</SectionLabel>
+      <h2 class="h-2">Three towers. Thousands of people. One digital layer.</h2>
+      <p class="body-copy">International Towers brings together major tenant organisations, employees, visitors, contractors and retailers. Around them sit meeting spaces, car parks, lockers, security, building operations and community life.</p>
+      <div class="amica-place"><div><span class="mono-label">People experience</span><p>Community · Events · Perks · Bookings · Access</p></div><strong>↕ Amica ↕</strong><div><span class="mono-label">Building operations</span><p>Security · Permits · Spaces · Contractors · Safety</p></div></div>
+      <p class="body-copy"><strong>The platform has always had two jobs:</strong> make the workplace better for the people using it, and make the buildings easier to operate.</p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection tight id="evolution"><ArticleTwoCol>
+      <SectionLabel slot="label">02 / Evolution</SectionLabel>
+      <h2 class="h-2">I didn't build the first version. I've helped evolve what came next.</h2>
+      <p class="body-copy">The International Towers relationship already existed when I joined 42 Interactive. Partner Portal was several versions into its life. I became involved around version four and have since helped guide it through roughly six major releases, through around version nine.</p>
+      <p class="body-copy">My role sits between the business and the engineering team: understand what International Towers is trying to achieve, help shape the product response, and work out how the technology needs to change. <strong>I led the technical team and architecture; the team generally wrote the implementation code.</strong></p>
+      <p class="body-copy">Over time it became much more than a portal. It became infrastructure for how people interact with the buildings.</p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark id="access-permits"><ArticleTwoCol>
+      <SectionLabel slot="label">03 / Access permits</SectionLabel>
+      <h2 class="h-2">A paper form was costing years.</h2>
+      <p class="body-copy">A contractor cannot simply walk into a major commercial building and start work. Someone needs to know who they represent, whether their induction and accreditation are current, what systems their work affects and who needs to approve it.</p>
+      <p class="body-copy">Amica turned that manual process into digital requests, tenant and operational approvals, contractor checks and CM3 integration for induction and accreditation validation.</p>
+      <p class="body-copy">Some combinations of building-system changes create unacceptable risk. The workflow can encode rules that prevent incompatible safety conditions being approved together.</p>
+      <p class="body-copy"><strong>This wasn't paper becoming a web form. It was operational knowledge becoming software.</strong></p>
+      <div class="amica-stats"><div><strong>16,448</strong><span class="mono-label">Access permits raised and processed</span></div><span class="amica-stat-arrow" aria-hidden="true">→</span><div><strong>8.16</strong><span class="mono-label">Working years automated</span></div></div>
+      <p class="amica-source">Reported by <a href={source}>42 Interactive</a>: an estimated three hours of tenancy, property-team and contractor effort per permit, expressed as 8.16 working years. A published estimate of operational effort, not a live counter.</p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection tight id="physical-world"><ArticleTwoCol>
+      <SectionLabel slot="label">04 / The physical world</SectionLabel>
+      <h2 class="h-2">A booking can change the building.</h2>
+      <p class="body-copy">A room booking carries context: the person, organisation, tenancy entitlements, space, booking window and access required. It does more than create a calendar record.</p>
+      <p class="body-copy">Through the building's Gallagher / HID access environment, Amica can provide the permissions needed to reach the booked space for the appropriate time window, then remove that temporary access when the booking ends.</p>
+      <ArticlePipeline steps={['Book room', 'Building access', 'Lift', 'Floor', 'Room', 'Booking ends', 'Access removed']} label="Digital booking → time-limited physical access" />
+    </ArticleTwoCol></ArticleSection>
+    <EditorialScrollSequence tone="dark" lines={["The software doesn't just record the booking.", 'It changes what the building will let you do.']} />
+
+    <ArticleSection tight id="mobile-access"><ArticleTwoCol>
+      <SectionLabel slot="label">05 / Mobile access</SectionLabel>
+      <h2 class="h-2">Your phone becomes the pass.</h2>
+      <p class="body-copy">Mobile credentials let people access the parts of the building their security profile permits. They shouldn't have to understand Gallagher, HID or security profiles. They approach with their phone. The door opens.</p>
+      <p class="body-copy"><strong>Good integration hides the systems underneath it.</strong></p>
+      <figure class="amica-access"><img src={`${media}/mobile-access.webp`} width="278" height="181" alt="A phone displaying mobile access held beside a physical building reader" loading="lazy" /><figcaption>Pass → door / Supplied mobile-access photograph.</figcaption></figure>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark tight id="bookings"><ArticleTwoCol>
+      <SectionLabel slot="label">06 / Bookings</SectionLabel>
+      <h2 class="h-2">One booking system. Many kinds of space.</h2>
+      <p class="body-copy">Meeting rooms, lockers and car parking share a booking concept, but the physical rules differ. Tenancy entitlements, contractual allowances, time windows, access and payments or chargeback all matter.</p>
+      <p class="body-copy">Parking adds bays, vehicle details, entry and exit, and usage allowances. <strong>The booking is connected to the physical and commercial context of the space.</strong></p>
+      <div class="amica-booking-pair"><figure><img src={`${media}/parking.webp`} width="327" height="647" alt="Amica parking booking interface showing vehicle types and available dates" loading="lazy" /><figcaption>Choose a space and time.</figcaption></figure><figure><img src={`${media}/towers.webp`} width="477" height="720" alt="International Towers beside the Barangaroo waterfront" loading="lazy" /><figcaption>Use a real place.</figcaption></figure></div>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection tight id="perks"><ArticleTwoCol>
+      <SectionLabel slot="label">07 / Perks</SectionLabel>
+      <h2 class="h-2">Then there were the perks.</h2>
+      <p class="body-copy">I knew the vouchers had landed when I started standing in restaurant queues at Barangaroo, my own Amica QR code ready, and seeing the same voucher on phones around me.</p>
+      <p class="body-copy"><strong>No dashboard required. People were actually using it.</strong></p>
+      <p class="body-copy">The programme brings together vouchers, competitions, rewards, events and points. Retailers scan voucher QR codes through tooling built for the programme, with redemptions tracked through Amica.</p>
+      <figure><img src={`${media}/perks-phones.webp`} width="1280" height="720" alt="Amica Perks screens for a competition, restaurant reward and coffee voucher" loading="lazy" /><figcaption>Voucher → lunch / The digital side of a familiar real-world moment.</figcaption></figure>
+    </ArticleTwoCol>
+    <figure class="amica-wide"><img src={`${media}/perks-wall.webp`} width="1386" height="1111" alt="Amica community programme showing retailer offers, competition winners, merchandise and local food deals" loading="lazy" /><figcaption>The programme in the world / Real offers, retailers, winners and community activity.</figcaption></figure>
+    </ArticleSection>
+
+    <ArticleSection dark tight id="events"><ArticleTwoCol>
+      <SectionLabel slot="label">08 / Screen → real world</SectionLabel>
+      <h2 class="h-2">The digital experience is only the beginning.</h2>
+      <p class="body-copy">Someone signs up on a screen. Then they physically experience something in the building. I made this showcase concept to explore that transition.</p>
+    </ArticleTwoCol>
+    <figure class="amica-wide"><video id="amica-showcase" controls muted playsinline preload="metadata" poster={`${media}/events-poster.jpg`} width="1920" height="1080" aria-label="Paul Kerr's Amica screen-to-real-world showcase concept"><source src={`${media}/events-showcase.mp4`} type="video/mp4" /></video><figcaption>My showcase concept / Not the final client-selected promotional film.</figcaption></figure>
+    </ArticleSection>
+
+    <ArticleSection tight id="community"><ArticleTwoCol>
+      <SectionLabel slot="label">09 / Community</SectionLabel>
+      <h2 class="h-2">A workplace isn't only desks and doors.</h2>
+      <p class="body-copy">Wellness sessions, community events, competitions and retailer experiences give people reasons to participate. Behind each event are practical questions about capacity, eligibility, registration, reminders and attendance.</p>
+      <p class="body-copy">Rewards and points add another engagement layer. <strong>Amica connects the operational building with the community inside it.</strong></p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark tight id="operating-platform"><ArticleTwoCol>
+      <SectionLabel slot="label">10 / The operating platform</SectionLabel>
+      <h2 class="h-2">The same platform goes much deeper behind the scenes.</h2>
+      <div class="amica-ecosystem">{areas.map(area => <span>{area}</span>)}</div>
+      <p class="body-copy">These areas grew through the work of a team over many releases. <strong>One platform gradually absorbing more of the relationship between people, organisations and place.</strong></p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection tight id="safety"><ArticleTwoCol>
+      <SectionLabel slot="label">11 / Safety</SectionLabel>
+      <h2 class="h-2">Some workflows matter more than convenience.</h2>
+      <p class="body-copy">Warden management, training, incident communication, targeted push notifications, SMS and access-permit safety support the people responsible for the buildings.</p>
+      <p class="body-copy">Amica supports those people and workflows. <strong>It doesn't replace certified building safety systems.</strong></p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark tight id="search"><ArticleTwoCol>
+      <SectionLabel slot="label">12 / Search and data</SectionLabel>
+      <h2 class="h-2">Years of platform growth create another problem: finding things.</h2>
+      <p class="body-copy">Indexed search makes people, organisations and platform content discoverable without asking users to know where everything lives. Keeping the index updated as records change helps the interface stay quick as the operational platform grows.</p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection tight id="ai"><ArticleTwoCol>
+      <SectionLabel slot="label">13 / AI</SectionLabel>
+      <h2 class="h-2">Now the platform can answer questions about itself.</h2>
+      <p class="body-copy">The first version of Amica AI is now shipped. It combines building and platform knowledge with structured operational data and tools into the underlying system.</p>
+      <ArticlePipeline steps={['Knowledge', 'Operational data', 'System tools', 'An answer in context']} label="The newest layer of the platform" />
+      <p class="body-copy">Operational users can ask questions about permits issued this month, active organisations or rewards being used. <strong>The answer can draw on the operation, not just a static document.</strong></p>
+      <p class="body-copy">Conversational booking, voice interaction and deeper operational actions are product direction, not current shipped capabilities. This is version one of a new layer on years of platform work.</p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark tight id="platform-evolution"><ArticleTwoCol>
+      <SectionLabel slot="label">14 / Platform evolution</SectionLabel>
+      <h2 class="h-2">A platform never stops changing.</h2>
+      <ArticlePipeline steps={['Partner Portal', 'Access + operations', 'Bookings + physical access', 'Community + perks', 'Mobile', 'Amica', 'AI']} label="Broad evolution / Not a version-by-version release map" />
+      <p class="body-copy">The buildings changed. The people using them changed. Security technology and ways of working changed. Across roughly six major releases of my involvement, the platform kept absorbing more of the relationship between people and place.</p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection id="looking-back"><ArticleTwoCol>
+      <SectionLabel slot="label">15 / Looking back</SectionLabel>
+      <h2 class="h-2">The best digital moments happen in the real world.</h2>
+      <p class="body-copy">After years working on Amica, some of my favourite product moments have almost nothing to do with looking at software.</p>
+      <div class="amica-outcomes"><p>Someone books a room.<strong>The door opens.</strong></p><p>Someone claims a voucher.<strong>They buy lunch downstairs.</strong></p><p>Someone joins an event.<strong>They meet people in the building.</strong></p></div>
+      <p class="body-copy"><strong>The software matters because of what happens after the screen.</strong> You shouldn't have to think about security profiles, APIs, entitlement rules or integrations. You should just be able to use the place.</p>
+    </ArticleTwoCol></ArticleSection>
+    <EditorialScrollSequence tone="dark" size="large" lines={["The software isn't the experience.", 'The building is.']} />
+  </article>
+  <KeepExploring routes={['shipped','learnings','building']} descriptions={{shipped:"See the other products and systems I've delivered.",learnings:'See what the work taught me.',building:"See what I'm working on now."}} />
+</BaseLayout>
+<script>
+  const video = document.querySelector<HTMLVideoElement>('#amica-showcase');
+  if (video) {
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let visible = false;
+    const sync = () => {
+      if (motion.matches || !visible) video.pause();
+      else { video.muted = true; void video.play().catch(() => {}); }
+    };
+    const observer = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; sync(); }, { threshold: .3 });
+    observer.observe(video);
+    motion.addEventListener('change', sync);
+    document.addEventListener('astro:before-swap', () => { observer.disconnect(); motion.removeEventListener('change', sync); }, { once: true });
+  }
+</script>
+<style>
+  .amica-hero { padding-top: clamp(120px,18vh,180px); padding-bottom: 48px; }
+  h1 { font-size: clamp(38px,5.5vw,82px); line-height: 1.04; letter-spacing: -.04em; max-width: 22ch; }
+  figure { margin: 0; min-width: 0; } img,video { display: block; width: 100%; height: auto; border-radius: var(--radius-md); } video { aspect-ratio: 16/9; background: #080807; }
+  figcaption,.amica-source { font-size: 14px; line-height: 1.55; color: var(--color-body); margin-top: 16px; max-width: 72ch; }
+  :global(.article-section--dark) figcaption,:global(.article-section--dark) .amica-source { color: var(--color-dark-body); }
+  a { text-decoration: underline; text-underline-offset: 4px; }
+  .amica-wide { margin-top: 40px; }
+  .amica-meta { display: flex; flex-wrap: wrap; gap: 12px 28px; border-top: 1px solid var(--color-border); padding-top: 20px; font: 11px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+  .amica-meta span:first-child { color: var(--color-accent); }
+  .amica-story :global(.editorial-seq) { margin-top: 0; }
+  .amica-place { border-block: 1px solid var(--color-dark-border); padding-block: 24px; display: grid; gap: 24px; }
+  .amica-place strong { font-size: 36px; color: var(--color-accent); font-weight: 500; }
+  .amica-place p { font-size: 19px; line-height: 1.5; margin-top: 12px; }
+  .amica-stats { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; padding-block: 32px; }
+  .amica-stats strong { display: block; font-size: clamp(48px,6.8vw,108px); font-weight: 500; line-height: 1; letter-spacing: -.05em; margin-bottom: 20px; }
+  .amica-stat-arrow { color: var(--color-accent); font-size: 42px; }
+  .amica-access { max-width: 360px; margin-top: 40px; }
+  .amica-booking-pair { display: grid; grid-template-columns: minmax(0,327px) minmax(0,477px); gap: clamp(24px,5vw,72px); align-items: center; margin-top: 40px; }
+  .amica-ecosystem { display: flex; flex-wrap: wrap; gap: 0 24px; padding-block: 16px; border-block: 1px solid var(--color-dark-border); }
+  .amica-ecosystem span { font-size: clamp(22px,3vw,38px); line-height: 1.8; letter-spacing: -.025em; }
+  .amica-outcomes { border-top: 1px solid var(--color-border); }
+  .amica-outcomes p { padding: 20px 0; border-bottom: 1px solid var(--color-border); font-size: clamp(20px,2.4vw,30px); line-height: 1.4; }
+  .amica-outcomes strong { display: block; font-weight: 500; }
+  @media(max-width:600px) { .amica-stats { grid-template-columns: 1fr; } .amica-stat-arrow { transform: rotate(90deg); justify-self: start; } .amica-booking-pair { grid-template-columns: 1fr; } .amica-booking-pair figure { max-width: 327px; } }
+</style>
