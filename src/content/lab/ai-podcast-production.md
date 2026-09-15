@@ -4,8 +4,8 @@ description: "Can AI turn an off-the-cuff conversation into a finished podcast? 
 category: "Voice and real-time"
 type: "Experiment"
 status: "Starting"
-heroImage: "/media/experiments/ai-podcast-production/podcast.png"
-heroAlt: "Podcast production concept showing a recording and an edited episode on a laptop"
+heroImage: "/media/experiments/ai-podcast-production/podcast-comfyui.png"
+heroAlt: "Podcast experiment concept with the ComfyUI workflow displayed on a laptop screen"
 publishedDate: 2026-09-15
 tools: ["Frontier models", "Audio", "Editorial AI"]
 displayOrder: 1
