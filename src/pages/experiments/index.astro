@@ -19,6 +19,12 @@ const podcast = bySlug('ai-podcast-production');
 const exp07 = bySlug('ltx-video-experiments');
 // Retain the unfinished listing sections so they can return when content is ready.
 const showUnfinishedExperiments = false;
+const showFilters = false;
+const publicExperiments = [
+  { item: poszo, question: 'Can AI take a drive-through order without making the experience worse?', context: 'Realtime voice · Restaurant ordering', description: poszo.data.description, image: '/media/projects/poszo.png', alt: 'Drive-through voice ordering concept', caption: 'Concept image · Voice ordering exploration', status: 'Active experiment' },
+  { item: wifi, question: 'Can Wi-Fi count people in a room?', context: 'Wi-Fi CSI · Spatial sensing', description: wifi.data.description, image: wifi.data.heroImage, alt: wifi.data.heroAlt, caption: 'RuView demo by ruvnet · Not my test results', status: 'Starting' },
+  { item: podcast, question: 'Can AI turn an off-the-cuff conversation into a finished podcast?', context: 'Frontier models · Audio · Editorial AI', description: 'Testing editorial judgement, not just audio processing. Source selection and all production tests are still ahead.', image: podcast.data.heroImage, alt: podcast.data.heroAlt, caption: 'Concept image · Experiment results still to come', status: 'Starting' },
+];
 
 const featuredOrder = [
   { slug: 'modular-2d-characters', span: 2, ratio: '3/4', offset: true },
@@ -36,9 +42,7 @@ const unfinishedLabLog = [
 ];
 
 const labLog = [
-  { slug: 'realtime-drive-through-ordering', title: 'Poszo' },
-  { slug: 'wifi-human-sensing', title: 'Wi-Fi human sensing' },
-  { slug: 'ai-podcast-production', title: 'AI Podcast Production' },
+  ...publicExperiments.map(({ item, question }) => ({ slug: item.id, title: question })),
   ...(showUnfinishedExperiments ? unfinishedLabLog.filter(entry => entry.slug !== 'realtime-drive-through-ordering') : []),
 ];
 const categories = showUnfinishedExperiments
@@ -60,61 +64,29 @@ const categories = showUnfinishedExperiments
     <Ticker text="Local AI · Voice · Video · 3D · Realtime · Agents · Robotics · Game Dev · Creative Tools" />
   </div>
 
-  <section class="container lab-page__filter">
+  {showFilters && <section class="container lab-page__filter">
     <FilterBar categories={categories} allLabel="All experiments" bordered={false} />
+  </section>}
+
+  <section class="container lab-page__rows" aria-label="Current experiments">
+    {publicExperiments.map((entry, i) => (
+      <article class:list={['lab-page__row', { 'lab-page__row--dark': i % 2 === 0 }]} data-card data-cat={entry.item.data.category} data-reveal>
+        <figure class="lab-page__media">
+          <a href={`/experiments/${entry.item.id}/`} aria-label={entry.question}>
+            <PlaceholderMedia src={entry.image} alt={entry.alt} label={entry.context} ratio="16/11" radius="md" />
+          </a>
+          <figcaption>{entry.caption}</figcaption>
+        </figure>
+        <div class="lab-page__copy">
+          <div class="mono-label">EXP {String(i + 1).padStart(2, '0')} · {entry.status}</div>
+          <h2 class="lab-page__question">{entry.question}</h2>
+          <div class="lab-page__context">{entry.context}</div>
+          <p class="lab-page__description">{entry.description}</p>
+          <a href={`/experiments/${entry.item.id}/`} class="lab-page__read-more">Explore the experiment →</a>
+        </div>
+      </article>
+    ))}
   </section>
-
-  {poszo && (
-    <section class="container lab-page__poszo" data-card data-cat={poszo.data.category}>
-      <a href={`/experiments/${poszo.id}/`} class="lab-page__grid-item" data-reveal>
-        <div class="mono-label">EXP 01 — Poszo · Active experiment</div>
-        <PlaceholderMedia src="/media/projects/poszo.png" alt="Poszo drive-through voice ordering concept" label="Poszo" ratio="16/9" radius="md" />
-        <div class="lab-page__exp01-grid">
-          <h2 class="lab-page__exp01-heading">Poszo</h2>
-          <div>
-            <p class="body-copy">{poszo.data.description}</p>
-            <span class="lab-page__poszo-link">Explore voice ordering →</span>
-          </div>
-        </div>
-      </a>
-    </section>
-  )}
-
-  {wifi && (
-    <section class="container lab-page__poszo" data-card data-cat={wifi.data.category}>
-      <a href={`/experiments/${wifi.id}/`} class="lab-page__grid-item" data-reveal>
-        <div class="mono-label">EXP 02 — Wi-Fi human sensing · Starting</div>
-        <PlaceholderMedia src={wifi.data.heroImage} alt={wifi.data.heroAlt} label="RuView upstream demo" ratio="16/9" radius="md" />
-        <span class="lab-page__grid-item-desc">RuView demo by ruvnet · Not my test results</span>
-        <div class="lab-page__exp01-grid">
-          <h2 class="lab-page__exp01-heading">Can Wi-Fi count people in a room?</h2>
-          <div>
-            <p class="body-copy">{wifi.data.description}</p>
-            <span class="lab-page__poszo-link">Explore Wi-Fi sensing →</span>
-          </div>
-        </div>
-      </a>
-    </section>
-  )}
-
-  {podcast && (
-    <section class="container lab-page__poszo" data-card data-cat={podcast.data.category}>
-      <a href={`/experiments/${podcast.id}/`} class="lab-page__grid-item" data-reveal>
-        <div class="mono-label">EXP 03 — AI Podcast Production · Starting</div>
-        <PlaceholderMedia src={podcast.data.heroImage} alt={podcast.data.heroAlt} label="AI Podcast Production" ratio="3/2" radius="md" />
-        <span class="lab-page__grid-item-desc">Concept image · Experiment results still to come</span>
-        <div class="lab-page__exp01-grid">
-          <h2 class="lab-page__exp01-heading">AI Podcast Production</h2>
-          <div>
-            <p class="body-copy">Can AI turn an off-the-cuff conversation into a finished podcast?</p>
-            <p class="lab-page__grid-item-desc">Frontier models · Audio · Editorial AI</p>
-            <span class="lab-page__poszo-link">Explore the production experiment →</span>
-          </div>
-        </div>
-      </a>
-    </section>
-  )}
-
   {showUnfinishedExperiments && <>
   {exp01 && (
     <section class="container lab-page__exp01" data-card data-cat={exp01.data.category}>
@@ -224,6 +196,20 @@ const categories = showUnfinishedExperiments
 </BaseLayout>
 
 <style>
+  .lab-page__rows { padding-block: clamp(60px, 9vh, 120px); display: flex; flex-direction: column; gap: clamp(60px, 9vh, 120px); }
+  .lab-page__row { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+  .lab-page__row--dark { background: var(--color-dark-bg); color: var(--color-dark-fg); border-radius: var(--radius-xl); padding: clamp(36px, 5vw, 64px); }
+  .lab-page__media { margin: 0; min-width: 0; }
+  .lab-page__media a { display: block; }
+  .lab-page__media figcaption { margin-top: 12px; font-size: 12px; line-height: 1.5; color: var(--color-body); }
+  .lab-page__copy { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+  .lab-page__question { margin: 0; font-size: clamp(30px, 3.6vw, 52px); line-height: .98; letter-spacing: -.035em; font-weight: 500; }
+  .lab-page__context { font-size: 17px; font-weight: 500; }
+  .lab-page__description { margin: 0; max-width: 42ch; font-size: 16px; line-height: 1.6; color: var(--color-body); }
+  .lab-page__row--dark .lab-page__description, .lab-page__row--dark figcaption, .lab-page__row--dark .mono-label { color: rgba(243, 242, 240, .62); }
+  .lab-page__read-more { display: inline-flex; align-self: flex-start; margin-top: 4px; padding-bottom: 4px; font-size: 15px; font-weight: 500; border-bottom: 1px solid var(--color-border-strong); }
+  .lab-page__row--dark .lab-page__read-more { border-bottom-color: rgba(243, 242, 240, .3); }
+  @media (max-width: 900px) { .lab-page__row { grid-template-columns: minmax(0, 1fr); gap: 20px; } }
   .lab-page__poszo { padding-top: clamp(20px, 3vh, 40px); padding-bottom: clamp(64px, 9vh, 120px); }
   .lab-page__poszo-link { display: inline-block; margin-top: 20px; border-bottom: 1px solid var(--color-border-strong); padding-bottom: 4px; }
   .lab-page__ticker {
