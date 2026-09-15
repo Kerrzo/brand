@@ -77,12 +77,12 @@ const categories = showUnfinishedExperiments
           </a>
           <figcaption>{entry.caption}</figcaption>
         </figure>
-        <div class="lab-page__copy">
+        <div class="lab-page__copy" data-listing-copy>
           <div class="mono-label">EXP {String(i + 1).padStart(2, '0')} · {entry.status}</div>
           <h2 class="lab-page__question">{entry.question}</h2>
           <div class="lab-page__context">{entry.context}</div>
           <p class="lab-page__description">{entry.description}</p>
-          <a href={`/experiments/${entry.item.id}/`} class="lab-page__read-more">Explore the experiment →</a>
+          <a href={`/experiments/${entry.item.id}/`} class="lab-page__read-more" data-listing-link>Explore the experiment →</a>
         </div>
       </article>
     ))}

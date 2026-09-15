@@ -10,20 +10,17 @@ interface Props {
   eyebrow: string;
   heading: string;
   tagline?: string;
-  backHref: string;
-  backLabel: string;
   heroLabel: string;
   heroImage?: string;
   heroAlt?: string;
   facts?: { label: string; value: string }[];
 }
 
-const { title, description, current, eyebrow, heading, tagline, backHref, backLabel, heroLabel, heroImage, heroAlt, facts = [] } = Astro.props;
+const { title, description, current, eyebrow, heading, tagline, heroLabel, heroImage, heroAlt, facts = [] } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} current={current}>
   <article class="detail container">
-    <a href={backHref} class="detail__back">&larr; {backLabel}</a>
     <div class="detail__intro" data-reveal>
       <div class="mono-label">{eyebrow}</div>
       <h1 class="detail__heading">{heading}</h1>
@@ -59,18 +56,6 @@ const { title, description, current, eyebrow, heading, tagline, backHref, backLa
 <style>
   .detail {
     padding-top: clamp(120px, 18vh, 200px);
-  }
-
-  .detail__back {
-    display: inline-flex;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--color-label);
-    margin-bottom: clamp(28px, 4vh, 48px);
-  }
-
-  .detail__back:hover {
-    color: var(--color-accent);
   }
 
   .detail__intro {

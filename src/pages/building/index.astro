@@ -62,7 +62,7 @@ const pageCopy: Record<string, { title?: string; href?: string; category: string
             dark={i % 2 === 0}
             class="projects-page__media"
           />
-          <div class="projects-page__copy">
+          <div class="projects-page__copy" data-listing-copy>
             <div class:list={['mono-label', { 'eyebrow--dark': i % 2 === 0 }]}>({String(i + 1).padStart(2, '0')}) &middot; Active exploration</div>
             <h2 class="projects-page__title">{title}</h2>
             <div class="projects-page__tagline">{category}</div>
@@ -70,7 +70,7 @@ const pageCopy: Record<string, { title?: string; href?: string; category: string
             <div class="projects-page__tags">
               {focus.map((tag) => <span class:list={['pill-tag', { 'pill-tag--dark': i % 2 === 0 }]}>{tag}</span>)}
             </div>
-            <a href={copy?.href ?? `/building/${item.id}/`} class="projects-page__link">Read More</a>
+            <a href={copy?.href ?? `/building/${item.id}/`} class="projects-page__link" data-listing-link>Read More</a>
           </div>
         </div>
       );

@@ -34,7 +34,7 @@ export default defineConfig({
     '/lessons': '/learnings',
     '/lessons/[slug]': '/learnings/[slug]',
   },
-  integrations: [sitemap(), mdx()],
+  integrations: [sitemap({ filter: (page) => new URL(page).pathname !== '/styleguide/' }), mdx()],
   vite: {
     plugins: [publicDirIndexFallback()],
     build: {

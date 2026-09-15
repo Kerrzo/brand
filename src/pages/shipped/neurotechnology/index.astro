@@ -54,10 +54,6 @@ const elements = ['Immersive VR experience', 'Anatomical 3D body model', 'Body /
         <p class="body-copy">The companion application allowed the experience to be configured and observed outside VR. The person inside the headset interacted with a tracked representation of their own body.</p>
         <p class="body-copy">The question I became increasingly interested in was what had to happen around that experience if it was ever going to reach more people.</p>
         <ul class="cognitivr-elements">{elements.map(element => <li>{element}</li>)}</ul>
-        <figure>
-          <img src={`${media}/product-frame-35.jpg`} width="1920" height="1080" alt="CognitiVR application showing session controls and pain markings on virtual body models" loading="lazy" decoding="async" />
-          <figcaption>The companion application / Frame from the supplied product recording.</figcaption>
-        </figure>
       </ArticleTwoCol>
     </ArticleSection>
 
@@ -69,8 +65,8 @@ const elements = ['Immersive VR experience', 'Anatomical 3D body model', 'Body /
       </ArticleTwoCol>
       <figure class="cognitivr-primary-video">
         <video controls autoplay muted loop playsinline preload="metadata" poster={`${media}/product-poster.jpg`} width="1920" height="1080" aria-label="CognitiVR product demonstration" aria-describedby="product-video-caption">
-          <source src={`${media}/product-in-motion.mp4`} type="video/mp4" />
-          <a href={`${media}/product-in-motion.mp4`}>Watch the CognitiVR product demonstration</a>
+          <source src={`${media}/product-in-motion-trimmed.mp4`} type="video/mp4" />
+          <a href={`${media}/product-in-motion-trimmed.mp4`}>Watch the CognitiVR product demonstration</a>
         </video>
         <figcaption id="product-video-caption">CognitiVR connected the person inside VR with a companion application used to configure and observe the experience.</figcaption>
       </figure>
@@ -105,8 +101,8 @@ const elements = ['Immersive VR experience', 'Anatomical 3D body model', 'Body /
         <p class="body-copy"><strong>The treatment should survive the hardware changing underneath it.</strong> This was an alternative tracking implementation, not a wholesale replacement of Kinect across every installation.</p>
         <figure class="cognitivr-secondary-video">
           <video controls autoplay muted loop playsinline preload="metadata" poster={`${media}/interaction-poster.jpg`} width="1920" height="1080" aria-label="Early CognitiVR pain representation development" aria-describedby="interaction-video-caption">
-            <source src={`${media}/pain-representation.mp4`} type="video/mp4" />
-            <a href={`${media}/pain-representation.mp4`}>Watch the interaction development recording</a>
+            <source src={`${media}/pain-representation-trimmed.mp4`} type="video/mp4" />
+            <a href={`${media}/pain-representation-trimmed.mp4`}>Watch the interaction development recording</a>
           </video>
           <figcaption id="interaction-video-caption">Early development and interaction work behind the pain representation experience. This recording shows the existing development process, not the later iPad tracking implementation.</figcaption>
         </figure>

@@ -1,0 +1,166 @@
+---
+import '@fontsource-variable/schibsted-grotesk/wght.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../../styles/global.css';
+import '../../styles/building-editorial.css';
+import '../../styles/styleguide.css';
+import { getCollection } from 'astro:content';
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
+import ArticleSection from '../../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../../components/content/article/ArticleTwoCol.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import Button from '../../components/ui/Button.astro';
+import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
+import BuildingEvidence from '../../components/content/building/BuildingEvidence.astro';
+const modules = import.meta.glob<AstroComponentFactory>('../../components/**/*.astro', { eager: true, import: 'default' });
+const posts = await getCollection('writing', ({data}) => !data.draft);
+const photo = '/media/work/amica/lobby.webp';
+// Every shared component is registered here. Source filenames are the reference names.
+const definitions: Record<string, { use: string; options?: string; props?: Record<string, unknown> }> = {
+  SectionLabel: { use: 'Small chapter label, optionally with an orange dot.', options: 'dark · withDot · default slot' },
+  Button: { use: 'Pill-shaped action link. All four variants are shown.', options: 'solid · outline · solid-dark · inverse · withDot · newTab', props: {href:'#guide-top'} },
+  Ticker: { use: 'Full-width continuous text ticker. Leave equal breathing room above and below.', props: {text:'Learn · Build · Ship · Experiment'} },
+  StatsRow: { use: 'A quiet row of small statistics separated by rules.', props: {stats:[{value:'01',label:'Explore'},{value:'02',label:'Build'},{value:'03',label:'Review'},{value:'04',label:'Learn'}]} },
+  PlaceholderMedia: { use: 'Ratio-controlled image, looping video or honest placeholder. Real images are cropped to the chosen ratio.', options: 'src · alt · poster · ratio · radius sm/md/lg/xl · dark', props: {src:photo,alt:'International Towers lobby',label:'Image frame',ratio:'16/9'} },
+  NavRow: { use: 'Ruled navigation link: label, description and arrow.', props: {href:'/building/',label:'Building',description:'See the products I am working on now.'} },
+  FilterBar: { use: 'Category filters with a result count. This demo filters only its two example items.', props: {categories:['Building','Learning'],allLabel:'All',bordered:true} },
+  FaqAccordion: { use: 'Expandable numbered questions. Click a question to open its answer.', props: {items:[{question:'When should we use this component?',answer:'When readers need answers to a small set of specific questions.'},{question:'Does the answer need to be short?',answer:'Keep it focused and readable. Use an editorial section for a longer story.'}]} },
+  CompareSlider: { use: 'Draggable before/after comparison. The current shared component uses placeholder surfaces, not uploaded images.', props: {beforeLabel:'Before · placeholder',afterLabel:'After · placeholder'} },
+  VideoReveal: { use: 'Click-to-play video with a cover and play treatment.', props: {videoUrl:'/media/work/amica/events-showcase.mp4',posterLabel:'Amica · Events showcase'} },
+  EditorialScrollSequence: { use: 'Scroll-highlighted editorial statement with optional progress rail.', options: 'lines · eyebrow · tone light/dark · size default/large · showRail · accentColor', props: {lines:['The tools have changed.','The judgement still matters.'],eyebrow:'An editorial pause',tone:'light'} },
+  FinalCTA: { use: 'Retired component. It deliberately renders nothing; its closing message moved into Footer.', options:'Legacy heading / id props; no visible output.' },
+  ListingHero: { use: 'Large listing-page title above metadata and introductory copy.', props: {heading:'Exploring what becomes possible.',eyebrowTop:'Field notes',eyebrow:'Open experiments',meta:'Unfinished on purpose.',lede:'<p>Real experiments exploring emerging technologies. <strong>Is this useful?</strong></p>'} },
+  LearningCard: { use: 'Article image, category, title, summary, date and reading time.', props:{post:posts[0]} },
+  KeepExploring: { use: 'Left-hand label with a heading and related navigation rows on the right.', options:'current · routes · descriptions', props:{routes:['building','experiments','learnings']} },
+  ArticleSection: { use: 'Full-width section surface with standard or tight vertical spacing. Contains other editorial components.', options:'dark · tight · id · class · default slot', props:{tight:true} },
+  ArticleTwoCol: { use: 'The editorial spine: narrow label column on the left, copy on the right. Stacks on mobile.', options:'ratio · label slot · default slot' },
+  ArticleStatement: { use: 'A static large statement. Use when the words need a pause without scroll animation.', options:'size lg/xl · align left/center · maxWidth' },
+  ArticleMedia: { use: 'Ratio-controlled media with a caption underneath.', options:'label · caption · src · alt · poster · ratio · radius · dark', props:{label:'Place and context',src:photo,alt:'International Towers lobby',caption:'A caption identifies what the image is evidence of.'} },
+  ArticlePipeline: { use: 'A horizontal process made of labelled steps and arrows.', props:{label:'The learning loop',steps:['Play','Review','Understand','Remember','Revisit']} },
+  ArticleLearnings: { use: 'Numbered editorial list with a title and optional explanation for each item.', props:{items:[{title:'Start with the problem.',copy:'Use the work to find out what actually matters.'},{title:'Keep the evidence visible.',copy:'Show what happened, what changed and what remains uncertain.'},{title:'Make the next question clear.'}]} },
+  ArticleExperimentCTA: { use: 'An editorial call to action pairing copy, a button and optional media.', props:{eyebrow:'Try the experiment',heading:'One question worth testing.',copy:'Give the reader a concrete next step.',href:'/experiments/',buttonLabel:'See the experiments',mediaLabel:'Experiment evidence',mediaSrc:photo,mediaAlt:'International Towers lobby'} },
+  EditorialOutcome: { use: 'Large outcome typography, with units, statement and supporting evidence note. These are demonstration figures.', options:'size default/feature/compact · layout row/stack · rule · stats · statement · note', props:{stats:[{figure:'580',unit:'Restaurants'},{figure:'1.1M+',unit:'Customers a week'}],statement:'Architecture at scale.',note:'Example of the outcome treatment used in the Craveable story.'} },
+  ShippedTimeline: { use: 'A vertical chronology with a rule and milestone markers.', props:{milestones:['Understand the existing system','Build the next useful piece','Learn from real use']} },
+  BuildingHero: { use: 'A product-detail introduction with status, period and optional product evidence.', options:'name · title · category · status · period · default/evidence slots', props:{name:'Brilliancy',title:'An engine finds the move. A coach explains the idea.',category:'Chess / AI coaching',status:'Active',period:'2026 — now'} },
+  BuildingEvidence: { use: 'Natural-aspect image or controlled video with a two-part caption. Avoids image distortion.', options:'src · poster · alt · label · caption · eager', props:{src:'/media/projects/brilliancy/game.png',alt:'Brilliancy chess review interface',label:'Real product UI',caption:'The board, move history and coaching explanation in one view.'} },
+  ExperimentResults: { use: 'Numbered test log showing each question, status and optional result.', props:{tests:[{name:'Does the idea work in a controlled test?',status:'Not run'},{name:'Does it remain useful in the real setting?',status:'Not run',result:'Define success before starting the test.'}]} },
+  Header: { use: 'Site navigation with active-page state, contact action and mobile menu.', options:'current · transparent. Shown in normal document flow here.', props:{current:'building'} },
+  Footer: { use: 'Contact columns, large moving text and site credits. The production footer remains unchanged.' },
+  SkipLink: { use: 'Keyboard shortcut to main content. Normally hidden until focused; kept visible in this specimen.' },
+  SEOHead: { use: 'Nonvisual metadata: title, description, canonical URL, social image and structured data. No visual light/dark variant.', options:'title · description · image' },
+  HomeHero: { use: 'Homepage introduction with image and scroll choreography. This catalogue shows its static reading state.' },
+  ProjectsSection: { use: 'Homepage current-work collection: alternating product rows and a wide feature.' },
+  EnterpriseWorkSection: { use: 'Homepage shipped-work collection with alternating image-and-copy rows.' },
+  LabSection: { use: 'Homepage experiment collection with its existing live content.' },
+  WritingSection: { use: 'Homepage latest-learning list with date, summary and a section action.' },
+  ServicesSection: { use: 'Numbered service rows linking to the working-together page.' },
+  AboutSection: { use: 'Portrait beside an editorial introduction and an about link.' },
+  AICaseStudySection: { use: 'Engineering-story introduction, numbered process rows and wide evidence image.' },
+  EmergingTechnologySection: { use: 'Homepage emerging-technology editorial section.' },
+};
+const entries = Object.entries(modules).map(([path, Component]) => {
+ const name = path.split('/').pop()!.replace('.astro','');
+ if (!definitions[name]) throw new Error(`Styleguide example missing for ${name}`);
+ return {name,Component,path:path.replace('../../','src/'),group:path.includes('/home/')?'Home compositions':path.includes('/global/')?'Site shell':path.includes('/ui/')?'UI primitives':'Editorial components',...definitions[name]};
+});
+const groups = ['UI primitives','Editorial components','Home compositions','Site shell'];
+const typography = [
+ ['h-display','Display','56–196px · line 0.86 · weight 500'],['h-hero','Hero','42–124px · line 0.94 · weight 500'],['h-1','Heading 1','36–88px · line 0.94 · weight 500'],['h-2','Heading 2','30–58px · line 1.04 · weight 500'],['h-3','Heading 3','24–40px · line 1 · weight 500'],['lede','Introduction / lede','19–28px · line 1.36'],['body-copy','Body copy','17px · line 1.6 · paragraphs up to 64ch'],['mono-label','Mono label','11px · tracking .14em · uppercase'],['eyebrow','Eyebrow','11px · tracking .18em · uppercase'],
+];
+---
+<!doctype html>
+<html lang="en" data-guide-theme="light">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="robots" content="noindex, nofollow"/><title>Styleguide · Paul Kerr</title></head>
+<body class="styleguide">
+  <a class="skip-link" href="#main">Skip to component catalogue</a>
+  <header class="sg-toolbar" id="guide-top">
+    <a href="#guide-top" class="sg-brand">Paul Kerr <span>/ Styleguide</span></a>
+    <details class="sg-menu">
+      <summary>Sections <span aria-hidden="true">⌄</span></summary>
+      <nav aria-label="Jump to styleguide section">
+        <a href="#typography">Typography & foundations</a>
+        <a href="#patterns">Page compositions</a>
+        {groups.map(group => <a href={`#${group.replaceAll(' ','-')}`}>{group}</a>)}
+      </nav>
+    </details>
+    <div class="sg-controls"><label for="sg-search">Find a component</label><input id="sg-search" type="search" placeholder="Name or use…"/><button id="sg-theme" type="button" role="switch" aria-checked="false" aria-label="Dark theme">Light <span aria-hidden="true">⇄</span> Dark</button></div>
+  </header>
+  <main id="main">
+    <section class="sg-intro container"><div class="mono-label">Internal reference / Unlinked</div><h1 class="h-1">A shared language<br/>for the site.</h1><p class="lede">Name the component. Choose light or dark. Show what matters.</p><p class="body-copy">{entries.length} shared components, the typography system and named page compositions. Use the exact names below when asking for a layout. Copy a reference to point to an example.</p><p class="sg-note">The master switch previews every visible component in the selected theme. Theme adaptations here are local to this catalogue; photography and product UI retain their original colours. Homepage compositions show their current content, including older material.</p>
+    <nav class="sg-jumps" aria-label="Styleguide sections"><a href="#typography">Typography</a><a href="#patterns">Page compositions</a>{groups.map(g=><a href={`#${g.replaceAll(' ','-')}`}>{g}</a>)}</nav></section>
+    <section id="typography" class="sg-section"><div class="sg-section-title container"><h2>Typography & foundations</h2><p>Schibsted Grotesk Variable / IBM Plex Mono. Live site classes, at their actual responsive sizes.</p></div>
+      {typography.map(([cls,name,spec])=><article class="sg-specimen"><header class="sg-specimen-head"><div><h3>{name}</h3><code>.{cls}</code><p>{spec}</p></div></header><div class="sg-preview sg-padded"><div class={cls}>Building something useful.</div></div></article>)}
+      <article class="sg-specimen" id="Prose"><header class="sg-specimen-head"><div><h3>Prose / emphasis / lists / quotes / code / tables</h3><code>src/styles/prose.css · typography.css</code><p>Paragraph gap 12px. Deliberate pause 28px. Important phrases use restrained bold.</p></div></header><div class="sg-preview sg-padded prose"><h2>Long-form reading</h2><p>I thought AI-assisted development was interesting but not ready for serious work. The work itself changed that view.</p><p><strong>Understanding the problem still matters.</strong> Use emphasis to help someone skim, without turning the whole paragraph bold.</p><p class="prose-emphasis"><strong>A pause gives the idea room.</strong></p><h3>A smaller editorial heading</h3><ul><li>Start with a question.</li><li>Keep evidence close to the claim.</li></ul><ol><li>Build.</li><li>Review.</li></ol><blockquote>The reason is what I need to remember.</blockquote><p>Use <a href="#typography">inline links</a>, <em>italics</em> and <code>inline code</code> when useful.</p><pre><code>question → experiment → evidence</code></pre><hr/><table><thead><tr><th>Element</th><th>Purpose</th></tr></thead><tbody><tr><td>Copy</td><td>Explain the idea</td></tr><tr><td>Evidence</td><td>Show the work</td></tr></tbody></table></div></article>
+      <article class="sg-specimen" id="Tokens"><header class="sg-specimen-head"><div><h3>Colour / pills / rules / shape / spacing</h3><code>src/styles/tokens.css · global.css</code><p>Warm white, near black, muted copy and orange accent. Corners 10 / 12 / 14 / 16px; pills fully rounded. Page edge 4vw; editorial columns stack at 900px.</p></div></header><div class="sg-preview sg-padded"><div class="sg-swatches">{[['Background','var(--color-bg)'],['Ink','var(--color-ink)'],['Body','var(--color-body)'],['Accent','#E14A22']].map(([label,color])=><div><span style={{background:color}}></span><p>{label}</p></div>)}</div><div class="sg-inline"><span class="pill-tag">Pill tag</span><span class="pill-tag pill-tag--dark">Dark pill tag</span><span class="dot"></span><span class="mono-label">Status dot</span></div><hr class="section-divider"/></div></article>
+    </section>
+    <section id="patterns" class="sg-section"><div class="sg-section-title container"><h2>Page compositions</h2><p>Named layouts assembled within pages. These are compositions rather than standalone component files.</p></div>
+      <article class="sg-specimen" id="ListingSplitRow"><header class="sg-specimen-head"><div><h3>ListingSplitRow</h3><code>src/pages/building/index.astro · src/pages/experiments/index.astro</code><p>Image left, heading and copy right. Rounded dark surface or open light surface. Stacks on mobile.</p></div><button data-copy="ListingSplitRow">Copy reference</button></header><div class="sg-preview sg-padded"><div class="sg-listing-row"><PlaceholderMedia src="/media/projects/poszo.png" alt="Voice ordering concept" label="Experiment" ratio="16/11"/><div><SectionLabel>EXP 01 · Active experiment</SectionLabel><h2 class="h-2">Can AI take a drive-through order without making the experience worse?</h2><p class="body-copy">The question leads. Real evidence and current status support it.</p><a href="/experiments/realtime-drive-through-ordering/">Explore the experiment →</a></div></div></div></article>
+      <article class="sg-specimen" id="ExperimentLog"><header class="sg-specimen-head"><div><h3>ExperimentLog</h3><code>src/pages/experiments/index.astro</code><p>Compact numbered link, question, tools and status.</p></div><button data-copy="ExperimentLog">Copy reference</button></header><div class="sg-preview sg-padded"><a class="sg-log" href="/experiments/wifi-human-sensing/"><span class="mono-label">02</span><h3>Can Wi-Fi count people in a room?</h3><span>Wi-Fi CSI · Spatial sensing</span><span class="mono-label">Starting</span></a></div></article>
+      <article class="sg-specimen" id="FullBleedSeparator"><header class="sg-specimen-head"><div><h3>FullBleedSeparator</h3><code>src/pages/shipped/boxofficevr/index.astro · .boxoffice-separator</code><p>Edge-to-edge image between chapters. No caption, background frame or vertical padding.</p></div><button data-copy="FullBleedSeparator">Copy reference</button></header><div class="sg-preview"><img src="/media/work/boxofficevr/platform-montage.webp" alt="BoxOfficeVR interface montage" loading="lazy" style="width:100%;height:auto"/></div></article>
+      <article class="sg-specimen" id="EditorialSpineEvidence"><header class="sg-specimen-head"><div><h3>EditorialSpineEvidence</h3><code>ArticleTwoCol + BuildingEvidence / .editorial-spine</code><p>Media aligned to body copy, with a deliberate 48px pause after the text.</p></div><button data-copy="EditorialSpineEvidence">Copy reference</button></header><div class="sg-preview sg-padded"><ArticleTwoCol><SectionLabel slot="label">01 / The idea</SectionLabel><h2 class="h-2">Let the content breathe.</h2><p class="body-copy">The picture starts at the same left edge as this paragraph.</p><div style="margin-top:48px"><BuildingEvidence src={photo} alt="International Towers lobby" label="In context" caption="Natural aspect ratio, aligned to the editorial copy."/></div></ArticleTwoCol></div></article>
+      <article class="sg-specimen" id="BuildingQuestions"><header class="sg-specimen-head"><div><h3>BuildingQuestions / BuildingStatus / BuildingStack</h3><code>src/styles/building-editorial.css</code><p>Ruled open questions, status strip and concise architecture columns.</p></div><button data-copy="BuildingQuestions">Copy reference</button></header><div class="sg-preview sg-padded"><div class="building-questions"><p>What does the product still need to prove?</p><p>What changes when real people use it?</p></div><div class="building-stack"><div><SectionLabel>Engine</SectionLabel><p>Position evaluation and candidate moves.</p></div><div><SectionLabel>Explanation</SectionLabel><p>The idea, the threat and the plan.</p></div><div><SectionLabel>Memory</SectionLabel><p>Useful context from earlier games.</p></div></div><div class="building-status"><span>Brilliancy</span><span>Status / Building</span><span>2026 → Now</span></div></div></article>
+    </section>
+    {groups.map(group=><section class="sg-section" id={group.replaceAll(' ','-')}><div class="sg-section-title container"><h2>{group}</h2><p>Use these exact component names when describing what you want.</p></div>{entries.filter(e=>e.group===group).map(({name,Component,path,use,options,props})=><article class="sg-specimen" id={name} data-search={`${name} ${use} ${group}`}><header class="sg-specimen-head"><div><h3>{name}</h3><code>{path}</code><p>{use}</p>{options && <p class="sg-options">Options: {options}</p>}</div><button type="button" data-copy={name}>Copy reference</button></header><div class:list={['sg-preview', {'sg-padded':!['Home compositions','Site shell'].includes(group) && !['ListingHero','BuildingHero','ArticleSection','EditorialScrollSequence','KeepExploring','Ticker'].includes(name)}]}>
+      {name==='SEOHead' || name==='FinalCTA' ? <p class="sg-empty">{name==='SEOHead'?'Metadata only — no rendered visual component.':'Intentionally empty — retired in favour of Footer.'}</p>
+      : name==='Button' ? <div class="sg-inline">{(['solid','outline','solid-dark','inverse'] as const).map(variant=><Button href="#Button" variant={variant} withDot>{variant}</Button>)}</div>
+      : name==='ArticleTwoCol' || name==='ArticleSection' ? <ArticleSection tight><ArticleTwoCol><SectionLabel slot="label">01 / Chapter label</SectionLabel><h2 class="h-2">The title starts beside the label.</h2><p class="body-copy">A narrow column gives the reader their place. The wide column carries the story.</p><p class="body-copy"><strong>Keep the important idea clear.</strong> Paragraph spacing stays consistent.</p></ArticleTwoCol></ArticleSection>
+      : name==='ArticleStatement' ? <Component {...props}>The move matters.<br/>The reason is what I need to remember.</Component>
+      : name==='SectionLabel' ? <Component withDot>01 / The beginning</Component>
+      : name==='BuildingHero' ? <Component {...props}><p class="body-copy">An active product with a visible question, an honest status and evidence from the work.</p><div slot="evidence"><BuildingEvidence src="/media/projects/brilliancy/game.png" alt="Brilliancy game review" label="Product evidence" caption="A real capture, not an invented interface."/></div></Component>
+      : name==='FilterBar' ? <div><Component {...props}/><div class="sg-inline"><div data-card data-cat="Building">Building example</div><div data-card data-cat="Learning">Learning example</div></div></div>
+      : <Component {...props}/>}
+    </div></article>)}</section>)}
+    <p class="sg-end container">End of catalogue · Use “component name + light/dark + content” in your next request.</p>
+  </main>
+  <script is:inline>
+    // Run before shared component modules bind their document-wide filters.
+    document.querySelectorAll('.sg-preview [data-card]').forEach(card => {
+      if (!card.closest('#FilterBar')) { card.removeAttribute('data-card'); card.removeAttribute('data-cat'); }
+    });
+    document.querySelectorAll('.sg-preview [data-card-group]').forEach(group => group.removeAttribute('data-card-group'));
+  </script>
+  <div id="sg-message" role="status" aria-live="polite"></div>
+  <script>
+    const root = document.documentElement;
+    const toggle = document.querySelector<HTMLButtonElement>('#sg-theme')!;
+    toggle.addEventListener('click', () => {
+      const dark = root.dataset.guideTheme !== 'dark';
+      root.dataset.guideTheme = dark ? 'dark' : 'light';
+      toggle.setAttribute('aria-checked', String(dark));
+      try { sessionStorage.setItem('styleguide-theme', root.dataset.guideTheme); } catch {}
+    });
+    try { if (sessionStorage.getItem('styleguide-theme') === 'dark') toggle.click(); } catch {}
+    const search = document.querySelector<HTMLInputElement>('#sg-search')!;
+    const menu = document.querySelector<HTMLDetailsElement>('.sg-menu')!;
+    document.querySelectorAll<HTMLAnchorElement>('.sg-menu a, .sg-jumps a').forEach(link => link.addEventListener('click', () => {
+      search.value = '';
+      search.dispatchEvent(new Event('input'));
+      menu.open = false;
+    }));
+    document.addEventListener('click', event => {
+      if (!menu.contains(event.target as Node)) menu.open = false;
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+    const toolbar = document.querySelector<HTMLElement>('.sg-toolbar')!;
+    new ResizeObserver(() => root.style.setProperty('--sg-toolbar-offset', `${toolbar.offsetHeight + 24}px`)).observe(toolbar);
+    search.addEventListener('input', () => {
+      const query = search.value.trim().toLowerCase();
+      document.querySelectorAll<HTMLElement>('.sg-specimen').forEach(item => { item.hidden = !!query && !item.querySelector('.sg-specimen-head')?.textContent?.toLowerCase().includes(query); });
+      document.querySelectorAll<HTMLElement>('.sg-section').forEach(section => { section.hidden = !section.querySelector('.sg-specimen:not([hidden])'); });
+    });
+    document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach(button => button.addEventListener('click', async () => {
+      const name = button.dataset.copy!;
+      const reference = `${name} — ${root.dataset.guideTheme} — ${location.origin}/styleguide/#${name}`;
+      try { await navigator.clipboard.writeText(reference); document.querySelector('#sg-message')!.textContent = `Copied ${name}`; }
+      catch { document.querySelector('#sg-message')!.textContent = reference; }
+    }));
+    document.querySelectorAll<HTMLElement>('[data-reveal]').forEach(el => el.classList.add('is-visible'));
+  </script>
+</body>
+</html>
