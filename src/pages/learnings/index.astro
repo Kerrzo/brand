@@ -24,6 +24,7 @@ const dateFmtLong = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'num
 const featuredReadingTime = readingTime(featured.body ?? '');
 
 const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
+const showFilters = false;
 
 ---
 
@@ -31,15 +32,15 @@ const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
   <ListingHero
     heading="Learnings"
     headingSize="clamp(58px, 12vw, 200px)"
-    eyebrowTop="Notes from the work"
-    eyebrow="Learning in public"
-    meta={`No content calendar.\nOnly lessons worth writing down.`}
-    lede={`<p>Building raises questions.</p><p>Writing helps me answer them.</p><p><strong>These are notes from AI products, architecture decisions and experiments that changed how I think.</strong></p>`}
+    eyebrowTop="Learnings"
+    eyebrow="Notes from the work"
+    meta=""
+    lede={`<p>Building raises questions.</p><p>Writing helps me answer them.</p>`}
   />
 
-  <section class="container writing-page__filter">
+  {showFilters && <section class="container writing-page__filter">
     <FilterBar categories={categories} allLabel="All" />
-  </section>
+  </section>}
 
   {featured && (
     <section class="container writing-page__featured" data-card data-cat={featured.data.category}>
@@ -71,10 +72,9 @@ const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
   <section class="writing-page__pause" data-writing-pause aria-label="Building in public">
     <div class="writing-page__pause-inner">
       <div class="writing-page__pause-statement">
-        <p data-pause-line data-pause-emphasis>Everything on this site comes from real projects, real experiments and real decisions.</p>
-        <p data-pause-line data-pause-emphasis>Sometimes the ideas survive.</p>
-        <p data-pause-line data-pause-emphasis>Sometimes they don&rsquo;t.</p>
-        <p data-pause-line data-pause-emphasis>Both are worth documenting.</p>
+        <p data-pause-line data-pause-emphasis>Some ideas survive.</p>
+        <p data-pause-line data-pause-emphasis>Some don&rsquo;t.</p>
+        <p data-pause-line data-pause-emphasis>Both are worth writing down.</p>
       </div>
     </div>
   </section>

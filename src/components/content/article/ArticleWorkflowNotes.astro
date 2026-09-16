@@ -1,0 +1,44 @@
+---
+interface Props {
+  label: string;
+  heading: string;
+  steps: string[];
+  description: string;
+  tags?: string[];
+  dark?: boolean;
+}
+const { label, heading, steps, description, tags = [], dark = false } = Astro.props;
+---
+
+<section class:list={['workflow-notes', { 'workflow-notes--dark': dark }]}>
+  <div class="workflow-notes__intro">
+    <span class="workflow-notes__label">{label}</span>
+    <h2>{heading}</h2>
+  </div>
+  <div class="workflow-notes__body">
+    <ol>
+      {steps.map((step, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><span>{step}</span></li>)}
+    </ol>
+    <div class="workflow-notes__aside">
+      <p>{description}</p>
+      {tags.length > 0 && <ul class="workflow-notes__tags" aria-label="Tools">{tags.map(tag => <li>{tag}</li>)}</ul>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .workflow-notes { --notes-bg: var(--color-bg); --notes-ink: var(--color-ink); --notes-body: var(--color-body); --notes-line: var(--color-border); background: var(--notes-bg); color: var(--notes-ink); padding: clamp(48px, 6vw, 96px) var(--edge); }
+  .workflow-notes--dark { --notes-bg: var(--color-dark-bg); --notes-ink: var(--color-dark-fg); --notes-body: var(--color-dark-body); --notes-line: var(--color-dark-border); }
+  .workflow-notes__intro { display: grid; grid-template-columns: minmax(0,.5fr) minmax(0,1.5fr); gap: var(--editorial-gap); align-items: end; margin-bottom: clamp(34px,5vh,64px); }
+  .workflow-notes__label { font: 11px var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--notes-body); }
+  h2 { margin: 0; font-size: clamp(26px,3.2vw,50px); line-height: 1.04; letter-spacing: -.035em; font-weight: 500; max-width: 36ch; }
+  .workflow-notes__body { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: clamp(24px,4vw,64px); align-items: start; }
+  ol { list-style: none; margin: 0; border: 1px solid var(--notes-line); border-radius: var(--radius-lg); padding: 26px 28px; font: 13.5px/2 var(--font-mono); color: var(--notes-body); }
+  ol li { display: grid; grid-template-columns: 2ch minmax(0,1fr); gap: 12px; overflow-wrap: anywhere; }
+  ol li > span:first-child { color: var(--color-accent); }
+  .workflow-notes__aside { display: flex; flex-direction: column; gap: 20px; }
+  p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--notes-body); max-width: 64ch; }
+  .workflow-notes__tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
+  .workflow-notes__tags li { border: 1px solid var(--notes-line); border-radius: var(--radius-pill); padding: 6px 12px; font-size: 13px; }
+  @media(max-width:900px) { .workflow-notes__intro, .workflow-notes__body { grid-template-columns: minmax(0,1fr); gap: 24px; } }
+</style>

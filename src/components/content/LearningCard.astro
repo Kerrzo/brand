@@ -7,7 +7,7 @@ const { post } = Astro.props;
 const date = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
 ---
 <a class="learning-card" href={`/learnings/${post.id}/`} data-card data-cat={post.data.category}>
-  <PlaceholderMedia label="Article image" src={post.data.heroImage} alt={post.data.heroAlt} ratio="16/10" radius="md" />
+  <PlaceholderMedia label="Article image" src={post.data.heroImage} alt={post.data.heroAlt} ratio={post.data.heroRatio ?? '16/10'} radius="md" />
   <div class="learning-card__copy">
     <span class="mono-label">{post.data.category}</span>
     <h3>{post.data.title}</h3>

@@ -64,7 +64,7 @@ const rich = item.data.richLayout;
               label={item.data.heroMediaLabel ?? 'Hero image · replace'}
               src={item.data.heroImage}
               alt={item.data.heroAlt}
-              ratio="16/9"
+              ratio={item.data.heroRatio ?? '16/9'}
               radius="lg"
               class="article__hero"
             />

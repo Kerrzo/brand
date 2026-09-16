@@ -24,6 +24,7 @@ const writing = defineCollection({
     // Optional multi-paragraph hero intro for rich articles whose deck needs
     // more than one sentence. Falls back to rendering `description` alone.
     heroIntro: z.array(z.string()).optional(),
+    heroRatio: z.string().optional(),
     heroImage: z.string().optional(),
     heroAlt: z.string().optional(),
     heroMediaLabel: z.string().optional(),

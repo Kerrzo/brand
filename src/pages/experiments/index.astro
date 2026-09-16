@@ -56,9 +56,8 @@ const categories = showUnfinishedExperiments
     heading="Exploring what becomes possible."
     headingSize="clamp(46px, 9.2vw, 158px)"
     eyebrow="Open experiments"
-    meta="Unfinished on purpose. Published as they are, notes included."
-    lede={`<p>Real experiments exploring emerging technologies before deciding whether they deserve to become products. Every experiment answers one question: <strong>Is this genuinely useful?</strong></p>`}
-  />
+    meta={"Things I'm testing right now.\nEach started with a question."}
+    lede={`<p>I use experiments to answer questions I can't answer by thinking about them.</p><p>Build something. Test it. See what happens.</p>`}  />
 
   <div class="lab-page__ticker">
     <Ticker text="Local AI · Voice · Video · 3D · Realtime · Agents · Robotics · Game Dev · Creative Tools" />
@@ -142,32 +141,15 @@ const categories = showUnfinishedExperiments
 
   <section class="lab-page__graph">
     <div class="container">
+      <div class="lab-page__graph-composition">
       <div class="lab-page__graph-intro" data-reveal>
-        <div class="mono-label" style="color:var(--color-dark-label)">How it was made</div>
-        <h2 class="lab-page__graph-heading">Every experiment begins with a question. The interesting part isn&rsquo;t the model&mdash;it&rsquo;s what survives contact with reality.</h2>
+        <h2 class="lab-page__graph-heading">The interesting part is what survives contact with reality.</h2>
       </div>
-      <div class="lab-page__graph-grid" data-reveal>
-        <div class="lab-page__graph-steps">
-          <div><span class="lab-page__graph-index">01</span>&nbsp; load reference sheet &rarr; face crop</div>
-          <div><span class="lab-page__graph-index">02</span>&nbsp; ip-adapter · weight 0.62</div>
-          <div><span class="lab-page__graph-index">03</span>&nbsp; character LoRA · 1400 steps</div>
-          <div><span class="lab-page__graph-index">04</span>&nbsp; prompt schema: [pose] [outfit] [lighting]</div>
-          <div><span class="lab-page__graph-index">05</span>&nbsp; seed sweep 8 &rarr; pick 1, upscale ×2</div>
-          <div><span class="lab-page__graph-index">06</span>&nbsp; manual pass: hands, silhouette, palette</div>
-        </div>
-        <div class="lab-page__graph-side">
-          <p>
-            Nothing here is exotic. The value is in the constraints: a fixed prompt schema, a
-            small trained model, and a human pass that only fixes the four things the model
-            reliably gets wrong.
-          </p>
-          <div class="lab-page__graph-tags">
-            <span class="pill-tag pill-tag--dark">ComfyUI</span>
-            <span class="pill-tag pill-tag--dark">Flux</span>
-            <span class="pill-tag pill-tag--dark">LoRA training</span>
-            <span class="pill-tag pill-tag--dark">Photoshop</span>
-          </div>
-        </div>
+      <ol class="lab-page__graph-grid" data-reveal>
+        <li><h3><span class="lab-page__graph-index">01 /</span> Build</h3><p>Make enough to answer the question.</p></li>
+        <li><h3><span class="lab-page__graph-index">02 /</span> Test</h3><p>See what happens when people use it.</p></li>
+        <li><h3><span class="lab-page__graph-index">03 /</span> Decide</h3><p>Continue, change it, or stop.</p></li>
+      </ol>
       </div>
     </div>
   </section>
@@ -335,67 +317,54 @@ const categories = showUnfinishedExperiments
     margin-top: clamp(80px, 12vh, 160px);
     background: var(--color-dark-bg);
     color: var(--color-dark-fg);
-    padding: clamp(64px, 10vh, 140px) 0;
+    padding: clamp(80px, 12vh, 160px) 0;
   }
 
+  .lab-page__graph-composition { width: 100%; max-width: 820px; margin-inline: auto; }
+
   .lab-page__graph-intro {
-    display: grid;
-    grid-template-columns: minmax(0, .5fr) minmax(0, 1.5fr);
-    gap: clamp(24px, 4vw, 72px);
-    align-items: end;
-    margin-bottom: clamp(34px, 5vh, 64px);
+    margin-bottom: 48px;
   }
 
   .lab-page__graph-heading {
     margin: 0;
-    font-size: clamp(26px, 3.2vw, 50px);
+    font-size: clamp(34px, 4vw, 56px);
     line-height: 1.04;
     letter-spacing: -.035em;
     font-weight: 500;
-    max-width: 36ch;
+    max-width: none;
   }
 
   .lab-page__graph-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-    gap: clamp(24px, 4vw, 64px);
-    align-items: start;
-  }
-
-  .lab-page__graph-steps {
-    border: 1px solid var(--color-dark-border);
-    border-radius: var(--radius-lg);
-    padding: 26px 28px;
-    font-family: var(--font-mono);
-    font-size: 13.5px;
-    line-height: 2;
-    color: rgba(243, 242, 240, .78);
-    overflow-x: auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   .lab-page__graph-index {
-    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: .85em;
+    color: var(--color-dark-fg);
   }
 
-  .lab-page__graph-side {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  .lab-page__graph-grid h3 {
+    margin: 0 0 18px;
+    font-size: clamp(22px, 2vw, 26px);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: -.02em;
   }
 
-  .lab-page__graph-side p {
+  .lab-page__graph-grid p {
     margin: 0;
+    max-width: 32ch;
     font-size: 17px;
     line-height: 1.6;
-    color: rgba(243, 242, 240, .66);
+    color: var(--color-dark-body);
   }
-
-  .lab-page__graph-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
   .lab-page__log {
     padding-top: clamp(80px, 11vh, 150px);
   }
@@ -452,11 +421,14 @@ const categories = showUnfinishedExperiments
 
   @media (max-width: 900px) {
     .lab-page__exp01-grid,
-    .lab-page__exp07-intro,
-    .lab-page__graph-intro,
-    .lab-page__graph-grid {
+    .lab-page__exp07-intro {
       grid-template-columns: minmax(0, 1fr);
       row-gap: 18px;
+    }
+
+    .lab-page__graph-grid {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 36px;
     }
 
     .lab-page__grid {

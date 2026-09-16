@@ -1,5 +1,5 @@
 ---
-title: "Neurotechnology"
+title: "Neurotechnology / Transducer"
 client: "Neurotechnology"
 tagline: "Exploring a more immersive way to manage pain"
 description: "Building VR therapy platforms that combined neuroscience, motion tracking and immersive technology to improve rehabilitation outcomes."
