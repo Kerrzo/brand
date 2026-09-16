@@ -5,7 +5,7 @@ import ArticleTwoCol from '../../components/content/article/ArticleTwoCol.astro'
 import ArticleStatement from '../../components/content/article/ArticleStatement.astro';
 import ArticleLearnings from '../../components/content/article/ArticleLearnings.astro';
 import SectionLabel from '../../components/ui/SectionLabel.astro';
-import EditorialScrollSequence from '../../components/ui/EditorialScrollSequence.astro';
+import BasicPrintDisplay from '../../components/ui/BasicPrintDisplay.astro';
 import NavRow from '../../components/ui/NavRow.astro';
 import KeepExploring from '../../components/content/KeepExploring.astro';
 const questions = ['Should we build it?', 'Can it reach people?', 'Will anyone change their behaviour for it?', 'Does it deserve to exist?'].map(title => ({title}));
@@ -30,8 +30,9 @@ const questions = ['Should we build it?', 'Can it reach people?', 'Will anyone c
       <p class="body-copy">My name repeated across the green monochrome screen. And I'd managed to get the spacing wrong, so the output ran together. I stopped it, changed it and ran it again.</p>
       <p class="body-copy">It was hardly sophisticated software. But <strong>I'd written instructions and made the machine do something that hadn't existed a few minutes earlier.</strong> Then I'd found something wrong, changed it and made it better.</p>
       <p class="lede">I was hooked.</p>
-    </ArticleTwoCol></ArticleSection>
-    <EditorialScrollSequence tone="light" lines={['The computer changed.', "The feeling didn't."]} />
+    </ArticleTwoCol>
+    </ArticleSection>
+    <BasicPrintDisplay />
 
     <ArticleSection dark id="software"><ArticleTwoCol>
       <SectionLabel slot="label">02 / Software</SectionLabel>
@@ -125,7 +126,7 @@ const questions = ['Should we build it?', 'Can it reach people?', 'Will anyone c
   .first-program { margin: 0; border-block: 1px solid var(--color-dark-border); padding-block: clamp(24px,4vw,48px); }
   .first-program pre { margin: 24px 0 0; font: clamp(16px,2.6vw,34px)/1.7 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; color: var(--color-dark-fg); }
   .first-program code { font: inherit; }
-  .about-story :global(.editorial-seq) { margin-top: 0; }
+
   .experience-montage { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,.8fr); gap: clamp(24px,4vw,64px); align-items: end; margin-top: 48px; }
   .experience-montage figure { margin: 0; min-width: 0; }
   .experience-montage img { display: block; width: 100%; height: auto; border-radius: var(--radius-md); }
@@ -135,3 +136,4 @@ const questions = ['Should we build it?', 'Can it reach people?', 'Will anyone c
   .closing-statement { padding-top: 24px; }
   @media(max-width:640px) { .experience-montage { grid-template-columns:1fr; gap:36px; } }
 </style>
+

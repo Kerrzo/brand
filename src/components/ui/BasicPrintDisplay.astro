@@ -1,0 +1,111 @@
+---
+// Small bitmap letterforms evoke a character display without a font download.
+const glyphs: Record<string,string[]> = {
+  P:['11110','10001','10001','11110','10000','10000','10000'],
+  A:['01110','10001','10001','11111','10001','10001','10001'],
+  U:['10001','10001','10001','10001','10001','10001','01110'],
+  L:['10000','10000','10000','10000','10000','10000','11111'],
+  K:['10001','10010','10100','11000','10100','10010','10001'],
+  E:['11111','10000','10000','11110','10000','10000','11111'],
+  R:['11110','10001','10001','11110','10100','10010','10001'],
+  '!':['00100','00100','00100','00100','00100','00000','00100'],
+};
+const path = [...'PAUL KERR!'].flatMap((letter,i) => (glyphs[letter] ?? []).flatMap((row,y) => [...row].flatMap((pixel,x) => pixel === '1' ? [`M${i*6+x} ${y}h1v1h-1z`] : []))).join('');
+---
+<section class="basic-display" data-basic-display aria-label="A green monochrome display progressively printing Paul Kerr, inspired by the Amstrad CPC 464">
+  <div class="basic-display__screen" aria-hidden="true">
+    <div class="basic-display__heading">Amstrad 64K Microcomputer<br />BASIC 1.0</div>
+    <div class="basic-display__command">Ready<br />RUN</div>
+    <div class="basic-display__output">
+      {Array.from({length:48}, () => <svg viewBox="0 0 60 8" class="basic-display__word" focusable="false"><path d={path} /></svg>)}
+    </div>
+  </div>
+</section>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-basic-display]').forEach(display => {
+    const words = [...display.querySelectorAll<SVGElement>('.basic-display__word')];
+    const output = display.querySelector<HTMLElement>('.basic-display__output')!;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const mobile = matchMedia('(max-width:600px)');
+    let frame = 0;
+    let visible = false;
+    let printed = 0;
+    let previousTime = 0;
+    let pass = 0;
+    let pause = 0;
+    let finished = false;
+    const total = () => (mobile.matches ? 24 : words.length) * 10;
+    const paint = () => {
+      words.forEach((word,index) => {
+        const characters = Math.max(0, Math.min(10, Math.floor(printed) - index * 10));
+        word.style.clipPath = `inset(0 ${100 - characters * 10}% 0 0)`;
+      });
+    };
+    const tick = (time: number) => {
+      frame = 0;
+      const elapsed = previousTime ? time - previousTime : 0;
+      previousTime = time;
+      if (pause > 0) {
+        pause = Math.max(0, pause - elapsed);
+        if (pause === 0) {
+          pass = 1;
+          printed = 0;
+          display.dataset.corrected = 'true';
+        }
+      } else {
+        printed = Math.min(total(), printed + elapsed * .24);
+        if (printed >= total()) {
+          if (pass === 0) pause = 800;
+          else finished = true;
+        }
+      }
+      paint();
+      if (!finished) frame = requestAnimationFrame(tick);
+    };
+    const sync = () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      previousTime = 0;
+      if (reduced.matches) {
+        finished = true;
+        display.dataset.corrected = 'true';
+        printed = total();
+        paint();
+      } else if (visible && !document.hidden && !finished) frame = requestAnimationFrame(tick);
+    };
+    paint();
+    const observer = new IntersectionObserver(entries => {
+      visible = entries[0].isIntersecting;
+      sync();
+    }, {threshold: 0});
+    observer.observe(output);
+    reduced.addEventListener('change',sync);
+    mobile.addEventListener('change',sync);
+    document.addEventListener('visibilitychange',sync);
+    sync();
+    document.addEventListener('astro:before-swap',() => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      reduced.removeEventListener('change',sync);
+      mobile.removeEventListener('change',sync);
+      document.removeEventListener('visibilitychange',sync);
+    },{once:true});
+  });
+</script>
+<style>
+  .basic-display { background:#12391c; color:#9ee878; padding:clamp(36px,6vw,80px) var(--edge); }
+  .basic-display__screen { max-width:880px; margin:auto; font:700 clamp(13px,1.8vw,22px)/1.4 'Courier New',monospace; letter-spacing:.025em; }
+  .basic-display__heading { margin-bottom:1.5em; }
+  .basic-display__command { margin-bottom:1em; }
+  .basic-display__output { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(6px,1vw,12px) 0; }
+  .basic-display__word { display:block; width:100%; height:auto; fill:currentColor; shape-rendering:crispEdges; }
+  .basic-display[data-corrected="true"] .basic-display__output { column-gap: 20px; }
+  @media(max-width:600px) {
+    .basic-display__output { grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px 0; }
+    .basic-display__word:nth-child(n+25) { display:none; }
+    .basic-display[data-corrected="true"] .basic-display__output { column-gap: 16px; }
+  }
+</style>
+
+
+

@@ -18,6 +18,7 @@ const posts = await getCollection('writing', ({data}) => !data.draft);
 const photo = '/media/work/amica/lobby.webp';
 // Every shared component is registered here. Source filenames are the reference names.
 const definitions: Record<string, { use: string; options?: string; props?: Record<string, unknown> }> = {
+  BasicPrintDisplay: { use: 'Amstrad-inspired green monochrome BASIC output. Pixel letterforms print rapidly, character by character, on entering view; reduced motion shows a static screen.' },
   SectionLabel: { use: 'Small chapter label, optionally with an orange dot.', options: 'dark · withDot · default slot' },
   Button: { use: 'Pill-shaped action link. All four variants are shown.', options: 'solid · outline · solid-dark · inverse · withDot · newTab', props: {href:'#guide-top'} },
   Ticker: { use: 'Full-width continuous text ticker. Leave equal breathing room above and below.', props: {text:'Learn · Build · Ship · Experiment'} },
@@ -164,3 +165,4 @@ const typography = [
   </script>
 </body>
 </html>
+
