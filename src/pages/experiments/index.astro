@@ -23,7 +23,7 @@ const showFilters = false;
 const publicExperiments = [
   { item: poszo, question: 'Can AI take a drive-through order without making the experience worse?', context: 'Realtime voice · Restaurant ordering', description: poszo.data.description, image: '/media/projects/poszo.png', alt: 'Drive-through voice ordering concept', caption: 'Concept image · Voice ordering exploration', status: 'Active experiment' },
   { item: wifi, question: 'Can Wi-Fi count people in a room?', context: 'Wi-Fi CSI · Spatial sensing', description: wifi.data.description, image: wifi.data.heroImage, alt: wifi.data.heroAlt, caption: 'RuView demo by ruvnet · Not my test results', status: 'Starting' },
-  { item: podcast, question: 'Can AI turn an off-the-cuff conversation into a finished podcast?', context: 'Frontier models · Audio · Editorial AI', description: 'Testing editorial judgement, not just audio processing. Source selection and all production tests are still ahead.', image: podcast.data.heroImage, alt: podcast.data.heroAlt, caption: 'Concept image · Experiment results still to come', status: 'Starting' },
+  { item: podcast, question: 'Can AI turn an off-the-cuff conversation into a finished podcast?', context: 'Frontier models · Audio · Editorial AI', description: 'Testing editorial judgement, not just audio processing. Source selection and all production tests are still ahead.', image: podcast.data.heroImage, alt: podcast.data.heroAlt, caption: 'ComfyUI setup · Podcast studio experiment', status: 'Starting' },
 ];
 
 const featuredOrder = [
@@ -73,7 +73,7 @@ const categories = showUnfinishedExperiments
       <article class:list={['lab-page__row', { 'lab-page__row--dark': i % 2 === 0 }]} data-card data-cat={entry.item.data.category} data-reveal>
         <figure class="lab-page__media">
           <a href={`/experiments/${entry.item.id}/`} aria-label={entry.question}>
-            <PlaceholderMedia src={entry.image} alt={entry.alt} label={entry.context} ratio="16/11" radius="md" />
+            <PlaceholderMedia src={entry.image} alt={entry.alt} label={entry.context} ratio={entry.item.id === 'ai-podcast-production' ? '3838/2035' : '16/11'} radius="md" />
           </a>
           <figcaption>{entry.caption}</figcaption>
         </figure>

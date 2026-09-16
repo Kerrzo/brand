@@ -8,9 +8,9 @@ interface Props {
 const { current, transparent = false } = Astro.props;
 
 const links = [
-  { key: 'experiments', label: 'Experiments', href: '/experiments/' },
   { key: 'building', label: 'Building', href: '/building/' },
   { key: 'shipped', label: 'Shipped', href: '/shipped/' },
+  { key: 'experiments', label: 'Experiments', href: '/experiments/' },
   { key: 'learnings', label: 'Learnings', href: '/learnings/' },
   { key: 'about', label: 'About', href: '/about/' },
 ] as const;

@@ -30,8 +30,8 @@ const tests = ['Source → story', 'Story → edit', 'Edit → produced episode'
       <div class="podcast-status"><span>Starting · 2026</span><span>Frontier models · Audio · Editorial AI</span></div>
     </ArticleTwoCol>
       <figure class="editorial-spine podcast-evidence">
-        <img src="/media/experiments/ai-podcast-production/podcast-comfyui.png" width="1536" height="1024" alt="Podcast experiment concept with the ComfyUI workflow displayed on a laptop screen" fetchpriority="high" />
-        <figcaption>Illustrative composite / The ComfyUI setup on a laptop. The original workflow screenshot appears below.</figcaption>
+        <img src="/media/experiments/ai-podcast-production/comfyui-workflow.png" width="3838" height="2035" alt="ComfyUI workflow connecting reference inputs, model loading, conditioning, sampling and video export" fetchpriority="high" />
+        <figcaption>The ComfyUI setup used for the podcast studio experiment. <a href="/media/experiments/ai-podcast-production/comfyui-workflow.png" target="_blank" rel="noopener noreferrer">View full-resolution workflow ↗</a></figcaption>
       </figure>
     </header>
 
@@ -67,12 +67,6 @@ const tests = ['Source → story', 'Story → edit', 'Edit → produced episode'
       <dl class="podcast-rows">{stages.map(([name, description]) => <div><dt>{name}</dt><dd>{description}</dd></div>)}</dl>
       <p class="body-copy">These are stages I'm testing. <strong>They aren't an automated pipeline I've already proved.</strong></p>
     </ArticleTwoCol>
-        <figure class="podcast-workflow">
-          <a href="/media/experiments/ai-podcast-production/comfyui-workflow.png" target="_blank" rel="noopener noreferrer" aria-label="Open the ComfyUI workflow at full resolution">
-            <img src="/media/experiments/ai-podcast-production/comfyui-workflow.png" width="3838" height="2035" alt="ComfyUI workflow connecting a reference video and studio image through model loading, conditioning, sampling, decoding and video export" loading="lazy" />
-          </a>
-          <figcaption><span class="mono-label">Behind the experiment / ComfyUI</span><p>The setup used to explore the podcast studio treatment, combining a reference recording with a studio image.</p><a href="/media/experiments/ai-podcast-production/comfyui-workflow.png" target="_blank" rel="noopener noreferrer">View full-resolution workflow ↗</a></figcaption>
-        </figure>
     </ArticleSection>
 
     <ArticleSection dark tight id="editorial-judgement"><ArticleTwoCol>
@@ -145,12 +139,6 @@ const tests = ['Source → story', 'Story → edit', 'Edit → produced episode'
   .podcast-comparison figcaption { margin-top: 16px; }
   .podcast-comparison figcaption p { margin-top: 8px; }
   .podcast-comparison p { color: var(--color-body); font-size: 15px; }
-  .podcast-workflow { margin: clamp(48px, 6vw, 80px) 0 0; min-width: 0; }
-  .podcast-workflow > a { display: block; width: 100%; aspect-ratio: 3838 / 2035; }
-  .podcast-workflow img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: var(--radius-md); }
-  .podcast-workflow figcaption { margin-top: 16px; font-size: 14px; line-height: 1.6; color: var(--color-body); }
-  .podcast-workflow figcaption p { margin-block: 8px; }
-  .podcast-workflow figcaption a { text-decoration: underline; text-underline-offset: 4px; }
   :global(#the-test.article-section--dark), :global(#current-status.article-section--dark) { --color-border: var(--color-dark-border); --color-body: var(--color-dark-body); }
   @media(max-width:600px) { .podcast-rows div { grid-template-columns: 1fr; gap: 8px; } .podcast-comparison { grid-template-columns: 1fr; } }
 </style>

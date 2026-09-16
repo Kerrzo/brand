@@ -51,8 +51,10 @@ const pageCopy: Record<string, { title?: string; href?: string; category: string
       const category = copy?.category ?? item.data.status;
       const description = copy?.description ?? item.data.description;
       const focus = copy?.focus ?? item.data.tags;
+      const href = copy?.href ?? `/building/${item.id}/`;
       return (
         <div class:list={['projects-page__row', { 'projects-page__row--dark': i % 2 === 0 }]} data-reveal>
+          <a href={href} aria-label={`Read about ${title}`}>
           <PlaceholderMedia
             label={`${title} hero image`}
             src={item.id === 'kerrzo' ? '/media/projects/kerrzo.mp4' : item.id === 'brilliancy' ? '/media/projects/brilliancy2.png' : item.id === 'ai-game-world' ? '/media/projects/poszo.png' : item.data.heroImage}
@@ -62,6 +64,7 @@ const pageCopy: Record<string, { title?: string; href?: string; category: string
             dark={i % 2 === 0}
             class="projects-page__media"
           />
+          </a>
           <div class="projects-page__copy" data-listing-copy>
             <div class:list={['mono-label', { 'eyebrow--dark': i % 2 === 0 }]}>({String(i + 1).padStart(2, '0')}) &middot; Active exploration</div>
             <h2 class="projects-page__title">{title}</h2>
@@ -70,7 +73,7 @@ const pageCopy: Record<string, { title?: string; href?: string; category: string
             <div class="projects-page__tags">
               {focus.map((tag) => <span class:list={['pill-tag', { 'pill-tag--dark': i % 2 === 0 }]}>{tag}</span>)}
             </div>
-            <a href={copy?.href ?? `/building/${item.id}/`} class="projects-page__link" data-listing-link>Read More</a>
+            <a href={href} class="projects-page__link" data-listing-link>Read More</a>
           </div>
         </div>
       );

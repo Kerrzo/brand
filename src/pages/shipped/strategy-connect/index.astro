@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArticleSection from '../../../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../../../components/content/article/ArticleTwoCol.astro';
+import ArticlePipeline from '../../../components/content/article/ArticlePipeline.astro';
+import SectionLabel from '../../../components/ui/SectionLabel.astro';
+import EditorialScrollSequence from '../../../components/ui/EditorialScrollSequence.astro';
+import NavRow from '../../../components/ui/NavRow.astro';
+import KeepExploring from '../../../components/content/KeepExploring.astro';
+// TODO: Replace these intentional comparison slots with Aidan's original and rebuilt UI captures.
+const comparison = [
+  { label: 'Original product', detail: 'Original hand-built UI', note: 'Screenshot coming' },
+  { label: 'AI-assisted rebuild', detail: 'Modern rebuilt UI', note: 'Screenshot coming' },
+];
+---
+<BaseLayout title="Strategy Connect / Engage+ — When the technology caught up" description="A long product relationship with Aidan Nuttall: a durable strategy platform, an AI-assisted rebuild and a new way to hear from an organisation." image="/media/work/cluster.png" current="shipped">
+  <article class="strategy-story">
+    <header class="container strategy-hero">
+      <ArticleTwoCol>
+        <SectionLabel slot="label" withDot>Shipped / Strategy + AI</SectionLabel>
+        <h1>Some product ideas have to wait for the technology to catch up.</h1>
+        <p class="lede">Strategy Connect began as software supporting the way Aidan Nuttall worked with organisations on strategy.</p>
+        <p class="body-copy">Over the years we kept talking about things we wished the software could do. Eventually the technology changed enough that <strong>some conversations stopped being hypothetical.</strong></p>
+        <div class="strategy-meta"><span>Strategy Connect / Engage+</span><span>Paul Kerr × Aidan Nuttall / Strategy Connect</span><span>Strategy software · AI · Product architecture</span></div>
+      </ArticleTwoCol>
+      <div class="comparison hero-comparison" aria-label="Original product to AI-assisted rebuild — screenshots pending">
+        {comparison.map(item => <div class="comparison-slot"><span class="mono-label">{item.label}</span><span class="comparison-title">{item.detail}</span><span class="comparison-note">{item.note}</span></div>)}
+      </div>
+    </header>
+
+    <ArticleSection dark id="how-we-met"><ArticleTwoCol>
+      <SectionLabel slot="label">01 / How we met</SectionLabel>
+      <h2 class="h-2">I met Aidan because I made up a startup idea on the way to the stage.</h2>
+      <p class="body-copy">At an early startup event, I volunteered to pitch. On the way up, I settled on an idea: using the emerging iPad and touch interfaces to help children learn.</p>
+      <p class="body-copy">Aidan was in the audience and joined the team. We spent the weekend making a rough prototype, working through a business canvas and getting out of the building to talk to real people. Would anyone actually pay for it?</p>
+      <p class="body-copy">The lasting result wasn't the startup idea. <strong>It was meeting Aidan.</strong></p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection id="first-platform"><ArticleTwoCol>
+      <SectionLabel slot="label">02 / The first Strategy Connect</SectionLabel>
+      <h2 class="h-2">Then Aidan showed me the product he was building.</h2>
+      <p class="body-copy">Strategy Connect was an early SaaS product supporting his work with organisations. When I reviewed it, there were some foundational problems to address.</p>
+      <p class="body-copy">Changing an identifier could expose another account's information. Logging in and opening screens could take tens of seconds. Before adding more capability, we needed to improve <strong>security, performance and the everyday experience.</strong></p>
+      <p class="body-copy">We secured the account boundaries, worked on performance and replaced the frontend while preserving the business logic. What began as a review grew into a much longer product relationship.</p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark id="strategy"><ArticleTwoCol>
+      <SectionLabel slot="label">03 / What Strategy Connect did</SectionLabel>
+      <h2 class="h-2">The software didn't create the strategy.</h2>
+      <p class="body-copy">Aidan and his father, Kevin, helped organisations work through their own strategic thinking. Their role was to facilitate it, not arrive with someone else's answer.</p>
+      <ArticlePipeline dark steps={['Foresight', 'Insight', 'Action']} label="A process supported by software" />
+      <p class="body-copy">The platform gave that thinking somewhere to live and a way to follow its progress. <strong>Tracking a strategy is different from ticking off tasks.</strong></p>
+      <div class="contrast"><p>Did we do the task?</p><p>Is the strategy progressing?</p></div>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection id="conversations"><ArticleTwoCol>
+      <SectionLabel slot="label">04 / Years of conversations</SectionLabel>
+      <h2 class="h-2">We kept imagining what the software could become.</h2>
+      <p class="body-copy">Could it understand the strategy well enough to notice drift? Could it bring external threats and opportunities into the conversation? Could it find deeper insights and support the facilitator?</p>
+      <p class="body-copy">These conversations started before ChatGPT. The ideas were interesting, but building them would have meant specialist teams, substantial data work and a level of investment that didn't make sense for a small team.</p>
+      <p class="body-copy"><strong>The problem wasn't a shortage of ideas.</strong> It was finding a practical way to build them.</p>
+    </ArticleTwoCol></ArticleSection>
+    <EditorialScrollSequence tone="dark" size="large" lines={["The ideas weren't new.", 'The technology finally caught up.']} />
+
+    <ArticleSection id="durability"><ArticleTwoCol>
+      <SectionLabel slot="label">05 / A platform that lasted</SectionLabel>
+      <h2 class="h-2">Meanwhile, Strategy Connect kept running.</h2>
+      <p class="body-copy">I was the primary developer, and for much of the original development the only developer. Aidan brought the product ownership and domain knowledge. Together we kept evolving a working production system.</p>
+      <p class="body-copy">Aidan also built a substantial set of <strong>automated acceptance tests.</strong> They captured how the product was expected to behave.</p>
+      <p class="body-copy">Over time, we accumulated more than code: business logic, a shared understanding of the product and a way to check that it still worked. All three mattered when we came back to its foundations.</p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark id="rebuild"><ArticleTwoCol>
+      <SectionLabel slot="label">06 / The rebuild</SectionLabel>
+      <h2 class="h-2">Then the economics changed.</h2>
+      <p class="body-copy">The stack was ageing. A new foundation was appealing, but a conventional rebuild meant months of work, significant cost and the risk of losing behaviour that had accumulated over years.</p>
+      <p class="body-copy">I was still sceptical about AI-assisted development for serious work. Aidan suggested we try an experiment.</p>
+      <p class="statement">A rebuild I'd expected to take months happened in days.</p>
+      <p class="body-copy">That doesn't mean years of product development happened in days. <strong>The understanding already existed.</strong> AI shortened the path from that understanding to a new technical foundation.</p>
+    </ArticleTwoCol>
+      <div class="comparison wide" aria-label="Before and after interface comparison — screenshots pending">
+        {comparison.map(item => <div class="comparison-slot"><span class="mono-label">{item.label}</span><span class="comparison-title">{item.detail}</span><span class="comparison-note">{item.note}</span></div>)}
+      </div>
+    </ArticleSection>
+
+    <ArticleSection id="safety-net"><ArticleTwoCol>
+      <SectionLabel slot="label">07 / The safety net</SectionLabel>
+      <h2 class="h-2">The old tests made the new speed useful.</h2>
+      <p class="body-copy">We could introduce the new interface against the existing backend, run the tests and verify the behaviour. Then we could replace the backend and check again.</p>
+      <ArticlePipeline steps={['New UI + existing backend', 'Test + verify', 'New UI + new backend', 'Test + verify']} label="Change the foundation in stages" />
+      <p class="body-copy"><strong>AI increased the speed of change. Existing engineering discipline made that speed usable.</strong></p>
+      <NavRow href="/learnings/the-moment-software-development-changed/" label="Related learning" description="The moment software development changed →" />
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark id="new-capability"><ArticleTwoCol>
+      <SectionLabel slot="label">08 / Then something more interesting happened</SectionLabel>
+      <h2 class="h-2">AI didn't just make the old software faster to build.</h2>
+      <p class="body-copy">The rebuild was about AI-assisted development. Engage+ was about <strong>AI as a product capability.</strong> They were different changes.</p>
+      <p class="body-copy">Doing the old thing faster was useful. Being able to do something that had previously been impractical was more interesting.</p>
+    </ArticleTwoCol>
+      <figure class="wide interview">
+        <div class="video-frame"><iframe id="aidan-interview" title="Aidan Nuttall on scaling meaningful conversations with AI" data-video-id="11dftwJtcgM" src="https://www.youtube.com/embed/11dftwJtcgM?enablejsapi=1&amp;playsinline=1&amp;rel=0" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+        <figcaption>Aidan Nuttall / Scaling meaningful conversations with AI. <a href="https://www.youtube.com/watch?v=11dftwJtcgM" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></figcaption>
+      </figure>
+    </ArticleSection>
+
+    <ArticleSection id="engage"><ArticleTwoCol>
+      <SectionLabel slot="label">09 / Engage+</SectionLabel>
+      <h2 class="h-2">How do you have a meaningful conversation with 1,000 people?</h2>
+      <p class="body-copy">Surveys scale, but the questions and answer formats constrain what people can say. Conversations give you depth, but a facilitator can't have them with everyone at once.</p>
+      <p class="body-copy">Engage+ explores that gap. A participant follows a link into a familiar conversational interface. The AI asks, listens, follows up and captures the response.</p>
+      <p class="body-copy"><strong>The conversation is the way in.</strong> Understanding what people are saying across all those conversations is the next problem.</p>
+      <figure class="phone"><img src="/media/work/clusterphone.png" alt="Engage+ mobile conversation about AI development and human oversight" loading="lazy" /><figcaption>Engage+ / The participant's conversation.</figcaption></figure>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark id="signal"><ArticleTwoCol>
+      <SectionLabel slot="label">10 / From conversations to signal</SectionLabel>
+      <h2 class="h-2">Thousands of answers only matter if you can understand them.</h2>
+      <p class="body-copy">Responses can be represented as vectors, grouped into clusters and explored as common themes. The visualisation helps people see patterns across an organisation, then drill back into the responses behind them.</p>
+      <p class="body-copy"><strong>A cluster is a starting point for understanding, not a replacement for the people who contributed.</strong> Commonality is useful, but outlying views need to remain visible too.</p>
+    </ArticleTwoCol>
+      <figure class="wide"><img src="/media/work/cluster.png" alt="Engage+ three-dimensional response visualisation with coloured clusters of related answers" loading="lazy" /><figcaption>Engage+ / Exploring related responses as clusters, with the original contributions behind the pattern.</figcaption></figure>
+    </ArticleSection>
+
+    <ArticleSection id="real-people"><ArticleTwoCol>
+      <SectionLabel slot="label">11 / Real people change the software</SectionLabel>
+      <h2 class="h-2">Conversation changed the safety model.</h2>
+      <p class="body-copy">During a real-world deployment, a serious safety-related response needed escalation. It made something very clear: conversational input changes what a product has to be ready for.</p>
+      <p class="body-copy">With a conventional form, we think about known fields, types and validation. With an open conversation, we also have to think about unexpected intent, sensitive content, abuse, off-topic responses and safety.</p>
+      <p class="body-copy"><strong>Guardrails, observation, moderation and escalation become part of the product.</strong> Real people don't stay inside the examples we used while building it.</p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection dark id="together"><ArticleTwoCol>
+      <SectionLabel slot="label">12 / Two products come back together</SectionLabel>
+      <h2 class="h-2">Strategy used to hear from a few people. Now it can potentially hear from everyone.</h2>
+      <p class="body-copy">Strategic conversations often begin with executives, leadership workshops and selected groups. Engage+ opens up the possibility of hearing from a much broader part of the organisation.</p>
+      <ArticlePipeline dark steps={['Leadership perspective', 'Organisation-wide conversations', 'Strategic context', 'Strategy']} label="A direction for the two products" />
+      <p class="body-copy">Aidan is increasingly looking at how Engage+ and Strategy Connect can come together. <strong>That's a product direction, not a claim that the integration is complete.</strong> The opportunity is to bring more of the organisation into the thinking behind its strategy.</p>
+    </ArticleTwoCol></ArticleSection>
+
+    <ArticleSection id="looking-back"><ArticleTwoCol>
+      <SectionLabel slot="label">13 / Looking back</SectionLabel>
+      <h2 class="h-2">Some conversations take years to become products.</h2>
+      <p class="body-copy">This story is as much about a long relationship as it is about technology. We kept talking about things that weren't practical to build. Then some of them became practical.</p>
+      <p class="body-copy">Strategy Connect could be rebuilt because <strong>the economics changed.</strong> Engage+ became possible because <strong>the capabilities changed.</strong> Those are related, but they aren't the same thing.</p>
+      <p class="body-copy">The part that excites me isn't reproducing software we already know how to build. It's finally being able to explore the things we couldn't.</p>
+    </ArticleTwoCol></ArticleSection>
+    <EditorialScrollSequence tone="dark" size="large" lines={['Sometimes the product idea has to wait for the technology.']} />
+  </article>
+  <KeepExploring routes={['learnings', 'building', 'shipped']} />
+</BaseLayout>
+
+<script>
+  interface VideoPlayer { mute(): void; playVideo(): void; pauseVideo(): void; destroy(): void; }
+  interface YouTubeAPI { Player: new (element: HTMLIFrameElement, options: { events: { onReady: () => void } }) => VideoPlayer; }
+  const frame = document.querySelector<HTMLIFrameElement>('#aidan-interview');
+  if (frame) {
+    const host = window as Window & { YT?: YouTubeAPI; onYouTubeIframeAPIReady?: () => void };
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    let player: VideoPlayer | undefined;
+    let ready = false;
+    let visible = false;
+    let disposed = false;
+    frame.src += `&origin=${encodeURIComponent(location.origin)}`;
+    const sync = () => {
+      if (!ready || !player) return;
+      if (!visible || document.hidden) player.pauseVideo();
+      else if (!motion.matches) { player.mute(); player.playVideo(); }
+    };
+    const initialise = () => {
+      if (disposed || player || !host.YT) return;
+      player = new host.YT.Player(frame, { events: { onReady: () => { ready = true; sync(); } } });
+    };
+    const previousReady = host.onYouTubeIframeAPIReady;
+    const apiReady = () => { previousReady?.(); initialise(); };
+    const observer = new IntersectionObserver(entries => {
+      visible = entries[0].isIntersecting && entries[0].intersectionRatio >= .3;
+      if (visible && !player) {
+        if (host.YT?.Player) initialise();
+        else {
+          host.onYouTubeIframeAPIReady = apiReady;
+          if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+            const script = document.createElement('script');
+            script.src = 'https://www.youtube.com/iframe_api';
+            document.head.append(script);
+          }
+        }
+      }
+      sync();
+    }, { threshold: [0, .3] });
+    observer.observe(frame);
+    document.addEventListener('visibilitychange', sync);
+    motion.addEventListener('change', sync);
+    document.addEventListener('astro:before-swap', () => {
+      disposed = true;
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', sync);
+      motion.removeEventListener('change', sync);
+      if (host.onYouTubeIframeAPIReady === apiReady) host.onYouTubeIframeAPIReady = previousReady;
+      player?.destroy();
+    }, { once: true });
+  }
+</script>
+
+<style>
+  .strategy-hero { padding-top: clamp(120px,18vh,180px); padding-bottom: clamp(48px,7vw,96px); }
+  h1 { font-size: clamp(38px,5.5vw,82px); line-height: 1.04; letter-spacing: -.04em; max-width: 22ch; }
+  .strategy-meta { display: flex; flex-wrap: wrap; gap: 12px 28px; border-top: 1px solid var(--color-border); padding-top: 20px; font: 11px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; line-height: 1.6; }
+  .strategy-meta span:first-child { color: var(--color-accent); }
+  .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .hero-comparison,.wide { margin-top: 48px; }
+  .comparison-slot { aspect-ratio: 16/10; border: 1px solid var(--color-border); padding: clamp(20px,3vw,48px); display: flex; flex-direction: column; justify-content: space-between; gap: 20px; }
+  .comparison-title { font-size: clamp(22px,3vw,42px); letter-spacing: -.025em; line-height: 1.15; max-width: 14ch; }
+  .comparison-note { font: 12px var(--font-mono); color: var(--color-body); }
+  :global(.article-section--dark) .comparison-slot { border-color: var(--color-dark-border); }
+  :global(.article-section--dark) .comparison-note,:global(.article-section--dark) figcaption { color: var(--color-dark-body); }
+  figure { margin: 0; min-width: 0; }
+  figure.wide { margin-top: 48px; }
+  img { display: block; width: 100%; height: auto; border-radius: var(--radius-md); }
+  figcaption { margin-top: 16px; font-size: 14px; line-height: 1.55; max-width: 72ch; color: var(--color-body); }
+  figcaption a { text-decoration: underline; text-underline-offset: 4px; }
+  .phone { max-width: 360px; padding-top: 18px; }
+  .video-frame { aspect-ratio: 16/9; background: #080807; }
+  iframe { display: block; width: 100%; height: 100%; border: 0; }
+  .statement { font-size: clamp(30px,4vw,60px); line-height: 1.12; letter-spacing: -.035em; max-width: 22ch; color: var(--color-accent); }
+  .contrast { border-block: 1px solid var(--color-dark-border); padding-block: 24px; }
+  .contrast p { font-size: clamp(24px,3vw,42px); line-height: 1.35; }
+  .contrast p:first-child { color: var(--color-dark-body); }
+  .contrast p:last-child { color: var(--color-accent); }
+  .strategy-story :global(.editorial-seq) { margin-top: 0; }
+  @media(max-width:600px) { .comparison { grid-template-columns: 1fr; } .comparison-slot { aspect-ratio: 16/9; } }
+</style>

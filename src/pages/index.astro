@@ -1,41 +1,140 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HomeHero from '../components/home/HomeHero.astro';
-import StatsRow from '../components/ui/StatsRow.astro';
-import ProjectsSection from '../components/home/ProjectsSection.astro';
-import AICaseStudySection from '../components/home/AICaseStudySection.astro';
-import EnterpriseWorkSection from '../components/home/EnterpriseWorkSection.astro';
-import EmergingTechnologySection from '../components/home/EmergingTechnologySection.astro';
-import ServicesSection from '../components/home/ServicesSection.astro';
-import LabSection from '../components/home/LabSection.astro';
-import WritingSection from '../components/home/WritingSection.astro';
-import AboutSection from '../components/home/AboutSection.astro';
-import FinalCTA from '../components/ui/FinalCTA.astro';
+import ArticleSection from '../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../components/content/article/ArticleTwoCol.astro';
+import ArticleStatement from '../components/content/article/ArticleStatement.astro';
+import SectionLabel from '../components/ui/SectionLabel.astro';
+import Button from '../components/ui/Button.astro';
+import PlaceholderMedia from '../components/ui/PlaceholderMedia.astro';
+import LearningCard from '../components/content/LearningCard.astro';
 
-const stats = [
-  { value: '30+', label: 'Years in technology' },
-  { value: 'CTO and product architect', label: 'Role' },
-  { value: 'Enterprise platforms', label: 'Shipped at scale' },
-  { value: 'AI · Web · Mobile · Voice · VR', label: 'Surfaces' },
+const [projects, work, lab, writing] = await Promise.all([
+  getCollection('projects', ({data}) => !data.draft),
+  getCollection('work', ({data}) => !data.draft),
+  getCollection('lab', ({data}) => !data.draft),
+  getCollection('writing', ({data}) => !data.draft && !data.placeholder),
+]);
+// Explicit v1 editorial selection. Unselected entries and their routes remain intact.
+// Titles and default media come from collections; these summaries serve the homepage.
+const buildingSelection = [
+  {id:'kerrzo', question:'What should business software look like when AI is part of the architecture?', copy:'An AI-first business platform built around shared operational context — so people and AI can work from the same understanding.', image:'/media/projects/kerrzo/marketing/sales-pipeline-kanban-board-with-deal-cards-and-icp-scores.png', alt:'Kerrzo marketing UI showing a sales pipeline with deal cards and customer context', caption:'Kerrzo / Marketing UI · Product in development'},
+  {id:'brilliancy', question:'Chess engines tell me what I did wrong. I want a coach that helps me stop doing it again.', copy:'An AI chess coach exploring engine truth, explanation and player memory as one learning system.', image:'/media/projects/brilliancy/game.png', alt:'Brilliancy game review with chessboard, move history and engine analysis', caption:'Brilliancy / Game review'},
 ];
+const building = buildingSelection.flatMap(selection => {
+  const item = projects.find(item => item.id === selection.id);
+  return item ? [{...selection, title:item.data.title, href:`/building/${item.id}/`}] : [];
+});
+const mediaSizes: Record<string, [number, number]> = { 'craveable-brands':[1440,814], 'international-towers-amica':[1440,900], 'strategy-connect':[1448,1086], neurotechnology:[1440,900], boxofficevr:[1437,681] };
+const shippedSelection = [
+  {id:'craveable-brands', copy:'Years of evolving a national ordering platform across web, mobile, payments, delivery and restaurant operations.'},
+  {id:'international-towers-amica', title:'Amica / International Towers', href:'/shipped/amica/', image:'/media/work/amica/lobby.webp', alt:'International Towers lobby with people and digital community screens', copy:'A digital layer connecting people, spaces, access, community and building operations across International Towers.'},
+  {id:'strategy-connect', title:'Strategy Connect / Engage+', copy:"A long-running strategy platform that eventually reached the point where AI made ideas we'd discussed for years practical to build."},
+  {id:'neurotechnology', title:'CognitiVR', copy:'A VR chronic-pain treatment platform where the technology worked — and the harder problem became reaching the people who might benefit from it.'},
+  {id:'boxofficevr', copy:"An immersive theatre platform that taught me something harder than streaming VR: people loving an experience doesn't necessarily change their behaviour."},
+];
+const shipped = shippedSelection.flatMap(selection => {
+  const item = work.find(item => item.id === selection.id);
+  return item ? [{...selection, title:selection.title ?? item.data.title, href:selection.href ?? `/shipped/${item.id}/`, image:selection.image ?? item.data.heroImage, alt:selection.alt ?? item.data.heroAlt}] : [];
+});
+const experimentSelection = [
+  {id:'realtime-drive-through-ordering', question:'Can AI take a drive-through order without making the experience worse?', label:'Realtime voice · Ordering', image:'/media/projects/poszo.png', alt:'Poszo drive-through voice ordering concept', caption:'Concept image · Active exploration'},
+  {id:'wifi-human-sensing', question:'Can Wi-Fi count people in a room?', label:'Wi-Fi CSI · Spatial sensing', caption:'RuView upstream demo · Not my test results'},
+  {id:'ai-podcast-production', question:'Can AI turn an off-the-cuff conversation into a finished podcast?', label:'Frontier models · Audio · Editorial AI', caption:'ComfyUI setup · Podcast studio experiment'},
+];
+const experiments = experimentSelection.flatMap(selection => {
+  const item = lab.find(item => item.id === selection.id);
+  return item ? [{...selection, href:`/experiments/${item.id}/`, image:selection.image ?? item.data.heroImage, alt:selection.alt ?? item.data.heroAlt}] : [];
+});
+const learnings = ['can-ai-replace-a-drone-shot', 'the-moment-software-development-changed'].flatMap(id => writing.filter(item => item.id === id));
+const [kerrzo, brilliancy] = building;
 ---
+<BaseLayout title="Product Architect & CTO" description="Paul Kerr is a Sydney-based product architect and CTO building AI-native products and complex digital platforms. Explore what he's building, shipped, experimenting with and learning.">
+  <header class="container home-hero">
+    <ArticleTwoCol>
+      <SectionLabel slot="label" withDot>Paul Kerr / Product architect</SectionLabel>
+      <h1 class="h-hero">I build ambitious products and the systems behind them.</h1>
+      <p class="lede">I've spent my career turning difficult ideas into working software — from national ordering platforms and connected buildings to VR products and AI-native systems.</p>
+      <p class="body-copy">Now I'm exploring what becomes possible when <strong>AI is part of the product architecture from the beginning.</strong></p>
+      <div class="hero-actions"><Button href="#building" withDot>See what I'm building</Button><a class="text-link" href="/about/">About me →</a></div>
+    </ArticleTwoCol>
+  </header>
 
-<BaseLayout
-  title="Paul Kerr — Architecting the AI Era"
-  description="Exploring how AI is reshaping software, products and the way we build them. Architecture notes, engineering stories and experiments from Paul Kerr."
-  transparentHeader
->
-  <HomeHero />
-  <div class="container">
-    <StatsRow stats={stats} />
-  </div>
-  <ProjectsSection />
-  <AICaseStudySection />
-  <EnterpriseWorkSection />
-  <EmergingTechnologySection />
-  <ServicesSection />
-  <LabSection />
-  <WritingSection />
-  <AboutSection />
-  <FinalCTA />
+  <ArticleSection id="building">
+    <ArticleTwoCol><SectionLabel slot="label" withDot>Building / Now</SectionLabel><h2 class="h-2">What I'm building now.</h2><p class="lede">Products I've decided are worth taking beyond the experiment.</p></ArticleTwoCol>
+    {kerrzo && <article class="anchor-feature">
+      <div class="feature-heading" data-listing-copy><div><span class="mono-label">Building · 2026 → Now</span><h3 class="h-2">{kerrzo.title}</h3></div><div class="feature-copy"><p class="lede">{kerrzo.question}</p><p class="body-copy">{kerrzo.copy}</p><a href={kerrzo.href} class="text-link" data-listing-link>Explore Kerrzo →</a></div></div>
+      <a class="natural-media" href={kerrzo.href} aria-label="Explore Kerrzo"><img src={kerrzo.image} alt={kerrzo.alt} width="2048" height="636" loading="lazy" /></a><p class="media-caption">{kerrzo.caption}</p>
+    </article>}
+    {brilliancy && <article class="split-story secondary-building">
+      <a class="natural-media" href={brilliancy.href} aria-label="Explore Brilliancy"><img src={brilliancy.image} alt={brilliancy.alt} width="3840" height="2236" loading="lazy" /></a>
+      <div class="story-copy" data-listing-copy><span class="mono-label">Building · 2026 → Now</span><h3 class="h-3">{brilliancy.title}</h3><p class="lede">{brilliancy.question}</p><p class="body-copy">{brilliancy.copy}</p><a class="text-link" href={brilliancy.href} data-listing-link>Explore Brilliancy →</a></div>
+    </article>}
+    <div class="section-action"><a class="text-link" href="/building/">View everything I'm building →</a></div>
+  </ArticleSection>
+
+  <ArticleSection dark id="shipped">
+    <ArticleTwoCol><SectionLabel slot="label" withDot>Shipped / Selected work</SectionLabel><h2 class="h-2">Things I've helped put into the world.</h2><p class="lede">Products and platforms that had to survive real users, real operations and real constraints.</p></ArticleTwoCol>
+    <div class="shipped-features">
+      {shipped.slice(0,3).map((item,index) => <article class:list={['split-story', {'split-story--reverse':index === 1}]}>
+        <a class="natural-media" href={item.href} aria-label={`Read ${item.title}`}><img src={item.image} alt={item.alt} width={mediaSizes[item.id][0]} height={mediaSizes[item.id][1]} loading="lazy" /></a>
+        <div class="story-copy" data-listing-copy><span class="mono-label">0{index+1} / Shipped</span><h3 class="h-2">{item.title}</h3><p class="body-copy">{item.copy}</p>{item.id === 'craveable-brands' && <span class="pill-tag">~580 restaurants</span>}<a class="text-link" href={item.href} data-listing-link>Read the story →</a></div>
+      </article>)}
+    </div>
+    <div class="supporting-stories">
+      {shipped.slice(3).map(item => <article><a class="natural-media" href={item.href} aria-label={`Read ${item.title}`}><img src={item.image} alt={item.alt} width={mediaSizes[item.id][0]} height={mediaSizes[item.id][1]} loading="lazy" /></a><div class="story-copy" data-listing-copy><h3 class="h-3">{item.title}</h3><p class="body-copy">{item.copy}</p>{item.id === 'craveable-brands' && <span class="pill-tag">~580 restaurants</span>}<a class="text-link" href={item.href} data-listing-link>Read the story →</a></div></article>)}
+    </div>
+    <div class="section-action"><a class="text-link" href="/shipped/">See all Shipped work →</a></div>
+  </ArticleSection>
+
+  <ArticleSection id="experiment-bridge"><ArticleTwoCol><SectionLabel slot="label">A question first</SectionLabel><ArticleStatement size="xl" maxWidth="22ch">Not every idea should become a product.</ArticleStatement><p class="lede">Some questions are cheaper to answer by building something.</p></ArticleTwoCol></ArticleSection>
+  <ArticleSection tight id="experiments">
+    <ArticleTwoCol><SectionLabel slot="label" withDot>Experiments / Open questions</SectionLabel><h2 class="h-2">Exploring what becomes possible.</h2><p class="body-copy">Real experiments exploring emerging technologies before deciding whether they deserve to become products.</p></ArticleTwoCol>
+    <div class="experiment-grid">
+      {experiments.map(item => <article><a class="experiment-media" href={item.href} aria-label={item.question}><PlaceholderMedia src={item.image} alt={item.alt} label={item.label} ratio="16/10" /></a><p class="media-caption">{item.caption}</p><div class="story-copy" data-listing-copy><span class="mono-label">{item.label}</span><h3>{item.question}</h3><a class="text-link" href={item.href} data-listing-link>Explore the experiment →</a></div></article>)}
+    </div>
+    <div class="section-action"><a class="text-link" href="/experiments/">See all Experiments →</a></div>
+  </ArticleSection>
+
+  <ArticleSection dark id="learnings">
+    <ArticleTwoCol><SectionLabel slot="label" withDot>Learnings / Notes from the work</SectionLabel><h2 class="h-2">Building raises questions. Writing helps me answer them.</h2></ArticleTwoCol>
+    <div class="learning-previews">{learnings.map(post => <LearningCard post={post} />)}</div>
+    <div class="section-action"><a class="text-link" href="/learnings/">Read all Learnings →</a></div>
+  </ArticleSection>
+
+  <ArticleSection id="about"><ArticleTwoCol><SectionLabel slot="label" withDot>About / Paul Kerr</SectionLabel><h2 class="h-2">I've spent my career building things that didn't exist yet.</h2><p class="body-copy">Some scaled to millions of customers. Some taught me that great technology isn't enough. Others are still experiments.</p><p class="body-copy">I'm still most interested in the same thing: <strong>understanding a difficult problem well enough to build something useful.</strong></p><a class="text-link" href="/about/">More about me →</a></ArticleTwoCol></ArticleSection>
 </BaseLayout>
+<style>
+  .home-hero { padding-top: clamp(140px,19vh,220px); padding-bottom: clamp(48px,8vh,100px); }
+  h1 { max-width: 19ch; text-wrap: balance; }
+  .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; }
+  .text-link { display: inline-block; width: fit-content; font-size: 16px; line-height: 1.5; padding-bottom: 5px; border-bottom: 1px solid currentColor; transition: color .2s; }
+  .text-link:hover, a:focus-visible { color: var(--color-accent); }
+  .anchor-feature { margin-top: clamp(48px,7vw,96px); }
+  .feature-heading { display: grid; grid-template-columns: .5fr 1.5fr; gap: var(--editorial-gap); margin-bottom: 36px; }
+  .feature-heading h3 { margin-top: 16px; }
+  .feature-copy,.story-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; min-width: 0; }
+  .natural-media { display: block; min-width: 0; }
+  .natural-media img { display: block; width: 100%; height: auto; border-radius: var(--radius-md); }
+  .media-caption { font-size: 12px; color: var(--color-body); line-height: 1.5; margin-top: 12px; }
+  .split-story { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); gap: clamp(28px,5vw,80px); align-items: center; }
+  .secondary-building { margin-top: clamp(64px,9vw,120px); padding-top: 48px; border-top: 1px solid var(--color-border); }
+  .secondary-building .lede { font-size: clamp(20px,2.2vw,28px); }
+  .shipped-features { display: grid; gap: clamp(64px,9vw,140px); margin-top: clamp(48px,7vw,96px); }
+  .split-story--reverse > a { order: 2; }
+  .supporting-stories { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px,4vw,64px); margin-top: clamp(64px,9vw,120px); padding-top: 48px; border-top: 1px solid var(--color-dark-border); }
+  .supporting-stories .story-copy { margin-top: 28px; }
+  .section-action { margin-top: 48px; }
+  .experiment-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 32px; margin-top: 48px; }
+  .experiment-grid .story-copy { margin-top: 28px; }
+  .experiment-grid h3 { font-size: clamp(24px,2.4vw,36px); line-height: 1.12; letter-spacing: -.03em; }
+  .experiment-media { display: block; }
+  .experiment-media :global(img) { object-fit: contain; }
+  .learning-previews { margin-top: 48px; --color-ink:var(--color-dark-fg); --color-body:var(--color-dark-body); --color-label:var(--color-dark-label); --color-border:var(--color-dark-border); }
+  .learning-previews :global(.learning-card:first-child) { grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); }
+  .learning-previews :global(.learning-card:last-child) { margin-left: var(--editorial-spine); }
+  @media(max-width:900px) { .feature-heading { grid-template-columns:1fr; } .split-story { grid-template-columns:1fr; } .split-story--reverse > a { order:0; } .experiment-grid { grid-template-columns:1fr; gap:48px; } .experiment-grid article { display:grid; grid-template-columns:1fr 1fr; gap:12px 28px; } .experiment-grid .story-copy { grid-column:2; grid-row:1 / 3; margin-top:0; } .experiment-grid .media-caption { margin-top:0; } }
+  @media(max-width:640px) { .supporting-stories { grid-template-columns:1fr; gap:48px; } .experiment-grid article { display:block; } .experiment-grid .story-copy { margin-top:24px; } .experiment-grid .media-caption { margin-top:12px; } .learning-previews :global(.learning-card:first-child) { grid-template-columns:1fr; } .learning-previews :global(.learning-card:last-child) { margin-left:0; } }
+</style>
+
+
