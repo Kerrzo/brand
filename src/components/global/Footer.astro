@@ -18,12 +18,12 @@
       </a>
     </div>
     <div class="site-footer__col">
-      <div class="site-footer__col-title">Contact</div>
+      <h3 class="site-footer__col-title">Contact</h3>
       <a href="mailto:paul@kerrzo.com">paul@kerrzo.com</a>
       <span>Sydney, Australia</span>
     </div>
     <div class="site-footer__col">
-      <div class="site-footer__col-title">Elsewhere</div>
+      <h3 class="site-footer__col-title">Elsewhere</h3>
       <a href="https://www.linkedin.com/in/kerrzo/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://github.com/kerrzo/" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
@@ -44,18 +44,21 @@
 
 <style>
   .site-footer {
+    --footer-gap: clamp(24px, 5vw, 96px);
     background: var(--color-dark-bg);
     color: var(--color-dark-fg);
     border-radius: 16px 16px 0 0;
     margin-top: clamp(80px, 12vh, 160px);
-    padding: clamp(56px, 9vh, 110px) var(--edge) 0;
+    padding: clamp(56px, 9vh, 110px) 0 0;
     overflow: hidden;
   }
 
   .site-footer__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, .7fr);
-    gap: 40px;
+    grid-template-columns: minmax(0, 440px) max-content max-content;
+    justify-content: space-evenly;
+    column-gap: 0;
+    margin-inline: auto;
   }
 
   .site-footer__lead {
@@ -122,9 +125,11 @@
   }
 
   .site-footer__col-title {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 6px;
+    font-size: clamp(24px, 2.4vw, 38px);
+    line-height: 1.1;
+    letter-spacing: -.025em;
+    font-weight: 500;
+    margin: 0 0 12px;
     color: var(--color-dark-fg);
   }
 
@@ -146,7 +151,7 @@
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    padding: 26px 0;
+    padding: 26px var(--footer-gap);
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: .1em;
@@ -158,6 +163,7 @@
     .site-footer__grid {
       grid-template-columns: minmax(0, 1fr);
       row-gap: 32px;
+      padding-inline: var(--footer-gap);
     }
 
     .site-footer__meta {

@@ -20,3 +20,7 @@ Consult these guides before working on related tasks:
 - [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
 - [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
 - [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+
+## Visual convention
+
+Do not use decorative horizontal rules to separate sections or editorial items. Use spacing, typography, labels, imagery and background changes instead. Preserve structural rules in navigation/list rows, Keep Exploring, tables and architecture/data lists. Existing site-wide divider cleanup is deferred to the global polish pass.
