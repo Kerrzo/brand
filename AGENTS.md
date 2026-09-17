@@ -1,12 +1,8 @@
 ## Development
 
-When starting the dev server, use background mode:
+Before starting a development server, check whether its intended port is already in use. If a compatible server is already running, reuse it. Never kill or replace a process merely because its port is occupied.
 
-```
-astro dev --background
-```
-
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+Prefer foreground development servers that the user can stop and restart directly. Agents may restart a server when needed for testing, but must leave server lifecycle control clear and accessible to the user. Do not start Astro in detached/background mode unless the user explicitly asks for it.
 
 ## Documentation
 
