@@ -25,6 +25,14 @@ const { title, description, image, current, transparentHeader = false } = Astro.
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <SEOHead title={`${title} · Paul Kerr`} description={description} image={image} />
+    <!-- Google tag (gtag.js) -->
+    <script async is:inline src="https://www.googletagmanager.com/gtag/js?id=G-BRGZZG9TCD"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BRGZZG9TCD');
+    </script>
     <script is:inline>
       document.documentElement.classList.add('js');
     </script>
