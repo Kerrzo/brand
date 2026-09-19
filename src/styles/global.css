@@ -142,7 +142,11 @@ button {
 [data-listing-link]::after { content: ''; position: absolute; inset: 0; z-index: 1; cursor: pointer; }
 [data-listing-copy]:has([data-listing-link]:focus-visible) { outline: 2px solid var(--color-accent); outline-offset: 8px; border-radius: 4px; }
 
-/* Shared editorial grid: use inside a container; evidence can keep its full width. */
+/* Shared editorial grid: use inside a container; evidence can keep its full width.
+   --editorial-spine offsets media/statements to the narrative content column
+   (≈25–30% into the page on desktop). Collapses to 0 under 900px.
+   Pair with ArticleTwoCol for label + heading/body; see --heading-measure /
+   --reading-measure / --media-measure in typography.css. */
 :root { --editorial-gap: clamp(24px, 4vw, 72px); --editorial-spine: calc(25% + var(--editorial-gap) * .75); }
 .editorial-spine { margin-inline-start: var(--editorial-spine); min-width: 0; }
 @media (max-width: 900px) { :root { --editorial-spine: 0px; } }

@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  max-width: var(--prose-measure);
+  max-width: var(--reading-measure);
 }
 
 .narrow-copy > * + * { margin-top: 20px; }

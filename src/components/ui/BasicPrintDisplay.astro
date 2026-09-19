@@ -94,7 +94,7 @@ const path = [...'PAUL KERR!'].flatMap((letter,i) => (glyphs[letter] ?? []).flat
 </script>
 <style>
   .basic-display { background:#12391c; color:#9ee878; padding:clamp(36px,6vw,80px) var(--edge); }
-  .basic-display__screen { max-width:880px; margin:auto; font:700 clamp(13px,1.8vw,22px)/1.4 'Courier New',monospace; letter-spacing:.025em; }
+  .basic-display__screen { max-width:880px; margin-inline-start: var(--editorial-spine); font:700 clamp(13px,1.8vw,22px)/1.4 'Courier New',monospace; letter-spacing:.025em; }
   .basic-display__heading { margin-bottom:1.5em; }
   .basic-display__command { margin-bottom:1em; }
   .basic-display__output { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(6px,1vw,12px) 0; }

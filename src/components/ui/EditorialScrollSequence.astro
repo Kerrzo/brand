@@ -8,6 +8,8 @@ interface Props {
   tone?: 'dark' | 'light';
   /** Default matches Building/About. Large is ~50% bigger for closing statements. */
   size?: 'default' | 'large';
+  /** Roughly doubles the default line measure so longer statements can flow wider. */
+  wide?: boolean;
 }
 
 const {
@@ -17,11 +19,12 @@ const {
   accentColor = 'var(--color-accent)',
   tone = 'dark',
   size = 'default',
+  wide = false,
 } = Astro.props;
 ---
 
 <section
-  class:list={['editorial-seq', `editorial-seq--${tone}`, `editorial-seq--size-${size}`]}
+  class:list={['editorial-seq', `editorial-seq--${tone}`, `editorial-seq--size-${size}`, { 'editorial-seq--wide': wide }]}
   data-editorial-seq
   data-show-rail={showRail ? 'true' : 'false'}
   data-accent={accentColor}
@@ -110,6 +113,14 @@ const {
   .editorial-seq--size-large .editorial-seq__lines {
     max-width: 72ch;
     gap: 16px;
+  }
+
+  .editorial-seq--wide .editorial-seq__lines {
+    max-width: 96ch;
+  }
+
+  .editorial-seq--wide.editorial-seq--size-large .editorial-seq__lines {
+    max-width: min(100%, 96ch);
   }
 
   .editorial-seq--dark .editorial-seq__lines p {

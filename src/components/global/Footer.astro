@@ -44,7 +44,6 @@
 
 <style>
   .site-footer {
-    --footer-gap: clamp(24px, 5vw, 96px);
     background: var(--color-dark-bg);
     color: var(--color-dark-fg);
     border-radius: 16px 16px 0 0;
@@ -55,10 +54,10 @@
 
   .site-footer__grid {
     display: grid;
-    grid-template-columns: minmax(0, 440px) max-content max-content;
-    justify-content: space-evenly;
-    column-gap: 0;
-    margin-inline: auto;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(32px, 4vw, 80px);
+    align-items: start;
+    padding-inline: var(--edge);
   }
 
   .site-footer__lead {
@@ -151,7 +150,7 @@
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    padding: 26px var(--footer-gap);
+    padding: 26px var(--edge);
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: .1em;
@@ -162,8 +161,7 @@
   @media (max-width: 900px) {
     .site-footer__grid {
       grid-template-columns: minmax(0, 1fr);
-      row-gap: 32px;
-      padding-inline: var(--footer-gap);
+      row-gap: 40px;
     }
 
     .site-footer__meta {

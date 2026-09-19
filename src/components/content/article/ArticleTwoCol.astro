@@ -29,6 +29,19 @@ const { ratio = 'minmax(0, .5fr) minmax(0, 1.5fr)', class: className = '' } = As
     display: flex;
     flex-direction: column;
     gap: 0;
+    min-width: 0;
+  }
+
+  /*
+    Narrative measure spine: section headings sit on the same left edge as
+    body copy, but at --heading-measure (~760px). Paragraphs keep
+    --reading-measure (~64ch). Media / figures / CTAs are NOT capped here —
+    they inherit the full content column so evidence can break wider.
+    Heroes keep their own tighter title measures (e.g. BuildingHero h1).
+    Display statements (EditorialScrollSequence, payoffs) live outside this.
+  */
+  .article-two-col__content > :global(:is(h2, .h-2)) {
+    max-width: min(100%, var(--heading-measure));
   }
 
   /* Default beat between major blocks; body paragraphs sit tighter. */

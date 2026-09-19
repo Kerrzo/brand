@@ -2,12 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleSection from '../../components/content/article/ArticleSection.astro';
 import ArticleTwoCol from '../../components/content/article/ArticleTwoCol.astro';
-import ArticleStatement from '../../components/content/article/ArticleStatement.astro';
 import ArticleLearnings from '../../components/content/article/ArticleLearnings.astro';
 import SectionLabel from '../../components/ui/SectionLabel.astro';
 import BasicPrintDisplay from '../../components/ui/BasicPrintDisplay.astro';
 import NavRow from '../../components/ui/NavRow.astro';
 import KeepExploring from '../../components/content/KeepExploring.astro';
+import EditorialScrollSequence from '../../components/ui/EditorialScrollSequence.astro';
 const questions = ['Should we build it?', 'Can it reach people?', 'Will anyone change their behaviour for it?', 'Does it deserve to exist?'].map(title => ({title}));
 ---
 <BaseLayout title="About" description="From a green-screen computer in Belfast to products, architecture and AI. Why Paul Kerr keeps building things — and what the work has taught him." current="about">
@@ -36,7 +36,7 @@ const questions = ['Should we build it?', 'Can it reach people?', 'Will anyone c
 
     <ArticleSection dark id="software"><ArticleTwoCol>
       <SectionLabel slot="label">02 / Software</SectionLabel>
-      <h2 class="h-2">For a long time, I wanted to become a really good programmer.</h2>
+      <h2 class="h-2">For a long time, I focused on learning the engineering craft.</h2>
       <p class="body-copy">I gravitated towards maths, physics, science and computers, then studied Computer Science at Queen's University Belfast in the late 1990s.</p>
       <p class="body-copy">AI was part of that education. One computer-vision exercise involved classifying tanks in different environments and orientations. By today's standards, the techniques were primitive. At the time, software appearing to recognise something it hadn't seen before was astonishing.</p>
       <p class="body-copy">After university I worked as a developer in Belfast, London and later internationally, including on large enterprise systems. Large teams, slower feedback, a lot of coordination and expensive changes.</p>
@@ -74,7 +74,7 @@ const questions = ['Should we build it?', 'Can it reach people?', 'Will anyone c
     <ArticleSection dark id="judgement"><ArticleTwoCol>
       <SectionLabel slot="label">06 / Judgement</SectionLabel>
       <h2 class="h-2">Building it turned out to be only part of the job.</h2>
-      <p class="body-copy">Craveable showed me what happens when product, technology, operations and distribution line up at scale. CognitiVR showed me that technology could work while reaching people remained difficult. BoxOfficeVR showed me that people could love an experience without changing their behaviour.</p>
+      <p class="body-copy">Craveable showed me what happens when product, technology, operations and distribution line up at scale. Neurotechnology showed me that technology could work while reaching people remained difficult. BoxOfficeVR showed me that people could love an experience without changing their behaviour.</p>
       <p class="body-copy">Earlier in my career, the question was usually <strong>can we build it?</strong> The questions got harder:</p>
       <div class="dark-primitives"><ArticleLearnings items={questions} /></div>
       <p class="body-copy">I still love difficult engineering. I've just learned that <strong>solving the engineering problem doesn't automatically solve the product.</strong></p>
@@ -115,15 +115,24 @@ const questions = ['Should we build it?', 'Can it reach people?', 'Will anyone c
       <h2 class="h-2">Still the same experiment.</h2>
       <p class="body-copy">The Amstrad is long gone. The machines are faster. The interfaces are better. And what one person can build has changed beyond recognition.</p>
       <p class="body-copy">But the thing I enjoy is basically the same.</p>
-      <div class="closing-statement"><ArticleStatement size="xl" maxWidth="22ch">Make something that wasn't there.<br /><br />Put it in front of someone.<br /><br />See what happens.</ArticleStatement></div>
     </ArticleTwoCol></ArticleSection>
+
+    <EditorialScrollSequence
+      tone="light"
+      size="large"
+      lines={[
+        "Make something that wasn't there.",
+        'Put it in front of someone.',
+        'See what happens.',
+      ]}
+    />
   </article>
   <KeepExploring routes={['building','shipped','experiments']} descriptions={{building:"See what I'm working on now.",shipped:"See the products and systems I've helped deliver.",experiments:"See the questions I'm testing."}} />
 </BaseLayout>
 <style>
   .about-hero { padding-top: clamp(140px,19vh,200px); padding-bottom: clamp(64px,10vh,120px); }
   h1 { font-size: clamp(38px,5.5vw,82px); line-height: 1.04; letter-spacing: -.04em; max-width: 21ch; text-wrap: balance; }
-  .first-program { margin: 0; border-block: 1px solid var(--color-dark-border); padding-block: clamp(24px,4vw,48px); }
+  .first-program { margin: 40px 0 0; border-block: 1px solid var(--color-dark-border); padding-block: clamp(24px,4vw,48px); }
   .first-program pre { margin: 24px 0 0; font: clamp(16px,2.6vw,34px)/1.7 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; color: var(--color-dark-fg); }
   .first-program code { font: inherit; }
 
@@ -133,7 +142,6 @@ const questions = ['Should we build it?', 'Can it reach people?', 'Will anyone c
   .experience-montage figcaption { color: var(--color-dark-body); font-size: 13px; line-height: 1.5; margin-top: 16px; }
   .dark-primitives { --color-ink:var(--color-dark-fg); --color-body:var(--color-dark-body); --color-label:var(--color-dark-label); --color-border:var(--color-dark-border); }
   .current-links { border-top: 1px solid var(--color-dark-border); }
-  .closing-statement { padding-top: 24px; }
   @media(max-width:640px) { .experience-montage { grid-template-columns:1fr; gap:36px; } }
 </style>
 

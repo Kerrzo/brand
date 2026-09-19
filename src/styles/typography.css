@@ -1,19 +1,36 @@
 :root {
-  --prose-gap: 12px;
-  --prose-pause: 28px;
+  /* Vertical rhythm for long-form copy */
+  --prose-gap: 18px;
+  --prose-pause: 32px;
+
+  /* Editorial measures — different content kinds get different widths.
+     READING: comfortable paragraph line length (~60–70ch).
+     HEADING: narrative section titles; modestly wider than reading, shared left edge.
+     DISPLAY: oversized editorial statements (scroll sequences, payoffs) — intentionally wider.
+     MEDIA: screenshots, video, diagrams — may break wider than reading/heading. */
   --prose-measure: 64ch;
+  --reading-measure: var(--prose-measure);
+  --heading-measure: 760px;
+  --display-measure: min(100%, 72ch);
+  --media-measure: 100%;
 }
 
 /* One source of paragraph spacing, including paragraphs in flex layouts. */
 p {
   margin: 0;
   /* Cap reading lines without narrowing headings, media or their containers. */
-  max-width: min(100%, var(--prose-measure));
+  max-width: min(100%, var(--reading-measure));
 }
 
 p + p {
   margin-top: var(--prose-gap);
 }
+
+/* Explicit measure utilities for compositions that opt in. */
+.measure-reading { max-width: min(100%, var(--reading-measure)); }
+.measure-heading { max-width: min(100%, var(--heading-measure)); }
+.measure-display { max-width: min(100%, var(--display-measure)); }
+.measure-media { max-width: min(100%, var(--media-measure)); width: 100%; }
 
 p.prose-emphasis {
   margin-top: var(--prose-pause);
@@ -50,6 +67,7 @@ h1, h2, h3, h4 {
   line-height: 1.04;
   letter-spacing: -0.035em;
   font-weight: 500;
+  text-wrap: pretty;
 }
 
 .h-3 {

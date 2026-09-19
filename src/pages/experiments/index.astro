@@ -57,7 +57,7 @@ const categories = showUnfinishedExperiments
     headingSize="clamp(46px, 9.2vw, 158px)"
     eyebrow="Open experiments"
     meta={"Things I'm testing right now.\nEach started with a question."}
-    lede={`<p>I use experiments to answer questions I can't answer by thinking about them.</p><p>Build something. Test it. See what happens.</p>`}  />
+    lede={`<p><strong>I use experiments to answer questions I can't answer by thinking about them.</strong></p><p>Build something. Test it. See what happens.</p>`}  />
 
   <div class="lab-page__ticker">
     <Ticker text="Local AI · Voice · Video · 3D · Realtime · Agents · Robotics · Game Dev · Creative Tools" />
@@ -143,7 +143,7 @@ const categories = showUnfinishedExperiments
     <div class="container">
       <div class="lab-page__graph-composition">
       <div class="lab-page__graph-intro" data-reveal>
-        <h2 class="lab-page__graph-heading">The interesting part is what survives contact with reality.</h2>
+        <h2 class="lab-page__graph-heading">The interesting part is what survives<br />contact with reality.</h2>
       </div>
       <ol class="lab-page__graph-grid" data-reveal>
         <li><h3><span class="lab-page__graph-index">01 /</span> Build</h3><p>Make enough to answer the question.</p></li>
@@ -317,19 +317,23 @@ const categories = showUnfinishedExperiments
     margin-top: clamp(80px, 12vh, 160px);
     background: var(--color-dark-bg);
     color: var(--color-dark-fg);
-    padding: clamp(80px, 12vh, 160px) 0;
+    padding: clamp(100px, 14vh, 180px) 0;
   }
 
-  .lab-page__graph-composition { width: 100%; max-width: 820px; margin-inline: auto; }
+  .lab-page__graph-composition {
+    width: 100%;
+    max-width: 1080px;
+    margin-inline: auto;
+  }
 
   .lab-page__graph-intro {
-    margin-bottom: 48px;
+    margin-bottom: clamp(64px, 9vh, 112px);
   }
 
   .lab-page__graph-heading {
     margin: 0;
     font-size: clamp(34px, 4vw, 56px);
-    line-height: 1.04;
+    line-height: 1.08;
     letter-spacing: -.035em;
     font-weight: 500;
     max-width: none;
@@ -338,7 +342,7 @@ const categories = showUnfinishedExperiments
   .lab-page__graph-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 40px;
+    gap: clamp(48px, 6vw, 80px) clamp(40px, 5vw, 72px);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -351,7 +355,7 @@ const categories = showUnfinishedExperiments
   }
 
   .lab-page__graph-grid h3 {
-    margin: 0 0 18px;
+    margin: 0 0 22px;
     font-size: clamp(22px, 2vw, 26px);
     font-weight: 500;
     text-transform: uppercase;
@@ -360,9 +364,9 @@ const categories = showUnfinishedExperiments
 
   .lab-page__graph-grid p {
     margin: 0;
-    max-width: 32ch;
-    font-size: 17px;
-    line-height: 1.6;
+    max-width: 28ch;
+    font-size: 18px;
+    line-height: 1.65;
     color: var(--color-dark-body);
   }
   .lab-page__log {
@@ -428,7 +432,7 @@ const categories = showUnfinishedExperiments
 
     .lab-page__graph-grid {
       grid-template-columns: minmax(0, 1fr);
-      row-gap: 36px;
+      row-gap: clamp(48px, 8vh, 72px);
     }
 
     .lab-page__grid {
