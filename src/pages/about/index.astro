@@ -5,6 +5,9 @@ import ArticleTwoCol from '../../components/content/article/ArticleTwoCol.astro'
 import ArticleLearnings from '../../components/content/article/ArticleLearnings.astro';
 import SectionLabel from '../../components/ui/SectionLabel.astro';
 import BasicPrintDisplay from '../../components/ui/BasicPrintDisplay.astro';
+import VideoReveal from '../../components/ui/VideoReveal.astro';
+// Final reel: public/media/about/making-showreel.mp4. Leave empty until supplied.
+const makingShowreel = ''; 
 import NavRow from '../../components/ui/NavRow.astro';
 import KeepExploring from '../../components/content/KeepExploring.astro';
 import EditorialScrollSequence from '../../components/ui/EditorialScrollSequence.astro';
@@ -16,7 +19,7 @@ const questions = ['Should we build it?', 'Can it reach people?', 'Will anyone c
       <SectionLabel slot="label" withDot>About / Paul Kerr</SectionLabel>
       <h1>I've been making things with computers since I was a kid.</h1>
       <p class="lede">The technology has changed a lot since my first green-screen computer. The part I love hasn't.</p>
-      <p class="body-copy">Make something that didn't exist before. Put it in front of someone. <strong>See what happens.</strong></p>
+      <p class="body-copy">Make something that wasn't there.<br /><strong>Watch someone experience it.</strong></p>
     </ArticleTwoCol></header>
 
     <ArticleSection dark id="hello-world"><ArticleTwoCol>
@@ -34,64 +37,67 @@ const questions = ['Should we build it?', 'Can it reach people?', 'Will anyone c
     </ArticleSection>
     <BasicPrintDisplay />
 
-    <ArticleSection dark id="software"><ArticleTwoCol>
-      <SectionLabel slot="label">02 / Software</SectionLabel>
-      <h2 class="h-2">For a long time, I focused on learning the engineering craft.</h2>
-      <p class="body-copy">I gravitated towards maths, physics, science and computers, then studied Computer Science at Queen's University Belfast in the late 1990s.</p>
-      <p class="body-copy">AI was part of that education. One computer-vision exercise involved classifying tanks in different environments and orientations. By today's standards, the techniques were primitive. At the time, software appearing to recognise something it hadn't seen before was astonishing.</p>
-      <p class="body-copy">After university I worked as a developer in Belfast, London and later internationally, including on large enterprise systems. Large teams, slower feedback, a lot of coordination and expensive changes.</p>
-      <p class="body-copy">I spent those years <strong>learning the engineering craft.</strong></p>
+    <ArticleSection dark id="the-craft"><ArticleTwoCol>
+      <SectionLabel slot="label">02 / The craft</SectionLabel>
+      <h2 class="h-2">I spent a long time learning how to build software.</h2>
+      <p class="body-copy">I studied Computer Science at Queen's University Belfast and spent the next couple of decades building software.</p>
+      <p class="body-copy">The work expanded from code into products, architecture, cloud, teams and businesses. Eventually I became more interested in <strong>the whole problem</strong> than any individual layer of the technology.</p>
+      <p class="body-copy">That's roughly how I ended up a CTO and product architect.</p>
+      <p class="body-copy">But I never stopped wanting to make things myself.</p>
     </ArticleTwoCol></ArticleSection>
-
-    <ArticleSection id="product"><ArticleTwoCol>
-      <SectionLabel slot="label">03 / Product</SectionLabel>
-      <h2 class="h-2">Then I became interested in everything around the code.</h2>
-      <p class="body-copy">Moneytech was an important early experience. I joined while the company and product were still being established. The work wasn't neatly divided into engineering, product and operations. We did what was needed.</p>
-      <p class="body-copy">We built software, dealt with security, worked on the user experience and handled operational jobs that would never appear in a developer job description.</p>
-      <p class="body-copy">It was one of the first times I really understood that <strong>software doesn't exist by itself.</strong> It sits inside a product. The product sits inside a business. And eventually somebody has to use the thing.</p>
-    </ArticleTwoCol></ArticleSection>
-
-    <ArticleSection dark id="the-interface"><ArticleTwoCol>
-      <SectionLabel slot="label">04 / The interface</SectionLabel>
-      <h2 class="h-2">The part I kept coming back to was the person on the other side.</h2>
-      <p class="body-copy">I enjoyed programming itself. Well-structured code could feel elegant. But the strongest reward was watching someone actually use something I'd helped create.</p>
-      <p class="body-copy"><strong>I loved the moment when something stopped being code and became an experience.</strong> Someone clicked it. Touched it. Walked through a door because of it. Put on a headset. Asked it a question.</p>
-      <p class="lede">And occasionally said: that's cool.</p>
-    </ArticleTwoCol>
+    <ArticleSection id="the-interface"><ArticleTwoCol>
+      <SectionLabel slot="label">03 / The interface</SectionLabel>
+      <h2 class="h-2">The bit I love is when technology becomes an experience.</h2>
+      <p class="body-copy">I enjoy programming. But the part I keep coming back to is what happens on the other side of the screen.</p>
+      <p class="body-copy">With Amica, software opened a physical door. With BoxOfficeVR, it put someone inside a performance. <strong>The code became something a person experienced.</strong></p>
+      <p class="body-copy">That interest keeps turning up in different forms: a voice that listens and responds, sensing a room without a camera, a chess coach that tries to teach rather than just calculate. Some of those are still questions I'm testing.</p>    </ArticleTwoCol>
       <div class="experience-montage">
         <figure><a href="/shipped/amica/" aria-label="Read the Amica story"><img src="/media/work/amica/lobby.webp" width="1440" height="900" alt="People moving through the International Towers lobby, alongside digital community screens" loading="lazy" /></a><figcaption>Use a place. / Amica</figcaption></figure>
         <figure><a href="/shipped/boxofficevr/" aria-label="Read the BoxOfficeVR story"><img src="/media/work/boxofficevr/mobile-viewer.webp" width="1437" height="681" alt="A theatre performance playing on a phone in a VR viewer" loading="lazy" /></a><figcaption>Enter a performance. / BoxOfficeVR</figcaption></figure>
       </div>
     </ArticleSection>
 
-    <ArticleSection id="whole-system"><ArticleTwoCol>
-      <SectionLabel slot="label">05 / The whole system</SectionLabel>
-      <h2 class="h-2">Eventually I stopped thinking about the screen in isolation.</h2>
-      <p class="body-copy">The work expanded from frontend to backend and cloud, then into architecture, operations, physical systems and teams. I was increasingly working where business problems, product decisions and technical architecture met.</p>
-      <p class="body-copy">That became my work as a CTO and product architect. <strong>Architecture, to me, isn't drawing boxes around technology.</strong> It's understanding enough of the system to make good decisions about what should exist, how the pieces fit together and what happens when real people start using it.</p>
-    </ArticleTwoCol></ArticleSection>
+    <ArticleSection dark id="making">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">04 / Making</SectionLabel>
+        <h2 class="h-2">I learn by making things.</h2>
+        <p class="body-copy">I've never been particularly interested in learning a tool in isolation. I usually need something to make.</p>
+        <p class="body-copy">A Blender scene became a Three.js experience I could step into in VR. A physics experiment became falling apples. An attempt at water droplets somehow became wriggling worms.</p>
+        <p class="body-copy"><strong>Making something is how I figure out what a technology can actually do.</strong></p>
+      </ArticleTwoCol>
+      <div class="making-reel">
+        <VideoReveal videoUrl={makingShowreel} posterLabel="Workbench / Personal experiments" />
+      </div>
+    </ArticleSection>
 
-    <ArticleSection dark id="judgement"><ArticleTwoCol>
-      <SectionLabel slot="label">06 / Judgement</SectionLabel>
-      <h2 class="h-2">Building it turned out to be only part of the job.</h2>
-      <p class="body-copy">Craveable showed me what happens when product, technology, operations and distribution line up at scale. Neurotechnology showed me that technology could work while reaching people remained difficult. BoxOfficeVR showed me that people could love an experience without changing their behaviour.</p>
-      <p class="body-copy">Earlier in my career, the question was usually <strong>can we build it?</strong> The questions got harder:</p>
-      <div class="dark-primitives"><ArticleLearnings items={questions} /></div>
+    <ArticleSection id="judgement"><ArticleTwoCol>
+      <SectionLabel slot="label">05 / Judgement</SectionLabel>
+      <h2 class="h-2">Building it is only part of the problem.</h2>
+      <p class="body-copy">Experience mostly changed the questions I ask.</p>
+      <p class="lede">Can we build it? <span aria-hidden="true">→</span></p>
+      <div class="section-spacing-top-lg"><ArticleLearnings items={questions} /></div>
       <p class="body-copy">I still love difficult engineering. I've just learned that <strong>solving the engineering problem doesn't automatically solve the product.</strong></p>
     </ArticleTwoCol></ArticleSection>
 
-    <ArticleSection id="new-again"><ArticleTwoCol>
-      <SectionLabel slot="label">07 / New again</SectionLabel>
-      <h2 class="h-2">Then software started feeling new again.</h2>
-      <p class="body-copy">After decades of building software, some kinds of work had become familiar. Websites. Content systems. Business applications. Cloud platforms.</p>
-      <p class="body-copy">I'd studied AI at university and spent years watching it progress mostly at the edges of everyday software. Then suddenly <strong>things that once felt like research problems became things I could build with.</strong></p>
-      <p class="body-copy">Software could see, listen and speak. It could reason across information, help write the software itself and participate in an interface rather than simply wait for a button click.</p>
-      <p class="body-copy">I didn't expect some of this to become practical in my working lifetime. Then it happened very quickly.</p>
-      <p class="lede">It brought back a feeling I recognised.</p>
+    <ArticleSection dark id="new-tools"><ArticleTwoCol>
+      <SectionLabel slot="label">06 / New tools</SectionLabel>
+      <h2 class="h-2">Then the tools started changing.</h2>
+      <p class="body-copy">After decades in software, some of it had become predictable.</p>
+      <p class="body-copy">Then things that once belonged in research papers became things I could build with.</p>
+      <p class="body-copy">Software could see, listen and speak. Models could help write code. Generative tools could create images, video and assets. Agents could begin connecting those capabilities together.</p>
+      <p class="body-copy"><strong>Suddenly the toolbox got much bigger.</strong> I could try more of the ideas I'd previously left alone.</p>
     </ArticleTwoCol></ArticleSection>
 
+    <ArticleSection id="current-exploration"><ArticleTwoCol>
+      <SectionLabel slot="label">07 / Current exploration</SectionLabel>
+      <h2 class="h-2">I'm interested in what happens when the tools connect.</h2>
+      <p class="body-copy">A model on its own is interesting. I'm more curious about what happens when it can work with the rest of the tools.</p>
+      <p class="body-copy">Can code and generative media become part of the same workflow? Can an agent work with a Blender scene? Can a voice conversation become a valid restaurant order?</p>
+      <p class="body-copy">I'm testing some of those connections now: ComfyUI and local models in production workflows, voice and transactional systems, sensing and physical spaces.</p>
+      <p class="body-copy"><strong>The individual tools are interesting. The combinations are where things get strange.</strong></p>
+    </ArticleTwoCol></ArticleSection>
     <ArticleSection dark id="now"><ArticleTwoCol>
-      <SectionLabel slot="label">08 / Now</SectionLabel>
+      <SectionLabel slot="label">08 / Building now</SectionLabel>
       <h2 class="h-2">So I'm building again.</h2>
       <p class="body-copy">AI-assisted development has changed the scale at which I can work personally. Ideas that once required a team just to test can now become working software quickly enough to learn from.</p>
       <p class="body-copy">That's brought me surprisingly close to where I started: <strong>having an idea, building it, putting it in front of someone and seeing what happens.</strong></p>
@@ -102,28 +108,19 @@ const questions = ['Should we build it?', 'Can it reach people?', 'Will anyone c
       </div>
     </ArticleTwoCol></ArticleSection>
 
-    <ArticleSection id="away"><ArticleTwoCol>
-      <SectionLabel slot="label">09 / Away from the screen</SectionLabel>
-      <h2 class="h-2">Away from the screen.</h2>
-      <p class="body-copy">I'm still a fairly unapologetic geek. I play chess, play games, read science fiction and fantasy, and spend an unreasonable amount of time wondering whether some new piece of technology can be turned into something useful.</p>
-      <p class="body-copy">I also like running and getting outside. And building things even when nobody has asked me to.</p>
-      <p class="body-copy"><strong>Sydney has been home for most of my adult life.</strong> It's where I live with my family.</p>
-    </ArticleTwoCol></ArticleSection>
-
-    <ArticleSection dark id="same-experiment"><ArticleTwoCol>
-      <SectionLabel slot="label">10 / Still the same experiment</SectionLabel>
+    <ArticleSection id="same-experiment"><ArticleTwoCol>
+      <SectionLabel slot="label">09 / Still the same experiment</SectionLabel>
       <h2 class="h-2">Still the same experiment.</h2>
       <p class="body-copy">The Amstrad is long gone. The machines are faster. The interfaces are better. And what one person can build has changed beyond recognition.</p>
       <p class="body-copy">But the thing I enjoy is basically the same.</p>
     </ArticleTwoCol></ArticleSection>
 
     <EditorialScrollSequence
-      tone="light"
+      tone="dark"
       size="large"
       lines={[
         "Make something that wasn't there.",
-        'Put it in front of someone.',
-        'See what happens.',
+        'Watch someone experience it.',
       ]}
     />
   </article>
@@ -139,8 +136,9 @@ const questions = ['Should we build it?', 'Can it reach people?', 'Will anyone c
   .experience-montage { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,.8fr); gap: clamp(24px,4vw,64px); align-items: end; margin-top: 48px; }
   .experience-montage figure { margin: 0; min-width: 0; }
   .experience-montage img { display: block; width: 100%; height: auto; border-radius: var(--radius-md); }
-  .experience-montage figcaption { color: var(--color-dark-body); font-size: 13px; line-height: 1.5; margin-top: 16px; }
+  .experience-montage figcaption { color: var(--color-body); font-size: 13px; line-height: 1.5; margin-top: 16px; }
   .dark-primitives { --color-ink:var(--color-dark-fg); --color-body:var(--color-dark-body); --color-label:var(--color-dark-label); --color-border:var(--color-dark-border); }
+  .making-reel { margin-top: clamp(36px,5vw,64px); }
   .current-links { border-top: 1px solid var(--color-dark-border); }
   @media(max-width:640px) { .experience-montage { grid-template-columns:1fr; gap:36px; } }
 </style>
