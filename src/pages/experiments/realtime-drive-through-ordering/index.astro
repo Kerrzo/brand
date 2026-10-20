@@ -5,6 +5,7 @@ import ArticleSection from '../../../components/content/article/ArticleSection.a
 import ArticleTwoCol from '../../../components/content/article/ArticleTwoCol.astro';
 import ArticlePipeline from '../../../components/content/article/ArticlePipeline.astro';
 import BuildingEvidence from '../../../components/content/building/BuildingEvidence.astro';
+import VideoReveal from '../../../components/ui/VideoReveal.astro';
 import SectionLabel from '../../../components/ui/SectionLabel.astro';
 import EditorialScrollSequence from '../../../components/ui/EditorialScrollSequence.astro';
 import KeepExploring from '../../../components/content/KeepExploring.astro';
@@ -26,7 +27,7 @@ const tests = ['Response latency', 'Interruptions', 'Corrections', 'Menu groundi
         <div class="poszo-meta"><span>Active experiment · 2026</span><span>Realtime voice · Ordering · AI</span></div>
       </ArticleTwoCol>
       <div class="poszo-hero-media editorial-spine">
-        <BuildingEvidence src="/media/projects/poszo.png" label="Poszo / Voice ordering" alt="Poszo drive-through voice ordering concept" caption="Exploring realtime conversation and restaurant ordering." eager />
+        <BuildingEvidence src="/media/experiments/pozso/ordering-replay.png" label="Poszo / Voice ordering" alt="Pozso replay showing voice conversation, agent activity and a draft mock order" caption="A mock order replay showing the conversation, agent activity and draft order." eager />
       </div>
     </header>
 
@@ -50,6 +51,10 @@ const tests = ['Response latency', 'Interruptions', 'Corrections', 'Menu groundi
         <ArticlePipeline steps={['Customer', 'Realtime conversation', 'Menu + order tools', 'Structured order']} label="Conceptual flow" />
         <p class="body-copy">The language model should not invent products, prices or modifiers. It needs to work against the actual menu and available ordering actions. Natural conversation has to map onto deterministic business actions.</p>
       </ArticleTwoCol>
+      <figure class="poszo-demo editorial-spine">
+        <VideoReveal videoUrl="/media/experiments/pozso/ordering-demo.mp4" posterLabel="Pozso / Prototype demonstration" />
+        <figcaption>Watch the voice-ordering prototype in use.</figcaption>
+      </figure>
     </ArticleSection>
 
     <ArticleSection dark tight id="the-hard-part">
@@ -100,6 +105,8 @@ const tests = ['Response latency', 'Interruptions', 'Corrections', 'Menu groundi
   .poszo-meta { display: flex; flex-wrap: wrap; gap: 12px 32px; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; border-top: 1px solid var(--color-border); padding-top: 20px; }
   .poszo-meta span:first-child { color: var(--color-accent); }
   .poszo-hero-media { margin-top: 32px; }
+  .poszo-demo { margin-top: 48px; margin-bottom: 0; margin-right: 0; }
+  .poszo-demo figcaption { margin-top: 16px; font-size: 13px; line-height: 1.5; color: var(--color-body); }
   .poszo-experiment :global(.editorial-seq) { margin-top: 0; }
   .poszo-experiment :global(.editorial-seq__inner) { padding-block: clamp(64px, 10vh, 110px); }
   .poszo-conversation { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--color-border); }
