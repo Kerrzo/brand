@@ -1,6 +1,6 @@
 ---
 title: "AI Podcast Production"
-description: "Can AI turn an off-the-cuff conversation into a finished podcast? Testing editorial judgement, not just audio processing."
+description: "Can AI turn a conversation into a podcast? Testing editorial judgement, not just audio processing."
 category: "Voice and real-time"
 type: "Experiment"
 status: "Starting"

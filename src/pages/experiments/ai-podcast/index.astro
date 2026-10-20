@@ -18,11 +18,11 @@ const stages = [
 const criteria = [['Story', 'Does the episode actually have a point?'], ['Pacing', 'Does it drag?'], ['Fidelity', 'Did the edit preserve what people meant?'], ['Voice', 'Does it still sound like the people involved?'], ['Production', 'Does it feel finished?'], ['Intervention', 'How much manual work was still required?']];
 const tests = ['Source → story', 'Story → edit', 'Edit → produced episode', 'Would I publish it?'].map(name => ({name, status: 'Not run'}));
 ---
-<BaseLayout title="AI Podcast Production — From conversation to finished episode" description="Can AI turn an off-the-cuff conversation into a finished podcast? An experiment in editorial judgement and audio production." current="experiments">
+<BaseLayout title="Can AI turn a conversation into a podcast?" description="Can AI turn a conversation into a podcast? An experiment in editorial judgement and audio production." current="experiments">
   <article class="podcast-experiment">
     <header class="container podcast-hero"><ArticleTwoCol>
       <SectionLabel slot="label" withDot>Experiment / AI Podcast Production</SectionLabel>
-      <h1>Can AI turn an off-the-cuff conversation into a finished podcast?</h1>
+      <h1>Can AI turn a conversation into a podcast?</h1>
       <p class="lede">I watched someone record a podcast at their desk. It was casual. A conversation, a camera, and then they were done.</p>
       <p class="body-copy">But I found myself wondering <strong>what happened after they pressed stop.</strong></p>
       <p class="body-copy">Someone still had to find the story, remove the dead parts, clean the audio, structure the episode, package it and publish it.</p>

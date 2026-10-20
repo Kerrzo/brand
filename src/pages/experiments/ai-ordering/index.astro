@@ -5,21 +5,21 @@ import ArticleSection from '../../../components/content/article/ArticleSection.a
 import ArticleTwoCol from '../../../components/content/article/ArticleTwoCol.astro';
 import ArticlePipeline from '../../../components/content/article/ArticlePipeline.astro';
 import BuildingEvidence from '../../../components/content/building/BuildingEvidence.astro';
-import VideoReveal from '../../../components/ui/VideoReveal.astro';
+
 import SectionLabel from '../../../components/ui/SectionLabel.astro';
 import EditorialScrollSequence from '../../../components/ui/EditorialScrollSequence.astro';
 import KeepExploring from '../../../components/content/KeepExploring.astro';
-const experiment = await getEntry('lab', 'realtime-drive-through-ordering');
+const experiment = await getEntry('lab', 'ai-ordering');
 if (!experiment) throw new Error('Missing Poszo experiment');
 const changes = ['Can I get a large chicken combo?', 'Actually make that spicy.', 'No drink.', 'Wait — make it two.'];
 const tests = ['Response latency', 'Interruptions', 'Corrections', 'Menu grounding', 'Modifiers', 'Order state', 'Confirmation', 'Human escalation'];
 ---
-<BaseLayout title="Poszo — Can AI take a drive-through order?" description={experiment.data.description} current="experiments">
+<BaseLayout title="Poszo — Can AI get your order right?" description={experiment.data.description} current="experiments">
   <article class="poszo-experiment">
     <header class="poszo-hero container">
       <ArticleTwoCol>
         <SectionLabel slot="label" withDot>Experiment / Poszo</SectionLabel>
-        <h1>Can AI take a drive-through order without making the experience worse?</h1>
+        <h1>Can AI get your order right?</h1>
         <div class="poszo-intro">
           <p class="lede">Voice AI can hold a conversation. Taking a restaurant order is a harder test.</p>
           <p class="body-copy">I'm building Poszo to explore whether realtime AI can understand a menu, handle interruptions and changes, construct a valid order and know when it should hand the conversation to a person.</p>
@@ -27,7 +27,7 @@ const tests = ['Response latency', 'Interruptions', 'Corrections', 'Menu groundi
         <div class="poszo-meta"><span>Active experiment · 2026</span><span>Realtime voice · Ordering · AI</span></div>
       </ArticleTwoCol>
       <div class="poszo-hero-media editorial-spine">
-        <BuildingEvidence src="/media/experiments/pozso/ordering-replay.png" label="Poszo / Voice ordering" alt="Pozso replay showing voice conversation, agent activity and a draft mock order" caption="A mock order replay showing the conversation, agent activity and draft order." eager />
+        <BuildingEvidence src="/media/experiments/pozso/ordering-demo.mp4" poster="/media/experiments/pozso/ordering-replay.png" label="Poszo / Voice ordering" alt="Poszo replay showing voice conversation, agent activity and a draft mock order" caption="A mock order replay showing the conversation, agent activity and draft order." eager />
       </div>
     </header>
 
@@ -51,10 +51,6 @@ const tests = ['Response latency', 'Interruptions', 'Corrections', 'Menu groundi
         <ArticlePipeline steps={['Customer', 'Realtime conversation', 'Menu + order tools', 'Structured order']} label="Conceptual flow" />
         <p class="body-copy">The language model should not invent products, prices or modifiers. It needs to work against the actual menu and available ordering actions. Natural conversation has to map onto deterministic business actions.</p>
       </ArticleTwoCol>
-      <figure class="poszo-demo editorial-spine">
-        <VideoReveal videoUrl="/media/experiments/pozso/ordering-demo.mp4" posterLabel="Pozso / Prototype demonstration" />
-        <figcaption>Watch the voice-ordering prototype in use.</figcaption>
-      </figure>
     </ArticleSection>
 
     <ArticleSection dark tight id="the-hard-part">
@@ -67,7 +63,26 @@ const tests = ['Response latency', 'Interruptions', 'Corrections', 'Menu groundi
         <ul class="poszo-tests">{tests.map(test => <li>{test}</li>)}</ul>
         <p class="body-copy">These aren't solved capabilities. They are the experiment.</p>
       </ArticleTwoCol>
-      <div class="poszo-subsection" id="the-test">
+    </ArticleSection>
+
+    <ArticleSection id="beyond-the-drive-through">
+      <ArticleTwoCol>
+        <SectionLabel slot="label">Learning / The next question</SectionLabel>
+        <div class="poszo-learning">
+          <a href="/learnings/beyond-the-drive-through/" class="poszo-learning__image" aria-label="Read The order doesn’t have to start at the drive-through">
+            <img src="/media/writing/ai-drive-through/in-car-concept.webp" width="1642" height="958" loading="lazy" alt="Red Rooster in-car voice ordering concept" />
+          </a>
+          <div class="poszo-learning__copy">
+            <h2 class="h-2">The order doesn’t have to start at the drive-through.</h2>
+            <p class="body-copy">Building Poszo led to another question: could the same conversation start in the car, before arriving? I’ve shared the idea and what still needs testing in Learnings.</p>
+            <p class="poszo-learning__note">An interface concept, not an implemented CarPlay application.</p>
+            <a class="poszo-learning__cta" href="/learnings/beyond-the-drive-through/">Read where the experiment led →</a>
+          </div>
+        </div>
+      </ArticleTwoCol>
+    </ArticleSection>
+
+    <ArticleSection dark tight id="the-test">
         <ArticleTwoCol>
           <SectionLabel slot="label">04 / The test</SectionLabel>
           <h2 class="h-2">The benchmark isn't whether the AI sounds human.</h2>
@@ -75,7 +90,6 @@ const tests = ['Response latency', 'Interruptions', 'Corrections', 'Menu groundi
           <p class="poszo-result">A natural conversation<br />that produces<br /><span>a valid order.</span></p>
           <p class="body-copy">That is the experiment.</p>
         </ArticleTwoCol>
-      </div>
     </ArticleSection>
 
     <ArticleSection tight id="where-it-could-go">
@@ -98,15 +112,46 @@ const tests = ['Response latency', 'Interruptions', 'Corrections', 'Menu groundi
   </article>
   <KeepExploring routes={['experiments', 'building', 'learnings']} descriptions={{ experiments: "See the other questions I'm testing.", building: "See what I'm turning into products.", learnings: 'See what the experiments taught me.' }} />
 </BaseLayout>
+<script>
+  const video = document.querySelector<HTMLVideoElement>('.poszo-hero-media video');
+  if (video) {
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let visible = false;
+    video.loop = true;
+    const sync = () => {
+      if (motion.matches || !visible || document.hidden) video.pause();
+      else { video.muted = true; void video.play().catch(() => {}); }
+    };
+    const observer = new IntersectionObserver(entries => {
+      visible = entries[0].isIntersecting && entries[0].intersectionRatio >= .3;
+      sync();
+    }, { threshold: [0, .3] });
+    observer.observe(video);
+    motion.addEventListener('change', sync);
+    document.addEventListener('visibilitychange', sync);
+    document.addEventListener('astro:before-swap', () => {
+      observer.disconnect();
+      motion.removeEventListener('change', sync);
+      document.removeEventListener('visibilitychange', sync);
+    }, { once: true });
+  }
+</script>
 <style>
+  .poszo-learning { display: grid; gap: 32px; width: 100%; }
+  .poszo-learning__image { display: block; }
+  .poszo-learning__image img { display: block; width: 100%; height: auto; border-radius: var(--radius-md); }
+  .poszo-learning__copy { display: grid; gap: 24px; justify-items: start; }
+  .poszo-learning__copy h2 { max-width: var(--heading-measure); }
+  .poszo-learning__note { color: var(--color-body); font-size: 14px; line-height: 1.5; }
+  .poszo-learning__cta { text-decoration: underline; text-underline-offset: 6px; }
+  .poszo-learning__cta:hover { color: var(--color-accent); }
   .poszo-hero { padding-top: clamp(120px, 18vh, 180px); padding-bottom: 48px; }
   h1 { font-size: clamp(36px, 5vw, 72px); line-height: 1.04; letter-spacing: -.04em; max-width: 23ch; }
   .poszo-intro { max-width: var(--prose-measure); }
   .poszo-meta { display: flex; flex-wrap: wrap; gap: 12px 32px; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; border-top: 1px solid var(--color-border); padding-top: 20px; }
   .poszo-meta span:first-child { color: var(--color-accent); }
   .poszo-hero-media { margin-top: 32px; }
-  .poszo-demo { margin-top: 48px; margin-bottom: 0; margin-right: 0; }
-  .poszo-demo figcaption { margin-top: 16px; font-size: 13px; line-height: 1.5; color: var(--color-body); }
+
   .poszo-experiment :global(.editorial-seq) { margin-top: 0; }
   .poszo-experiment :global(.editorial-seq__inner) { padding-block: clamp(64px, 10vh, 110px); }
   .poszo-conversation { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--color-border); }

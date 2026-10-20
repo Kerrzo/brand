@@ -42,7 +42,7 @@ export default defineConfig({
       rollupOptions: {
         output: {
           assetFileNames: (assetInfo) => {
-            if (assetInfo.name.endsWith('.css') || assetInfo.name.endsWith('.js')) {
+            if (assetInfo.name?.endsWith('.css') || assetInfo.name?.endsWith('.js')) {
               return 'assets/[name].[hash].[ext]';
             }
             return 'assets/[name].[hash].[ext]';

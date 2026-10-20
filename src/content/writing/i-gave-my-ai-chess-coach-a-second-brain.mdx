@@ -1,0 +1,141 @@
+---
+title: "I Gave My AI Chess Coach a Second Brain"
+description: "How an experiment with a small local decision model gave me a new idea for personalised chess coaching."
+publishedDate: 2026-10-21
+category: "AI products"
+tags: ["Brilliancy", "Local AI", "Coaching decisions"]
+featured: false
+displayOrder: 2
+placeholder: false
+richLayout: true
+eyebrow: "Learning / An unexpected connection"
+heroIntro:
+  - "I've been building Brilliancy, an AI chess coach designed to help developing players improve."
+  - "The goal isn't just to explain chess mistakes. I want it to remember what a player struggles with, recognise patterns and work out what they should learn next."
+  - "An unrelated experiment with a small local AI model gave me an idea for how to do that."
+heroImage: "/media/writing/second-brain/brilliancy-game.webp"
+heroRatio: "3840/2236"
+heroAlt: "Brilliancy game review with a chessboard, move analysis and coaching guidance"
+heroMediaLabel: "Brilliancy / Product evidence"
+heroCaption: "Brilliancy's game review. The decision-model experiment is a separate test, not a shipped feature."
+socialImage: "/media/writing/second-brain/brilliancy-game.webp"
+relatedProjects: ["brilliancy"]
+---
+
+import ArticleSection from '../../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../../components/content/article/ArticleTwoCol.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import BuildingEvidence from '../../components/content/building/BuildingEvidence.astro';
+import CoachingArchitecture from '../../components/content/article/CoachingArchitecture.astro';
+
+<ArticleSection dark id="the-experiment">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">01 / The experiment</SectionLabel>
+    <h2 class="h-2">I wasn't looking for a chess application.</h2>
+    <p class="body-copy">I've been experimenting with local AI models on an NVIDIA RTX 5090, running them under WSL.</p>
+    <p class="body-copy">One was a 2-billion-parameter Jev-Style decision model. Instead of generating a conversational answer, it evaluates a set of possible actions and ranks them.</p>
+    <p class="body-copy">I wanted to see what it could do.</p>
+    <p class="body-copy"><strong>Then I thought about <a href="/building/brilliancy/">Brilliancy</a>.</strong></p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection id="the-question">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">02 / The question</SectionLabel>
+    <h2 class="h-2">What should a chess coach do next?</h2>
+    <p class="body-copy">Imagine a player rated 920 who keeps missing knight forks. They've made the same mistake several times. Their mastery of the pattern is poor, and they have exercises due for review.</p>
+    <p class="body-copy">Should the coach explain the mistake? Give another puzzle? Schedule practice? Switch activities? Or simply let them continue?</p>
+    <p class="body-copy">I gave the model the player's context and five possible coaching actions. Then I changed the scenario to a player rated 1250 with strong fork mastery.</p>
+    <div class="decision-results">
+      <table>
+        <caption>Two player contexts / Model-assigned probabilities</caption>
+        <thead><tr><th scope="col">Action</th><th scope="col">Player A<span>920 · Struggling with forks</span></th><th scope="col">Player B<span>1250 · Strong fork mastery</span></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Explain</th><td><strong>40.0%</strong></td><td>3.1%</td></tr>
+          <tr><th scope="row">Review<span>Schedule practice</span></th><td>34.5%</td><td>7.8%</td></tr>
+          <tr><th scope="row">Retry</th><td>16.9%</td><td>10.7%</td></tr>
+          <tr><th scope="row">Switch</th><td>5.1%</td><td>2.2%</td></tr>
+          <tr><th scope="row">Continue</th><td>3.4%</td><td><strong>76.2%</strong></td></tr>
+        </tbody>
+        <tfoot><tr><th scope="row">Decision time</th><td>14.3 ms</td><td>13.6 ms</td></tr></tfoot>
+      </table>
+    </div>
+    <p class="body-copy">The model ranked different actions for different player contexts. That was interesting. It didn't establish that either recommendation was right.</p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection dark id="a-better-test">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">03 / A better test</SectionLabel>
+    <h2 class="h-2">Then I changed just the learning history.</h2>
+    <p class="body-copy">The first two scenarios differed in several ways. I wanted to know whether the model was responding to the player's learning history.</p>
+    <p class="body-copy">In a more controlled test, the chess situation and rating stayed the same. Only the player's mastery and history changed.</p>
+    <p class="body-copy"><strong>The model changed its recommended action in response.</strong></p>
+    <p class="body-copy">That gave me a more specific observation to follow up: the same chess situation could lead to a different coaching choice depending on what the player had already learned.</p>
+    {/* Editorial TODO for Paul: add exact controlled-test inputs and output figures when available. No quantitative claim is made for this test. */}
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection id="real-evidence">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">04 / Real evidence</SectionLabel>
+    <h2 class="h-2">A decision in milliseconds.</h2>
+    <p class="body-copy">The playground lets me inspect the session state, the candidate actions and the raw response from the local model.</p>
+    <div class="playground-evidence">
+      <a href="/media/writing/second-brain/jev-playground.webp" target="_blank" rel="noopener" aria-label="Open the full-resolution Jev Playground screenshot">
+        <BuildingEvidence src="/media/writing/second-brain/jev-playground.webp" alt="Jev Playground showing a Brilliancy coaching test: explain ranks first, confidence is 0.26 and the configured gate blocks the action; total execution is 145 milliseconds" label="Local test / Jev Playground" caption="Testing coaching decisions with a local Jev-Style model." />
+      </a>
+    </div>
+    <p class="body-copy"><strong>The model ranked “explain” first. That does not mean the system should automatically act on it.</strong></p>
+    <p class="body-copy">In this example, the gate blocks the selected action because the distribution does not meet its configured confidence thresholds. Ranking an option and deciding whether to act are separate decisions.</p>
+    <p class="body-copy">These are model-assigned probabilities. They aren't calibrated confidence in a coaching decision, or evidence that the advice will help someone learn.</p>
+    <p class="body-copy">This screenshot is a separate run showing 145 ms total execution time. The earlier 13–14 ms figures are decision measurements; they aren't interchangeable with that total.</p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection dark id="the-connection">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">05 / The connection</SectionLabel>
+    <h2 class="h-2">What if Brilliancy had a coaching brain?</h2>
+    <p class="body-copy">The experiment suggested an architecture that combines several specialised capabilities rather than asking one model to do everything.</p>
+    <p class="body-copy">An LLM could interpret the game, plan the coaching and explain it. Jev-Style could help rank the possible interventions. Both would need verified chess evidence and a useful picture of the player.</p>
+    <div class="coaching-diagram"><CoachingArchitecture /></div>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection id="the-next-question">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">06 / The next question</SectionLabel>
+    <h2 class="h-2">Would it actually make someone a better chess player?</h2>
+    <p class="body-copy">The early results are encouraging. But selecting a plausible action isn't the same as improving someone's learning.</p>
+    <p class="body-copy">The next test is whether a coaching system using this decision model makes better choices than a simpler LLM-led approach.</p>
+    <p class="body-copy">That means testing against real games, real player histories and eventually real learners.</p>
+    <p class="body-copy"><strong>The architecture is a hypothesis, not a finished Brilliancy feature.</strong></p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection dark id="closing">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">07 / Closing</SectionLabel>
+    <h2 class="h-2">An experiment found somewhere to go.</h2>
+    <p class="body-copy">I started the morning testing a model I didn't have a use for.</p>
+    <p class="body-copy">A few tests later, I had a new idea for Brilliancy.</p>
+    <p class="body-copy">Whether it helps someone become a better chess player is still an open question.</p>
+    <p class="body-copy"><strong>That's what I want to test next.</strong></p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<style>{`
+  .decision-results { width: 100%; max-width: 960px; margin-block: 16px 8px; }
+  .decision-results table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  .decision-results caption { text-align: left; font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-label); padding-bottom: 24px; }
+  .decision-results th, .decision-results td { text-align: left; padding: 20px 14px; border-bottom: 1px solid var(--color-border); font-size: 17px; font-weight: 400; vertical-align: top; }
+  .decision-results th:first-child { padding-left: 0; }
+  .decision-results th span { display: block; font-size: 13px; line-height: 1.5; color: var(--color-body); margin-top: 8px; }
+  .decision-results td { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .decision-results td strong { color: var(--color-accent); font-weight: 500; }
+  .decision-results tfoot th, .decision-results tfoot td { border-bottom: 0; font-size: 14px; }
+  .playground-evidence, .coaching-diagram { width: 100%; margin-block: 20px; }
+  .playground-evidence a { text-decoration: none; }
+  @media (max-width: 600px) { .decision-results th, .decision-results td { font-size: 14px; padding: 16px 8px; } .decision-results th span { font-size: 11px; } .decision-results tfoot td { font-size: 12px; } }
+`}</style>

@@ -13,17 +13,17 @@ const all = await getCollection('lab', ({ data }) => !data.draft);
 const bySlug = (slug: string) => all.find((item) => item.id === slug)!;
 
 const exp01 = bySlug('consistent-character-workflows');
-const poszo = bySlug('realtime-drive-through-ordering');
+const poszo = bySlug('ai-ordering');
 const wifi = bySlug('wifi-human-sensing');
-const podcast = bySlug('ai-podcast-production');
+const podcast = bySlug('ai-podcast');
 const exp07 = bySlug('ltx-video-experiments');
 // Retain the unfinished listing sections so they can return when content is ready.
 const showUnfinishedExperiments = false;
 const showFilters = false;
 const publicExperiments = [
-  { item: poszo, question: 'Can AI take a drive-through order without making the experience worse?', context: 'Realtime voice · Restaurant ordering', description: poszo.data.description, image: '/media/experiments/pozso/ordering-replay.png', alt: 'Pozso replay showing voice conversation, agent activity and a draft mock order', caption: 'Prototype capture · Mock order replay', status: 'Active experiment' },
+  { item: poszo, question: 'Can AI get your order right?', context: 'Realtime voice · Restaurant ordering', description: poszo.data.description, image: '/media/experiments/pozso/ordering-replay.png', alt: 'Poszo replay showing voice conversation, agent activity and a draft mock order', caption: 'Prototype capture · Mock order replay', status: 'Active experiment' },
   { item: wifi, question: 'Can Wi-Fi count people in a room?', context: 'Wi-Fi CSI · Spatial sensing', description: wifi.data.description, image: wifi.data.heroImage, alt: wifi.data.heroAlt, caption: 'RuView demo by ruvnet · Not my test results', status: 'Starting' },
-  { item: podcast, question: 'Can AI turn an off-the-cuff conversation into a finished podcast?', context: 'Frontier models · Audio · Editorial AI', description: 'Testing editorial judgement, not just audio processing. Source selection and all production tests are still ahead.', image: podcast.data.heroImage, alt: podcast.data.heroAlt, caption: 'ComfyUI setup · Podcast studio experiment', status: 'Starting' },
+  { item: podcast, question: 'Can AI turn a conversation into a podcast?', context: 'Frontier models · Audio · Editorial AI', description: 'Testing editorial judgement, not just audio processing. Source selection and all production tests are still ahead.', image: podcast.data.heroImage, alt: podcast.data.heroAlt, caption: 'ComfyUI setup · Podcast studio experiment', status: 'Starting' },
 ];
 
 const featuredOrder = [
@@ -34,7 +34,7 @@ const featuredOrder = [
 ];
 
 const unfinishedLabLog = [
-  { slug: 'realtime-drive-through-ordering', title: 'AI-native voice ordering' },
+  { slug: 'ai-ordering', title: 'AI-native voice ordering' },
   { slug: 'consistent-character-workflows', title: 'Consistent game character pipeline' },
   { slug: 'modular-environment-kits', title: 'Cinematic website fly-through generation' },
   { slug: 'local-ai-versus-cloud', title: 'Local inference architecture' },
@@ -43,7 +43,7 @@ const unfinishedLabLog = [
 
 const labLog = [
   ...publicExperiments.map(({ item, question }) => ({ slug: item.id, title: question })),
-  ...(showUnfinishedExperiments ? unfinishedLabLog.filter(entry => entry.slug !== 'realtime-drive-through-ordering') : []),
+  ...(showUnfinishedExperiments ? unfinishedLabLog.filter(entry => entry.slug !== 'ai-ordering') : []),
 ];
 const categories = showUnfinishedExperiments
   ? ['Generative imagery', 'Voice and real-time', '3D and assets', 'Infrastructure']
@@ -72,7 +72,7 @@ const categories = showUnfinishedExperiments
       <article class:list={['lab-page__row', { 'lab-page__row--dark': i % 2 === 0 }]} data-card data-cat={entry.item.data.category} data-reveal>
         <figure class="lab-page__media">
           <a href={`/experiments/${entry.item.id}/`} aria-label={entry.question}>
-            <PlaceholderMedia src={entry.image} alt={entry.alt} label={entry.context} ratio={entry.item.id === 'realtime-drive-through-ordering' ? '1906/1614' : entry.item.id === 'ai-podcast-production' ? '3838/2035' : '16/11'} radius="md" />
+            <PlaceholderMedia src={entry.image} alt={entry.alt} label={entry.context} ratio={entry.item.id === 'ai-ordering' ? '1906/1614' : entry.item.id === 'ai-podcast' ? '3838/2035' : '16/11'} radius="md" />
           </a>
           <figcaption>{entry.caption}</figcaption>
         </figure>

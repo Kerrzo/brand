@@ -11,7 +11,10 @@ import { readingTime } from '../../lib/readingTime';
 // Only real, published Learning articles — placeholder entries are excluded
 // until they have real write-ups.
 const all = await getCollection('writing', ({ data }) => !data.draft && !data.placeholder);
-const sorted = all.sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf());
+const sorted = all.sort((a, b) =>
+  (a.data.displayOrder ?? Infinity) - (b.data.displayOrder ?? Infinity)
+  || b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf()
+);
 
 const featured = sorted.find((p) => p.data.featured) ?? sorted[0];
 const rest = sorted.filter((p) => p.id !== featured?.id);
@@ -46,7 +49,7 @@ const showFilters = false;
     <section class="container writing-page__featured" data-card data-cat={featured.data.category}>
       <a href={`/learnings/${featured.id}/`} class="writing-page__featured-grid" data-reveal>
         <div class="writing-page__featured-media-wrap">
-          <PlaceholderMedia label="Hero image · replace" src={featured.data.heroImage} alt={featured.data.heroAlt} ratio="16/9" radius="lg" />
+          <PlaceholderMedia label="Article image" src={featured.data.listingImage ?? featured.data.heroImage} alt={featured.data.listingAlt ?? featured.data.heroAlt} ratio={featured.data.listingRatio ?? '16/9'} radius="lg" />
           <span class="writing-page__featured-badge">Featured</span>
         </div>
         <div class="writing-page__featured-copy">

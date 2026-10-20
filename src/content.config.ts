@@ -12,6 +12,7 @@ const writing = defineCollection({
     description: z.string(),
     publishedDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
+    displayOrder: z.number().optional(),
     category: z.enum(['AI products', 'Creative AI', 'Architecture', 'Leadership']),
     tags: z.array(z.string()).default([]),
     featured: z.boolean().default(false),

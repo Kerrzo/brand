@@ -1,0 +1,44 @@
+<figure class="coaching-architecture" aria-label="Proposed Brilliancy coaching architecture">
+  <figcaption class="mono-label">Proposed architecture / A hypothesis to test</figcaption>
+  <div class="architecture-pair inputs">
+    <div><h3>Game PGN</h3><p>Moves · Positions · Game history</p></div>
+    <div><h3>Player context</h3><p>Mastery · Weaknesses · Progress · Goals</p></div>
+  </div>
+  <div class="flow" aria-hidden="true">↓</div>
+  <section class="brain" aria-label="The coaching brain">
+    <p class="mono-label">The coaching brain</p>
+    <h3 class="brain-title">LLM-led reasoning<br />and orchestration</h3>
+    <div class="architecture-pair capabilities">
+      <div><h4>LLM / Queen</h4><p>Interpret · Plan · Explain</p></div>
+      <div><h4>Jev-Style</h4><p>Score choices · Rank · Prioritise</p></div>
+    </div>
+    <p class="iteration">Iterative decisions when more evidence is needed.</p>
+    <div class="grounding">
+      <p class="mono-label">Grounded in</p>
+      <div class="architecture-pair">
+        <div><h4>Stockfish</h4><p>Verified chess evidence</p></div>
+        <div><h4>Player model</h4><p>Learning history and progress</p></div>
+      </div>
+    </div>
+  </section>
+  <div class="flow" aria-hidden="true">↓</div>
+  <div class="result"><h3>Personalised coaching result</h3><p>Game insights · Prioritised lessons · Exercises · Next steps</p></div>
+</figure>
+<style>
+  .coaching-architecture { margin: 0; padding: clamp(24px, 4vw, 60px); background: var(--color-dark-bg); color: var(--color-dark-fg); border: 1px solid var(--color-dark-border); border-radius: var(--radius-md); text-align: center; }
+  figcaption { margin-bottom: 44px; }
+  .mono-label { color: var(--color-dark-label); }
+  .architecture-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+  h3, h4 { margin: 0; font-size: clamp(20px, 2.1vw, 28px); font-weight: 500; line-height: 1.2; letter-spacing: -.025em; }
+  p { margin: 12px 0 0; font-size: 16px; line-height: 1.6; color: var(--color-dark-body); }
+  .flow { padding: 22px; color: var(--color-accent); font-size: 25px; }
+  .brain { padding: clamp(24px, 4vw, 52px); border: 1px solid var(--color-dark-border); border-radius: var(--radius-md); }
+  .brain > .mono-label { margin: 0 0 20px; }
+  .brain-title { font-size: clamp(26px, 3vw, 40px); }
+  .capabilities { margin-top: 40px; }
+  .iteration { margin-top: 32px; font-size: 14px; }
+  .grounding { margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--color-dark-border); }
+  .grounding > p { margin: 0 0 20px; }
+  .grounding h4 { font-size: 20px; }
+  @media (max-width: 600px) { .architecture-pair { grid-template-columns: 1fr; gap: 28px; } figcaption { margin-bottom: 32px; } .brain { padding: 24px 16px; } }
+</style>

@@ -38,9 +38,9 @@ const shipped = shippedSelection.flatMap(selection => {
   return item ? [{...selection, title:selection.title ?? item.data.title, href:selection.href ?? `/shipped/${item.id}/`, image:selection.image ?? item.data.heroImage, alt:selection.alt ?? item.data.heroAlt}] : [];
 });
 const experimentSelection = [
-  {id:'realtime-drive-through-ordering', question:'Can AI take a drive-through order without making the experience worse?', label:'Realtime voice · Ordering', image:'/media/experiments/pozso/ordering-replay.png', alt:'Pozso replay showing voice conversation, agent activity and a draft mock order', caption:'Prototype capture · Mock order replay'},
+  {id:'ai-ordering', question:'Can AI get your order right?', label:'Realtime voice · Ordering', image:'/media/experiments/pozso/ordering-replay.png', alt:'Poszo replay showing voice conversation, agent activity and a draft mock order', caption:'Prototype capture · Mock order replay'},
   {id:'wifi-human-sensing', question:'Can Wi-Fi count people in a room?', label:'Wi-Fi CSI · Spatial sensing', caption:'RuView upstream demo · Not my test results'},
-  {id:'ai-podcast-production', question:'Can AI turn an off-the-cuff conversation into a finished podcast?', label:'Frontier models · Audio · Editorial AI', caption:'ComfyUI setup · Podcast studio experiment'},
+  {id:'ai-podcast', question:'Can AI turn a conversation into a podcast?', label:'Frontier models · Audio · Editorial AI', caption:'ComfyUI setup · Podcast studio experiment'},
 ];
 const experiments = experimentSelection.flatMap(selection => {
   const item = lab.find(item => item.id === selection.id);
