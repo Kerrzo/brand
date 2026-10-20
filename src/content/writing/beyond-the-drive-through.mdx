@@ -1,0 +1,190 @@
+---
+title: "The order doesn’t have to start at the drive-through."
+description: "How a voice-ordering experiment led me to explore a different way to order food from a car."
+publishedDate: 2026-10-21
+category: "AI products"
+tags: ["Poszo", "Conversational AI", "Product experiments"]
+featured: false
+placeholder: false
+richLayout: true
+eyebrow: "Learning / From one question to another"
+heroIntro:
+  - "I've been experimenting with conversational AI for food ordering."
+  - "The question was fairly simple: could someone order food by talking naturally, without navigating menus, pressing buttons or adapting the way they speak to a machine?"
+  - "That led me to build Poszo, a voice-ordering prototype using a real restaurant menu."
+  - "I originally imagined it sitting at a drive-through."
+  - "Then I started wondering why the conversation needed to happen there at all."
+heroImage: "/media/experiments/pozso/ordering-replay.png"
+heroRatio: "1906/1614"
+hideHeroImage: true
+listingImage: "/media/writing/ai-drive-through/in-car-concept.webp"
+listingAlt: "Red Rooster in-car voice ordering concept — not an implemented CarPlay application"
+listingRatio: "1642/958"
+heroAlt: "Real Poszo prototype showing a voice conversation, agent activity and a mock Red Rooster order"
+heroMediaLabel: "Poszo / Ordering prototype"
+heroCaption: "A mock order in the working prototype. No commercial deployment is implied."
+socialImage: "/media/experiments/pozso/ordering-replay.png"
+relatedLab: ["realtime-drive-through-ordering"]
+---
+
+import ArticleSection from '../../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../../components/content/article/ArticleTwoCol.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import ArticleMedia from '../../components/content/article/ArticleMedia.astro';
+import BuildingEvidence from '../../components/content/building/BuildingEvidence.astro';
+
+<ArticleSection dark id="thequestion">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">01 / The question</SectionLabel>
+    <h2 class="h-2">Can AI take a food order without making the experience worse?</h2>
+    <p class="body-copy">Ordering food sounds like a straightforward conversation.</p>
+    <p class="body-copy">Until you try to automate it.</p>
+    <p class="body-copy">People change their minds. Interrupt themselves. Ask questions about the menu. Add something halfway through. Remove something else.</p>
+    <p class="body-copy">A customer might say:</p>
+    <p class="body-copy">"Can I get a chicken burger meal?"</p>
+    <p class="body-copy">Then:</p>
+    <p class="body-copy">"Actually, make that large. And no ice in the drink."</p>
+    <p class="body-copy">The system needs to understand the conversation, maintain the order and respond naturally.</p>
+    <p class="body-copy">And eventually it needs to turn that conversation into something the restaurant can actually fulfil.</p>
+    <p class="body-copy">I wanted to see how close we could get.</p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection id="theexperiment">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">02 / The experiment</SectionLabel>
+    <h2 class="h-2">So I built Poszo.</h2>
+    <p class="body-copy">Poszo is a conversational ordering prototype.</p>
+    <p class="body-copy">It uses AI to understand spoken requests, maintain an order and respond to changes during the conversation.</p>
+    <p class="body-copy">I connected it to a real Red Rooster menu so I could experiment with actual products and ordering behaviour rather than a handful of invented examples.</p>
+    <p class="body-copy">The early versions were too conversational in the wrong ways.</p>
+    <p class="body-copy">Too much introduction. Too much confirmation. Too much unnecessary enthusiasm.</p>
+    <p class="body-copy">I kept refining the experience.</p>
+    <p class="body-copy">A good ordering conversation should be quick. It should understand what you mean, ask when something is unclear and otherwise get out of the way.</p>
+    <p class="body-copy"><strong>The goal wasn't to make an AI that could talk about food. It was to make ordering food easier.</strong></p>
+    <div class="ordering-evidence"><BuildingEvidence src="/media/experiments/pozso/ordering-replay.png" alt="Poszo mock order replay with voice conversation, agent tool activity and live order" label="Poszo / Working prototype" caption="A real prototype test using menu items. The replay shows a mock order, not a completed restaurant transaction." /></div>
+    <p class="body-copy"><a href="/experiments/realtime-drive-through-ordering/">Explore the Poszo experiment and watch the demo →</a></p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection dark id="thereaction">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">03 / The reaction</SectionLabel>
+    <h2 class="h-2">Then the experiment became a business conversation.</h2>
+    <p class="body-copy">I shared the prototype with Craveable Brands, the group behind Red Rooster, Oporto and Chicken Treat.</p>
+    <p class="body-copy">There was interest in exploring the idea further, including how conversational ordering might make the customer experience faster.</p>
+    <p class="body-copy">That got me thinking about the journey customers make before they even reach the restaurant.</p>
+    <p class="body-copy">A drive-through is only one place where someone might want to order.</p>
+    <p class="body-copy">What if the conversation started earlier?</p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection id="theconnection">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">04 / The connection</SectionLabel>
+    <h2 class="h-2">Why wait until you reach the drive-through?</h2>
+    <p class="body-copy">Imagine you're driving home.</p>
+    <p class="body-copy">You know what you want for dinner.</p>
+    <p class="body-copy">Instead of waiting until you arrive, you could start the order from your car.</p>
+    <p class="body-copy">"Get me a chicken burger meal from Red Rooster."</p>
+    <p class="body-copy">The system could clarify the details, confirm the order and eventually connect it to an appropriate collection experience.</p>
+    <p class="body-copy">The important part is that the underlying conversational engine doesn't necessarily care whether the customer is standing at a drive-through, using a phone or interacting through an in-car interface.</p>
+    <p class="body-copy">The interface changes.</p>
+    <p class="body-copy">The ordering capability can remain largely the same.</p>
+    <p class="body-copy"><strong>I thought I was building a drive-through ordering system.</strong></p>
+    <p class="body-copy"><strong>I was actually exploring a different way to interact with commerce.</strong></p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection dark id="theconcept">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">05 / The concept</SectionLabel>
+    <h2 class="h-2">What would ordering from the car look like?</h2>
+    <p class="body-copy">I started exploring an in-car interface for Poszo.</p>
+    <p class="body-copy">The idea is deliberately simple.</p>
+    <p class="body-copy">Voice handles the conversation.</p>
+    <p class="body-copy">The screen shows enough information to reassure the customer that the order is correct.</p>
+    <p class="body-copy">A short order summary. A total. Clear confirmation.</p>
+    <p class="body-copy">Not another complicated menu to navigate while driving.</p>
+    <div class="ordering-evidence"><ArticleMedia dark src="/media/writing/ai-drive-through/in-car-concept.webp" alt="Red Rooster in-car ordering concept showing a voice waveform, meal summary, total and order confirmation controls" label="In-car ordering concept" ratio="1642/958" caption="An early in-car ordering interface concept for Red Rooster. Not an implemented CarPlay application." /></div>
+    <p class="body-copy">This is a visual concept, not a working Apple CarPlay application. The platform capabilities, supported app categories, entitlements, interaction restrictions and driver-safety requirements still need to be validated.</p>
+    <p class="body-copy">The concept helps me explore the experience before committing to an implementation.</p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection id="oneenginedifferentexperiences">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">06 / One engine, different experiences</SectionLabel>
+    <h2 class="h-2">The interface doesn't have to define the product.</h2>
+    <p class="body-copy">This is the part I find interesting.</p>
+    <p class="body-copy">The same underlying ordering capability could potentially support different customer experiences.</p>
+    <p class="body-copy">At a drive-through, it might replace a conventional ordering conversation.</p>
+    <p class="body-copy">On a phone, it might offer a faster alternative to navigating a menu.</p>
+    <p class="body-copy">In a car, it might let someone begin an order before arriving.</p>
+    <p class="body-copy">Each environment introduces different constraints.</p>
+    <p class="body-copy">The conversation, interaction design, integrations and safety requirements would need to adapt.</p>
+    <p class="body-copy">But the underlying capability could be shared.</p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection dark id="ordering-architecture">
+  <ArticleTwoCol>
+    <figure class="ordering-architecture" aria-label="Working ordering prototype and three possible interfaces">
+      <figcaption class="mono-label">One engine / Possible interfaces</figcaption>
+      <div class="ordering-engine">
+        <p class="mono-label">Working prototype</p>
+        <h3>Conversational ordering engine</h3>
+        <p>Menu · Order state · Conversation · Validation</p>
+      </div>
+      <p class="ordering-direction" aria-hidden="true">↓</p>
+      <p class="mono-label ordering-status">Proposed experiences / Not deployed integrations</p>
+      <ul class="ordering-interfaces">
+        <li><span class="mono-label">01 / Drive-through</span><h4>At the restaurant</h4><p>Voice ordering at the restaurant</p></li>
+        <li><span class="mono-label">02 / Mobile</span><h4>On a phone</h4><p>Conversational ordering on a phone</p></li>
+        <li><span class="mono-label">03 / In-car</span><h4>Before arriving</h4><p>Voice-first ordering concept</p></li>
+      </ul>
+    </figure>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection id="whatilearned">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">07 / What I learned</SectionLabel>
+    <h2 class="h-2">Sometimes the experiment isn't the product.</h2>
+    <p class="body-copy">I started by trying to answer a specific question about drive-through ordering.</p>
+    <p class="body-copy">Could AI handle the conversation?</p>
+    <p class="body-copy">Building Poszo helped me understand what worked, what felt awkward and what needed to change.</p>
+    <p class="body-copy">But it also revealed another possibility.</p>
+    <p class="body-copy">The conversational capability might be useful in places I hadn't originally considered.</p>
+    <p class="body-copy">There's still plenty to validate.</p>
+    <p class="body-copy">Whether customers would prefer it. Whether it genuinely saves time. How ordering, payment, collection and safety would work in different environments.</p>
+    <p class="body-copy">Those are product questions, not just AI questions.</p>
+    <p class="body-copy">And they're worth exploring.</p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection dark id="closing">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">08 / Closing</SectionLabel>
+    <h2 class="h-2">One experiment. Another question.</h2>
+    <p class="body-copy">I started with a drive-through.</p>
+    <p class="body-copy">Now I'm wondering what happens when the same conversation moves into the car.</p>
+    <p class="body-copy"><strong>That's usually how the next experiment begins.</strong></p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<style>{`
+  .ordering-evidence { width: 100%; margin-block: 24px; }
+  .ordering-architecture { margin: 0; width: 100%; padding: clamp(24px, 4vw, 52px); border: 1px solid var(--color-dark-border); border-radius: var(--radius-md); }
+  .ordering-architecture figcaption { margin-bottom: 32px; }
+  .ordering-engine { max-width: 650px; margin-inline: auto; text-align: center; }
+  .ordering-engine h3 { font-size: clamp(26px, 3vw, 40px); line-height: 1.1; letter-spacing: -.03em; font-weight: 500; margin-block: 16px; }
+  .ordering-engine > p:last-child { font-size: 17px; line-height: 1.6; color: var(--color-dark-body); }
+  .ordering-direction { color: var(--color-accent); font-size: 28px; text-align: center; padding-block: 24px; }
+  .ordering-status { text-align: center; margin-bottom: 28px; }
+  .ordering-interfaces { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(20px,3vw,40px); list-style: none; padding: 0; margin: 0; }
+  .ordering-interfaces li { min-width: 0; }
+  .ordering-interfaces h4 { font-size: clamp(20px,2vw,26px); line-height: 1.2; font-weight: 500; margin-block: 16px 12px; letter-spacing: -.02em; }
+  .ordering-interfaces p { font-size: 15px; line-height: 1.6; color: var(--color-dark-body); }
+  @media(max-width:600px) { .ordering-interfaces { grid-template-columns: 1fr; gap: 32px; } }
+`}</style>

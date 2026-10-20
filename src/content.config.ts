@@ -25,6 +25,11 @@ const writing = defineCollection({
     // more than one sentence. Falls back to rendering `description` alone.
     heroIntro: z.array(z.string()).optional(),
     heroRatio: z.string().optional(),
+    // Learning detail introductions are text-only; hero assets remain on listings.
+    hideHeroImage: z.boolean().default(true),
+    listingImage: z.string().optional(),
+    listingAlt: z.string().optional(),
+    listingRatio: z.string().optional(),
     heroImage: z.string().optional(),
     heroAlt: z.string().optional(),
     heroMediaLabel: z.string().optional(),

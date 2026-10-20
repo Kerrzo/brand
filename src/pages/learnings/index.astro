@@ -14,14 +14,14 @@ const all = await getCollection('writing', ({ data }) => !data.draft && !data.pl
 const sorted = all.sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf());
 
 const featured = sorted.find((p) => p.data.featured) ?? sorted[0];
-const rest = sorted.filter((p) => p.id !== featured.id);
+const rest = sorted.filter((p) => p.id !== featured?.id);
 const grid = rest.slice(0, 8);
 const earlier = rest.slice(8);
 
 const dateFmtShort = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
 const dateFmtLong = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' });
 
-const featuredReadingTime = readingTime(featured.body ?? '');
+const featuredReadingTime = featured ? readingTime(featured.body ?? '') : '';
 
 const categories = ['AI products', 'Creative AI', 'Architecture', 'Leadership'];
 const showFilters = false;

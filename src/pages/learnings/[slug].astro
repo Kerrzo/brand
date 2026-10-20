@@ -19,7 +19,7 @@ const dateFmt = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric'
 const rich = item.data.richLayout;
 ---
 
-<BaseLayout title={item.data.title} description={item.data.description} current="learnings">
+<BaseLayout title={item.data.title} description={item.data.description} image={item.data.socialImage} current="learnings">
   <div class:list={['article-frame', 'container', { 'article-frame--rich': rich }]}>
     <div class="article__intro" data-reveal>
       <ArticleTwoCol>
@@ -28,7 +28,7 @@ const rich = item.data.richLayout;
         ) : (
           <span slot="label" class="pill-tag">{item.data.category}</span>
         )}
-        <div class="article__intro-main">
+        <div class:list={['article__intro-main', { 'article__intro-main--text-only': item.data.hideHeroImage }]}>
           <div class="article__intro-copy">
             <h1 class="article__heading">{item.data.title}</h1>
             {item.data.heroIntro?.length ? (
@@ -59,7 +59,7 @@ const rich = item.data.richLayout;
               </div>
             )}
           </div>
-          <figure class="article__hero-figure">
+          {!item.data.hideHeroImage && <figure class="article__hero-figure">
             <PlaceholderMedia
               label={item.data.heroMediaLabel ?? 'Hero image · replace'}
               src={item.data.heroImage}
@@ -69,7 +69,7 @@ const rich = item.data.richLayout;
               class="article__hero"
             />
             {item.data.heroCaption && <figcaption class="article__hero-caption">{item.data.heroCaption}</figcaption>}
-          </figure>
+          </figure>}
         </div>
       </ArticleTwoCol>
     </div>
@@ -119,6 +119,26 @@ const rich = item.data.richLayout;
     gap: 30px;
     align-items: flex-start;
     padding-right: clamp(0px, 2vw, 24px);
+  }
+
+  .article__intro-main--text-only {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: none;
+  }
+
+  .article__intro-main--text-only .article__intro-copy {
+    width: 100%;
+    min-width: 0;
+    padding-right: 0;
+  }
+
+  .article__intro-main--text-only .article__heading {
+    width: 100%;
+    max-width: none;
+  }
+
+  .article__intro-main--text-only .article__deck {
+    max-width: var(--reading-measure, 64ch);
   }
 
   .article__heading {

@@ -31,6 +31,7 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   redirects: {
+    '/learnings/i-built-an-ai-drive-through': '/learnings/beyond-the-drive-through/',
     '/lessons': '/learnings',
     '/lessons/[slug]': '/learnings/[slug]',
   },
