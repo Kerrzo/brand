@@ -162,6 +162,40 @@ const evidence = [
         {project.data.externalUrl && <a class="inline-link" href={project.data.externalUrl} target="_blank" rel="noopener noreferrer">Visit Kerrzo →</a>}
       </ArticleTwoCol>
     </ArticleSection>
+    <section class="kerrzo-film" aria-label="Kerrzo cinematic teaser">
+      <div class="container">
+        <video src="/media/projects/kerrzo.mp4" controls muted playsinline loop preload="metadata" aria-label="Kerrzo cinematic teaser" />
+      </div>
+    </section>
   </article>
   <KeepExploring current="building" descriptions={{ shipped: 'See the products and systems behind the work.', learnings: 'See what building and shipping has taught me.' }} />
 </BaseLayout>
+
+<style>
+  .kerrzo-film { background: #000; padding-block: clamp(40px, 6vw, 96px); }
+  .kerrzo-film video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; }
+</style>
+
+<script>
+  const film = document.querySelector<HTMLVideoElement>('.kerrzo-film video');
+  if (film) {
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let visible = false;
+    const sync = () => {
+      if (!visible || document.hidden || motion.matches) film.pause();
+      else void film.play().catch(() => {});
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting && entry.intersectionRatio >= .3;
+      sync();
+    }, { threshold: [0, .3] });
+    observer.observe(film);
+    motion.addEventListener('change', sync);
+    document.addEventListener('visibilitychange', sync);
+    document.addEventListener('astro:before-swap', () => {
+      observer.disconnect();
+      motion.removeEventListener('change', sync);
+      document.removeEventListener('visibilitychange', sync);
+    }, { once: true });
+  }
+</script>
