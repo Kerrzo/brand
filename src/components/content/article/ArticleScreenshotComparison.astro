@@ -1,0 +1,26 @@
+---
+interface Capture { label: string; detail: string; note?: string; src?: string; alt?: string; }
+interface Props { items?: Capture[]; label?: string; dark?: boolean; }
+const { items = [
+  { label: 'Original product', detail: 'Original hand-built UI', note: 'Screenshot coming' },
+  { label: 'AI-assisted rebuild', detail: 'Modern rebuilt UI', note: 'Screenshot coming' },
+], label = 'Before and after interface comparison', dark = false } = Astro.props;
+---
+<div class:list={['screenshot-comparison', { 'screenshot-comparison--dark': dark }]} role="group" aria-label={label}>
+  {items.map(item => <figure>
+    <span class="mono-label">{item.label}</span>
+    {item.src ? <img src={item.src} alt={item.alt ?? item.detail} loading="lazy" /> : <span class="comparison-title">{item.detail}</span>}
+    <figcaption>{item.note ?? item.detail}</figcaption>
+  </figure>)}
+</div>
+<style>
+  .screenshot-comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  figure { margin: 0; min-width: 0; aspect-ratio: 16/10; border: 1px solid var(--color-border); padding: clamp(20px,3vw,48px); display: flex; flex-direction: column; justify-content: space-between; gap: 20px; }
+  .comparison-title { font-size: clamp(22px,3vw,42px); letter-spacing: -.025em; line-height: 1.15; max-width: 14ch; }
+  figcaption { font: 12px var(--font-mono); color: var(--color-body); }
+  img { display: block; width: 100%; height: auto; }
+  figure:has(img) { aspect-ratio: auto; }
+  .screenshot-comparison--dark figure, :global(.article-section--dark) figure { border-color: var(--color-dark-border); }
+  .screenshot-comparison--dark figcaption, :global(.article-section--dark) figcaption { color: var(--color-dark-body); }
+  @media(max-width:600px) { .screenshot-comparison { grid-template-columns: 1fr; } figure { aspect-ratio: 16/9; } }
+</style>

@@ -1,0 +1,10 @@
+---
+/** Copy beside strategy-clusters.mjs and vendor/. No React integration is needed. */
+interface Props { dataSrc?: string; intro?: boolean; }
+const {intro=false,dataSrc='/media/strategy-connect/demo-data.json'}=Astro.props;
+---
+<strategy-clusters data-src={dataSrc} intro={intro ? '' : undefined}></strategy-clusters>
+<noscript><img src="/media/work/cluster.png" alt="Original Strategy Connect response-cluster screenshot; the interactive synthetic demonstration requires JavaScript." loading="lazy" /><p>Interactive synthetic demonstration requires JavaScript.</p></noscript>
+<script>
+  import './strategy-clusters.mjs';
+</script>

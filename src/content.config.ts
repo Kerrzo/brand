@@ -29,6 +29,7 @@ const writing = defineCollection({
     // Learning detail introductions are text-only; hero assets remain on listings.
     hideHeroImage: z.boolean().default(true),
     listingImage: z.string().optional(),
+    listingPoster: z.string().optional(),
     listingAlt: z.string().optional(),
     listingRatio: z.string().optional(),
     heroImage: z.string().optional(),

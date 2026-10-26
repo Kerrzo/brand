@@ -25,11 +25,11 @@ const building = buildingSelection.flatMap(selection => {
   const item = projects.find(item => item.id === selection.id);
   return item ? [{...selection, title:item.data.title, href:`/building/${item.id}/`}] : [];
 });
-const mediaSizes: Record<string, [number, number]> = { 'craveable-brands':[1440,814], 'international-towers-amica':[1440,900], 'strategy-connect':[1448,1086], neurotechnology:[1440,900], boxofficevr:[1437,681] };
+const mediaSizes: Record<string, [number, number]> = { 'craveable-brands':[1440,814], 'international-towers-amica':[1440,900], 'strategy-connect':[1280,648], neurotechnology:[1440,900], boxofficevr:[1437,681] };
 const shippedSelection = [
   {id:'craveable-brands', copy:'Years of evolving a national ordering platform across web, mobile, payments, delivery and restaurant operations.'},
   {id:'international-towers-amica', title:'Amica / International Towers', href:'/shipped/amica/', image:'/media/work/amica/lobby.webp', alt:'International Towers lobby with people and digital community screens', copy:'A digital layer connecting people, spaces, access, community and building operations across International Towers.'},
-  {id:'strategy-connect', title:'Strategy Connect / Engage+', copy:"A long-running strategy platform that eventually reached the point where AI made ideas we'd discussed for years practical to build."},
+  {id:'strategy-connect', title:'Strategy Connect / Engage+', image:'/media/strategy-connect/response-landscape.png', alt:'Strategy Connect response landscape demonstration showing 720 synthetic viewpoints grouped into themes', copy:"A long-running strategy platform that eventually reached the point where AI made ideas we'd discussed for years practical to build."},
   {id:'neurotechnology', title:'Neurotechnology / Transducer', copy:'A VR chronic-pain treatment platform where the technology worked — and the harder problem became reaching the people who might benefit from it.'},
   {id:'boxofficevr', copy:"An immersive theatre platform that taught me something harder than streaming VR: people loving an experience doesn't necessarily change their behaviour."},
 ];

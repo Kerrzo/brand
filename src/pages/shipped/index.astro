@@ -57,7 +57,9 @@ const takeaways = [
       return (
         <article class:list={['work-row', { 'work-row--dark': i % 2 === 0 }]} data-card data-cat={item.data.category} data-reveal>
           <a href={href} aria-label={`Read ${item.data.title}`}>
-            {item.id === 'international-towers-amica' ? (
+            {item.id === 'strategy-connect' ? (
+              <img class="work-row__natural-image" src="/media/strategy-connect/response-landscape.png" alt="Strategy Connect interactive response landscape demonstration, showing 720 synthetic viewpoints grouped into themes" width="1280" height="649" loading="lazy" />
+            ) : item.id === 'international-towers-amica' ? (
               <img class="work-row__natural-image" src={item.data.heroImage} alt={item.data.heroAlt} loading="lazy" />
             ) : (
               <PlaceholderMedia src={item.data.heroImage} alt={item.data.heroAlt} label={`${item.data.client} · ${item.data.tagline}`} ratio="16/11" radius="md" />
