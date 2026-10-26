@@ -22,19 +22,20 @@ const architecture = [
 ];
 // Product screenshots supplied for the detail page.
 const screens = {
-  review: '/media/projects/brilliancy/game.png',
-  openings: '/media/projects/brilliancy/openings.png',
-  progress: '/media/projects/brilliancy/progress.png',
-  training: '/media/projects/brilliancy/training.png',
+  coach: '/media/projects/brilliancy/01-brilliancy-ai-chess-coach.webp',
+  review: '/media/projects/brilliancy/03-brilliancy-game-review.webp',
+  openings: '/media/projects/brilliancy/06-brilliancy-italian-game-study.webp',
+  progress: '/media/projects/brilliancy/05-brilliancy-practice-and-progress.webp',
+  training: '/media/projects/brilliancy/02-brilliancy-consider-your-move.webp',
 };
 ---
-<BaseLayout title="Brilliancy — Building the chess coach I want to use" description={project.data.description} image={screens.review} current="building">
+<BaseLayout title="Brilliancy — Building the chess coach I want to use" description={project.data.description} image={screens.coach} current="building">
   <article class="brilliancy-story">
     <BuildingHero name={project.data.title} title="Chess engines tell me what I did wrong. I want a coach that helps me stop doing it again." category="Chess · AI coaching · Personalised learning" status="Active" period="2026 — now">
       <p class="lede">I'm building Brilliancy to explore what happens when engine analysis, AI explanation and a player's own history become one coaching system.</p>
         <p class="body-copy">The engine can already find the mistake.</p>
         <p class="body-copy">I'm interested in whether software can help me understand it, remember it and make a better decision next time.</p>
-      <BuildingEvidence slot="evidence" src={screens.review} eager label="Brilliancy / Game review" alt="Brilliancy game review showing the chessboard, move history, game details and engine-selected review positions" caption="The board, move history and review in one place. This capture shows an engine-only review; the coaching still has to prove its value." />
+      <BuildingEvidence slot="evidence" src={screens.coach} eager label="Brilliancy / Game review" alt="Brilliancy game review showing the chessboard, move history and a conversation with Coach Mia" caption="The board, move history and coaching conversation in one place." />
     </BuildingHero>
 
     <ArticleSection dark id="the-problem">
@@ -111,7 +112,7 @@ const screens = {
         <p class="body-copy">What plan would you choose?</p>
         <p class="body-copy">The aim isn't to memorise an engine move.</p>
         <p class="body-copy"><strong>It's to recognise the idea when I see it again.</strong></p>
-      <BuildingEvidence src={screens.training} label="Brilliancy / Training" alt="A training challenge from a played game, with a chess position, coaching prompt and hint" caption="A position from my own game becomes a training challenge. Bringing the right ideas back over time is the learning loop I'm working towards." />
+      <BuildingEvidence src={screens.training} label="Brilliancy / Training" alt="A training challenge from a played game, with a chess position, coaching prompt and hint" caption="A position from a reviewed game becomes a coaching challenge. Bringing the right ideas back over time is the learning loop I'm working towards." />
       </ArticleTwoCol>
     </ArticleSection>
 
@@ -128,7 +129,7 @@ const screens = {
         <p class="body-copy">And when has the position changed enough that the normal opening plan no longer applies?</p>
         <p class="body-copy">Opening study becomes more useful when it connects back to the games I've actually played.</p>
         <p class="body-copy">If I repeatedly reach the same structure and make the same strategic mistake, <strong>that belongs in the coaching system too.</strong></p>
-        <BuildingEvidence src={screens.openings} label="Brilliancy / Opening catalogue" alt="Brilliancy opening catalogue with board positions, opening plans and repertoire controls" caption="Opening positions alongside the ideas behind them, with a route into repertoire study." />
+        <BuildingEvidence src={screens.openings} label="Brilliancy / Opening study" alt="Brilliancy Italian Game walkthrough with a chessboard, move prompt and coaching hint" caption="An Italian Game walkthrough pairs the position with a move prompt and the ideas behind it." />
       </ArticleTwoCol>
     </ArticleSection>
 
@@ -158,9 +159,12 @@ const screens = {
         <p class="body-copy">AI should make those things easier to understand — not bury them underneath another interface.</p>
         <p class="body-copy">The product brings together the board, move history, engine analysis, evaluation, annotations and coaching narrative so I can move between what happened, why it happened, and what I should learn from it.</p>
       </ArticleTwoCol>
+      <div class="brilliancy-move-film">
+        <BuildingEvidence src="/media/projects/brilliancy/mia-3d-move.mp4" poster="/media/projects/brilliancy/mia-3d-move.jpg" label="Brilliancy / 3D coaching prototype" alt="A 3D chess move followed by Coach Mia explaining a back-rank invasion" caption="A rendered exploration of the move and the idea behind it, with Coach Mia's coaching on screen." />
+      </div>
       <div class="brilliancy-screens">
         <BuildingEvidence src={screens.review} label="01 / Reviewing the game" alt="Brilliancy game review with move navigation, game details and lessons from the game" caption="Moving between the position, the moves and the lessons from a game." />
-        <BuildingEvidence src={screens.progress} label="02 / Learning over time" alt="Brilliancy progress screen showing reviewed games, opening mastery, a skill map and recurring patterns" caption="The progress view brings reviewed games, skills and recurring patterns together. It is a view of the learning history, not proof of improved chess." />
+        <BuildingEvidence src={screens.progress} label="02 / Learning over time" alt="Brilliancy Today dashboard showing a game review, positions due for practice and training progress" caption="The Today view brings a game review, practice positions and training progress together. It is a view of learning activity, not proof of improved chess." />
       </div>
       <div class="editorial-spine brilliancy-principle"><p>AI should make the chess<br /><span>easier to understand.</span></p><p class="body-copy">It shouldn't make the interface more complicated.</p></div>
     </ArticleSection>
@@ -227,3 +231,31 @@ const screens = {
   </article>
   <KeepExploring current="building" descriptions={{ shipped: "See the products and systems I've already delivered.", learnings: 'See what building and shipping has taught me.' }} />
 </BaseLayout>
+
+<style>
+  .brilliancy-move-film { margin-top: clamp(40px, 5vw, 72px); }
+</style>
+<script>
+  const film = document.querySelector<HTMLVideoElement>('.brilliancy-move-film video');
+  if (film) {
+    film.loop = true;
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let visible = false;
+    const sync = () => {
+      if (!visible || document.hidden || motion.matches) film.pause();
+      else void film.play().catch(() => {});
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting && entry.intersectionRatio >= .3;
+      sync();
+    }, { threshold: [0, .3] });
+    observer.observe(film);
+    motion.addEventListener('change', sync);
+    document.addEventListener('visibilitychange', sync);
+    document.addEventListener('astro:before-swap', () => {
+      observer.disconnect();
+      motion.removeEventListener('change', sync);
+      document.removeEventListener('visibilitychange', sync);
+    }, { once: true });
+  }
+</script>
