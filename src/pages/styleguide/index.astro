@@ -18,6 +18,8 @@ const posts = await getCollection('writing', ({data}) => !data.draft);
 const photo = '/media/work/amica/lobby.webp';
 // Every shared component is registered here. Source filenames are the reference names.
 const definitions: Record<string, { use: string; options?: string; props?: Record<string, unknown> }> = {
+  EngagePreview: { use: 'Engage+ listing animation with poster-only reduced-motion mode and visibility-based playback.', options: 'Preserves the listing media frame' },
+  KerrzoScreen: { use: 'Front-on Kerrzo demo UI with a once-on-viewport animation and reduced-motion final state.', options: 'code (K02, K04, K06, K07, K09, K13) · eager', props: { code: 'K02' } },
   ArticleScreenshotComparison: { use: 'Paired original/rebuilt interface captures, preserved from Strategy Connect. Supports real screenshots or labelled pending captures.', options: 'items (label, detail, src, alt, note) · label · dark' },
   StrategyClusters: { use: 'Interactive response landscape with 720 synthetic viewpoints, explicitly labelled as demonstration data.', options: 'dataSrc · intro (optional)', props: { dataSrc: '/media/strategy-connect/demo-data.json' } },
   CoachingArchitecture: { use: 'Native responsive Brilliancy architecture hypothesis: paired inputs, complementary reasoning and ranking capabilities, evidence grounding and coaching output. Stacks on mobile.' },

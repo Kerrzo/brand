@@ -153,12 +153,13 @@ const areas = ['Access', 'Permits', 'Spaces', 'Car parking', 'Lockers', 'People'
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let visible = false;
     const sync = () => {
-      if (motion.matches || !visible) video.pause();
+      if (motion.matches || !visible || document.hidden) video.pause();
       else { video.muted = true; void video.play().catch(() => {}); }
     };
     const observer = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; sync(); }, { threshold: .3 });
     observer.observe(video);
     motion.addEventListener('change', sync);
+    document.addEventListener('visibilitychange', sync);
     document.addEventListener('astro:before-swap', () => { observer.disconnect(); motion.removeEventListener('change', sync); }, { once: true });
   }
 </script>

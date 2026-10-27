@@ -2,7 +2,7 @@
 import { getEntry } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BuildingHero from '../../../components/content/building/BuildingHero.astro';
-import BuildingEvidence from '../../../components/content/building/BuildingEvidence.astro';
+import KerrzoScreen from '../../../components/content/building/KerrzoScreen.astro';
 import ArticleSection from '../../../components/content/article/ArticleSection.astro';
 import ArticleTwoCol from '../../../components/content/article/ArticleTwoCol.astro';
 import ArticleLearnings from '../../../components/content/article/ArticleLearnings.astro';
@@ -22,12 +22,7 @@ const principles = [
   { title: 'Models', copy: "I don't want the product to assume one model or provider will solve every workload forever." },
   { title: 'Agents', copy: 'Agents need context, tools and boundaries. The important work is deciding what they can do, for whom, and where a person needs to remain involved.' },
 ];
-// User-supplied marketing UI exports; preserve their original proportions.
-const mediaBase = '/media/projects/kerrzo/marketing';
-const evidence = [
-  { src: mediaBase + '/operations-projects-portfolio-status-and-budget.png', label: '01 / Planning and delivering work', alt: 'Kerrzo marketing UI mockup showing a project portfolio with status, progress and milestones', caption: 'Projects, progress and delivery milestones in one operational view. From the Kerrzo marketing UI collection.' },
-  { src: mediaBase + '/ai-agents-workspace-department-agents-and-activity.png', label: '02 / Agents across the business', alt: 'Kerrzo marketing UI mockup showing an agent workspace organised around business departments', caption: 'The agent workspace presents the direction across sales, support, operations, production and people. Marketing UI mockup; capabilities are still evolving.' },
-];
+
 ---
 <BaseLayout title="Kerrzo — Building an AI-first business operating system" description={project.data.description} current="building">
   <article class="building-story">
@@ -35,7 +30,7 @@ const evidence = [
       <p class="lede">I'm building Kerrzo to explore that question.</p>
               <p class="body-copy">Kerrzo brings the operational context of a business together so people and AI can work from the same understanding.</p>
         <p class="body-copy">Customers, sales, support, projects, people and knowledge become connected parts of the same system, with AI designed into the architecture from the beginning.</p>
-      <BuildingEvidence slot="evidence" src={mediaBase + '/sales-pipeline-kanban-board-with-deal-cards-and-icp-scores.png'} eager label="Kerrzo / Sales pipeline" alt="Kerrzo marketing UI mockup showing sales opportunities across qualified, proposal and negotiation stages" caption="Customer context alongside the sales pipeline. A view from Kerrzo's marketing UI collection, while the product continues to evolve." />
+      <KerrzoScreen slot="evidence" code="K02" eager />
     </BuildingHero>
 
     <ArticleSection id="the-question" class="building-question">
@@ -87,7 +82,8 @@ const evidence = [
         <p class="body-copy">The important part is that the operational system and the intelligence layer are being designed together.</p>
       </ArticleTwoCol>
       <div class="building-product-evidence">
-        {evidence.map(item => <BuildingEvidence {...item} />)}
+        <KerrzoScreen code="K04" />
+        <KerrzoScreen code="K06" />
       </div>
       <div class="editorial-spine building-payoff"><p>The application creates the context.<br /><span>The AI makes the context useful.</span></p></div>
     </ArticleSection>

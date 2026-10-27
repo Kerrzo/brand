@@ -1,4 +1,5 @@
 ---
+import EngagePreview from '../../components/ui/EngagePreview.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ListingHero from '../../components/content/ListingHero.astro';
 import FilterBar from '../../components/ui/FilterBar.astro';
@@ -58,7 +59,7 @@ const takeaways = [
         <article class:list={['work-row', { 'work-row--dark': i % 2 === 0 }]} data-card data-cat={item.data.category} data-reveal>
           <a href={href} aria-label={`Read ${item.data.title}`}>
             {item.id === 'strategy-connect' ? (
-              <img class="work-row__natural-image" src="/media/strategy-connect/response-landscape.png" alt="Strategy Connect interactive response landscape demonstration, showing 720 synthetic viewpoints grouped into themes" width="1280" height="649" loading="lazy" />
+              <EngagePreview />
             ) : item.id === 'international-towers-amica' ? (
               <img class="work-row__natural-image" src={item.data.heroImage} alt={item.data.heroAlt} loading="lazy" />
             ) : (
@@ -308,3 +309,4 @@ const takeaways = [
     }
   }
 </style>
+

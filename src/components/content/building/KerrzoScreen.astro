@@ -1,0 +1,53 @@
+---
+interface Props {
+  code?: 'K02' | 'K04' | 'K06' | 'K07' | 'K09' | 'K13';
+  eager?: boolean;
+}
+const { code = 'K02', eager = false } = Astro.props;
+const names = { K02: 'Sales Strategy', K04: 'Resource Planning', K06: 'Business Financials', K07: 'Client Relationships', K09: 'Team and Capacity', K13: 'Knowledge' };
+const base = `/media/projects/kerrzo/screens/${code}`;
+const title = `Kerrzo ${names[code]} — illustrative demo with fictional data`;
+---
+<div class="kerrzo-screen">
+  <iframe src={`${base}/index.html?render`} title={title} loading={eager ? 'eager' : 'lazy'} tabindex="-1" style="width:1920px;height:1080px;max-width:none;transform-origin:top left;transform:scale(var(--screen-scale, 0));border:0;pointer-events:none"></iframe>
+  <noscript>
+    <style is:inline>.kerrzo-screen iframe { display: none; }</style>
+    <img src={`${base}/poster.png`} alt={title} width="1920" height="1080" loading={eager ? 'eager' : 'lazy'} />
+  </noscript>
+</div>
+<style>
+  .kerrzo-screen { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #080c0b; }
+  img { display: block; width: 100%; height: auto; }
+  iframe { display: block; width: 1920px; height: 1080px; border: 0; transform-origin: top left; transform: scale(var(--screen-scale, 0)); pointer-events: none; }
+</style>
+<script>
+  // Keep the native desktop composition, even in a narrow mobile column.
+  document.querySelectorAll<HTMLElement>('.kerrzo-screen').forEach((screen) => {
+    const fit = () => screen.style.setProperty('--screen-scale', String(screen.clientWidth / 1920));
+    fit();
+    new ResizeObserver(fit).observe(screen);
+    const frame = screen.querySelector('iframe')!;
+    let visible = false;
+    let played = false;
+    const send = (type: string) => frame.contentWindow?.postMessage({ type }, location.origin);
+    frame.addEventListener('load', () => {
+      send('kerrzo-reset');
+      if (visible && !document.hidden) { send('kerrzo-play'); played = true; }
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) { send('kerrzo-reset'); played = false; }
+      else if (visible && !played) { send('kerrzo-play'); played = true; }
+    });
+    // Observe the actual scaled frame wrapper, not the 1920px iframe document.
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting && entry.intersectionRatio >= 0.25;
+      if (!entry.isIntersecting || entry.intersectionRatio === 0) {
+        send('kerrzo-reset');
+        played = false;
+      } else if (visible && !document.hidden && !played) {
+        send('kerrzo-play');
+        played = true;
+      }
+    }, { threshold: [0, 0.25] }).observe(screen);
+  });
+</script>

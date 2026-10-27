@@ -1,4 +1,6 @@
 ---
+import EngagePreview from '../components/ui/EngagePreview.astro';
+import KerrzoScreen from '../components/content/building/KerrzoScreen.astro';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleSection from '../components/content/article/ArticleSection.astro';
@@ -67,15 +69,15 @@ const [kerrzo, brilliancy] = building;
     {kerrzo && <article class="anchor-feature">
       <div class="feature-heading" data-listing-copy><div><span class="mono-label">Building · 2026 → Now</span></div><div class="feature-copy"><span class="mono-label product-identity">{kerrzo.title}</span><h3 class="h-2">{kerrzo.question}</h3><p class="body-copy">{kerrzo.copy}</p><a href={kerrzo.href} class="text-link" data-listing-link>Explore Kerrzo →</a></div></div>
             <div class="kerrzo-montage">
-        <a class="natural-media kerrzo-montage__main" href={kerrzo.href} aria-label="Explore Kerrzo sales pipeline"><img src={kerrzo.image} alt={kerrzo.alt} width="2048" height="636" loading="lazy" /></a>
-        <a class="natural-media" href={kerrzo.href} aria-label="Explore Kerrzo operations"><img src="/media/projects/kerrzo/marketing/operations-projects-portfolio-status-and-budget.png" alt="Kerrzo marketing UI showing project portfolios, status and budgets" width="2048" height="794" loading="lazy" /></a>
-        <a class="natural-media" href={kerrzo.href} aria-label="Explore Kerrzo AI agents"><img src="/media/projects/kerrzo/marketing/ai-agents-workspace-department-agents-and-activity.png" alt="Kerrzo marketing UI showing department agents and their activity" width="2048" height="532" loading="lazy" /></a>
+        <a class="natural-media kerrzo-montage__main" href={kerrzo.href} aria-label="Explore Kerrzo sales strategy"><KerrzoScreen code="K02" /></a>
+        <a class="natural-media" href={kerrzo.href} aria-label="Explore Kerrzo resource planning"><KerrzoScreen code="K04" /></a>
+        <a class="natural-media" href={kerrzo.href} aria-label="Explore Kerrzo business financials"><KerrzoScreen code="K06" /></a>
       </div><p class="media-caption">Sales · Operations · AI agents / Marketing UI · Product in development</p>
     </article>}
   </ArticleSection>
   <ArticleSection>
     {brilliancy && <article class="split-story secondary-building">
-      <a class="natural-media" href={brilliancy.href} aria-label="Explore Brilliancy"><img src={brilliancy.image} alt={brilliancy.alt} width="2560" height="1440" loading="lazy" /></a>
+      <a class="natural-media" href={brilliancy.href} aria-label="Explore Brilliancy"><PlaceholderMedia src="/media/projects/brilliancy/mia-3d-move.mp4" poster="/media/projects/brilliancy/mia-3d-move.jpg" label="Brilliancy coaching demonstration" alt="A 3D chess move followed by coaching from Mia" ratio="16/9" radius="md" /></a>
       <div class="story-copy" data-listing-copy><span class="mono-label product-identity">{brilliancy.title}</span><h3 class="h-3">{brilliancy.question}</h3><p class="body-copy">{brilliancy.copy}</p><span class="mono-label">Building · 2026 → Now</span><a class="text-link" href={brilliancy.href} data-listing-link>Explore Brilliancy →</a></div>
     </article>}
     <div class="section-action section-action--right"><a class="text-link" href="/building/">View everything I'm building →</a></div>
@@ -85,7 +87,7 @@ const [kerrzo, brilliancy] = building;
     <ArticleTwoCol><SectionLabel slot="label" withDot>Shipped / Selected work</SectionLabel><h2 class="h-2">Things I've helped put into the world.</h2><p class="lede">Products and platforms that had to survive real users, real operations and real constraints.</p></ArticleTwoCol>
     <div class="shipped-features">
       {shipped.slice(0,3).map((item,index) => <article class:list={['split-story', {'split-story--reverse':index === 1}]}>
-        <a class="natural-media" href={item.href} aria-label={`Read ${item.title}`}><img src={item.image} alt={item.alt} width={mediaSizes[item.id][0]} height={mediaSizes[item.id][1]} loading="lazy" /></a>
+        <a class="natural-media" href={item.href} aria-label={`Read ${item.title}`}>{item.id === 'strategy-connect' ? <EngagePreview /> : item.id === 'craveable-brands' ? <PlaceholderMedia src="/media/writing/ai-drive-through/in-car-concept.mp4" poster="/media/writing/ai-drive-through/in-car-concept.webp" label="In-car ordering concept" alt="Animated Red Rooster in-car ordering concept" ratio="1642/958" /> : <img src={item.image} alt={item.alt} width={mediaSizes[item.id][0]} height={mediaSizes[item.id][1]} loading="lazy" />}</a>
         <div class="story-copy" data-listing-copy><span class="mono-label">0{index+1} / Shipped</span><h3 class="h-2">{item.title}</h3><p class="body-copy">{item.copy}</p><a class="text-link" href={item.href} data-listing-link>Read the story →</a></div>
       </article>)}
     </div>

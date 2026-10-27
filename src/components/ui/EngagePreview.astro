@@ -1,0 +1,34 @@
+<div class="engage-preview">
+                <img src="/media/strategy-connect/listing-motion-v2-poster.png" alt="Engage+ response landscape demonstration" width="1280" height="720" loading="lazy" />
+                <video data-engage-preview data-src="/media/strategy-connect/listing-motion-v2.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+              </div>
+<style>
+  .engage-preview { position: relative; width: 100%; aspect-ratio: 1280 / 649; overflow: hidden; border-radius: var(--radius-md); background: #080807; }
+  .engage-preview img, .engage-preview video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+  .engage-preview video { opacity: 0; pointer-events: none; }
+  .engage-preview video.is-playing { opacity: 1; }
+</style>
+<script>
+  const video = document.querySelector<HTMLVideoElement>('[data-engage-preview]');
+  if (video) {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    let visible = false;
+    const sync = () => {
+      if (reduced.matches) {
+        video.pause();
+        video.classList.remove('is-playing');
+        if (video.hasAttribute('src')) { video.removeAttribute('src'); video.load(); }
+      } else if (visible && !document.hidden) {
+        if (!video.hasAttribute('src')) video.src = video.dataset.src!;
+        video.play().catch(() => {});
+      } else video.pause();
+    };
+    video.addEventListener('playing', () => video.classList.add('is-playing'));
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting && entry.intersectionRatio >= .25;
+      sync();
+    }, { threshold: [0, .25] }).observe(video.parentElement!);
+    reduced.addEventListener('change', sync);
+    document.addEventListener('visibilitychange', sync);
+  }
+</script>

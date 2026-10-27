@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "site": "paulkerr.com.au",
+  "updated_on": "2026-10-27",
+  "assets": [
+    {
+      "code": "K02",
+      "name": "Kerrzo Sales Strategy",
+      "approved": true,
+      "approved_on": "2026-10-27",
+      "aspect_ratio": "16:9",
+      "design_size": [
+        1920,
+        1080
+      ],
+      "animation_seconds": 2,
+      "replay_event": "kerrzo-strategy-replay",
+      "notes": "Approved screen-only viewport microanimation; visible-data start, no camera, tilt, DOF or outer canvas. Real native UI with fictional local fixtures.",
+      "files": {
+        "html": {
+          "path": "assets/K02/index.html",
+          "sha256": "58a78f8c9f17e7d3ea1fca4f9e84e1be55947c5cabdcf7b66cb49e1e468846cf"
+        },
+        "poster": {
+          "path": "assets/K02/poster.png",
+          "sha256": "d9fa546e07eb835ade948fe7a7cd4ec3a85d13529912e59ca6e9985ba43e636c"
+        },
+        "animation_source": {
+          "path": "assets/K02/animate.js",
+          "sha256": "52b2f8a3bfa1972ed23cfd61cc5562cad8298f6ed256d1f0368501cfd2129c2c"
+        }
+      }
+    },
+    {
+      "code": "K04",
+      "name": "Kerrzo Resource Planning / delivery planning",
+      "approved": true,
+      "approved_on": "2026-10-27",
+      "aspect_ratio": "16:9",
+      "design_size": [
+        1920,
+        1080
+      ],
+      "animation_seconds": 2,
+      "replay_event": "kerrzo-screen-replay",
+      "notes": "Approved screen-only viewport microanimation; visible-data start, no camera, tilt, DOF or outer canvas. Real native UI with fictional local fixtures.",
+      "files": {
+        "html": {
+          "path": "assets/K04/index.html",
+          "sha256": "932daa5d2bd004a84f31040153def32cd57cd7e4b51f114da7aaadeb224ac2b0"
+        },
+        "poster": {
+          "path": "assets/K04/poster.png",
+          "sha256": "6a526d06c3ba379daff18612fecfd883cc8ac2ac1943500c7bcc652e1f1e527c"
+        },
+        "animation_source": {
+          "path": "assets/K04/animate.js",
+          "sha256": "5b22741b5f716fb8fef9fd0349cb8b3bf2c5c676651e371f7926e6b565eed2b0"
+        }
+      }
+    },
+    {
+      "code": "K06",
+      "name": "Kerrzo Business Financials",
+      "approved": true,
+      "approved_on": "2026-10-27",
+      "aspect_ratio": "16:9",
+      "design_size": [
+        1920,
+        1080
+      ],
+      "animation_seconds": 1.9875,
+      "notes": "Approved exact speed, visible-data start, front-on, no camera. Original UI snapshot, not live application.",
+      "replay_event": "kerrzo-financial-replay",
+      "files": {
+        "html": {
+          "path": "assets/K06/index.html",
+          "sha256": "b3325ad076ee5c0795810e3a83e3c1d5cf5b7b21a74497a7cfa1d987e68a21f9"
+        },
+        "poster": {
+          "path": "assets/K06/poster.png",
+          "sha256": "8c0b3ae0458bc154096b57b79e398725b1cb19a62dd2fc1f0a9adcfb562876a3"
+        },
+        "animation_source": {
+          "path": "assets/K06/animate.js",
+          "sha256": "4c933f8e79662a894bc9ab8e513e3bb0b91936be676518c0626e0b4bcff77ce7"
+        }
+      }
+    },
+    {
+      "code": "K07",
+      "name": "Kerrzo Clients / relationships",
+      "approved": true,
+      "approved_on": "2026-10-27",
+      "aspect_ratio": "16:9",
+      "design_size": [
+        1920,
+        1080
+      ],
+      "animation_seconds": 2,
+      "replay_event": "kerrzo-screen-replay",
+      "notes": "Approved screen-only viewport microanimation; visible-data start, no camera, tilt, DOF or outer canvas. Real native UI with fictional local fixtures.",
+      "files": {
+        "html": {
+          "path": "assets/K07/index.html",
+          "sha256": "4343ebef8f3c0f8cf753d0fd7f9825444cd036979c60d187a8d5c3c88244858a"
+        },
+        "poster": {
+          "path": "assets/K07/poster.png",
+          "sha256": "0a027b7e32fbae27418d8e0bb9f90d9342c450503b49effcf1e666e7f01ae78a"
+        },
+        "animation_source": {
+          "path": "assets/K07/animate.js",
+          "sha256": "5b22741b5f716fb8fef9fd0349cb8b3bf2c5c676651e371f7926e6b565eed2b0"
+        }
+      }
+    },
+    {
+      "code": "K09",
+      "name": "Kerrzo Team & Capacity",
+      "approved": true,
+      "approved_on": "2026-10-27",
+      "aspect_ratio": "16:9",
+      "design_size": [
+        1920,
+        1080
+      ],
+      "animation_seconds": 2,
+      "replay_event": "kerrzo-screen-replay",
+      "notes": "Approved screen-only viewport microanimation; visible-data start, no camera, tilt, DOF or outer canvas. Real native UI with fictional local fixtures.",
+      "files": {
+        "html": {
+          "path": "assets/K09/index.html",
+          "sha256": "5f42ec872daab7833c9eb210e34e811127491f1f18b8eb2e378d069f7f72b1d8"
+        },
+        "poster": {
+          "path": "assets/K09/poster.png",
+          "sha256": "a119511cb3c65272bcec0d07e6b08958d5ea58bb9b6365817793f5e27a03dd62"
+        },
+        "animation_source": {
+          "path": "assets/K09/animate.js",
+          "sha256": "5b22741b5f716fb8fef9fd0349cb8b3bf2c5c676651e371f7926e6b565eed2b0"
+        }
+      }
+    },
+    {
+      "code": "K13",
+      "name": "Kerrzo Knowledge",
+      "approved": true,
+      "approved_on": "2026-10-27",
+      "aspect_ratio": "16:9",
+      "design_size": [
+        1920,
+        1080
+      ],
+      "animation_seconds": 2,
+      "replay_event": "kerrzo-screen-replay",
+      "notes": "Approved screen-only viewport microanimation; visible-data start, no camera, tilt, DOF or outer canvas. Real native UI with fictional local fixtures.",
+      "files": {
+        "html": {
+          "path": "assets/K13/index.html",
+          "sha256": "a6f50213ff525507d3e52017df5aa31e7a0da1abe3ee05c7343d717bd4e38523"
+        },
+        "poster": {
+          "path": "assets/K13/poster.png",
+          "sha256": "9f22cbad9dc81792675073b7cded950fccac674bbc46c6fc7fdb46467f9a844e"
+        },
+        "animation_source": {
+          "path": "assets/K13/animate.js",
+          "sha256": "5b22741b5f716fb8fef9fd0349cb8b3bf2c5c676651e371f7926e6b565eed2b0"
+        }
+      }
+    }
+  ]
+}

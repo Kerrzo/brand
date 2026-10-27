@@ -1,4 +1,5 @@
 ---
+import PlaceholderMedia from '../../../components/ui/PlaceholderMedia.astro';
 import { getEntry } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ArticleSection from '../../../components/content/article/ArticleSection.astro';
@@ -70,7 +71,7 @@ const tests = ['Response latency', 'Interruptions', 'Corrections', 'Menu groundi
         <SectionLabel slot="label">Learning / The next question</SectionLabel>
         <div class="poszo-learning">
           <a href="/learnings/beyond-the-drive-through/" class="poszo-learning__image" aria-label="Read The order doesn’t have to start at the drive-through">
-            <img src="/media/writing/ai-drive-through/in-car-concept.webp" width="1642" height="958" loading="lazy" alt="Red Rooster in-car voice ordering concept" />
+            <PlaceholderMedia src="/media/writing/ai-drive-through/in-car-concept.mp4" poster="/media/writing/ai-drive-through/in-car-concept.webp" ratio="1642/958" label="In-car voice ordering concept" alt="Animated Red Rooster in-car voice ordering concept" />
           </a>
           <div class="poszo-learning__copy">
             <h2 class="h-2">The order doesn’t have to start at the drive-through.</h2>

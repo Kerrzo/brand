@@ -30,7 +30,7 @@ const isVideo = Boolean(src && /\.(mp4|webm|mov)(\?|$)/i.test(src));
 >
   {src ? (
     isVideo ? (
-      <video src={src} poster={poster} autoplay muted loop playsinline aria-label={alt || label} />
+      <video data-viewport-preview src={src} poster={poster} muted loop playsinline preload="metadata" aria-label={alt || label} />
     ) : (
       <img src={src} alt={alt} loading="lazy" />
     )
@@ -38,6 +38,23 @@ const isVideo = Boolean(src && /\.(mp4|webm|mov)(\?|$)/i.test(src));
     <span class="media-frame__label">{label}</span>
   )}
 </div>
+
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll<HTMLVideoElement>('video[data-viewport-preview]').forEach(video => {
+    let visible = false;
+    const sync = () => {
+      if (visible && !reduced.matches && !document.hidden) video.play().catch(() => {});
+      else video.pause();
+    };
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting && entry.intersectionRatio >= 0.25;
+      sync();
+    }, { threshold: [0, 0.25] }).observe(video);
+    reduced.addEventListener('change', sync);
+    document.addEventListener('visibilitychange', sync);
+  });
+</script>
 
 <style>
   .media-frame {

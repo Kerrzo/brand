@@ -45,6 +45,7 @@ const { title, description, image, current, transparentHeader = false } = Astro.
     </main>
     <Footer />
     <script>
+      import '../scripts/visibility-budget';
       function initReveals() {
         const nodes = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
         if (!nodes.length) return;
