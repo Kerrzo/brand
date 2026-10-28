@@ -1,0 +1,79 @@
+---
+import KaiShoeViewer from '../../../components/content/experiments/KaiShoeViewer.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArticleSection from '../../../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../../../components/content/article/ArticleTwoCol.astro';
+import SectionLabel from '../../../components/ui/SectionLabel.astro';
+import ExperimentPendingMedia from '../../../components/content/experiments/ExperimentPendingMedia.astro';
+const title='Can I Build an AAA-Quality Character with AI?';
+const subtitle='One character, a collection of AI tools, and a journey through 3D modelling, texturing, animation and Unreal Engine.';
+const pipeline=[['Concept','AI-generated character references'],['Generate','AI-assisted 3D geometry'],['Refine','Blender / ZBrush / retopology'],['Texture','Substance Painter / material work'],['Prepare','Rigging / character compatibility'],['Perform','Unreal Engine / animation / rendering']];
+const criteria=[['Visual quality','How convincing does Kai look in the final render?'],['Production readiness','How reusable, animatable and technically sound is the character?'],['Efficiency','Where did AI save effort, and where was manual work still required?']];
+---
+<BaseLayout title={title} description={subtitle} current="experiments"><article class="kai-story">
+<header class="container kai-hero"><ArticleTwoCol><SectionLabel slot="label" withDot>Experiment / AI + 3D</SectionLabel><h1>{title}</h1><p class="lede">{subtitle}</p>
+<p class="body-copy">I've spent most of my career building software, not creating 3D characters.</p>
+<p class="body-copy">But AI is making it possible to explore disciplines that previously felt difficult to enter without years of specialist training.</p>
+<p class="body-copy">I wanted to find out how far that could go.</p>
+<p class="body-copy">Could I take an AI-generated character concept, turn it into a usable 3D model, work through the traditional production pipeline and eventually bring her to life in Unreal Engine?</p>
+<p class="body-copy"><strong>That became Kai.</strong></p></ArticleTwoCol></header><ArticleSection dark class="kai-performance"><ExperimentPendingMedia /></ArticleSection>
+<ArticleSection  id="chapter-1"><ArticleTwoCol><SectionLabel slot="label">01 / THE QUESTION</SectionLabel><h2 class="h-2">What does it actually take to create a character?</h2><p class="body-copy">A finished character can look deceptively simple.</p>
+<p class="body-copy">But behind the image is a long chain of specialist work.</p>
+<p class="body-copy">Concept art. Modelling. Sculpting. Retopology. UV mapping. Texturing. Materials. Rigging. Animation. Lighting. Rendering.</p>
+<p class="body-copy">Different artists often specialise in different parts of that process.</p>
+<p class="body-copy">I wanted to see how much of it I could navigate myself, using AI to accelerate the parts I didn't yet know how to do.</p>
+<p class="body-copy">Not just generate a nice picture.</p>
+<p class="body-copy"><strong>Create something I could actually use.</strong></p><ExperimentPendingMedia index={1} /></ArticleTwoCol></ArticleSection>
+<ArticleSection dark id="chapter-2"><ArticleTwoCol><SectionLabel slot="label">02 / FROM IMAGE TO GEOMETRY</SectionLabel><h2 class="h-2">The first result was surprisingly good.</h2><p class="body-copy">AI image generation made it relatively easy to explore Kai's appearance.</p>
+<p class="body-copy">The next challenge was turning that concept into a three-dimensional model.</p>
+<p class="body-copy">I experimented with AI 3D generation tools, including HY3D and Tripo and locally using Trellis and Pixal3d.</p>
+<p class="body-copy">Some results were genuinely impressive.</p>
+<p class="body-copy">The overall forms, clothing and armour could provide a useful starting point.</p>
+<p class="body-copy">But looking good in a rendered preview and being ready for production are very different things.</p><ExperimentPendingMedia index={2} /></ArticleTwoCol></ArticleSection>
+<ArticleSection  id="chapter-3"><ArticleTwoCol><SectionLabel slot="label">03 / THE REALITY CHECK</SectionLabel><h2 class="h-2">Then I started looking closely.</h2><p class="body-copy">This is where the limitations became obvious.</p>
+<p class="body-copy">Hair was difficult.</p>
+<p class="body-copy">Some surfaces contained strange geometry or texture artefacts.</p>
+<p class="body-copy">Topology wasn't always suitable for deformation.</p>
+<p class="body-copy">Clothing needed more careful treatment.</p>
+<p class="body-copy">And details that looked convincing from one angle could fall apart when examined closely.</p>
+<p class="body-copy">At one point I discovered that Kai's mouth textures weren't suitable for animation. Areas that had never been visible in the original closed-mouth model suddenly mattered.</p>
+<p class="body-copy">I had to repair the lip textures manually.</p>
+<p class="body-copy"><strong>The AI had given me a starting point. It hadn't finished the job.</strong></p></ArticleTwoCol></ArticleSection>
+<ArticleSection dark id="chapter-4"><ArticleTwoCol><SectionLabel slot="label">04 / LEARNING THE CRAFT</SectionLabel><h2 class="h-2">I still had to learn how the pieces worked.</h2><p class="body-copy">The experiment quickly became a journey through several professional 3D tools.</p>
+<p class="body-copy">Blender for modelling, mesh editing and parts of the asset workflow.</p>
+<p class="body-copy">ZBrush for sculpting, remeshing and refining geometry.</p>
+<p class="body-copy">Substance Painter for materials and texture detail.</p>
+<p class="body-copy">Unreal Engine for bringing everything together.</p>
+<p class="body-copy">I also explored how MetaHuman-compatible geometry could help with character animation.</p>
+<p class="body-copy">Different parts of the character required different approaches.</p>
+<p class="body-copy">Rigid armour, deformable clothing and organic anatomy didn't all benefit from the same workflow.</p>
+<p class="body-copy">There wasn't one magic AI tool that solved everything.</p>
+<p class="body-copy"><strong>The interesting part was learning how to connect them.</strong></p><ExperimentPendingMedia index={3} /></ArticleTwoCol></ArticleSection>
+<ArticleSection  id="chapter-5"><ArticleTwoCol><SectionLabel slot="label">05 / THE PIPELINE</SectionLabel><h2 class="h-2">The tools became a workflow.</h2><p class="body-copy">Over time I began to understand where AI could help and where traditional tools were still essential.</p><ol class="kai-pipeline">{pipeline.map(([label,detail],i)=><li><span class="mono-label">{String(i+1).padStart(2,"0")} / {label}</span><p>{detail}</p>{i<5 && <span class="pipeline-arrow" aria-hidden="true">↓</span>}</li>)}</ol><p class="body-copy">This is an experimental workflow. It isn’t a fully automated pipeline.</p><ExperimentPendingMedia index={4} /><KaiShoeViewer /></ArticleTwoCol></ArticleSection>
+<ArticleSection dark id="chapter-6"><ArticleTwoCol><SectionLabel slot="label">06 / BRINGING KAI TO LIFE</SectionLabel><h2 class="h-2">A model isn't a character until it can perform.</h2><p class="body-copy">This was the part I was most interested in reaching.</p>
+<p class="body-copy">A static render can hide a lot of problems.</p>
+<p class="body-copy">Animation can't.</p>
+<p class="body-copy">The character needs to move convincingly. Facial expressions need to work. Materials need to hold up under different lighting.</p>
+<p class="body-copy">And suddenly all those earlier decisions about geometry, textures and rigging become important.</p>
+<p class="body-copy">My goal was to record a performance, bring it into Unreal Engine and produce a cinematic result.</p>
+<p class="body-copy">This is where the experiment moves beyond generating assets and into creating an experience.</p></ArticleTwoCol></ArticleSection>
+<ArticleSection  id="chapter-7"><ArticleTwoCol><SectionLabel slot="label">07 / WHAT AI ACTUALLY CHANGED</SectionLabel><h2 class="h-2">AI made the starting point much easier.</h2><p class="body-copy">Without AI, I would have faced a substantial learning curve before producing even an initial character model.</p>
+<p class="body-copy">AI generation gave me something tangible to work with much earlier.</p>
+<p class="body-copy">That changed the experiment.</p>
+<p class="body-copy">Instead of spending all my time trying to create the first usable shape, I could spend more time exploring how professional character-production workflows actually function.</p>
+<p class="body-copy">But AI didn't remove the need to understand those workflows.</p>
+<p class="body-copy">I still needed to make decisions, recognise problems, learn tools and repair things that didn't work.</p>
+<p class="body-copy"><strong>AI shortened the distance to a useful starting point. The craft still mattered.</strong></p></ArticleTwoCol></ArticleSection>
+<ArticleSection dark id="chapter-8"><ArticleTwoCol><SectionLabel slot="label">08 / THE RESULT</SectionLabel><h2 class="h-2">How close did I get?</h2><p class="body-copy">The final performance still needs to be reviewed. I want to assess it across three separate questions.</p><dl class="kai-criteria">{criteria.map(([label,question])=><div><dt class="mono-label">{label}</dt><dd>{question}</dd></div>)}</dl><ExperimentPendingMedia index={5} /></ArticleTwoCol></ArticleSection>
+<ArticleSection  id="chapter-9"><ArticleTwoCol><SectionLabel slot="label">09 / THE NEXT QUESTION</SectionLabel><h2 class="h-2">What happens when the whole pipeline gets better?</h2><p class="body-copy">This experiment started with a question about creating one character.</p>
+<p class="body-copy">But it has raised a much bigger one.</p>
+<p class="body-copy">What happens when concept generation, 3D geometry, retopology, materials, rigging and real-time engines become easier to connect?</p>
+<p class="body-copy">Could a technically experienced individual move through a production pipeline that previously required several specialists?</p>
+<p class="body-copy">And how much better could the results become as the tools improve?</p>
+<p class="body-copy">I don't have a definitive answer yet.</p>
+<p class="body-copy">But I've learned far more by trying to make Kai than I would have by simply reading about the tools.</p>
+<p class="body-copy"><strong>The next step is to make another character — and see what I can do differently.</strong></p></ArticleTwoCol></ArticleSection>
+</article></BaseLayout>
+<style>
+.kai-story :global(.kai-performance:not(:has(figure))){display:none}.kai-hero{padding-block:clamp(80px,12vw,160px) clamp(60px,8vw,100px)}h1{font-size:clamp(44px,6vw,100px);letter-spacing:-.055em;line-height:1.04;max-width:19ch}.kai-hero .lede{max-width:48ch}.kai-story :global(.body-copy){max-width:var(--reading-measure)}.kai-pipeline{list-style:none;padding:0;margin:48px 0;display:grid;grid-template-columns:1fr;gap:40px 32px}.kai-pipeline p{margin-top:16px;font-size:18px;line-height:1.5}.pipeline-arrow{display:block;margin-top:20px;color:var(--color-accent);font-size:24px}.kai-criteria{display:grid;gap:36px;margin-top:36px}.kai-criteria dd{margin:12px 0 0;font-size:clamp(21px,2.2vw,30px);max-width:38ch;line-height:1.4}@media(max-width:600px){.kai-pipeline{grid-template-columns:1fr;gap:28px}}
+</style>

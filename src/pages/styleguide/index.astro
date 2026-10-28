@@ -18,6 +18,8 @@ const posts = await getCollection('writing', ({data}) => !data.draft);
 const photo = '/media/work/amica/lobby.webp';
 // Every shared component is registered here. Source filenames are the reference names.
 const definitions: Record<string, { use: string; options?: string; props?: Record<string, unknown> }> = {
+  KaiShoeViewer: { use: 'Click-to-load 3D shoe geometry with orbit, zoom, wireframe and reset. On-demand rendering only; no idle animation.' },
+  ExperimentPendingMedia: { use: 'Evidence slot: labelled in development, hidden in production until supplied.', options: 'index · src/data/kai-media.json' },
   EngagePreview: { use: 'Engage+ listing animation with poster-only reduced-motion mode and visibility-based playback.', options: 'Preserves the listing media frame' },
   KerrzoScreen: { use: 'Front-on Kerrzo demo UI with a once-on-viewport animation and reduced-motion final state.', options: 'code (K02, K04, K06, K07, K09, K13) · eager', props: { code: 'K02' } },
   ArticleScreenshotComparison: { use: 'Paired original/rebuilt interface captures, preserved from Strategy Connect. Supports real screenshots or labelled pending captures.', options: 'items (label, detail, src, alt, note) · label · dark' },

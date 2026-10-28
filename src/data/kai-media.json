@@ -1,0 +1,50 @@
+[
+  {
+    "id": "KAI_01_FINAL_PERFORMANCE",
+    "path": "/media/experiments/kai/final-performance.mp4",
+    "type": "Cinematic video",
+    "ratio": "16/9",
+    "caption": "Kai / Current render in Unreal Engine.",
+    "alt": "Kai character render in Unreal Engine"
+  },
+  {
+    "id": "KAI_02_INITIAL_CONCEPT",
+    "path": "/media/experiments/kai/initial-concept.webp",
+    "type": "Concept artwork",
+    "ratio": "1161/1354",
+    "caption": "Kai / The starting point.",
+    "alt": "Kai initial character concept sheet showing her full outfit, facial expressions, equipment and turnaround views"
+  },
+  {
+    "id": "KAI_03_AI_GENERATED_MESH",
+    "path": "/media/experiments/kai/ai-generated-mesh.webp",
+    "type": "Generated mesh image",
+    "ratio": "1024/1660",
+    "caption": "From concept to generated geometry.",
+    "alt": "Full-length untextured Kai character mesh, showing the hair, jacket, clothing and boots"
+  },
+  {
+    "id": "KAI_06_PRODUCTION_WORKFLOW",
+    "path": "/media/experiments/kai/production-workflow.webp",
+    "type": "Work-in-progress montage",
+    "ratio": "1219/1603",
+    "caption": "Kai / Clothing, armour and equipment in progress.",
+    "alt": "Kai work-in-progress clothing and equipment, showing separate armour, jacket, belt, trousers and boot assets"
+  },
+  {
+    "id": "KAI_07_PIPELINE_PROGRESS",
+    "path": "/media/experiments/kai/pipeline-progress.webp",
+    "type": "Material reference",
+    "ratio": "1448/1086",
+    "caption": "Kai / Boot material reference for texturing.",
+    "alt": "Kai boot material reference with annotated textile, leather, plastic, webbing and rubber material groups"
+  },
+  {
+    "id": "KAI_09_FINAL_RESULT",
+    "path": "/media/experiments/kai/final-result.webp",
+    "type": "Current result still",
+    "ratio": "1812/1687",
+    "caption": "Kai / Current result — viewport capture. Lots to do (she is wearing a temporary wig until I learn how to do hair!). I have done the head and body but next up I have to convert her clothing to MetaHuman clothing to get full body renders",
+    "alt": "Close-up viewport capture of Kai with pink hair, facial materials and red lighting"
+  }
+]

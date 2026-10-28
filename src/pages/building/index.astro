@@ -1,4 +1,5 @@
 ---
+import KerrzoScreen from '../../components/content/building/KerrzoScreen.astro';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ListingHero from '../../components/content/ListingHero.astro';
@@ -55,15 +56,15 @@ const pageCopy: Record<string, { title?: string; href?: string; category: string
       return (
         <div class:list={['projects-page__row', { 'projects-page__row--dark': i % 2 === 0 }]} data-reveal>
           <a href={href} aria-label={`Read about ${title}`}>
-          <PlaceholderMedia
+          {item.id === 'kerrzo' ? <KerrzoScreen code="K06" /> : <PlaceholderMedia
             label={`${title} hero image`}
             src={item.id === 'kerrzo' ? '/media/projects/kerrzo.mp4' : item.id === 'brilliancy' ? '/media/projects/brilliancy/01-brilliancy-ai-chess-coach.webp' : item.id === 'ai-game-world' ? '/media/projects/poszo.png' : item.data.heroImage}
             alt={item.id === 'kerrzo' ? 'Kerrzo platform interface' : item.id === 'brilliancy' ? 'Brilliancy chess board and coaching UI' : item.id === 'ai-game-world' ? 'Poszo voice ordering interface' : item.data.heroAlt}
-            ratio={item.id === 'brilliancy' ? '16/9' : '16/11'}
+            ratio={item.id === 'kerrzo' || item.id === 'brilliancy' ? '16/9' : '16/11'}
             radius="md"
             dark={i % 2 === 0}
             class="projects-page__media"
-          />
+          />}
           </a>
           <div class="projects-page__copy" data-listing-copy>
             <div class:list={['mono-label', { 'eyebrow--dark': i % 2 === 0 }]}>({String(i + 1).padStart(2, '0')}) &middot; Active exploration</div>

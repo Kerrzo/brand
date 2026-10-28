@@ -1,0 +1,15 @@
+---
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import ArticleMedia from '../article/ArticleMedia.astro';
+import media from '../../../data/kai-media.json';
+interface Props { index?: number; }
+const { index = 0 } = Astro.props;
+const asset = media[index];
+const supplied = existsSync(resolve('public', asset.path.slice(1)));
+---
+{supplied ? <ArticleMedia src={asset.path} alt={asset.alt || asset.caption} label={asset.id} caption={asset.caption} ratio={asset.ratio} /> : import.meta.env.DEV && <figure class="pending-media">
+<div style={{aspectRatio:asset.ratio}}><span class="mono-label">Media to come</span><strong>{asset.id}</strong><span>{asset.type} · {asset.ratio}</span><code>{asset.path}</code></div><figcaption>{asset.caption}</figcaption></figure>}
+<style>
+.pending-media{margin:48px 0 0;min-width:0}.pending-media>div{width:100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:24px;background:rgba(128,128,128,.08);border:1px dashed rgba(128,128,128,.4)}.pending-media strong{font-size:clamp(15px,2vw,24px);overflow-wrap:anywhere}.pending-media code{font-size:12px;overflow-wrap:anywhere;max-width:100%;opacity:.6}.pending-media figcaption{font-size:14px;opacity:.6;margin-top:16px}@media(max-width:600px){.pending-media>div{min-height:230px}}
+</style>
