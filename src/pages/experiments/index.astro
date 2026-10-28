@@ -5,7 +5,6 @@ import ListingHero from '../../components/content/ListingHero.astro';
 import FilterBar from '../../components/ui/FilterBar.astro';
 import CompareSlider from '../../components/ui/CompareSlider.astro';
 import PlaceholderMedia from '../../components/ui/PlaceholderMedia.astro';
-import ExperimentPendingMedia from '../../components/content/experiments/ExperimentPendingMedia.astro';
 import VideoReveal from '../../components/ui/VideoReveal.astro';
 import Ticker from '../../components/ui/Ticker.astro';
 import FinalCTA from '../../components/ui/FinalCTA.astro';
@@ -16,7 +15,6 @@ const bySlug = (slug: string) => all.find((item) => item.id === slug)!;
 const exp01 = bySlug('consistent-character-workflows');
 const poszo = bySlug('ai-ordering');
 const wifi = bySlug('wifi-human-sensing');
-const kai = bySlug('aaa-character-with-ai');
 const podcast = bySlug('ai-podcast');
 const exp07 = bySlug('ltx-video-experiments');
 // Retain the unfinished listing sections so they can return when content is ready.
@@ -26,7 +24,6 @@ const publicExperiments = [
   { item: poszo, question: 'Can AI get your order right?', context: 'Realtime voice · Restaurant ordering', description: poszo.data.description, image: '/media/experiments/pozso/ordering-replay.png', alt: 'Poszo replay showing voice conversation, agent activity and a draft mock order', caption: 'Prototype capture · Mock order replay', status: 'Active experiment' },
   { item: wifi, question: 'Can Wi-Fi count people in a room?', context: 'Wi-Fi CSI · Spatial sensing', description: wifi.data.description, image: wifi.data.heroImage, alt: wifi.data.heroAlt, caption: 'RuView demo by ruvnet · Not my test results', status: 'Starting' },
   { item: podcast, question: 'Can AI turn a conversation into a podcast?', context: 'Frontier models · Audio · Editorial AI', description: 'Testing editorial judgement, not just audio processing. Source selection and all production tests are still ahead.', image: podcast.data.heroImage, alt: podcast.data.heroAlt, caption: 'ComfyUI setup · Podcast studio experiment', status: 'Starting' },
-  { item: kai, question: kai.data.title, context: 'AI + 3D · Creative production', description: kai.data.description, image: undefined, alt: '', caption: 'Kai · Ongoing experiment', status: 'Active experiment' },
 ];
 
 const featuredOrder = [
@@ -75,7 +72,7 @@ const categories = showUnfinishedExperiments
       <article class:list={['lab-page__row', { 'lab-page__row--dark': i % 2 === 0 }]} data-card data-cat={entry.item.data.category} data-reveal>
         <figure class="lab-page__media">
           <a href={`/experiments/${entry.item.id}/`} aria-label={entry.question}>
-            {entry.item.id === 'aaa-character-with-ai' ? <ExperimentPendingMedia index={1} /> : <PlaceholderMedia src={entry.image} alt={entry.alt} label={entry.context} ratio={entry.item.id === 'ai-ordering' ? '1906/1614' : entry.item.id === 'ai-podcast' ? '3838/2035' : '16/11'} radius="md" />}
+            <PlaceholderMedia src={entry.image} alt={entry.alt} label={entry.context} ratio={entry.item.id === 'ai-ordering' ? '1906/1614' : entry.item.id === 'ai-podcast' ? '3838/2035' : '16/11'} radius="md" />
           </a>
           <figcaption>{entry.caption}</figcaption>
         </figure>
