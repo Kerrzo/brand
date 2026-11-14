@@ -1,5 +1,5 @@
 ---
-title: "Poszo — Can AI get your order right?"
+title: "Can You Still Tell You're Talking to AI?"
 description: "Testing whether realtime AI can keep a conversation natural, maintain a valid restaurant order and know when to involve a person."
 category: "Voice and real-time"
 type: "Experiment"

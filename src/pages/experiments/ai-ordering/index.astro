@@ -15,12 +15,12 @@ if (!experiment) throw new Error('Missing Poszo experiment');
 const changes = ['Can I get a large chicken combo?', 'Actually make that spicy.', 'No drink.', 'Wait — make it two.'];
 const tests = ['Response latency', 'Interruptions', 'Corrections', 'Menu grounding', 'Modifiers', 'Order state', 'Confirmation', 'Human escalation'];
 ---
-<BaseLayout title="Poszo — Can AI get your order right?" description={experiment.data.description} current="experiments">
+<BaseLayout title={experiment.data.title} description={experiment.data.description} current="experiments">
   <article class="poszo-experiment">
     <header class="poszo-hero container">
       <ArticleTwoCol>
         <SectionLabel slot="label" withDot>Experiment / Poszo</SectionLabel>
-        <h1>Can AI get your order right?</h1>
+        <h1>{experiment.data.title}</h1>
         <div class="poszo-intro">
           <p class="lede">Voice AI can hold a conversation. Taking a restaurant order is a harder test.</p>
           <p class="body-copy">I'm building Poszo to explore whether realtime AI can understand a menu, handle interruptions and changes, construct a valid order and know when it should hand the conversation to a person.</p>
