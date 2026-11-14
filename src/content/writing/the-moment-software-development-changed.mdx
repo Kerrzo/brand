@@ -1,18 +1,19 @@
 ---
-title: "A new way to build software."
-description: "How AI-assisted development changed the economics of rebuilding Strategy Connect — and the way I approach new ideas."
+title: "AI made me fall in love with building software again."
+description: "After nearly thirty years of building software, AI brought the creative part of the craft closer again."
 publishedDate: 2026-09-10
+updatedDate: 2026-11-14
 category: "AI products"
-tags: ["AI-assisted development", "Software architecture", "Product development"]
+tags: ["AI-assisted development", "Software craft", "Product development"]
 featured: false
 displayOrder: 4
 placeholder: false
 richLayout: true
 eyebrow: "Learning / AI-Assisted Development"
 heroIntro:
-  - "I spent much of my career building software the traditional way. Writing code, designing architectures, working with teams and gradually turning ideas into products."
-  - "When AI-assisted development first appeared, I was interested but unconvinced. The early tools were impressive in places, frustrating in others, and not something I was ready to rely on for serious work."
-  - "That changed when I got the opportunity to try a different approach on a product I knew well."
+  - "I fell in love with programming a long time ago."
+  - "There was something magical about starting with an idea, sitting down at a computer, and gradually turning that idea into something real."
+  - "I loved the problem-solving. I loved understanding how things worked. I even loved the frustrating parts — tracking down bugs, wrestling with frameworks, and finally getting something working after hours of effort."
 heroImage: "/media/writing/strategy-connect/rebuilt-application.jpg"
 heroRatio: "2044/1538"
 heroAlt: "Rebuilt Strategy Connect application dashboard with active strategy plans and upcoming milestones"
@@ -24,124 +25,139 @@ import ArticleSection from '../../components/content/article/ArticleSection.astr
 import ArticleTwoCol from '../../components/content/article/ArticleTwoCol.astro';
 import SectionLabel from '../../components/ui/SectionLabel.astro';
 
-<ArticleSection dark id="the-opportunity">
+<ArticleSection dark id="software-as-an-art-form">
   <ArticleTwoCol>
-    <SectionLabel slot="label">01 / The opportunity</SectionLabel>
-    <h2 class="h-2">We'd wanted to rebuild Strategy Connect for years.</h2>
-    <p class="body-copy">Strategy Connect was a platform we'd built and maintained over many years.</p>
-    <p class="body-copy">The software had evolved, the requirements had changed, and our understanding of the product had grown considerably.</p>
-    <p class="body-copy">We knew there were things we'd do differently if we were starting again.</p>
-    <p class="body-copy">But rebuilding a working platform is expensive. Months of development, significant investment and the risk of disrupting something customers already depend on.</p>
-    <p class="body-copy">There was always something more immediately valuable to work on.</p>
-    <p class="body-copy"><strong>The rebuild made technical sense. It just didn't make economic sense.</strong></p>
+    <SectionLabel slot="label">01 / The beginning</SectionLabel>
+    <h2 class="h-2">Software was my art form.</h2>
+    <p class="body-copy">Programming was never just a job for me. It was a creative outlet.</p>
+    <p class="body-copy">I sometimes think of it like painting. You spend years learning the techniques, understanding the tools, and developing a feel for what works. Eventually, you stop thinking about every individual brushstroke and start thinking about what you're trying to create.</p>
+    <p class="body-copy">And for the better part of thirty years, I was fortunate enough to make a career out of it.</p>
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection id="the-experiment">
+<ArticleSection id="building-became-harder-than-imagining">
   <ArticleTwoCol>
-    <SectionLabel slot="label">02 / The experiment</SectionLabel>
-    <h2 class="h-2">Then the client suggested we try something different.</h2>
-    <p class="body-copy">Aidan, the owner of Strategy Connect, knew I'd been experimenting with AI-assisted development.</p>
-    <p class="body-copy">We started discussing whether the technology had progressed enough to change the economics of a rebuild.</p>
-    <p class="body-copy">Rather than committing to a conventional development project, we could try building a new foundation using AI-assisted tools and see how far we got.</p>
-    <p class="body-copy">We had years of product knowledge, a clear understanding of the business and plenty of ideas about what we'd change.</p>
-    <p class="body-copy">What we didn't know was how much faster this new workflow could make us.</p>
-    <p class="body-copy"><strong>The cost of finding out had become small enough to give it a go.</strong></p>
+    <SectionLabel slot="label">02 / The friction</SectionLabel>
+    <h2 class="h-2">Somewhere along the way, building became harder than imagining.</h2>
+    <p class="body-copy">As my career progressed, so did the complexity of the software I worked on.</p>
+    <p class="body-copy">Frameworks became more sophisticated. Applications became larger. Expectations increased. There were architectures to maintain, dependencies to manage, security considerations, testing, deployment and a seemingly endless stream of things that needed attention.</p>
+    <p class="body-copy">None of that was necessarily bad. Much of it was important engineering work, and I enjoyed learning how to do it well.</p>
+    <p class="body-copy">But something gradually changed.</p>
+    <p class="body-copy">I still had ideas. Lots of them.</p>
+    <p class="body-copy">Little applications I wanted to create. Experiments I wanted to try. Things I thought would be useful, or interesting, or simply beautiful to build.</p>
+    <p class="body-copy">But I knew what was involved.</p>
+    <p class="body-copy">An idea that might take an afternoon to imagine could take weeks of evenings to implement properly. Before I could explore the interesting part, I'd need to set up the project, learn another framework, solve the inevitable technical problems and get everything working.</p>
+    <p class="body-copy">I still loved creating software.</p>
+    <p class="body-copy">I just didn't always have the energy to build the things I imagined.</p>
+    <p class="body-copy">And when you spend your working days building software, the thought of spending your evenings battling another framework becomes a little less appealing.</p>
+    <p class="body-copy">Gradually, I stopped starting so many personal projects.</p>
+    <p class="body-copy">Not because I'd run out of ideas.</p>
+    <p class="body-copy"><strong>Because the effort of bringing them to life had begun to outweigh the excitement of creating them.</strong></p>
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection dark id="a-different-workflow">
+<ArticleSection dark id="ai-changed-the-equation">
   <ArticleTwoCol>
-    <SectionLabel slot="label">03 / A different workflow</SectionLabel>
-    <h2 class="h-2">The biggest change wasn't the code. It was the feedback loop.</h2>
-    <p class="body-copy">Traditionally, turning an architectural idea into working software takes time.</p>
-    <p class="body-copy">You design the approach, implement it, run it, review the result, make changes and repeat.</p>
-    <p class="body-copy">AI-assisted development compressed that cycle considerably.</p>
-    <p class="body-copy">I could describe an architectural direction, work through an implementation with the AI, run the software, review what it had produced and immediately refine it.</p>
-    <p class="body-copy">The AI handled much of the implementation work, while I concentrated on architecture, product behaviour, integration and deciding whether the result was actually any good.</p>
-    <p class="body-copy">It wasn't a case of typing a prompt and walking away.</p>
-    <p class="body-copy">There were mistakes, corrections, technical decisions and plenty of iteration.</p>
-    <p class="body-copy">But the pace was completely different.</p>
-    <p class="body-copy"><strong>I was spending more time deciding what the software should be and less time translating those decisions into code.</strong></p>
-    <p class="body-copy">That's when the workflow really started to click for me.</p>
+    <SectionLabel slot="label">03 / The turning point</SectionLabel>
+    <h2 class="h-2">Then AI changed the equation.</h2>
+    <p class="body-copy">Like many developers, I initially approached AI-assisted programming with a mixture of curiosity and scepticism.</p>
+    <p class="body-copy">The early tools were interesting, occasionally impressive, and frequently frustrating.</p>
+    <p class="body-copy">I experimented with them, but they didn't fundamentally change how I worked.</p>
+    <p class="body-copy">That changed as the models became more capable.</p>
+    <p class="body-copy">One of the turning points was a project involving Strategy Connect, a platform we'd developed and maintained for years.</p>
+    <p class="body-copy">We'd wanted to rebuild parts of it for a long time. We knew the product, understood its problems and had plenty of ideas about what we'd do differently.</p>
+    <p class="body-copy">But the economics of rebuilding a working platform had never quite made sense.</p>
+    <p class="body-copy">With AI-assisted development, we decided to experiment.</p>
+    <p class="body-copy">What surprised me wasn't simply how quickly we could write code.</p>
+    <p class="body-copy">It was how quickly we could turn an idea into something we could actually use.</p>
+    <p class="body-copy">I could describe an approach, have an AI agent implement it, run the software, see what worked and change direction.</p>
+    <p class="body-copy">An idea no longer needed to survive days of implementation before I could find out whether it was any good.</p>
+    <p class="body-copy"><strong>The feedback loop had changed.</strong></p>
+    <p class="body-copy">And I began to realise what that meant for me personally.</p>
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection id="the-rebuild">
+<ArticleSection id="the-part-i-loved">
   <ArticleTwoCol>
-    <SectionLabel slot="label">04 / The rebuild</SectionLabel>
-    <h2 class="h-2">Work we'd expected to take months was suddenly achievable in weeks.</h2>
-    <p class="body-copy">We made progress far faster than I would have expected using our previous approach.</p>
-    <p class="body-copy">A new technical foundation that had been difficult to justify commercially became practical to build and evaluate.</p>
-    <p class="body-copy">And importantly, we weren't starting from nothing.</p>
-    <p class="body-copy">We had years of understanding the product, its users, its requirements and the problems we wanted to solve.</p>
-    <p class="body-copy">That knowledge mattered enormously.</p>
-    <p class="body-copy">AI didn't invent the product or make the architectural decisions for us. It accelerated the process of turning those decisions into working software.</p>
-    <p class="body-copy"><strong>The experience changed my expectations of what a small, experienced team could achieve.</strong></p>
-    <p class="body-copy">It also changed how I thought about the economics of software development.</p>
+    <SectionLabel slot="label">04 / The work</SectionLabel>
+    <h2 class="h-2">I could get back to the part I loved.</h2>
+    <p class="body-copy">I've spent decades learning how to build software.</p>
+    <p class="body-copy">I understand architecture, engineering trade-offs, performance, testing and the countless details that separate software that works from software that works well.</p>
+    <p class="body-copy">I haven't stopped using those skills.</p>
+    <p class="body-copy">If anything, I find myself drawing on them constantly.</p>
+    <p class="body-copy">But I'm applying them differently.</p>
+    <p class="body-copy">Instead of personally translating every decision into code, I spend more of my time deciding what the software should do, how it should behave and whether the result is good enough.</p>
+    <p class="body-copy">I work with AI coding agents. I give them direction, review their work, test what they've built and refine it.</p>
+    <p class="body-copy">Sometimes they make mistakes. Sometimes an implementation needs to be thrown away. Sometimes we go backwards before moving forwards.</p>
+    <p class="body-copy">I'm still responsible for the decisions.</p>
+    <p class="body-copy">But I'm no longer spending most of my creative energy on the mechanics of implementing them.</p>
+    <p class="body-copy">And something unexpected happened.</p>
+    <p class="body-copy"><strong>I started wanting to build things in my spare time again.</strong></p>
+    <p class="body-copy">Not because I needed another business.</p>
+    <p class="body-copy">Not because someone was paying me.</p>
+    <p class="body-copy">Simply because I could imagine something interesting and experience it without spending weeks getting there.</p>
+    <p class="body-copy">That feeling I'd had when I first discovered programming started coming back.</p>
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection dark id="something-unexpected">
+<ArticleSection dark id="the-craft-moved">
   <ArticleTwoCol>
-    <SectionLabel slot="label">05 / Something unexpected</SectionLabel>
-    <h2 class="h-2">Then Aidan started building too.</h2>
-    <p class="body-copy">One of the most interesting developments came after the initial rebuild.</p>
-    <p class="body-copy">Aidan began using AI-assisted development to make changes to the platform himself.</p>
-    <p class="body-copy">He isn't a software developer. But he understands Strategy Connect, its customers and the business better than anyone.</p>
-    <p class="body-copy">Previously, making a change generally meant explaining what he wanted, having a developer implement it, reviewing the result and repeating the process.</p>
-    <p class="body-copy">Now he could participate much more directly.</p>
-    <p class="body-copy">That doesn't mean every change is automatically production-ready or that engineering oversight becomes unnecessary.</p>
-    <p class="body-copy">But it does mean someone with deep product knowledge can get much closer to the implementation.</p>
-    <p class="body-copy">And I find that fascinating.</p>
-    <p class="body-copy"><strong>AI isn't just accelerating development. It's changing who can participate in creating software.</strong></p>
+    <SectionLabel slot="label">05 / The craft</SectionLabel>
+    <h2 class="h-2">The craft hasn't disappeared. It's moved.</h2>
+    <p class="body-copy">Recently, I've been experimenting with a little iPhone video editor.</p>
+    <p class="body-copy">I wanted something that would let me shoot a video, make a few simple edits and share it without transferring everything to my computer and opening professional editing software.</p>
+    <p class="body-copy">As I started using an early version, I found myself thinking about the interactions.</p>
+    <p class="body-copy">Why should changing a clip's speed require a complicated series of steps?</p>
+    <p class="body-copy">What if you could simply stretch the clip to slow it down, or squeeze it to speed it up?</p>
+    <p class="body-copy">What if adjusting the beginning of a clip automatically played a second of the previous clip and then continued across the cut, so you could immediately hear whether the edit felt natural?</p>
+    <p class="body-copy">These are little things.</p>
+    <p class="body-copy">But they're the things I love thinking about.</p>
+    <p class="body-copy">I can explore an idea, have an agent implement it, try it on my phone and discover whether it actually feels right.</p>
+    <p class="body-copy">Then I can change it.</p>
+    <p class="body-copy">Perhaps the animation is too slow. Perhaps a control should disappear when it isn't needed. Perhaps an interaction that sounded clever turns out to be confusing.</p>
+    <p class="body-copy">That's where I want to spend my time.</p>
+    <p class="body-copy">Not adding features for the sake of adding features, but refining an experience until it feels natural.</p>
+    <p class="body-copy">I've always admired applications where you can sense the care that went into them. Beautiful, restrained software that doesn't demand your attention. It simply lets you do what you came to do.</p>
+    <p class="body-copy">That's the kind of software I want to create.</p>
+    <p class="body-copy"><strong>And AI has given me a new way to pursue that craft.</strong></p>
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection id="what-changed-for-me">
+<ArticleSection id="where-this-leads">
   <ArticleTwoCol>
-    <SectionLabel slot="label">06 / What changed for me</SectionLabel>
-    <h2 class="h-2">It feels like a new superpower.</h2>
-    <p class="body-copy">I've spent decades learning how to design and build software.</p>
-    <p class="body-copy">That experience hasn't become less useful. If anything, I've found myself drawing on it more.</p>
-    <p class="body-copy">Understanding architecture, recognising problems, knowing what to test and being able to judge the quality of an implementation all become important when software can be generated so quickly.</p>
-    <p class="body-copy">The difference is the speed at which I can put that experience to work.</p>
-    <p class="body-copy">An idea no longer has to wait until I've found the time to implement every detail myself.</p>
-    <p class="body-copy">I can explore an approach, build a working version, test it and change direction while the thinking is still fresh.</p>
-    <p class="body-copy"><strong>It's a new level of leverage for someone who already knows how to build software.</strong></p>
-    <p class="body-copy">And it's made building exciting in a way I haven't felt for a long time.</p>
+    <SectionLabel slot="label">06 / Looking forward</SectionLabel>
+    <h2 class="h-2">I don't know where all this leads.</h2>
+    <p class="body-copy">There's plenty of speculation about what AI will mean for software development.</p>
+    <p class="body-copy">Will everyone build their own applications? Will traditional programming disappear? Will software become so easy to create that individual products lose their value?</p>
+    <p class="body-copy">I don't know.</p>
+    <p class="body-copy">And increasingly, I'm comfortable not knowing.</p>
+    <p class="body-copy">What I do know is that I still love building things.</p>
+    <p class="body-copy">I want to keep developing serious products and solving difficult problems. But I also want to spend time creating small, thoughtful applications simply because I believe they should exist.</p>
+    <p class="body-copy">Things that make someone's day a little easier.</p>
+    <p class="body-copy">Things that are beautiful to use.</p>
+    <p class="body-copy">Things that people might recommend to a friend because they genuinely enjoy them.</p>
+    <p class="body-copy">I don't need every one of those ideas to become a business.</p>
+    <p class="body-copy">If I spend the next five years creating a handful of applications that I'm proud of, and other people find them useful, I'll consider that time well spent.</p>
+    <p class="body-copy">Of course, getting people to discover and use software is its own challenge. That's something I'm looking forward to learning more about.</p>
+    <p class="body-copy"><strong>But the motivation to create is there again.</strong></p>
   </ArticleTwoCol>
 </ArticleSection>
 
-<ArticleSection dark id="the-bigger-opportunity">
+<ArticleSection dark id="still-a-software-craftsman">
   <ArticleTwoCol>
-    <SectionLabel slot="label">07 / The bigger opportunity</SectionLabel>
-    <h2 class="h-2">Speed changes what becomes worth building.</h2>
-    <p class="body-copy">For me, the most interesting consequence isn't simply delivering the same software faster.</p>
-    <p class="body-copy">It's what happens to ideas that previously weren't worth pursuing.</p>
-    <p class="body-copy">A rebuild that was too expensive.</p>
-    <p class="body-copy">A feature that would take too long to validate.</p>
-    <p class="body-copy">An experiment that needed a team before we could even find out whether it worked.</p>
-    <p class="body-copy">When the cost of turning an idea into working software falls dramatically, the calculation changes.</p>
-    <p class="body-copy">You can test more ideas. Explore more alternatives. Discover mistakes earlier. Spend less time debating what might work and more time finding out.</p>
-    <p class="body-copy">Of course, faster implementation doesn't automatically mean better products.</p>
-    <p class="body-copy">You still need to understand the problem, make good decisions, test what you've built and put it in front of real users.</p>
-    <p class="body-copy">But now we have a much more powerful way of doing that.</p>
-    <p class="body-copy">And that opens up possibilities I find genuinely exciting.</p>
-  </ArticleTwoCol>
-</ArticleSection>
-
-<ArticleSection id="looking-forward">
-  <ArticleTwoCol>
-    <SectionLabel slot="label">08 / Looking forward</SectionLabel>
-    <h2 class="h-2">I don't want to go back.</h2>
-    <p class="body-copy">I still enjoy programming. I still care about architecture and engineering.</p>
-    <p class="body-copy">But I don't miss spending days implementing something that I can now explore in hours.</p>
-    <p class="body-copy">AI-assisted development has become part of how I work, alongside the engineering practices and product judgement I've developed over my career.</p>
-    <p class="body-copy">I'm still learning where it works well, where it struggles and how to use it responsibly.</p>
-    <p class="body-copy">But the Strategy Connect experience changed my perspective.</p>
-    <p class="body-copy"><strong>We haven't made software engineering irrelevant.</strong></p>
-    <p class="body-copy"><strong>We've given ourselves a much more powerful way to practise it.</strong></p>
-    <p class="body-copy">And I'm only beginning to explore what that makes possible.</p>
+    <SectionLabel slot="label">07 / The outcome</SectionLabel>
+    <h2 class="h-2">I'm still a software craftsman.</h2>
+    <p class="body-copy">For a long time, writing code was how I expressed that craft.</p>
+    <p class="body-copy">Now, increasingly, it's through the things I imagine, the decisions I make, and the care I put into the finished experience.</p>
+    <p class="body-copy">AI agents can write enormous amounts of code. They can solve difficult technical problems and implement ideas at a speed I couldn't have imagined a few years ago.</p>
+    <p class="body-copy">But I still have to decide what is worth building.</p>
+    <p class="body-copy">I still have to use the software, question it, refine it and decide when it feels right.</p>
+    <p class="body-copy">And I still get that wonderful feeling when something that existed only in my imagination becomes real.</p>
+    <p class="body-copy">Perhaps that's what I've rediscovered.</p>
+    <p class="body-copy"><strong>I never stopped loving software development. I just got tired of how much work it took to reach the part I loved.</strong></p>
+    <p class="body-copy">AI has brought that part closer again.</p>
+    <p class="body-copy">And after nearly thirty years of building software, I find myself excited about what I might create next.</p>
+    <p class="body-copy">Not the income.</p>
+    <p class="body-copy"><strong>The outcome.</strong></p>
   </ArticleTwoCol>
 </ArticleSection>
