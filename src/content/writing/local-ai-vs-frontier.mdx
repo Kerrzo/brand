@@ -1,6 +1,6 @@
 ---
 title: "Can local AI compete with frontier models?"
-description: "I gave the same production-style TypeScript task to a fast local Qwen model, Codex and Claude. The speed was close. The code was not."
+description: "I gave the same production-style TypeScript task to a local Qwen model, Codex and Claude. The local output was fast. The code quality told a different story."
 publishedDate: 2026-11-17
 category: "Architecture"
 tags: ["local AI", "coding agents", "model evaluation"]
@@ -45,7 +45,7 @@ import SectionLabel from '../../components/ui/SectionLabel.astro';
 <ArticleSection id="the-comparison">
   <ArticleTwoCol>
     <SectionLabel slot="label">02 / The comparison</SectionLabel>
-    <h2 class="h-2">The local model was much faster than I expected.</h2>
+    <h2 class="h-2">The speed surprised me. The code quality surprised me more.</h2>
     <p class="body-copy">The local run used an Unsloth Qwen3.6 35B-A3B MTP GGUF at Q4 in LM Studio, running on an RTX 5090 with native multi-token prediction enabled.</p>
     <p class="body-copy">Across the captured screenshots it decoded at <strong>roughly 266–270 tokens per second</strong>, with a reported time to first token between 0.42 and 0.59 seconds.</p>
     <p class="body-copy">Its complete 12,169-token response implies <strong>about 45 seconds of decoding.</strong> That is an estimate, not a measured end-to-end duration.</p>
@@ -61,8 +61,8 @@ import SectionLabel from '../../components/ui/SectionLabel.astro';
         </tbody>
       </table>
     </div>
-    <p class="body-copy"><strong>The timings are not directly comparable.</strong> Qwen's number is estimated decoding time; the others are recorded or reported response durations. Claude took 61 seconds when asked to respond without testing. A separate 98-second Claude run included reported compilation and 13 passing tests, which I did not independently reproduce.</p>
-    <p class="body-copy"><strong>The scores were an informal static review, not benchmark results.</strong></p>
+    <p class="body-copy"><strong>The timings are not directly comparable.</strong> Qwen's number is estimated decoding time; the others are recorded or reported response durations. Claude took 61 seconds when asked to respond without testing.</p>
+    <p class="body-copy"><strong>The scores were an informal static review, not benchmark results.</strong> Claude's 9/10 is my review of the actual 61-second implementation displayed below.</p>
   </ArticleTwoCol>
 </ArticleSection>
 
