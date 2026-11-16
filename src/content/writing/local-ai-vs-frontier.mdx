@@ -13,10 +13,15 @@ listingImage: "/media/writing/local-ai-vs-frontier.png"
 listingAlt: "Local AI versus Frontier AI comparison showing Qwen, Codex and Claude response times and informal code-quality scores"
 listingRatio: "1199/1312"
 heroIntro:
-  - "A local model on my RTX 5090 generated more than twelve thousand tokens in roughly forty-five seconds of estimated decoding time."
-  - "Codex took 54.6 seconds. Claude took 61 when asked to respond without running tests."
-  - "On speed alone, the local model looked competitive."
-  - "**Then I read the code.**"
+  - "I've been experimenting with local AI again, and wanted to see how close the latest models are getting to the frontier."
+  - "One technology particularly caught my attention: **speculative decoding** — an approach that lets AI generate responses faster by predicting and checking multiple tokens at once."
+  - "So I decided to have a little fun."
+  - "I gave three models — **Qwen running locally, Codex and Claude** — the same non-trivial coding challenge."
+  - "The task wasn't simply to write a function. It required careful reasoning about concurrency, timeouts, retries and failure handling."
+  - "I wanted to understand two things:"
+  - "**How fast is local AI becoming? And can it produce code I'd actually trust?**"
+  - "The results were interesting."
+  - "The local model was remarkably fast. But when I reviewed the implementations, **speed turned out to be only half the story.**"
 ---
 
 import ArticleSection from '../../components/content/article/ArticleSection.astro';
