@@ -34,9 +34,11 @@ const rich = item.data.richLayout;
             {item.data.heroIntro?.length ? (
               item.data.heroIntro.map((line) => (
                 <p class="article__deck">
-                  {line.startsWith('**') && line.endsWith('**')
-                    ? <strong>{line.slice(2, -2)}</strong>
-                    : line}
+                  {line.split(/(\*\*.*?\*\*)/g).filter(Boolean).map((segment) =>
+                    segment.startsWith('**') && segment.endsWith('**')
+                      ? <strong>{segment.slice(2, -2)}</strong>
+                      : segment
+                  )}
                 </p>
               ))
             ) : (
