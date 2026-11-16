@@ -1,0 +1,121 @@
+---
+title: "Can local AI compete with frontier models?"
+description: "I gave the same production-style TypeScript task to a fast local Qwen model, Codex and Claude. The speed was close. The code was not."
+publishedDate: 2026-11-17
+category: "Architecture"
+tags: ["local AI", "coding agents", "model evaluation"]
+featured: false
+displayOrder: 1
+placeholder: false
+richLayout: true
+eyebrow: "Learning / Local AI"
+listingImage: "/media/writing/local-ai-vs-frontier.png"
+listingAlt: "Local AI versus Frontier AI comparison showing Qwen, Codex and Claude response times and informal code-quality scores"
+listingRatio: "1199/1312"
+heroIntro:
+  - "A local model on my RTX 5090 generated more than twelve thousand tokens in roughly forty-five seconds of estimated decoding time."
+  - "Codex took 54.6 seconds. Claude took 61 when asked to respond without running tests."
+  - "On speed alone, the local model looked competitive."
+  - "**Then I read the code.**"
+---
+
+import ArticleSection from '../../components/content/article/ArticleSection.astro';
+import ArticleTwoCol from '../../components/content/article/ArticleTwoCol.astro';
+import ArticleLearnings from '../../components/content/article/ArticleLearnings.astro';
+import LocalAiSourceViewer from './_components/LocalAiSourceViewer.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+
+<ArticleSection dark id="the-question">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">01 / The question</SectionLabel>
+    <h2 class="h-2">How close is a fast local coding model to the frontier?</h2>
+    <p class="body-copy">Local AI has an obvious appeal: privacy, control, predictable cost and the ability to experiment without sending every prompt to a hosted service.</p>
+    <p class="body-copy"><strong>The less obvious question is whether it can do work I would trust.</strong></p>
+    <p class="body-copy">I wanted something harder to judge than a small function or a familiar coding exercise, so I asked three models to implement the same in-memory TypeScript task scheduler.</p>
+    <p class="body-copy">The scheduler needed bounded concurrency, priority ordering, FIFO behaviour, retries, timeouts, cancellation, pause and resume—and it had to settle every accepted task exactly once.</p>
+    <p class="body-copy"><strong>One requirement made the task particularly revealing: a timed-out promise may keep running, so it must continue occupying a real concurrency slot.</strong></p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection id="the-comparison">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">02 / The comparison</SectionLabel>
+    <h2 class="h-2">The local model was much faster than I expected.</h2>
+    <p class="body-copy">The local run used an Unsloth Qwen3.6 35B-A3B MTP GGUF at Q4 in LM Studio, running on an RTX 5090 with native multi-token prediction enabled.</p>
+    <p class="body-copy">Across the captured screenshots it decoded at <strong>roughly 266–270 tokens per second</strong>, with a reported time to first token between 0.42 and 0.59 seconds.</p>
+    <p class="body-copy">Its complete 12,169-token response implies <strong>about 45 seconds of decoding.</strong> That is an estimate, not a measured end-to-end duration.</p>
+
+    <div class="comparison-table section-spacing-top-lg" role="region" aria-label="Informal model comparison" tabindex="0">
+      <table>
+        <caption>One prompt · Three captured responses</caption>
+        <thead><tr><th scope="col">Model</th><th scope="col">Reported timing</th><th scope="col">Informal review</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Qwen local</th><td>~45 sec decoding only</td><td><strong>3 / 10</strong></td></tr>
+          <tr><th scope="row">Codex Sol 6.1 Light</th><td>54.6 sec response</td><td><strong>9 / 10</strong></td></tr>
+          <tr><th scope="row">Claude Opus 5.5 Medium</th><td>61 sec without testing</td><td><strong>9 / 10</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="body-copy"><strong>The timings are not directly comparable.</strong> Qwen's number is estimated decoding time; the others are recorded or reported response durations. Claude took 61 seconds when asked to respond without testing. A separate 98-second Claude run included reported compilation and 13 passing tests, which I did not independently reproduce.</p>
+    <p class="body-copy"><strong>The scores were an informal static review, not benchmark results.</strong></p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection dark id="what-the-speed-hid">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">03 / What the speed hid</SectionLabel>
+    <h2 class="h-2">Fast output is not the same as correct software.</h2>
+    <p class="body-copy">The Qwen response looked plausible at a glance. It used a heap for priority ordering, tracked task state and attempted to guard against double settlement.</p>
+    <p class="body-copy"><strong>But the captured implementation had defects in the exact places the task was designed to test.</strong></p>
+    <p class="body-copy">Its physical concurrency counter was decremented without being incremented. A timeout released capacity even though the underlying work could still be running. Retry bookkeeping removed the task from the active-ID map too early. The captured status type also did not include values later assigned by the implementation.</p>
+    <p class="body-copy"><strong>The code was quick to produce and expensive to trust.</strong></p>
+    <p class="body-copy"><strong>Codex and Claude handled the core concurrency model much more carefully.</strong> Both separated the scheduler's decision about an attempt from the physical lifetime of the underlying promise—a small architectural distinction with a large effect on correctness.</p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection id="the-source">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">04 / The evidence</SectionLabel>
+    <h2 class="h-2">Don't take the summary on trust. Read the outputs.</h2>
+    <p class="body-copy">The original prompt and all three captured implementations are below. <strong>They have not been silently corrected or cleaned up.</strong></p>
+    <p class="body-copy"><strong>The Qwen source is its second, complete attempt;</strong> the first response reached the context limit and did not produce a complete implementation.</p>
+    <div class="source-artefact section-spacing-top-lg">
+      <LocalAiSourceViewer />
+    </div>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection dark id="what-i-learned">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">05 / What I learned</SectionLabel>
+    <ArticleLearnings items={[
+      { title: "Local inference is no longer obviously slow.", copy: "On capable hardware, a quantised local model can produce substantial code at a pace that feels competitive with hosted tools." },
+      { title: "Throughput can disguise reasoning failures.", copy: "A long, polished answer can arrive quickly and still miss the invariant that matters most." },
+      { title: "Good evaluation tasks need architectural traps.", copy: "The timeout requirement exposed whether each model understood the difference between a promise settling and work physically stopping." },
+      { title: "The best setup may be mixed.", copy: "Local models are increasingly useful for private, high-volume and lower-risk work. Frontier models still earned the difficult implementation in this experiment." },
+    ]} />
+  </ArticleTwoCol>
+</ArticleSection>
+
+<ArticleSection id="the-conclusion">
+  <ArticleTwoCol>
+    <SectionLabel slot="label">06 / The conclusion</SectionLabel>
+    <h2 class="h-2">Local AI is closer. It isn't interchangeable.</h2>
+    <p class="body-copy"><strong>This was one prompt, one local setup and one informal review.</strong> It does not establish a general ranking of the models.</p>
+    <p class="body-copy">But it changed my mental model.</p>
+    <p class="body-copy"><strong>The local model was not a toy.</strong> Its speed was remarkable, and parts of its approach were sensible. For exploration, private work and tasks where I can cheaply verify the answer, that is already useful.</p>
+    <p class="body-copy">For a concurrency primitive where a subtle mistake could corrupt everything built on top of it, <strong>the frontier implementations were in a different class.</strong></p>
+    <p class="body-copy"><strong>The question is no longer whether local AI can write serious-looking code. It can. The question is where the cost of verifying it becomes greater than the value of running it locally.</strong></p>
+  </ArticleTwoCol>
+</ArticleSection>
+
+<style>{`
+  .source-artefact { width: 100%; }
+  .comparison-table { width: 100%; overflow-x: auto; }
+  .comparison-table table { width: 100%; min-width: 650px; border-collapse: collapse; }
+  .comparison-table caption { padding-bottom: 20px; text-align: left; color: var(--color-label); font: 11px/1.4 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+  .comparison-table th, .comparison-table td { padding: 20px 16px; border-bottom: 1px solid var(--color-border); text-align: left; font-size: 15px; font-weight: 400; vertical-align: top; }
+  .comparison-table th:first-child { padding-left: 0; }
+  .comparison-table td { font-family: var(--font-mono); font-size: 13px; }
+  .comparison-table td strong { color: var(--color-accent); font-weight: 500; }
+`}</style>

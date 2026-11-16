@@ -1,0 +1,385 @@
+---
+import { codeToHtml } from 'shiki';
+import prompt from '../../../data/local-ai-frontier/original-prompt.md?raw';
+import qwen from '../../../data/local-ai-frontier/qwen3.6-35b-a3b-mtp.ts?raw';
+import codex from '../../../data/local-ai-frontier/codex-sol-6.1.ts?raw';
+import claude from '../../../data/local-ai-frontier/claude-opus-5.5.ts?raw';
+
+const models = [
+  {
+    id: 'qwen',
+    label: 'Qwen local',
+    version: 'Qwen3.6 35B-A3B MTP · Q4',
+    timing: '~45 sec decoding only',
+    review: 'Informal static review · 3/10',
+    note: 'Second complete attempt. Timing is estimated from 12,169 tokens at the reported decode rate—not measured wall time.',
+    code: qwen,
+  },
+  {
+    id: 'codex',
+    label: 'Codex',
+    version: 'Codex Sol 6.1 Light',
+    timing: '54.6 sec recorded response',
+    review: 'Informal static review · 9/10',
+    note: 'Captured implementation from the original conversation. Not independently compiled or test-verified for this article.',
+    code: codex,
+  },
+  {
+    id: 'claude',
+    label: 'Claude',
+    version: 'Claude Opus 5.5 Medium',
+    timing: '61 sec · testing excluded',
+    review: 'Informal static review · 9/10',
+    note: 'A no-testing run took 61 seconds. A separate 98-second run included reported compilation and 13 passing tests, not independently reproduced for this article.',
+    code: claude,
+  },
+];
+
+const rendered = await Promise.all(models.map(async (model) => ({
+  ...model,
+  html: await codeToHtml(model.code, { lang: 'ts', theme: 'github-dark-default' }),
+})));
+---
+
+<section class="source-viewer" data-source-viewer aria-labelledby="source-viewer-heading">
+  <div class="source-viewer__intro">
+    <div>
+      <p class="source-viewer__eyebrow">Captured experiment artefacts</p>
+      <h3 id="source-viewer-heading">Read the original prompt and generated code</h3>
+    </div>
+    <a class="source-viewer__download" href="/downloads/local-ai-frontier-experiment-sources.zip" download>
+      Download experiment sources (.zip)
+    </a>
+  </div>
+
+  <details class="source-viewer__prompt">
+    <summary>View challenge prompt <span aria-hidden="true">+</span></summary>
+    <pre><code>{prompt}</code></pre>
+  </details>
+
+  <div class="source-viewer__tabs" role="tablist" aria-label="Generated source by model">
+    {rendered.map((model, index) => (
+      <button
+        type="button"
+        role="tab"
+        id={`source-tab-${model.id}`}
+        aria-controls={`source-panel-${model.id}`}
+        aria-selected={index === 0 ? 'true' : 'false'}
+        tabindex={index === 0 ? 0 : -1}
+        data-source-tab={model.id}
+      >
+        {model.label}
+      </button>
+    ))}
+  </div>
+
+  {rendered.map((model, index) => (
+    <section
+      class="source-viewer__panel"
+      role="tabpanel"
+      id={`source-panel-${model.id}`}
+      aria-labelledby={`source-tab-${model.id}`}
+      hidden={index !== 0}
+      data-source-panel={model.id}
+    >
+      <div class="source-viewer__meta">
+        <div><span>Model</span><strong>{model.version}</strong></div>
+        <div><span>Timing</span><strong>{model.timing}</strong></div>
+        <div><span>Review</span><strong>{model.review}</strong></div>
+      </div>
+      <p class="source-viewer__note">{model.note}</p>
+
+      <div class="source-viewer__code-frame" data-code-frame>
+        <div class="source-viewer__code" set:html={model.html} />
+      </div>
+
+      <div class="source-viewer__actions">
+        <button type="button" data-expand-code aria-expanded="false">Read full code</button>
+        <button type="button" data-copy-code>Copy code</button>
+        <span class="source-viewer__status" aria-live="polite" data-copy-status></span>
+      </div>
+    </section>
+  ))}
+
+  <p class="source-viewer__disclaimer">
+    These are captured outputs, preserved without corrections. This was one informal task, not a controlled benchmark; the Qwen decoding estimate is not directly comparable with the recorded end-to-end times.
+  </p>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-source-viewer]').forEach((viewer) => {
+    const tabs = Array.from(viewer.querySelectorAll<HTMLButtonElement>('[data-source-tab]'));
+    const panels = Array.from(viewer.querySelectorAll<HTMLElement>('[data-source-panel]'));
+
+    const activate = (tab: HTMLButtonElement) => {
+      const id = tab.dataset.sourceTab;
+      tabs.forEach((item) => {
+        const selected = item === tab;
+        item.setAttribute('aria-selected', String(selected));
+        item.tabIndex = selected ? 0 : -1;
+      });
+      panels.forEach((panel) => { panel.hidden = panel.dataset.sourcePanel !== id; });
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(tab));
+      tab.addEventListener('keydown', (event) => {
+        let next = index;
+        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        activate(tabs[next]);
+        tabs[next].focus();
+      });
+    });
+
+    panels.forEach((panel) => {
+      const frame = panel.querySelector<HTMLElement>('[data-code-frame]');
+      const expand = panel.querySelector<HTMLButtonElement>('[data-expand-code]');
+      const copy = panel.querySelector<HTMLButtonElement>('[data-copy-code]');
+      const status = panel.querySelector<HTMLElement>('[data-copy-status]');
+
+      expand?.addEventListener('click', () => {
+        const expanded = frame?.classList.toggle('is-expanded') ?? false;
+        expand.setAttribute('aria-expanded', String(expanded));
+        expand.textContent = expanded ? 'Collapse code' : 'Read full code';
+        if (!expanded) frame?.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      });
+
+      copy?.addEventListener('click', async () => {
+        const code = panel.querySelector('code')?.textContent ?? '';
+        try {
+          await navigator.clipboard.writeText(code);
+          if (status) status.textContent = 'Copied';
+        } catch {
+          if (status) status.textContent = 'Copy failed';
+        }
+        window.setTimeout(() => { if (status) status.textContent = ''; }, 1800);
+      });
+    });
+  });
+</script>
+
+<style>
+  .source-viewer {
+    overflow: hidden;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    background: #11110f;
+    color: var(--color-dark-fg);
+  }
+
+  .source-viewer__intro {
+    display: flex;
+    justify-content: space-between;
+    gap: 28px;
+    align-items: end;
+    padding: clamp(24px, 4vw, 44px);
+  }
+
+  .source-viewer__eyebrow,
+  .source-viewer__meta span {
+    margin: 0 0 10px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.4;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--color-dark-label);
+  }
+
+  .source-viewer h3 {
+    max-width: 20ch;
+    margin: 0;
+    font-size: clamp(25px, 3vw, 40px);
+    line-height: 1.05;
+    letter-spacing: -.035em;
+    font-weight: 500;
+  }
+
+  .source-viewer__download {
+    flex: 0 0 auto;
+    padding-bottom: 4px;
+    border-bottom: 1px solid currentColor;
+    font-size: 13px;
+  }
+
+  .source-viewer__prompt {
+    border-top: 1px solid var(--color-dark-border);
+    border-bottom: 1px solid var(--color-dark-border);
+  }
+
+  .source-viewer__prompt summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px clamp(24px, 4vw, 44px);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    list-style: none;
+  }
+
+  .source-viewer__prompt summary::-webkit-details-marker { display: none; }
+  .source-viewer__prompt[open] summary span { transform: rotate(45deg); }
+
+  .source-viewer__prompt pre {
+    max-height: 50vh;
+    margin: 0;
+    padding: 24px clamp(24px, 4vw, 44px) 32px;
+    overflow: auto;
+    border-top: 1px solid var(--color-dark-border);
+    color: rgba(243, 242, 240, .78);
+    font: 12px/1.7 var(--font-mono);
+    white-space: pre-wrap;
+  }
+
+  .source-viewer__tabs {
+    display: flex;
+    overflow-x: auto;
+    padding: 18px clamp(18px, 4vw, 38px) 0;
+    border-bottom: 1px solid var(--color-dark-border);
+    scrollbar-width: thin;
+  }
+
+  .source-viewer__tabs button {
+    min-width: max-content;
+    padding: 14px 18px 16px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--color-dark-label);
+    cursor: pointer;
+    font: 500 13px/1 var(--font-sans);
+  }
+
+  .source-viewer__tabs button[aria-selected='true'] {
+    border-bottom-color: var(--color-accent);
+    color: var(--color-dark-fg);
+  }
+
+  .source-viewer__tabs button:focus-visible,
+  .source-viewer__actions button:focus-visible,
+  .source-viewer__prompt summary:focus-visible,
+  .source-viewer__download:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .source-viewer__panel {
+    padding: clamp(24px, 4vw, 44px);
+  }
+
+  .source-viewer__panel[hidden] { display: none; }
+
+  .source-viewer__meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .source-viewer__meta div { min-width: 0; }
+  .source-viewer__meta span { display: block; }
+  .source-viewer__meta strong { display: block; font-size: 13px; line-height: 1.45; font-weight: 500; }
+
+  .source-viewer__note,
+  .source-viewer__disclaimer {
+    max-width: 82ch;
+    color: var(--color-dark-body);
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  .source-viewer__note { margin: 20px 0 24px; }
+
+  .source-viewer__code-frame {
+    position: relative;
+    max-height: 31rem;
+    overflow: hidden;
+    border: 1px solid var(--color-dark-border);
+    border-radius: var(--radius-sm);
+    background: #0d1117;
+  }
+
+  .source-viewer__code-frame::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 90px;
+    pointer-events: none;
+    background: linear-gradient(transparent, #0d1117);
+  }
+
+  .source-viewer__code-frame.is-expanded {
+    max-height: 72vh;
+    overflow: auto;
+  }
+
+  .source-viewer__code-frame.is-expanded::after { display: none; }
+
+  .source-viewer__code :global(.shiki) {
+    min-width: max-content;
+    margin: 0;
+    padding: 22px 0 28px;
+    overflow: visible;
+    background: transparent !important;
+    font: 12px/1.65 var(--font-mono);
+    tab-size: 2;
+  }
+
+  .source-viewer__code :global(code) { counter-reset: source-line; }
+  .source-viewer__code :global(.line) { display: block; min-height: 1.65em; padding-right: 24px; }
+  .source-viewer__code :global(.line::before) {
+    counter-increment: source-line;
+    content: counter(source-line);
+    display: inline-block;
+    width: 50px;
+    margin-right: 18px;
+    color: rgba(230, 237, 243, .3);
+    text-align: right;
+    user-select: none;
+  }
+
+  .source-viewer__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .source-viewer__actions button {
+    padding: 10px 14px;
+    border: 1px solid var(--color-dark-border);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--color-dark-fg);
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  .source-viewer__actions button:hover { border-color: var(--color-accent); }
+  .source-viewer__status { color: var(--color-dark-label); font: 11px/1 var(--font-mono); }
+
+  .source-viewer__disclaimer {
+    margin: 0;
+    padding: 0 clamp(24px, 4vw, 44px) clamp(24px, 4vw, 40px);
+  }
+
+  @media (max-width: 700px) {
+    .source-viewer__intro { align-items: start; flex-direction: column; }
+    .source-viewer__meta { grid-template-columns: 1fr; gap: 16px; }
+    .source-viewer__code-frame { max-height: 27rem; }
+    .source-viewer__code-frame.is-expanded { max-height: 68vh; }
+    .source-viewer__code :global(.shiki) { font-size: 11px; }
+    .source-viewer__code :global(.line::before) { width: 36px; margin-right: 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .source-viewer__prompt summary span { transition: none; }
+  }
+</style>
